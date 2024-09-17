@@ -1,0 +1,290 @@
+body {
+  background: radial-gradient(circle, #000000 0%, #333333 100%);
+  color: #910202;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  position: relative;
+  animation: fadeInBackground 2s ease-out;
+  top: 20px;
+}
+
+img {
+  transition: transform 0.3s, filter 0.3s;
+}
+
+#top-image,
+#couple-image,
+#sexy-image,
+#footer-image {
+  position: absolute;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  opacity: 0;
+  transition: transform 0.3s, filter 0.3s;
+}
+
+#top-image {
+  top: -50px;
+  right: 0;
+  width: 760px;
+  animation: fadeInTopImage 4s ease-out forwards;
+}
+
+#couple-image {
+  top: -50px;
+  left: 0;
+  width: 800px;
+  animation: fadeInCoupleImage 6s ease-out forwards;
+}
+
+#sexy-image {
+  bottom: 0;
+  left: 0;
+  width: 200px;
+  animation: fadeInSexyImage 1s ease-out forwards;
+}
+
+#footer-image {
+  bottom: 30px;
+  right: 230px;
+  width: 450px;
+  background: url("/NakedLove/proibido.png") no-repeat center center;
+  background-size: cover;
+  animation: fadeInImage 1s ease-out forwards;
+  border: none; /* Remove qualquer contorno */
+  box-shadow: none; /* Remove qualquer sombra */
+}
+
+#top-image:hover,
+#couple-image:hover,
+#sexy-image:hover,
+#footer-image:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+#form-container {
+  max-width: 400px;
+  width: 100%;
+  background-color: #141313;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(128, 128, 128, 0.5);
+  opacity: 0;
+  animation: fadeInContainer 1.5s 0.1s ease-out forwards;
+  z-index: 2;
+  transform: translateY(-150px);
+}
+
+.profile-container {
+  position: relative;
+  text-align: center;
+  margin-bottom: 20px;
+  top: 20px;
+}
+
+.profile-picture {
+  width: 120px;
+  height: 120px;
+  background: url("/NakedLove/no user.png") no-repeat center center;
+  background-size: cover;
+  border-radius: 50%;
+  border: 1.8px solid #fbf8f83f;
+  box-shadow: 0 0 10px rgba(246, 245, 245, 0.6);
+  animation: shadowAnimation 1s infinite;
+  transition: transform 0.3s, filter 0.3s;
+}
+
+.profile-container:hover .profile-picture {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+button,
+.file-input-label {
+  transition: transform 0.3s, filter 0.3s;
+}
+
+button:hover,
+.file-input-label:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+#symbol-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  z-index: 3;
+}
+
+#zoom-symbol {
+  font-size: 100px;
+  color: #800000;
+  text-shadow: 1px 1px 0 #000000, -1px -1px 0 #000000, 1px -1px 0 #000000,
+    -1px 1px 0 #000000, 0 1px 0 #000000, 0 -1px 0 #000000, 1px 0 0 #000000,
+    -1px 0 0 #000000;
+  opacity: 0;
+  animation: fadeInSymbol 1s ease-out forwards, neonAnimation 1.5s infinite;
+  transition: transform 0.4s ease;
+}
+
+#zoom-symbol:hover {
+  transform: scale(1.2);
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #fa0505;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #fbf6f6;
+  color: #fa0505;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  background-color: #fa0505;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #e00404;
+}
+
+#photo-button img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.file-input-label {
+  background-color: #d73f3f;
+  color: #fff;
+  border: 1px solid #fa0505;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.file-input-label:hover {
+  background-color: #5b0101;
+  border-color: #dc393900;
+}
+
+@keyframes shadowAnimation {
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(82, 0, 0, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 15px rgb(48, 0, 0);
+  }
+}
+
+@keyframes borderAnimation {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInBackground {
+  0% {
+    background-color: rgb(26, 26, 26);
+  }
+  100% {
+    background-color: #1a1a1a;
+  }
+}
+
+@keyframes fadeInTopImage {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInCoupleImage {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInSexyImage {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInContainer {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInImage {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInSymbol {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes neonAnimation {
+  0% {
+    text-shadow: 0 0 5px #2b0000, 0 0 10px #310000, 0 0 15px #4f0000,
+      0 0 20px #510101, 0 0 25px #610303, 0 0 30px #800000;
+  }
+  50% {
+    text-shadow: 0 0 10px #f74c4c, 0 0 20px #ce4040, 0 0 30px #8a2626,
+      0 0 40px #741f1f, 0 0 50px #691818, 0 0 60px #800000;
+  }
+  100% {
+    text-shadow: 0 0 5px #1f0101, 0 0 10px #120000, 0 0 15px #0c0101,
+      0 0 20px #180202, 0 0 25px #070707, 0 0 30px #800000;
+  }
+}

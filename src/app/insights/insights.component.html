@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel de Administração</title>
+    <link rel="stylesheet" href="insights.component.css" />
+  </head>
+  <body>
+    <div class="admin-container">
+      <h1>Painel de Administração</h1>
+
+      <div class="section">
+        <h2>Gerenciamento de Usuários</h2>
+        <div class="user-list">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome do Usuário</th>
+                <th>Status</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody id="userTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Informações do Site</h2>
+        <p>Total de Lucro: <span id="siteProfit">R$ 0,00</span></p>
+        <p>Planos Ativos</p>
+        <ul id="activePlans"></ul>
+      </div>
+    </div>
+
+    <script src="insights.component.ts"></script>
+  </body>
+</html>

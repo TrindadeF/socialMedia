@@ -1,0 +1,202 @@
+body {
+  background-color: #1a1a1a;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Centraliza verticalmente */
+  height: 100vh; /* Ocupa toda a altura da viewport */
+  overflow: hidden; /* Evita rolagem da página */
+}
+
+header {
+  display: flex;
+  flex-direction: column; /* Organiza os itens em coluna */
+  align-items: center; /* Centraliza horizontalmente */
+  justify-content: center; /* Centraliza verticalmente */
+  width: 100%;
+  height: 50vh;
+  position: relative;
+  text-align: center; /* Centraliza o texto dentro do header */
+  background: rgba(0, 0, 0, 0.7); /* Preto transparente */
+  border-radius: 10px; /* Bordas arredondadas para efeito 3D */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para efeito 3D */
+  overflow: hidden; /* Oculta partes da animação que saem da área do header */
+}
+
+.logo {
+  font-size: 35vh; /* Ajustado para tamanho menor */
+  color: #3b0101;
+  position: absolute; /* Posiciona o logo de forma absoluta */
+  top: 200px; /* Ajusta a distância do topo */
+  left: 95px; /* Ajusta a distância da esquerda */
+  margin: 0;
+  line-height: 0;
+  transition: transform 0.3s ease, filter 0.3s ease; /* Adiciona transições suaves */
+  animation: neonGlow 1.5s ease-in-out infinite; /* Adiciona a animação de brilho pulsante */
+}
+
+.logo:hover {
+  transform: scale(1.1); /* Zoom suave */
+  filter: brightness(1.5); /* Brilho aumentado */
+}
+
+.header-content {
+  color: #fff;
+  position: relative; /* Para centralizar o texto dentro do header */
+  z-index: 1; /* Garante que o texto fique acima da animação de fundo */
+  margin-top: 10px; /* Ajusta a margem superior para não sobrepor o logo */
+}
+
+.header-content h1,
+.header-content p {
+  transition: transform 0.3s ease, filter 0.3s ease; /* Transições para zoom e brilho */
+}
+
+.header-content h1:hover,
+.header-content p:hover {
+  transform: scale(1.1); /* Zoom suave */
+  filter: brightness(1.5); /* Brilho aumentado */
+}
+
+.header-content h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #ff6b6b;
+}
+
+.header-content p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Animação de brilho no fundo do header */
+@keyframes shine {
+  0% {
+    background: rgba(0, 0, 0, 0.7);
+  }
+  50% {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    background: rgba(0, 0, 0, 0.7);
+  }
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.2),
+    rgba(0, 0, 0, 0.7)
+  );
+  opacity: 0.6;
+  animation: shine 3s infinite; /* Animação de brilho em câmera lenta */
+  z-index: 0; /* Coloca a animação de fundo atrás do texto */
+}
+
+.cta,
+.login-btn {
+  display: inline-block;
+  padding: 15px;
+  border-radius: 25px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 20px;
+  margin-right: 15px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.cta {
+  background-color: #ff6b6b;
+  border: none;
+}
+
+.cta:hover {
+  background-color: #ff4b4b;
+  transform: scale(1.1);
+}
+
+.login-btn {
+  background-color: #ff6b6b;
+  border: none;
+}
+
+.login-btn:hover {
+  background-color: #ff4b4b;
+  transform: scale(1.1);
+}
+
+footer {
+  background-color: #333;
+  border-top: 1px solid #444;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+  color: #aaa;
+}
+
+footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  display: block;
+}
+
+.image-container img:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+@keyframes neonGlow {
+  0% {
+    text-shadow: 0 0 5px #ff6b6b, 0 0 10px #ff6b6b, 0 0 15px #ff6b6b,
+      0 0 20px #ff6b6b, 0 0 25px #ff6b6b, 0 0 30px #ff6b6b, 0 0 35px #ff6b6b;
+  }
+  50% {
+    text-shadow: 0 0 10px #ff6b6b, 0 0 20px #ff6b6b, 0 0 30px #ff6b6b,
+      0 0 40px #ff6b6b, 0 0 50px #ff6b6b, 0 0 60px #ff6b6b, 0 0 70px #ff6b6b;
+  }
+  100% {
+    text-shadow: 0 0 5px #ff6b6b, 0 0 10px #ff6b6b, 0 0 15px #ff6b6b,
+      0 0 20px #ff6b6b, 0 0 25px #ff6b6b, 0 0 30px #ff6b6b, 0 0 35px #ff6b6b;
+  }
+}
+
+.logo {
+  font-size: 35vh;
+  color: #3b0101;
+  position: absolute;
+  top: 200px;
+  left: 95px;
+  margin: 0;
+  line-height: 0;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  animation: neonGlow 1.5s ease-in-out infinite;
+}

@@ -1,0 +1,242 @@
+body {
+  background-color: #000;
+  color: #fff;
+  margin: 0;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  width: 5px;
+  height: 100%;
+  background-color: #dc3545;
+  z-index: -1;
+}
+
+body::before {
+  left: 0;
+}
+body::after {
+  right: 0;
+}
+
+.profile-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.profile-picture {
+  width: 250px;
+  height: 250px;
+  top: -14px;
+  right: -422px;
+  background-color: #ddd;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  position: relative;
+  border: 1px solid transparent;
+  animation: pulsate 2s infinite;
+  transition: transform 0.3s ease;
+}
+
+.profile-picture:hover {
+  transform: scale(1.2);
+}
+
+.post-form {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #dc3545;
+  box-shadow: 0 0 10px #dc3545;
+  transition: box-shadow 0.3s ease;
+  background-color: #222;
+}
+
+.preview-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border: 2px solid #f70505;
+  border-radius: 5px;
+  display: block;
+  margin-top: 10px;
+  object-fit: cover;
+}
+
+.chat-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  /z-index: 1000;
+}
+
+.chat-button .chat-icon {
+  font-size: 40px;
+  color: #dc3545;
+  background-color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chat-button .chat-icon:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.post {
+  background-color: #222;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.post .caption {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.post img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 5px;
+  border: 2px solid #f70505;
+  display: block;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+
+@keyframes pulsate {
+  0%,
+  100% {
+    border-color: transparent;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  50% {
+    border-color: #f70505;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.vip-container {
+  position: fixed;
+  right: 15px;
+  top: 550px;
+  text-align: right;
+  color: #ff0606;
+  font-size: 24px;
+  font-weight: bold;
+  animation: blink 1s infinite;
+}
+
+.acquisition-container {
+  position: fixed;
+  right: 70px;
+  top: 580px;
+}
+
+button,
+.btn-clickable,
+.btn-acquire,
+.btn-exit {
+  background-color: #dc3545;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+button:hover,
+.btn-clickable:hover,
+.btn-acquire:hover,
+.btn-exit:hover {
+  background-color: #f88585;
+  transform: scale(1.1);
+}
+
+button:active,
+.btn-clickable:active,
+.btn-acquire:active,
+.btn-exit:active {
+  transform: scale(0.95);
+}
+
+.btn-exit {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #333;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
+  box-shadow: 0 0 5px #ff5959;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+  box-shadow: 0 0 15px #ff5959;
+}
+
+.rules-container {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  width: 0px !important;
+  background-color: #222;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #dc3545;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  z-index: 10;
+}
+
+.btn-clickable {
+  background-color: #dc3545;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  padding: 5px 5px;
+  border-radius: 15px;
+  display: block;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-clickable:hover {
+  transform: scale(1.05);
+  background-color: #f88585;
+}

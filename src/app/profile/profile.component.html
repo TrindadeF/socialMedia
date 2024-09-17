@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil - Site de Relacionamento Adulto</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="profile.component.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">Meu Perfil</a>
+      <div class="navbar-nav ml-auto">
+        <div class="line-left"></div>
+        <div class="line-right"></div>
+        <a
+          href="/NakedLove/18 rl p2/rl/login/login.html"
+          class="btn btn-danger mr-2"
+          >Sair</a
+        >
+      </div>
+    </nav>
+
+    <div class="container profile-container mt-5 pt-5">
+      <div class="profile-picture"></div>
+      <div class="profile-info">
+        <div class="profile-name">Nome: João Silva</div>
+        <div class="profile-age">Idade: 30</div>
+      </div>
+    </div>
+
+    <div class="feed container mt-5">
+      <h4>ⓃakedLove</h4>
+
+      <div class="post-form">
+        <textarea
+          class="form-control mb-2"
+          id="post-text"
+          placeholder="O que você vai nos mostrar hoje?"
+        ></textarea>
+        <div class="d-flex align-items-center">
+          <label class="mr-2" for="upload-photo" style="cursor: pointer">
+            <i class="fas fa-image fa-2x text-white"></i>
+            <input
+              type="file"
+              id="upload-photo"
+              accept="image/*"
+              style="display: none"
+            />
+          </label>
+          <button id="publish-button" class="btn btn-danger" type="button">
+            Publicar
+          </button>
+          <button
+            id="confirm-button"
+            class="btn btn-danger"
+            type="button"
+            style="display: none"
+          >
+            Confirmar
+          </button>
+        </div>
+        <img
+          id="preview-image"
+          class="preview-image mt-2"
+          style="display: none"
+        />
+      </div>
+
+      <div id="posts-container"></div>
+    </div>
+
+    <div class="vip-container">
+      <div class="vip-text">🔥 Acesso VIP 🔥</div>
+    </div>
+
+    <div class="acquisition-container text-center mt-4">
+      <button class="btn-acquire">Adquirir</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="profile.component.ts"></script>
+  </body>
+</html>
