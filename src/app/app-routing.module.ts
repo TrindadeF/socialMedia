@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'match', component: MatchComponent },
   { path: 'insights', component: InsightsComponent },
   { path: 'intro', component: IntroComponent, pathMatch: 'full' },
+  { path: '', redirectTo: '/intro', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -1,6 +1,9 @@
 <router-outlet>
-  <button mat-button="aboveMenu">Login</button>
-  <button mat-button="belowMenu">Perfil</button>
-  <button mat-button="beforeMenu">Match</button>
-  <button mat-button="afterMenu">Regras</button>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <button [routerLink]="['/login']">Login</button>
+    <button [routerLink]="['/profile']">Perfil</button>
+    <button [routerLink]="['/match']">Match</button>
+    <button [routerLink]="['/rules']">Regras</button>
+    <button [routerLink]="['/home']">Home</button>
+  </nav>
 </router-outlet>
