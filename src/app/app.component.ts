@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './api.service';
+import { Post } from 'database';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +9,16 @@ import { ApiService } from './api.service';
 })
 export class AppComponent implements OnInit {
   title = 'app-love';
-  message: string = '';
 
+  posts: Post[] = [];
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
-    this.apiService.getData().subscribe((data) => {
-      this.message = data.message;
+    this.apiService.getData().subscribe({
+      next: (data) => (this.posts = data),
+      error: (error) => {
+        console.log(error);
+      },
     });
   }
 }
