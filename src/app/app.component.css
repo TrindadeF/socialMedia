@@ -1,0 +1,30 @@
+nav.navbar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 80px; /* largura desejada */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #000; /* totalmente escuro */
+  padding: 10px 0;
+}
+
+nav.navbar .btn {
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  border: none;
+  background: none;
+  color: white; /* cor dos ícones */
+}
+
+nav.navbar .btn:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* efeito hover */
+  color: #ccc;
+}
+
+nav.navbar .fa {
+  font-size: 24px; /* tamanho dos ícones */
+}

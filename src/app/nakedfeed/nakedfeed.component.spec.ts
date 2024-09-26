@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MatchComponent } from './match.component';
+import { NakedfeedComponent } from './nakedfeed.component';
 
-describe('MatchComponent', () => {
-  let component: MatchComponent;
-  let fixture: ComponentFixture<MatchComponent>;
+describe('NakedfeedComponent', () => {
+  let component: NakedfeedComponent;
+  let fixture: ComponentFixture<NakedfeedComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MatchComponent]
+      declarations: [NakedfeedComponent]
     });
-    fixture = TestBed.createComponent(MatchComponent);
+    fixture = TestBed.createComponent(NakedfeedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

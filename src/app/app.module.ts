@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { MatchComponent } from './match/match.component';
 import { InsightsComponent } from './insights/insights.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -16,19 +15,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { FeedComponent } from './feed/feed.component';
 import { CommonModule } from '@angular/common';
+import { NakedFeedComponent } from './nakedfeed/nakedfeed.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ProfileComponent,
-    MatchComponent,
     InsightsComponent,
     LoginComponent,
     RegisterComponent,
     IntroComponent,
     RulesComponent,
     FeedComponent,
+    NakedFeedComponent,
   ],
   imports: [
     BrowserModule,

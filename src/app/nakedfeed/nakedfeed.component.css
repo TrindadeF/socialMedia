@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.profile input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 30px;
+  border: 1px solid #555;
+  background-color: #333;
+  color: #fff;
+}
+
+.posts {
+  margin-top: 20px;
+}
+
+.post {
+  background-color: #1c1c1c;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.username-time {
+  display: flex;
+  flex-direction: column;
+}
+
+.username-time strong {
+  color: #fff;
+}
+
+.username-time span {
+  font-size: 12px;
+  color: #888;
+}
+
+.content {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.post-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  color: #888;
+}

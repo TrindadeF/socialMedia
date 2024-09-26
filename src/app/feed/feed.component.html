@@ -1,7 +1,7 @@
 <div class="container">
   <aside class="sidebar">
     <div class="logo">
-      <img src="assets/logo.svg" alt="Logo" />
+      <img src="assets/images/logo.png" alt="Logo" />
     </div>
     <nav class="navigation">
       <ul>
@@ -23,32 +23,4 @@
       </ul>
     </nav>
   </aside>
-
-  <!-- Feed -->
-  <main class="feed">
-    <div class="feed-header">
-      <h2>Para você</h2>
-      <button class="dropdown-button">▼</button>
-    </div>
-
-    <section class="posts">
-      <div class="post" *ngFor="let post of posts">
-        <div class="post-header">
-          <img class="avatar" src="{{ post.avatar }}" alt="User Avatar" />
-          <div class="post-info">
-            <h3>{{ post.username }}</h3>
-            <span>{{ post.time }}</span>
-          </div>
-        </div>
-        <div class="post-content">
-          <p>{{ post.content }}</p>
-        </div>
-        <div class="post-actions">
-          <button><i class="icon-like"></i>{{ post.likes }}</button>
-          <button><i class="icon-comment"></i>{{ post.comments }}</button>
-          <button><i class="icon-share"></i></button>
-        </div>
-      </div>
-    </section>
-  </main>
 </div>
