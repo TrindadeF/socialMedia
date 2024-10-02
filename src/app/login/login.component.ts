@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // Para redirecionar após o login
+import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -16,8 +16,8 @@ export class LoginComponent {
   onSubmit() {
     this.ApiService.login(this.username, this.password).subscribe({
       next: (response) => {
-        localStorage.setItem('token', response.token); // Salva o token se o login for bem-sucedido
-        this.router.navigate(['/perfil']); // Redireciona para a página de perfil
+        localStorage.setItem('token', response.token);
+        this.router.navigate(['/profile']);
       },
       error: (err) => {
         console.error('Erro no login:', err);

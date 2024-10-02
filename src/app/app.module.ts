@@ -11,11 +11,12 @@ import { RulesComponent } from './rules/rules.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FeedComponent } from './feed/feed.component';
 import { CommonModule } from '@angular/common';
 import { NakedFeedComponent } from './nakedfeed/nakedfeed.component';
 import { FormsModule } from '@angular/forms';
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,9 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -7,14 +7,15 @@ import { InsightsComponent } from './insights/insights.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FeedComponent } from './feed/feed.component';
 import { NakedFeedComponent } from './nakedfeed/nakedfeed.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'insights', component: InsightsComponent },
-  { path: '', redirectTo: '/intro', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'feed', component: FeedComponent },
   { path: 'nakedfeed', component: NakedFeedComponent },
 ];

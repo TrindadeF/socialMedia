@@ -1,36 +1,35 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
 body {
   background: radial-gradient(
     circle at 50% 50%,
     #d3d3d3 0%,
     #a9a9a9 50%,
-    #808080 100%
+    #5e5d5d 100%
   );
   font-family: "Arial", sans-serif;
-  height: 100vh;
-  margin: 0;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Evita barras de rolagem */
-  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5); /* Sombra interna para o efeito 3D */
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
 }
 
 #form-container {
   max-width: 500px;
   width: 100%;
-  background-color: rgba(
-    7,
-    7,
-    7,
-    0.8
-  ) !important; /* Cor preta com 80% de opacidade */
+  background-color: rgba(7, 7, 7, 0.8) !important;
   padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 0, 0, 0.3); /* Sombra para efeito 3D */
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 0, 0, 0.3);
   animation: glow 5s infinite, slideUp 1s forwards ease-out;
-  opacity: 0; /* Inicialmente invisível */
-  transform: translateY(100px); /* Inicia ligeiramente abaixo */
+  opacity: 0;
+  transform: translateY(100px);
 }
 
 @keyframes glow {
@@ -48,7 +47,7 @@ body {
 @keyframes slideUp {
   to {
     opacity: 1;
-    transform: translateY(0); /* Sobe até o centro */
+    transform: translateY(0);
   }
 }
 

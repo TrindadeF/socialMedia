@@ -11,12 +11,12 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { username, password });
+  login(email: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, { email, password });
   }
 
-  register(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, { username, password });
+  register(email: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, { email, password });
   }
   getData(): Observable<Post[]> {
     return this.http.get<Post[]>(this.apiUrl);
