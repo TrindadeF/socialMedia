@@ -7,7 +7,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { InsightsComponent } from './insights/insights.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { IntroComponent } from './intro/intro.component';
 import { RulesComponent } from './rules/rules.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
@@ -16,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FeedComponent } from './feed/feed.component';
 import { CommonModule } from '@angular/common';
 import { NakedFeedComponent } from './nakedfeed/nakedfeed.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,6 @@ import { NakedFeedComponent } from './nakedfeed/nakedfeed.component';
     InsightsComponent,
     LoginComponent,
     RegisterComponent,
-    IntroComponent,
     RulesComponent,
     FeedComponent,
     NakedFeedComponent,
@@ -37,6 +36,7 @@ import { NakedFeedComponent } from './nakedfeed/nakedfeed.component';
     MatButtonModule,
     MatMenuModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

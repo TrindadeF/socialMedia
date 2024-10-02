@@ -1,37 +1,27 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router'; // Para redirecionar após o login
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
-  constructor(private renderer: Renderer2) {}
+export class LoginComponent {
+  username: string = '';
+  password: string = '';
 
-  ngOnInit(): void {
-    this.setupLoginForm();
-  }
+  constructor(private ApiService: ApiService, private router: Router) {}
 
-  setupLoginForm(): void {
-    const loginForm = document.getElementById('login-form') as HTMLFormElement;
-
-    if (loginForm) {
-      this.renderer.listen(loginForm, 'submit', (event: Event) => {
-        event.preventDefault();
-
-        const formData = new FormData(loginForm);
-        const username = formData.get('username') as string;
-        const password = formData.get('password') as string;
-
-        const hasLoggedInBefore = localStorage.getItem('hasLoggedInBefore');
-
-        if (!hasLoggedInBefore) {
-          localStorage.setItem('hasLoggedInBefore', 'true');
-          window.location.href = 'regras.html';
-        } else {
-          window.location.href = '/18 rl p2/rl/Perfil/Perfil.html';
-        }
-      });
-    }
+  onSubmit() {
+    this.ApiService.login(this.username, this.password).subscribe({
+      next: (response) => {
+        localStorage.setItem('token', response.token); // Salva o token se o login for bem-sucedido
+        this.router.navigate(['/perfil']); // Redireciona para a página de perfil
+      },
+      error: (err) => {
+        console.error('Erro no login:', err);
+      },
+    });
   }
 }
