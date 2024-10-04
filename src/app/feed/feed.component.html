@@ -23,4 +23,45 @@
       </ul>
     </nav>
   </aside>
+
+  <div class="feed container mt-5">
+    <h4>ⓃakedLove</h4>
+
+    <div class="post-form">
+      <textarea
+        class="form-control mb-2"
+        id="post-text"
+        placeholder="O que você vai nos mostrar hoje?"
+      ></textarea>
+      <div class="d-flex align-items-center">
+        <label class="mr-2" for="upload-photo" style="cursor: pointer">
+          <i class="fas fa-image fa-2x text-white"></i>
+          <input
+            type="file"
+            id="upload-photo"
+            accept="image/*"
+            style="display: none"
+          />
+        </label>
+        <button id="publish-button" class="btn btn-danger" type="button">
+          Publicar
+        </button>
+        <button
+          id="confirm-button"
+          class="btn btn-danger"
+          type="button"
+          style="display: none"
+        >
+          Confirmar
+        </button>
+      </div>
+      <img
+        id="preview-image"
+        class="preview-image mt-2"
+        style="display: none"
+      />
+    </div>
+
+    <div id="posts-container"></div>
+  </div>
 </div>

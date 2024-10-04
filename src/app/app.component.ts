@@ -1,23 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ApiService } from './api.service';
-import { Post } from 'database';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'app-love';
 
-  posts: Post[] = [];
+  email: string = '';
+  password: string = '';
+
   constructor(private apiService: ApiService) {}
 
-  ngOnInit() {
-    this.apiService.getData().subscribe({
-      next: (data) => (this.posts = data),
+  // Método para realizar login
+  login() {
+    this.apiService.login(this.email, this.password).subscribe({
+      next: (response) => {
+        console.log('Login bem-sucedido', response);
+        // Aqui você pode redirecionar o usuário ou armazenar o token de autenticação
+      },
       error: (error) => {
-        console.log(error);
+        console.error('Erro no login:', error);
+      },
+    });
+  }
+
+  // Método para realizar registro
+  register() {
+    this.apiService.register(this.email, this.password).subscribe({
+      next: (response) => {
+        console.log('Registro bem-sucedido', response);
+        // Você pode notificar o usuário de que o registro foi bem-sucedido
+      },
+      error: (error) => {
+        console.error('Erro no registro:', error);
       },
     });
   }

@@ -8,16 +8,16 @@ import { ApiService } from '../api.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  username: string = '';
+  email: string = '';
   password: string = '';
 
   constructor(private ApiService: ApiService, private router: Router) {}
 
   onSubmit() {
-    this.ApiService.login(this.username, this.password).subscribe({
+    this.ApiService.login(this.email, this.password).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.token);
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/feed']);
       },
       error: (err) => {
         console.error('Erro no login:', err);
