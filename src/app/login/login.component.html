@@ -39,6 +39,10 @@
             required
           />
         </div>
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
+
         <div class="d-grid">
           <input type="submit" class="btn btn-primary" value="Entrar" />
         </div>

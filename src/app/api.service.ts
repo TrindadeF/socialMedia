@@ -6,17 +6,28 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:3000/auth'; // URL base da API
+  private apiUrl = 'http://localhost:3000/auth';
+  private apiPost = 'http://localhost:3000/post';
 
   constructor(private http: HttpClient) {}
 
-  // Método para realizar login
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, { email, password });
   }
 
-  // Método para realizar registro
   register(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, { email, password });
+  }
+  getPosts(): Observable<any> {
+    return this.http.get(`${this.apiPost}/`);
+  }
+  logout(): void {
+    localStorage.removeItem('authToken');
+  }
+  getUserProfile(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/profile`);
+  }
+  publishPost(formData: FormData): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/posts`, formData);
   }
 }
