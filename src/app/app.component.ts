@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiService } from './api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +7,18 @@ import { ApiService } from './api.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'app-love';
+  constructor(private router: Router) {}
 
-  email: string = '';
-  password: string = '';
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('userId');
+  }
+  isLoginRoute(): boolean {
+    return this.router.url === '/login';
+  }
 
-  constructor(private apiService: ApiService) {}
+  logout() {
+    localStorage.removeItem('userId');
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
 }

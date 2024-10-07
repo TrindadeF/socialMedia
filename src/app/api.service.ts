@@ -10,6 +10,7 @@ export class ApiService {
   private apiPost = 'http://localhost:3000/post';
 
   constructor(private http: HttpClient) {}
+  private isLoggedIn: boolean = false;
 
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, { email, password });
@@ -29,5 +30,11 @@ export class ApiService {
   }
   publishPost(formData: FormData): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/posts`, formData);
+  }
+  userIsLoggedIn(): boolean {
+    return this.isLoggedIn;
+  }
+  updateUserProfile(profileData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/profile`, profileData);
   }
 }

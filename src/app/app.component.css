@@ -1,0 +1,40 @@
+.example-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 80px;
+  background-color: #000;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.menu-icons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.menu-item {
+  padding: 20px 0;
+  text-align: center;
+  color: #888;
+  transition: color 0.3s;
+}
+
+.menu-item:hover {
+  color: white;
+}
+
+.menu-item img.icon {
+  width: 30px;
+  height: 30px;
+}
+
+.menu-item.bottom {
+  margin-top: auto;
+}

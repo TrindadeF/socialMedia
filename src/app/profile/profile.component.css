@@ -1,142 +1,287 @@
 body {
-  background-color: #000;
-  color: #fff;
   margin: 0;
-  overflow-x: hidden;
+  background-color: #000;
+  color: #000;
   font-family: Arial, sans-serif;
 }
 
-body::before,
-body::after {
-  content: "";
-  position: fixed;
-  width: 5px;
-  height: 100%;
-  background-color: #dc3545;
-  z-index: -1;
-}
-
-body::before {
-  left: 0;
-}
-body::after {
-  right: 0;
+.feed {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #161616;
+  overflow-y: auto;
 }
 
 .container {
-  padding-top: 70px; /* Para dar espaço abaixo da navbar fixa */
+  display: flex;
+  height: 100vh;
+  background-color: #000;
 }
 
 .profile-container {
-  text-align: center;
-  margin: 20px auto;
-}
-
-.profile-picture {
-  width: 150px; /* Ajustado para ser menor */
-  height: 150px; /* Ajustado para ser menor */
-  background-color: #ddd;
-  border-radius: 50%;
-  margin-bottom: 10px;
-  position: relative;
-  border: 3px solid #dc3545; /* Aumentei a borda */
-}
-
-.post {
-  background-color: #222;
-  border: 1px solid #fff;
-  border-radius: 5px;
-  padding: 10px; /* Aumentei um pouco o padding */
-  margin: 20px 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-}
-
-.post .caption {
-  font-weight: bold;
-  margin-bottom: 5px; /* Ajustado para ser um pouco menor */
-}
-
-.post img {
+  align-items: center;
+  background-color: #000;
+  color: #fff;
   width: 100%;
-  max-width: 100%; /* Agora respeita o limite do contêiner */
-  height: auto;
-  border-radius: 5px;
-  border: 2px solid #f70505;
-  display: block;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid #333;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.profile-image img {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  border: 3px solid #333;
+}
+
+.profile-info {
+  flex-grow: 1;
+  padding-left: 20px;
+}
+
+.profile-info h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.profile-info .username {
+  color: #aaa;
   margin-bottom: 10px;
 }
 
-.chat-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
+.profile-info .bio,
+.profile-info .location,
+.profile-info .partner,
+.profile-info .followers {
+  margin-bottom: 5px;
+  font-size: 14px;
 }
 
-.chat-button .chat-icon {
-  font-size: 40px;
-  color: #dc3545;
-  background-color: #fff;
+.edit-btn {
+  background-color: #1da1f2;
+  color: white;
+  padding: 8px 15px;
   border: none;
-  border-radius: 50%;
-  padding: 15px;
+  border-radius: 20px;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 10px;
+  font-size: 14px;
 }
 
-.chat-button .chat-icon:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+.edit-btn:hover {
+  background-color: #0d8bec;
 }
 
-.rules-container {
-  position: fixed;
-  left: 20px;
-  bottom: 20px;
-  width: 0px !important;
+/* Estilo das abas */
+.profile-tabs {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.profile-tabs button {
+  background: none;
+  color: #aaa;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.profile-tabs button.active {
+  color: white;
+  border-bottom: 2px solid white;
+}
+
+.profile-tabs button:hover {
+  color: white;
+}
+
+/* Estilo do conteúdo */
+.profile-content {
+  background-color: #1c1c1c;
+  padding: 15px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.profile-content img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+/* Estilo de cada post */
+.post {
   background-color: #222;
   padding: 10px;
   border-radius: 10px;
-  border: 2px solid #dc3545;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  text-align: center;
-  z-index: 10;
+  margin-bottom: 15px;
 }
 
-button,
-.btn-clickable {
-  background-color: #dc3545;
-  border: none;
+/* Estilos gerais do modal */
+.modal {
+  display: none; /* Escondido por padrão */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+}
+
+/* Conteúdo do modal */
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 400px;
+  position: relative;
+  color: #000;
+}
+
+/* Fechar o modal */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="url"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+textarea {
+  height: 80px;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#save-btn {
+  background-color: #000;
   color: #fff;
-  font-size: 16px;
-  padding: 10px 20px; /* Mantenha o padding consistente */
+  padding: 10px 20px;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-button:hover,
-.btn-clickable:hover {
-  background-color: #f88585;
-  transform: scale(1.1);
+#save-btn:hover {
+  background-color: #333;
+}
+modal {
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-::-webkit-scrollbar {
-  width: 12px;
-}
-::-webkit-scrollbar-track {
-  background: #333;
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  margin: 100px auto;
+  width: 50%;
   border-radius: 10px;
 }
-::-webkit-scrollbar-thumb {
-  background: #555;
-  border-radius: 10px;
-  box-shadow: 0 0 5px #ff5959;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+
+.close {
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #777;
-  box-shadow: 0 0 15px #ff5959;
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group input[type="checkbox"] {
+  width: auto;
+}
+
+.profile-container {
+  margin-top: 20px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+}
+
+.profile-image img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.profile-info {
+  margin-left: 20px;
+}
+
+.edit-btn {
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background-color: #0056b3;
 }

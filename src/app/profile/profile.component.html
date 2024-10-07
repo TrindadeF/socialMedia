@@ -1,23 +1,76 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Perfil - Site de Relacionamento Adulto</title>
-    <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link href="profile.component.css" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-  </head>
-  <body>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="profile.component.ts"></script>
-  </body>
-</html>
+<div class="container">
+  <div class="profile-container">
+    <div class="profile-header">
+      <div class="profile-image">
+        <img [src]="user?.profilePicture" alt="{{ user?.name }}" />
+      </div>
+      <div class="profile-info">
+        <h2>{{ user.name }}</h2>
+        <h3>{{ user.age }}</h3>
+        <p class="username">{{ user?.username }}</p>
+        <button class="edit-btn" (click)="openEditProfile()">
+          Editar perfil
+        </button>
+      </div>
+    </div>
+
+    <div class="profile-tabs">
+      <button
+        [class.active]="selectedTab === 'threads'"
+        (click)="selectTab('feed')"
+      >
+        Feed
+      </button>
+      <button
+        [class.active]="selectedTab === 'respostas'"
+        (click)="selectTab('respostas')"
+      >
+        Respostas
+      </button>
+      <button
+        [class.active]="selectedTab === 'republicacoes'"
+        (click)="selectTab('republicacoes')"
+      >
+        Republicações
+      </button>
+    </div>
+
+    <div *ngIf="selectedTab === 'threads'" class="profile-content">
+      <div *ngFor="let post of posts" class="post">
+        <p>{{ post.content }}</p>
+        <img *ngIf="post.imageUrl" [src]="post.imageUrl" alt="post image" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de edição de perfil -->
+  <div class="modal" *ngIf="modalOpen">
+    <div class="modal-content">
+      <h2>Editar Perfil</h2>
+      <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+        <div>
+          <label for="name">Nome</label>
+          <input id="name" formControlName="name" type="text" />
+        </div>
+        <div>
+          <label for="bio">Bio</label>
+          <textarea id="bio" formControlName="bio"></textarea>
+        </div>
+        <div>
+          <label for="link">Link</label>
+          <input id="link" formControlName="link" type="text" />
+        </div>
+        <div>
+          <label for="privateProfile">Perfil Privado</label>
+          <input
+            id="privateProfile"
+            formControlName="privateProfile"
+            type="checkbox"
+          />
+        </div>
+        <button type="submit">Salvar</button>
+        <button type="button" (click)="closeEditProfile()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</div>

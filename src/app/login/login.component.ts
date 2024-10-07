@@ -12,11 +12,12 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private ApiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   onSubmit() {
-    this.ApiService.login(this.email, this.password).subscribe({
+    this.apiService.login(this.email, this.password).subscribe({
       next: (response) => {
+        localStorage.setItem('userId', response.userId);
         localStorage.setItem('token', response.token);
         console.log('Login bem-sucedido', response);
         this.router.navigate(['/feed']);

@@ -1,1 +1,27 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" opened class="sidenav" *ngIf="isLoggedIn()">
+    <div class="menu-icons">
+      <a href="#" class="menu-item">
+        <img src="assets/images/logo.jpg" alt="Logo" class="icon" />
+      </a>
+      <a routerLink="/rules" class="menu-item">
+        <mat-icon>home</mat-icon>
+      </a>
+      <a routerLink="/feed" class="menu-item">
+        <mat-icon>search</mat-icon>
+      </a>
+      <a routerLink="/nakedfeed" class="menu-item">
+        <mat-icon>favorite</mat-icon>
+      </a>
+      <a routerLink="/profile" class="menu-item">
+        <mat-icon>person</mat-icon>
+      </a>
+      <a (click)="logout()" class="menu-item bottom">
+        <mat-icon>logout</mat-icon>
+      </a>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

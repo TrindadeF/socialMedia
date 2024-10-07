@@ -17,6 +17,9 @@ import { CommonModule } from '@angular/common';
 import { NakedFeedComponent } from './nakedfeed/nakedfeed.component';
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth.interceptor';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,9 @@ import { AuthInterceptor } from './auth.interceptor';
     MatMenuModule,
     HttpClientModule,
     FormsModule,
+    MatSidenavModule,
+    MatIconModule,
+    ReactiveFormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -53,7 +53,7 @@ export class FeedComponent implements OnInit {
       formData.append('image', this.selectedImage);
     }
 
-    this.http.post<Post>('http://localhost:3000/posts', formData).subscribe({
+    this.http.post<Post>('http://localhost:3000/posts/', formData).subscribe({
       next: (response: Post) => {
         console.log('Post publicado com sucesso:', response);
         this.posts.push(response);
@@ -97,5 +97,8 @@ export class FeedComponent implements OnInit {
     previewImage.src = '';
     previewImage.style.display = 'none';
     this.alertMessage = '';
+  }
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('userId');
   }
 }
