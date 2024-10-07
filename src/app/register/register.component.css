@@ -9,7 +9,6 @@ body {
   margin: 0;
   position: relative;
   animation: fadeInBackground 2s ease-out;
-  top: 20px;
 }
 
 img {
@@ -55,8 +54,8 @@ img {
   background: url("/NakedLove/proibido.png") no-repeat center center;
   background-size: cover;
   animation: fadeInImage 1s ease-out forwards;
-  border: none; /* Remove qualquer contorno */
-  box-shadow: none; /* Remove qualquer sombra */
+  border: none;
+  box-shadow: none;
 }
 
 #top-image:hover,

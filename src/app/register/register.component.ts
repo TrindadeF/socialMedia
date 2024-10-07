@@ -1,4 +1,6 @@
 import { Component, Renderer2, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -6,12 +8,23 @@ import { Component, Renderer2, OnInit } from '@angular/core';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  constructor(private renderer: Renderer2) {}
+  name: string = '';
+  email: string = '';
+  password: string = '';
+  confirmPassword: string = '';
+  gender: string = '';
+  age: string = '';
+  errorMessage: string = '';
+
+  constructor(
+    private renderer: Renderer2,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.setupGenderSelectListener();
     this.setupFileInputListener();
-    this.setupBirthdateListener();
     this.setupAnimationEndListener();
   }
 
@@ -24,6 +37,7 @@ export class RegisterComponent implements OnInit {
     if (genderSelect && formContainer) {
       this.renderer.listen(genderSelect, 'change', (event) => {
         const value = (event.target as HTMLSelectElement).value;
+        this.gender = value;
         if (value === 'female') {
           formContainer.classList.add('feminine');
         } else {
@@ -40,7 +54,6 @@ export class RegisterComponent implements OnInit {
     if (fileInput && profilePicture) {
       this.renderer.listen(fileInput, 'change', () => {
         const file = fileInput.files ? fileInput.files[0] : null;
-
         if (file) {
           const reader = new FileReader();
           reader.onload = (e: ProgressEvent<FileReader>) => {
@@ -54,35 +67,6 @@ export class RegisterComponent implements OnInit {
           profilePicture.style.backgroundImage =
             'url("https://via.placeholder.com/120")';
           profilePicture.classList.remove('has-photo');
-        }
-      });
-    }
-  }
-
-  setupBirthdateListener(): void {
-    const birthdateInput = document.getElementById(
-      'birthdate'
-    ) as HTMLInputElement;
-    const ageError = document.getElementById('age-error');
-
-    if (birthdateInput && ageError) {
-      this.renderer.listen(birthdateInput, 'change', () => {
-        const birthdate = new Date(birthdateInput.value);
-        const today = new Date();
-        let age = today.getFullYear() - birthdate.getFullYear();
-        const monthDiff = today.getMonth() - birthdate.getMonth();
-
-        if (
-          monthDiff < 0 ||
-          (monthDiff === 0 && today.getDate() < birthdate.getDate())
-        ) {
-          age--;
-        }
-
-        if (age < 18) {
-          ageError.style.display = 'block';
-        } else {
-          ageError.style.display = 'none';
         }
       });
     }
@@ -103,5 +87,42 @@ export class RegisterComponent implements OnInit {
         }
       );
     }
+  }
+
+  registerUser(): void {
+    if (this.password !== this.confirmPassword) {
+      this.errorMessage = 'As senhas não coincidem!';
+      return;
+    }
+
+    const userData = {
+      name: this.name,
+      email: this.email,
+      password: this.password,
+      gender: this.gender,
+      age: this.age,
+    };
+
+    if (
+      !this.name ||
+      !this.email ||
+      !this.password ||
+      !this.gender ||
+      !this.age
+    ) {
+      this.errorMessage = 'Todos os campos são obrigatórios.';
+      return;
+    }
+
+    this.http.post('http://localhost:3000/auth/register', userData).subscribe({
+      next: (response) => {
+        console.log('Usuário registrado com sucesso!', response);
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        console.error('Erro ao registrar o usuário:', error);
+        this.errorMessage = 'Erro ao registrar. Tente novamente.';
+      },
+    });
   }
 }
