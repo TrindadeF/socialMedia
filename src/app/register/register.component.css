@@ -51,7 +51,7 @@ img {
   bottom: 30px;
   right: 230px;
   width: 450px;
-  background: url("/NakedLove/proibido.png") no-repeat center center;
+  background: url("/src/assets/images/proibido.png") no-repeat center center;
   background-size: cover;
   animation: fadeInImage 1s ease-out forwards;
   border: none;
@@ -119,7 +119,7 @@ button:hover,
   justify-content: center;
   align-items: center;
   position: absolute;
-  bottom: 20px;
+  bottom: 10px;
   width: 100%;
   z-index: 3;
 }
