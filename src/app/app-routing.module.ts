@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { FeedComponent } from './feed/feed.component';
 import { NakedFeedComponent } from './nakedfeed/nakedfeed.component';
 import { AuthGuard } from './auth.guard';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'feed', component: FeedComponent },
   { path: 'nakedfeed', component: NakedFeedComponent },
+  { path: 'edit-profile', component: EditProfileComponent },
 ];
 
 @NgModule({

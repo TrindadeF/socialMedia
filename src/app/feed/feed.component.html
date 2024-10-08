@@ -11,7 +11,7 @@
         placeholder="O que você vai nos mostrar hoje?"
         [(ngModel)]="postContent"
       ></textarea>
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center mb-2">
         <label class="mr-2" for="upload-photo" style="cursor: pointer">
           <i class="fas fa-image fa-2x text-white"></i>
           <input
@@ -35,6 +35,7 @@
         id="preview-image"
         class="preview-image mt-2"
         style="display: none"
+        alt="Prévia da imagem"
       />
     </div>
 
@@ -51,18 +52,29 @@
       {{ alertMessage }}
     </div>
 
-    <div id="posts-container" class="posts">
+    <div id="posts-container" class="posts mt-4">
       <div *ngFor="let post of posts" class="post">
-        <div class="post-header">
-          <img src="path/to/avatar.jpg" alt="avatar" class="avatar" />
-          <div class="post-info">
-            <h3>{{ post.id }}</h3>
+        <div class="post-header d-flex align-items-center">
+          <img
+            src="/src/assets/images/default.jpg"
+            alt="Avatar do usuário"
+            class="avatar"
+          />
+          <div class="post-info ml-2">
+            <h5>{{ post.owner }}</h5>
+            <small>{{ post.createdAt | date : "short" }}</small>
           </div>
         </div>
-        <div class="post-content">
+        <div class="post-content mt-2">
           <p>{{ post.content }}</p>
+          <img
+            *ngIf="post.imageUrl"
+            [src]="post.imageUrl"
+            class="post-image"
+            alt="Imagem do post"
+          />
         </div>
-        <div class="post-actions">
+        <div class="post-actions mt-2">
           <button><i class="fas fa-heart"></i> Curtir</button>
           <button><i class="fas fa-comment"></i> Comentar</button>
         </div>

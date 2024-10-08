@@ -29,12 +29,15 @@ export class ApiService {
     return this.http.get(`${this.apiUrl}/profile`);
   }
   publishPost(formData: FormData): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/posts`, formData);
+    return this.http.post<any>(`${this.apiUrl}/post`, formData);
   }
   userIsLoggedIn(): boolean {
     return this.isLoggedIn;
   }
   updateUserProfile(profileData: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/profile`, profileData);
+  }
+  getUserById(userId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/profile/`);
   }
 }

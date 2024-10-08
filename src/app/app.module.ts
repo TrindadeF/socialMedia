@@ -20,6 +20,7 @@ import { AuthInterceptor } from './auth.interceptor';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     RulesComponent,
     FeedComponent,
     NakedFeedComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

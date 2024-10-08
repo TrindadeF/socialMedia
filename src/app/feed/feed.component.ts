@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
-
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-}
+import { Post } from 'database';
 
 @Component({
   selector: 'app-love',
@@ -21,13 +16,22 @@ export class FeedComponent implements OnInit {
   loading: boolean = false;
   alertMessage: string = '';
   alertType: string = '';
+  canPublish: boolean = false;
 
   constructor(private apiService: ApiService, private http: HttpClient) {}
+
+  ngOnInit() {
+    this.getPosts();
+  }
 
   getPosts() {
     this.apiService.getPosts().subscribe({
       next: (posts) => {
-        this.posts = posts;
+        this.posts = posts.sort((a: any, b: any) => {
+          return (
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+        });
       },
       error: (error) => {
         this.errorMessage = 'Erro ao carregar os posts';
@@ -36,24 +40,27 @@ export class FeedComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.getPosts();
-  }
-
-  logout(): void {
-    this.apiService.logout();
-    window.location.href = '/login';
+  likePost(post: Post) {
+    post.likes += 1;
   }
 
   publishPost() {
     this.loading = true;
     const formData = new FormData();
+
+    if (!this.postContent.trim()) {
+      this.alertMessage = 'O conteúdo do post é obrigatório!';
+      this.alertType = 'error';
+      this.loading = false;
+      return;
+    }
+
     formData.append('content', this.postContent);
     if (this.selectedImage) {
       formData.append('image', this.selectedImage);
     }
 
-    this.http.post<Post>('http://localhost:3000/posts/', formData).subscribe({
+    this.http.post<Post>('http://localhost:3000/post/', formData).subscribe({
       next: (response: Post) => {
         console.log('Post publicado com sucesso:', response);
         this.posts.push(response);
@@ -87,6 +94,9 @@ export class FeedComponent implements OnInit {
       reader.readAsDataURL(this.selectedImage);
     }
   }
+  checkFormValidity() {
+    this.canPublish = !!this.postContent.trim() || !!this.selectedImage;
+  }
 
   resetForm() {
     this.postContent = '';
@@ -97,8 +107,6 @@ export class FeedComponent implements OnInit {
     previewImage.src = '';
     previewImage.style.display = 'none';
     this.alertMessage = '';
-  }
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('userId');
+    this.canPublish = false;
   }
 }
