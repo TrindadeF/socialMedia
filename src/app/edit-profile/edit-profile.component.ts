@@ -18,6 +18,8 @@ export class EditProfileComponent implements OnInit {
     nickName: '',
     description: '',
   };
+
+  originalUser: User | null = null;
   alertMessage: string = '';
   alertType: string = '';
   previewImage: string | ArrayBuffer | null = null;
@@ -25,32 +27,42 @@ export class EditProfileComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.loadUserProfile();
+    this.fetchUserProfile();
   }
 
-  loadUserProfile() {
-    const userId = 'id_do_usuario';
-    this.apiService.getUserById(userId).subscribe({
-      next: (user) => {
-        this.user = user;
-        if (user.profilePic) {
-          this.previewImage = user.profilePic;
+  fetchUserProfile() {
+    this.apiService.getUserProfile().subscribe({
+      next: (response) => {
+        this.user = response;
+        this.originalUser = { ...response };
+        if (response.profilePic) {
+          this.previewImage = response.profilePic;
         }
       },
-      error: (error) => {
-        this.alertMessage = 'Erro ao carregar os dados do usuário.';
-        this.alertType = 'error';
+      error: (err) => {
+        console.error('Erro ao buscar perfil do usuário:', err);
       },
     });
   }
 
   onSubmit() {
-    const updateUser: User = {
-      ...this.user,
-      profilePic: this.previewImage as string,
-    };
+    const updateUser = this.getUpdatedFields();
 
-    this.apiService.updateUserProfile(updateUser).subscribe({
+    if (Object.keys(updateUser).length === 0) {
+      this.alertMessage = 'Nenhuma alteração foi feita.';
+      this.alertType = 'info';
+      return;
+    }
+
+    const userId = this.getLoggedInUserId();
+
+    if (!userId) {
+      this.alertMessage = 'Erro: ID do usuário não encontrado.';
+      this.alertType = 'error';
+      return;
+    }
+
+    this.apiService.updateUserProfile(userId, updateUser).subscribe({
       next: () => {
         this.alertMessage = 'Perfil atualizado com sucesso!';
         this.alertType = 'success';
@@ -71,5 +83,37 @@ export class EditProfileComponent implements OnInit {
       };
       reader.readAsDataURL(fileInput.files[0]);
     }
+  }
+
+  getUpdatedFields(): Partial<User> {
+    const updatedFields: Partial<User> = {};
+
+    if (this.user.name !== this.originalUser?.name) {
+      updatedFields.name = this.user.name;
+    }
+    if (this.user.age !== this.originalUser?.age) {
+      updatedFields.age = this.user.age;
+    }
+    if (this.user.gender !== this.originalUser?.gender) {
+      updatedFields.gender = this.user.gender;
+    }
+    if (this.user.email !== this.originalUser?.email) {
+      updatedFields.email = this.user.email;
+    }
+    if (this.user.nickName !== this.originalUser?.nickName) {
+      updatedFields.nickName = this.user.nickName;
+    }
+    if (this.user.description !== this.originalUser?.description) {
+      updatedFields.description = this.user.description;
+    }
+    if (this.previewImage !== this.originalUser?.profilePic) {
+      updatedFields.profilePic = this.previewImage as string;
+    }
+
+    return updatedFields;
+  }
+
+  private getLoggedInUserId(): string {
+    return localStorage.getItem('userId') || '';
   }
 }

@@ -19,25 +19,32 @@ export class ApiService {
   register(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, { email, password });
   }
+
   getPosts(): Observable<any> {
     return this.http.get(`${this.apiPost}/`);
   }
+
   logout(): void {
     localStorage.removeItem('authToken');
   }
+
   getUserProfile(): Observable<any> {
     return this.http.get(`${this.apiUrl}/profile`);
   }
+
   publishPost(formData: FormData): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/post`, formData);
   }
+
   userIsLoggedIn(): boolean {
     return this.isLoggedIn;
   }
-  updateUserProfile(profileData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/profile`, profileData);
+
+  updateUserProfile(userId: string, profileData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/profile/edit/${userId}`, profileData);
   }
+
   getUserById(userId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/profile/`);
+    return this.http.get(`${this.apiUrl}/profile/${userId}`);
   }
 }

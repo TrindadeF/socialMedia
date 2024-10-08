@@ -7,10 +7,8 @@
       <div class="profile-info">
         <h2>{{ user.name }}</h2>
         <h3>{{ user.age }}</h3>
+        <h4>`{{ user.description }}</h4>
         <p class="username">{{ user?.username }}</p>
-        <button class="edit-btn" (click)="openEditProfile()">
-          Editar perfil
-        </button>
       </div>
     </div>
 
@@ -40,36 +38,6 @@
         <p>{{ post.content }}</p>
         <img *ngIf="post.imageUrl" [src]="post.imageUrl" alt="post image" />
       </div>
-    </div>
-  </div>
-
-  <div class="modal" *ngIf="modalOpen">
-    <div class="modal-content">
-      <h2>Editar Perfil</h2>
-      <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
-        <div>
-          <label for="name">Nome</label>
-          <input id="name" formControlName="name" type="text" />
-        </div>
-        <div>
-          <label for="bio">Bio</label>
-          <textarea id="bio" formControlName="bio"></textarea>
-        </div>
-        <div>
-          <label for="link">Link</label>
-          <input id="link" formControlName="link" type="text" />
-        </div>
-        <div>
-          <label for="privateProfile">Perfil Privado</label>
-          <input
-            id="privateProfile"
-            formControlName="privateProfile"
-            type="checkbox"
-          />
-        </div>
-        <button type="submit">Salvar</button>
-        <button type="button" (click)="closeEditProfile()">Cancelar</button>
-      </form>
     </div>
   </div>
 </div>

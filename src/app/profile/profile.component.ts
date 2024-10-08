@@ -17,9 +17,7 @@ export class ProfileComponent implements OnInit {
   constructor(private apiService: ApiService, private fb: FormBuilder) {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
-      bio: [''],
-      link: [''],
-      privateProfile: [false],
+      descrition: [''],
     });
   }
 
@@ -35,9 +33,7 @@ export class ProfileComponent implements OnInit {
 
         this.profileForm.patchValue({
           name: this.user.name,
-          bio: this.user.bio,
-          link: this.user.link,
-          privateProfile: this.user.privateProfile,
+          description: this.user.description,
         });
       },
       error: (err) => {
@@ -59,30 +55,5 @@ export class ProfileComponent implements OnInit {
 
   selectTab(tab: string) {
     this.selectedTab = tab;
-  }
-
-  openEditProfile() {
-    this.modalOpen = true;
-  }
-
-  closeEditProfile() {
-    this.modalOpen = false;
-  }
-
-  saveProfile() {
-    if (this.profileForm.valid) {
-      const updatedProfile = this.profileForm.value;
-
-      this.apiService.updateUserProfile(updatedProfile).subscribe({
-        next: (response) => {
-          console.log('Perfil atualizado com sucesso', response);
-          this.user = response;
-          this.closeEditProfile();
-        },
-        error: (err) => {
-          console.error('Erro ao atualizar o perfil:', err);
-        },
-      });
-    }
   }
 }
