@@ -17,20 +17,12 @@
         [class.active]="selectedTab === 'threads'"
         (click)="selectTab('feed')"
       >
-        Feed
+      
+        Minhas Postagens
+        <mat-icon>add_photo_alternate</mat-icon>
       </button>
-      <button
-        [class.active]="selectedTab === 'respostas'"
-        (click)="selectTab('respostas')"
-      >
-        Respostas
-      </button>
-      <button
-        [class.active]="selectedTab === 'republicacoes'"
-        (click)="selectTab('republicacoes')"
-      >
-        Republicações
-      </button>
+     
+     
     </div>
 
     <div *ngIf="selectedTab === 'threads'" class="profile-content">

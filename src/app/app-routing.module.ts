@@ -9,6 +9,7 @@ import { FeedComponent } from './feed/feed.component';
 import { NakedFeedComponent } from './nakedfeed/nakedfeed.component';
 import { AuthGuard } from './auth.guard';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { PaymentsComponent } from './payments/payments.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -20,6 +21,8 @@ const routes: Routes = [
   { path: 'feed', component: FeedComponent },
   { path: 'nakedfeed', component: NakedFeedComponent },
   { path: 'edit-profile', component: EditProfileComponent },
+  { path: 'payments', component: PaymentsComponent },
+  
 ];
 
 @NgModule({

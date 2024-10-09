@@ -1,6 +1,27 @@
 <body>
   <div class="container">
     <h2>Editar Perfil</h2>
+
+    <!-- Seção da pré-visualização da foto de perfil -->
+    <div class="profile-picture-preview">
+      <img 
+        [src]="previewImage ? previewImage : 'assets/images/user.jpg'" 
+        alt="Foto de Perfil Preview" 
+      />
+    </div>
+
+    <!-- Campo de upload da foto de perfil -->
+    <div class="form-group">
+      <label for="profile-picture">Foto de Perfil</label>
+      <input
+        type="file"
+        id="profile-picture"
+        class="form-control"
+        (change)="onImageSelected($event)"
+        accept="image/*"
+      />
+    </div>
+
     <form (ngSubmit)="onSubmit()" #editProfileForm="ngForm">
       <div class="form-group">
         <label for="name">Nome</label>
@@ -26,13 +47,16 @@
       </div>
       <div class="form-group">
         <label for="description">Descrição</label>
-        <textarea
-          id="description"
-          class="form-control"
-          [(ngModel)]="user.description"
-          name="description"
-          rows="3"
-        ></textarea>
+        <div class="description-wrapper">
+          <textarea
+            id="description"
+            class="form-control"
+            [(ngModel)]="user.description"
+            name="description"
+            rows="3"
+          ></textarea>
+          <div class="linear-box"></div>
+        </div>
       </div>
       <div class="form-group">
         <label for="email">Email</label>
@@ -73,25 +97,10 @@
           <option value="HOM">Homossexual</option>
         </select>
       </div>
-      <div class="form-group">
-        <label for="profile-picture">Foto de Perfil</label>
-        <input
-          type="file"
-          id="profile-picture"
-          class="form-control"
-          (change)="onImageSelected($event)"
-          accept="image/*"
-        />
-        <img
-          *ngIf="previewImage"
-          [src]="previewImage"
-          class="mt-2"
-          alt="Preview"
-        />
-      </div>
+
       <button
         type="submit"
-        class="btn btn-primary"
+        class="btn-primary"
         [disabled]="editProfileForm.invalid"
       >
         Salvar

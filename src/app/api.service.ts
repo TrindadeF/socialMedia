@@ -19,7 +19,9 @@ export class ApiService {
   register(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, { email, password });
   }
-
+  resetPassword(email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/reset-password`, { email });
+  }
   getPosts(): Observable<any> {
     return this.http.get(`${this.apiPost}/`);
   }

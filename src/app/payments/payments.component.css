@@ -1,0 +1,112 @@
+body {
+    background-color: #121212; /* Cor de fundo escura para todo o corpo */
+    font-family: Arial, sans-serif; /* Fonte mais moderna */
+    color: #fff; /* Cor do texto padrão */
+    margin: 0; /* Remover margens */
+    padding: 0; /* Remover preenchimento */
+}
+
+.payment-container {
+    display: flex;
+    flex-direction: column; /* Alinhar os filhos verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 100vh; /* Altura total da tela */
+    position: relative; /* Para posicionar elementos internos */
+    background-image: url('/src/assets/images/sensual 3.avif'); /* Imagem de fundo */
+    background-size: cover; /* Cobrir todo o espaço disponível */
+    background-position: center; /* Centralizar a imagem de fundo */
+}
+
+.payment {
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.1); /* Fundo transparente */
+    border-radius: 15px; /* Bordas arredondadas */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra mais suave */
+    max-width: 500px; /* Largura máxima do contêiner */
+    text-align: center; /* Centralizar texto */
+    z-index: 1; /* Para estar acima da imagem de fundo */
+}
+
+.payment h1 {
+    color: #fa0606; /* Cor do título */
+    margin-bottom: 20px; /* Espaço abaixo do título */
+    font-size: 24px; /* Tamanho do texto */
+}
+
+.payment-image {
+    width: 50%; /* Reduz a largura para 50% */
+    height: auto; /* Mantém a proporção da imagem */
+    max-width: 300px; /* Limita a largura máxima a 200px */
+    transition: transform 0.5s ease-in-out; /* Transição suave */
+    border-radius: 50%; /* Torna a imagem redonda */
+    border: 2px solid black; /* Contorno preto de 2px */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
+}
+
+.payment-image:hover {
+    transform: scale(1.05); /* Leve aumento ao passar o mouse */
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.option {
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    border-radius: 10px;
+    padding: 15px; /* Espaçamento interno */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra suave */
+    transition: transform 0.2s; /* Transição suave para o efeito de hover */
+}
+
+.option:hover {
+    transform: translateY(-5px); /* Levantar ao passar o mouse */
+}
+
+.additional-info {
+    margin-top: 10px;  
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente */
+    border-radius: 10px;
+    padding: 15px; /* Espaçamento interno */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra suave */
+    transition: transform 0.2s; /* Transição suave para o efeito de hover */
+}
+
+.additional-info:hover {
+    transform: scale(1.05); /* Leve aumento ao passar o mouse */
+}
+
+.actions {
+    margin-top: 20px;
+}
+
+.btn {
+    background-color: #fa0606; /* Cor de fundo do botão */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s; /* Transição para o efeito de hover */
+}
+
+.btn:hover {
+    background-color: #b40505; /* Cor do botão ao passar o mouse */
+}
+
+/* Centralizando a imagem "sensual 3.avif" */
+.center-image {
+    position: absolute; /* Posiciona a imagem em relação ao contêiner */
+    top: 50%; /* Centraliza verticalmente */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta a posição para realmente centralizar */
+    z-index: 0; /* Coloca a imagem abaixo do conteúdo */
+    width: 100%; /* Ajusta a largura conforme necessário */
+    height: auto; /* Mantém a proporção da imagem */
+    
+}

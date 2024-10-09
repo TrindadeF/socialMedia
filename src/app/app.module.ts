@@ -21,6 +21,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { PaymentsComponent } from './payments/payments.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,9 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     FeedComponent,
     NakedFeedComponent,
     EditProfileComponent,
+    ForgotPasswordComponent,
+    AppComponent, 
+    PaymentsComponent
   ],
   imports: [
     BrowserModule,
