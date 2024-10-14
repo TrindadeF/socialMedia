@@ -1,0 +1,260 @@
+/* Define o fundo preto com efeito 3D para o corpo da página */
+body {
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(circle at center, #000000, #333333); /* Gradiente radial para efeito 3D */
+    color: white; /* Cor do texto branca para contraste */
+    font-family: Arial, sans-serif; /* Fonte padrão */
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 100vh; /* Altura da tela inteira */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse a tela */
+}
+
+/* Define o estilo para o carregamento com o coração */
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    z-index: 9999; /* Garante que o carregamento fique acima de tudo */
+    transition: opacity 1s ease;
+}
+
+.heart {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    background-color: red;
+    transform: rotate(-45deg);
+    animation: heartBeat 1s infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: red;
+}
+
+.heart::before {
+    top: -50px;
+    left: 0;
+}
+
+.heart::after {
+    top: 0;
+    left: 50px;
+}
+
+@keyframes heartBeat {
+    0% {
+        transform: scale(1) rotate(-45deg);
+    }
+    50% {
+        transform: scale(1.2) rotate(-45deg);
+    }
+    100% {
+        transform: scale(1) rotate(-45deg);
+    }
+}
+
+/* Define o estilo para o contêiner do carrossel */
+.carousel-wrapper {
+    position: relative;
+    width: 500px; /* Largura fixa do carrossel */
+    height: 500px; /* Altura fixa do carrossel */
+    background-color: black; /* Fundo preto para o carrossel */
+    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse o contêiner */
+    border-radius: 50%; /* Contêiner circular */
+    opacity: 0; /* Inicialmente invisível */
+    transform: translateY(100vh); /* Começa fora da tela, abaixo */
+    transition: opacity 1s ease, transform 1s ease; /* Transição suave */
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.5) inset; /* Contorno 3D inicial */
+    animation: borderGlow 2s infinite; /* Animação de contorno florescente */
+}
+
+/* Define a animação de subida e visibilidade */
+.carousel-wrapper.visible {
+    opacity: 1; /* Torna o contêiner visível */
+    transform: translateY(0); /* Move o contêiner para o centro da tela */
+}
+
+/* Define o estilo para o contêiner das imagens */
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    overflow: hidden;
+}
+
+/* Define o estilo para a imagem dentro do carrossel */
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    transition: transform 0.5s ease; /* Animação de transformação */
+}
+
+/* Define o estilo para a imagem dentro do carrossel */
+.image-container img {
+    width: 100%; /* Ajusta a largura para preencher o contêiner */
+    height: 100%; /* Ajusta a altura para preencher o contêiner */
+    border-radius: 50%; /* Imagens circulares */
+    border: 8px solid darkred; /* Contorno vermelho escuro */
+    object-fit: cover; /* Garante que a imagem cubra o contêiner sem distorção */
+    animation: borderGlow 1.5s infinite; /* Animação de contorno florescente */
+    transition: opacity 0.5s ease;
+}
+
+/* Define o estilo para a animação de contorno */
+@keyframes borderGlow {
+    0% {
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 0, 0, 1);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+    }
+}
+
+/* Adiciona a animação de zoom ao passar o mouse sobre a imagem */
+.image-container:hover {
+    transform: scale(1.05); /* Leve aumento de zoom */
+}
+
+/* Define o estilo para o overlay das imagens */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Transparente preto para o overlay */
+    color: white;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 50%; /* Faz o overlay ter bordas arredondadas */
+    opacity: 0; /* Inicialmente invisível */
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center; /* Centraliza verticalmente o texto */
+    justify-content: center; /* Centraliza horizontalmente o texto */
+    font-size: 1rem; /* Ajuste do tamanho da fonte */
+}
+
+/* Torna o overlay visível e preenche a imagem quando o mouse está sobre a imagem */
+.image-container:hover .overlay {
+    opacity: 1;
+}
+
+/* Define o estilo para os botões de seta */
+.arrow-btn {
+    position: absolute;
+    top: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 2;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    animation: arrowBlink 1.5s infinite; /* Animação de piscar */
+}
+
+/* Efeito de zoom ao passar o mouse sobre o botão de seta */
+.arrow-btn:hover {
+    transform: scale(1.2);
+}
+
+/* Define o estilo específico para o botão de seta anterior */
+#prevBtn {
+    left: 10px;
+}
+
+/* Define o estilo específico para o botão de seta próximo */
+#nextBtn {
+    right: 10px;
+}
+
+/* Animação de piscar das setas */
+@keyframes arrowBlink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Define o estilo para os pontos de navegação */
+.dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: red; /* Cor do ponto ativo */
+}
+
+/* Define o estilo para o botão especial */
+.special-button {
+    position: absolute;
+    top: 70%;
+    right: 30px;
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 2;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Exibe o botão especial quando necessário */
+.special-button.show {
+    opacity: 1;
+}

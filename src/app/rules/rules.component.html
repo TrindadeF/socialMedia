@@ -1,45 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Regras - NakedLove</title>
     <link rel="stylesheet" href="rules.component.css" />
-  </head>
-  <body>
+</head>
+<body>
     <div class="carousel-container">
-      <div class="carousel-item active">
-        <h2>Bem-vindo(a) ao NakedLove</h2>
-        <p>Siga estas Regras da casa:</p>
-      </div>
-      <div class="carousel-item">
-        <h2>Seja você mesmo</h2>
-        <p>
-          Certifique-se de que as suas fotos, idade e biografia são fiéis à sua
-          pessoa.
-        </p>
-      </div>
-      <div class="carousel-item">
-        <h2>Seja prudente</h2>
-        <p>Não tenha muita pressa em dar os seus dados pessoais.</p>
-      </div>
-      <div class="carousel-item">
-        <h2>Tenha encontros seguros</h2>
-        <p>
-          Seja simpático. Respeite os outros e trate-os como gostaria de ser
-          tratado.
-        </p>
-      </div>
-      <div class="carousel-item">
-        <h2>Seja proativo</h2>
-        <p>Denuncie sempre os comportamentos incorretos.</p>
-      </div>
+        <div class="carousel-item active">
+            <h2>Bem-vindo(a) ao NakedLove</h2>
+            <p>Siga estas Regras da casa:</p>
+        </div>
+        <div class="carousel-item">
+            <h2>Seja você mesmo</h2>
+            <p>
+                Certifique-se de que as suas fotos, idade e biografia são fiéis à sua
+                pessoa.
+            </p>
+        </div>
+        <div class="carousel-item">
+            <h2>Seja prudente</h2>
+            <p>Não tenha muita pressa em dar os seus dados pessoais.</p>
+        </div>
+        <div class="carousel-item">
+            <h2>Tenha encontros seguros</h2>
+            <p>
+                Seja simpático. Respeite os outros e trate-os como gostaria de ser
+                tratado.
+            </p>
+        </div>
+        <div class="carousel-item">
+            <h2>Seja proativo</h2>
+            <p>Denuncie sempre os comportamentos incorretos.</p>
+        </div>
 
-      <div class="carousel-controls">
-        <button id="prev">Anterior</button>
-        <button id="next">Próximo</button>
-      </div>
+        <div class="carousel-controls">
+            <button (click)="prev()">Anterior</button>
+            <button (click)="next()">Próximo</button>
+        </div>
     </div>
-    <script src="rules.component.ts"></script>
-  </body>
+</body>
 </html>

@@ -23,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { PaymentsComponent } from './payments/payments.component';
+import { PresentationComponent } from './presentation/presentation.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { PaymentsComponent } from './payments/payments.component';
     EditProfileComponent,
     ForgotPasswordComponent,
     AppComponent, 
-    PaymentsComponent
+    PaymentsComponent, PresentationComponent
   ],
   imports: [
     BrowserModule,

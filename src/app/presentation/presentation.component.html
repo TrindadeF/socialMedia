@@ -1,0 +1,22 @@
+<div *ngIf="isLoading" id="loading">
+    <div class="heart"></div>
+  </div>
+  
+  <div class="carousel-wrapper" *ngIf="!isLoading">
+    <div class="container">
+      <div class="image-container">
+        <img [src]="images[currentIndex].src" [alt]="images[currentIndex].alt">
+        <div class="overlay">{{ images[currentIndex].description }}</div>
+      </div>
+  
+      <button (click)="prevImage()" class="arrow-btn">&lt;</button>
+      <button (click)="nextImage()" class="arrow-btn">&gt;</button>
+  
+      <div class="dots">
+        <div *ngFor="let dot of images; let i = index" [class.active]="i === currentIndex" class="dot"></div>
+      </div>
+  
+      <button id="specialButton" class="special-button" (click)="goToHomePage()">Ir para a Página Inicial</button>
+    </div>
+  </div>
+  

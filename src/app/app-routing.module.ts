@@ -10,6 +10,7 @@ import { NakedFeedComponent } from './nakedfeed/nakedfeed.component';
 import { AuthGuard } from './auth.guard';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PaymentsComponent } from './payments/payments.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'nakedfeed', component: NakedFeedComponent },
   { path: 'edit-profile', component: EditProfileComponent },
   { path: 'payments', component: PaymentsComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   
 ];
 
