@@ -24,6 +24,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { PresentationComponent } from './presentation/presentation.component';
+import { ChatComponent } from './chat/chat.component';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +41,10 @@ import { PresentationComponent } from './presentation/presentation.component';
     EditProfileComponent,
     ForgotPasswordComponent,
     AppComponent, 
-    PaymentsComponent, PresentationComponent
+    PaymentsComponent, 
+    PresentationComponent, 
+    ChatComponent,
+    
   ],
   imports: [
     BrowserModule,
