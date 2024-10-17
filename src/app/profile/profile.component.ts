@@ -13,11 +13,12 @@ export class ProfileComponent implements OnInit {
   selectedTab: string = 'threads';
   profileForm: FormGroup;
   modalOpen: boolean = false;
+  profilePicUrl: string = '';
 
   constructor(private apiService: ApiService, private fb: FormBuilder) {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
-      descrition: [''],
+      description: [''],
     });
   }
 
@@ -30,6 +31,7 @@ export class ProfileComponent implements OnInit {
     this.apiService.getUserProfile().subscribe({
       next: (response) => {
         this.user = response;
+        this.profilePicUrl = this.user.profilePic ? this.user.profilePic : '';
 
         this.profileForm.patchValue({
           name: this.user.name,

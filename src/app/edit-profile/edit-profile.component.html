@@ -2,15 +2,13 @@
   <div class="container">
     <h2>Editar Perfil</h2>
 
-    <!-- Seção da pré-visualização da foto de perfil -->
     <div class="profile-picture-preview">
-      <img 
-        [src]="previewImage ? previewImage : 'assets/images/user.jpg'" 
-        alt="Foto de Perfil Preview" 
+      <img
+        [src]="previewImage ? previewImage : 'assets/images/user.jpg'"
+        alt="Foto de Perfil Preview"
       />
     </div>
 
-    <!-- Campo de upload da foto de perfil -->
     <div class="form-group">
       <label for="profile-picture">Foto de Perfil</label>
       <input
@@ -18,7 +16,7 @@
         id="profile-picture"
         class="form-control"
         (change)="onImageSelected($event)"
-        accept="image/*"
+        name="image"
       />
     </div>
 

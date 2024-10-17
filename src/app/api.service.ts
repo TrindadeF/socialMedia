@@ -42,8 +42,10 @@ export class ApiService {
     return this.isLoggedIn;
   }
 
-  updateUserProfile(userId: string, profileData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/profile/edit/${userId}`, profileData);
+  updateUserProfile(userId: string, profileData: FormData): Observable<any> {
+    return this.http.put(`${this.apiUrl}/profile/edit/${userId}`, profileData, {
+      headers: {},
+    });
   }
 
   getUserById(userId: string): Observable<any> {

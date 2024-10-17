@@ -2,30 +2,36 @@
   <div class="profile-container">
     <div class="profile-header">
       <div class="profile-image">
-        <img [src]="user?.profilePicture" alt="{{ user?.name }}" />
+        <img
+          *ngIf="user?.profilePic; else noProfilePic"
+          [src]="user.profilePic"
+          alt="{{ user?.name }}"
+        />
+        <ng-template #noProfilePic>
+          <img
+            src="assets/default-profile-pic.jpg"
+            alt="Imagem de perfil padrão"
+          />
+        </ng-template>
       </div>
       <div class="profile-info">
         <h2>{{ user.name }}</h2>
         <h3>{{ user.age }}</h3>
-        <h4>`{{ user.description }}</h4>
+        <h4>{{ user.description }}</h4>
         <p class="username">{{ user?.username }}</p>
       </div>
     </div>
 
     <div class="profile-tabs">
       <button
-        [class.active]="selectedTab === 'threads'"
+        [class.active]="selectedTab === 'feed'"
         (click)="selectTab('feed')"
       >
-      
         Minhas Postagens
-        <mat-icon>add_photo_alternate</mat-icon>
       </button>
-     
-     
     </div>
 
-    <div *ngIf="selectedTab === 'threads'" class="profile-content">
+    <div *ngIf="selectedTab === 'feed'" class="profile-content">
       <div *ngFor="let post of posts" class="post">
         <p>{{ post.content }}</p>
         <img *ngIf="post.imageUrl" [src]="post.imageUrl" alt="post image" />

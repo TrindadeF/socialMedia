@@ -1,11 +1,10 @@
-/* Estilo para o corpo */
 body {
-  background-color: #121212; /* Cor de fundo escura */
-  font-family: Arial, sans-serif; /* Fonte moderna */
-  color: #ffffff; /* Cor do texto padrão */
+  background-color: #121212;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  width: 100%;
 }
 
-/* Estilo para o contêiner */
 .container {
   max-width: 600px; /* Largura máxima do contêiner */
   margin: 0 auto; /* Centraliza o contêiner */
@@ -38,7 +37,8 @@ input[type="text"],
 input[type="email"],
 input[type="file"],
 input[type="number"], /* Adicionado para o campo de idade */
-select { /* Adicionado para o campo de gênero */
+select {
+  /* Adicionado para o campo de gênero */
   display: inline-block; /* Alinha o campo de entrada na mesma linha */
   width: 100%; /* Largura completa */
   padding: 12px; /* Espaçamento interno */

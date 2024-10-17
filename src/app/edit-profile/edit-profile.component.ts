@@ -24,6 +24,8 @@ export class EditProfileComponent implements OnInit {
   alertType: string = '';
   previewImage: string | ArrayBuffer | null = null;
 
+  fileToUpload: File | null = null;
+
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
@@ -47,12 +49,15 @@ export class EditProfileComponent implements OnInit {
 
   onSubmit() {
     const updateUser = this.getUpdatedFields();
+    const formData = new FormData();
 
-    if (Object.keys(updateUser).length === 0) {
-      this.alertMessage = 'Nenhuma alteração foi feita.';
-      this.alertType = 'info';
-      return;
+    if (this.fileToUpload) {
+      formData.append('image', this.fileToUpload, this.fileToUpload.name);
     }
+
+    Object.keys(updateUser).forEach((key) => {
+      formData.append(key, (updateUser as any)[key]);
+    });
 
     const userId = this.getLoggedInUserId();
 
@@ -62,7 +67,7 @@ export class EditProfileComponent implements OnInit {
       return;
     }
 
-    this.apiService.updateUserProfile(userId, updateUser).subscribe({
+    this.apiService.updateUserProfile(userId, formData).subscribe({
       next: () => {
         this.alertMessage = 'Perfil atualizado com sucesso!';
         this.alertType = 'success';
@@ -77,6 +82,8 @@ export class EditProfileComponent implements OnInit {
   onImageSelected(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     if (fileInput.files && fileInput.files.length > 0) {
+      this.fileToUpload = fileInput.files[0];
+
       const reader = new FileReader();
       reader.onload = () => {
         this.previewImage = reader.result;
@@ -106,8 +113,9 @@ export class EditProfileComponent implements OnInit {
     if (this.user.description !== this.originalUser?.description) {
       updatedFields.description = this.user.description;
     }
-    if (this.previewImage !== this.originalUser?.profilePic) {
-      updatedFields.profilePic = this.previewImage as string;
+
+    if (this.fileToUpload) {
+      updatedFields.profilePic = this.fileToUpload.name;
     }
 
     return updatedFields;
