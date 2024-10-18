@@ -1,4 +1,5 @@
 export type Post = {
+  mediaUrls: any;
   content: string;
   owner: string;
   createdAt: Date;

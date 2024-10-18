@@ -11,17 +11,31 @@
         placeholder="O que você vai nos mostrar hoje?"
         [(ngModel)]="postContent"
       ></textarea>
+
       <div class="d-flex align-items-center mb-2">
-        <label class="mr-2" for="upload-photo" style="cursor: pointer">
-          <i class="fas fa-image fa-2x text-white"></i>
+        <label class="mr-2" for="upload-image" style="cursor: pointer">
+          <i class="fas fa-image fa-2x text-white"></i> Incluir Imagem
           <input
             type="file"
-            id="upload-photo"
+            id="upload-image"
             accept="image/*"
             style="display: none"
-            (change)="onImageSelected($event)"
+            (change)="onMediaSelected($event)"
           />
         </label>
+
+        <label class="mr-2" for="upload-media" style="cursor: pointer">
+          <i class="fas fa-video fa-2x text-white"></i> Incluir Vídeo
+          <input
+            type="file"
+            id="upload-media"
+            accept="image/*,video/*"
+            style="display: none"
+            (change)="onMediaSelected($event)"
+            multiple
+          />
+        </label>
+
         <button
           id="publish-button"
           class="btn btn-danger"
@@ -31,12 +45,21 @@
           Publicar
         </button>
       </div>
+
       <img
         id="preview-image"
         class="preview-image mt-2"
-        style="display: none"
+        style="display: none; max-width: 100%"
         alt="Prévia da imagem"
       />
+
+      <video
+        id="preview-video"
+        class="preview-video mt-2"
+        style="display: none; max-width: 100%"
+        controls
+        alt="Prévia do vídeo"
+      ></video>
     </div>
 
     <div *ngIf="loading" class="loading-bar"></div>
@@ -56,7 +79,7 @@
       <div *ngFor="let post of posts" class="post">
         <div class="post-header d-flex align-items-center">
           <img
-            src="/src/assets/images/default.jpg"
+            src="/src/assets/images/default-avatar.jpg"
             alt="Avatar do usuário"
             class="avatar"
           />
@@ -67,12 +90,28 @@
         </div>
         <div class="post-content mt-2">
           <p>{{ post.content }}</p>
+
           <img
-            *ngIf="post.imageUrl"
-            [src]="post.imageUrl"
+            *ngIf="
+              post.mediaUrls &&
+              post.mediaUrls.length > 0 &&
+              isImage(post.mediaUrls[0])
+            "
+            [src]="post.mediaUrls[0]"
             class="post-image"
             alt="Imagem do post"
           />
+
+          <video
+            *ngIf="
+              post.mediaUrls &&
+              post.mediaUrls.length > 0 &&
+              !isImage(post.mediaUrls[0])
+            "
+            [src]="post.mediaUrls[0]"
+            class="post-video"
+            controls
+          ></video>
         </div>
         <div class="post-actions mt-2">
           <button><i class="fas fa-heart"></i> Curtir</button>

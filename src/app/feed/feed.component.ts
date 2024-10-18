@@ -11,7 +11,7 @@ import { Post } from 'database';
 export class FeedComponent implements OnInit {
   posts: Post[] = [];
   postContent: string = '';
-  selectedImage: File | null = null;
+  selectedMedia: File[] = [];
   errorMessage: string = '';
   loading: boolean = false;
   alertMessage: string = '';
@@ -48,6 +48,7 @@ export class FeedComponent implements OnInit {
     this.loading = true;
     const formData = new FormData();
 
+    // Validação para verificar se o conteúdo não está vazio
     if (!this.postContent.trim()) {
       this.alertMessage = 'O conteúdo do post é obrigatório!';
       this.alertType = 'error';
@@ -55,16 +56,20 @@ export class FeedComponent implements OnInit {
       return;
     }
 
+    // Adicionar o conteúdo do post ao FormData
     formData.append('content', this.postContent);
-    if (this.selectedImage) {
-      formData.append('image', this.selectedImage);
-    }
 
+    // Adicionar a mídia ao FormData
+    this.selectedMedia.forEach((file) => {
+      formData.append('media', file); // backend espera o campo 'media' para os arquivos
+    });
+
+    // Enviar o formulário ao backend
     this.http.post<Post>('http://localhost:3000/post/', formData).subscribe({
       next: (response: Post) => {
         console.log('Post publicado com sucesso:', response);
-        this.posts.push(response);
-        this.resetForm();
+        this.posts.unshift(response); // Adicionar o post ao início da lista de posts
+        this.resetForm(); // Resetar o formulário
         this.alertMessage = 'Post publicado com sucesso!';
         this.alertType = 'success';
       },
@@ -79,34 +84,65 @@ export class FeedComponent implements OnInit {
     });
   }
 
-  onImageSelected(event: Event) {
+  onMediaSelected(event: Event) {
     const fileInput = event.target as HTMLInputElement;
     if (fileInput.files && fileInput.files.length > 0) {
-      this.selectedImage = fileInput.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        const previewImage = document.getElementById(
-          'preview-image'
-        ) as HTMLImageElement;
-        previewImage.src = reader.result as string;
-        previewImage.style.display = 'block';
-      };
-      reader.readAsDataURL(this.selectedImage);
+      this.selectedMedia = Array.from(fileInput.files);
+
+      const previewImage = document.getElementById(
+        'preview-image'
+      ) as HTMLImageElement;
+      const previewVideo = document.getElementById(
+        'preview-video'
+      ) as HTMLVideoElement;
+
+      this.selectedMedia.forEach((file) => {
+        const fileReader = new FileReader();
+
+        if (file.type.startsWith('image/')) {
+          fileReader.onload = () => {
+            previewImage.src = fileReader.result as string;
+            previewImage.style.display = 'block';
+            previewVideo.style.display = 'none';
+          };
+          fileReader.readAsDataURL(file);
+        } else if (file.type.startsWith('video/')) {
+          fileReader.onload = () => {
+            previewVideo.src = fileReader.result as string;
+            previewVideo.style.display = 'block';
+            previewImage.style.display = 'none';
+          };
+          fileReader.readAsDataURL(file);
+        }
+      });
+
+      this.checkFormValidity();
     }
   }
+
   checkFormValidity() {
-    this.canPublish = !!this.postContent.trim() || !!this.selectedImage;
+    this.canPublish =
+      !!this.postContent.trim() || this.selectedMedia.length > 0;
   }
 
   resetForm() {
     this.postContent = '';
-    this.selectedImage = null;
+    this.selectedMedia = [];
     const previewImage = document.getElementById(
       'preview-image'
     ) as HTMLImageElement;
+    const previewVideo = document.getElementById(
+      'preview-video'
+    ) as HTMLVideoElement;
     previewImage.src = '';
     previewImage.style.display = 'none';
+    previewVideo.src = '';
+    previewVideo.style.display = 'none';
     this.alertMessage = '';
     this.canPublish = false;
+  }
+
+  isImage(mediaUrl: string): boolean {
+    return /\.(jpg|jpeg|png|gif)$/i.test(mediaUrl);
   }
 }
