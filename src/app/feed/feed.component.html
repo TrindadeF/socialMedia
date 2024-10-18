@@ -79,7 +79,7 @@
       <div *ngFor="let post of posts" class="post">
         <div class="post-header d-flex align-items-center">
           <img
-            src="/src/assets/images/default-avatar.jpg"
+            [src]="post || '/src/assets/images/default-avatar.jpg'"
             alt="Avatar do usuário"
             class="avatar"
           />
@@ -88,31 +88,31 @@
             <small>{{ post.createdAt | date : "short" }}</small>
           </div>
         </div>
+
         <div class="post-content mt-2">
           <p>{{ post.content }}</p>
 
-          <img
-            *ngIf="
-              post.mediaUrls &&
-              post.mediaUrls.length > 0 &&
-              isImage(post.mediaUrls[0])
-            "
-            [src]="post.mediaUrls[0]"
-            class="post-image"
-            alt="Imagem do post"
-          />
+          <div *ngIf="post.media && post.media.length > 0">
+            <div *ngFor="let mediaUrl of post.media">
+              <img
+                *ngIf="isImage(mediaUrl)"
+                [src]="mediaUrl"
+                class="post-image"
+                alt="Imagem do post"
+                style="max-width: 35%; margin-top: 10px"
+              />
 
-          <video
-            *ngIf="
-              post.mediaUrls &&
-              post.mediaUrls.length > 0 &&
-              !isImage(post.mediaUrls[0])
-            "
-            [src]="post.mediaUrls[0]"
-            class="post-video"
-            controls
-          ></video>
+              <video
+                *ngIf="!isImage(mediaUrl)"
+                [src]="mediaUrl"
+                class="post-video"
+                controls
+                style="max-width: 100%; margin-top: 10px"
+              ></video>
+            </div>
+          </div>
         </div>
+
         <div class="post-actions mt-2">
           <button><i class="fas fa-heart"></i> Curtir</button>
           <button><i class="fas fa-comment"></i> Comentar</button>

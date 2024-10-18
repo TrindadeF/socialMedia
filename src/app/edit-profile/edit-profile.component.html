@@ -6,6 +6,7 @@
       <img
         [src]="previewImage ? previewImage : 'assets/images/user.jpg'"
         alt="Foto de Perfil Preview"
+        class="profile-pic"
       />
     </div>
 
@@ -32,17 +33,19 @@
           required
         />
       </div>
+
       <div class="form-group">
-        <label for="username">Nome de Usuário</label>
+        <label for="nickName">Nome de Usuário</label>
         <input
           type="text"
-          id="username"
+          id="nickName"
           class="form-control"
           [(ngModel)]="user.nickName"
           name="nickName"
           required
         />
       </div>
+
       <div class="form-group">
         <label for="description">Descrição</label>
         <div class="description-wrapper">
@@ -56,6 +59,7 @@
           <div class="linear-box"></div>
         </div>
       </div>
+
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -67,6 +71,7 @@
           required
         />
       </div>
+
       <div class="form-group">
         <label for="age">Idade</label>
         <input
@@ -78,6 +83,7 @@
           required
         />
       </div>
+
       <div class="form-group">
         <label for="gender">Gênero</label>
         <select
@@ -104,6 +110,7 @@
         Salvar
       </button>
     </form>
+
     <div
       *ngIf="alertMessage"
       class="alert"

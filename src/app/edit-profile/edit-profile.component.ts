@@ -48,31 +48,26 @@ export class EditProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    const updateUser = this.getUpdatedFields();
     const formData = new FormData();
 
     if (this.fileToUpload) {
       formData.append('image', this.fileToUpload, this.fileToUpload.name);
     }
-
-    Object.keys(updateUser).forEach((key) => {
-      formData.append(key, (updateUser as any)[key]);
-    });
+    formData.append('name', this.user.name);
+    formData.append('age', this.user.age.toString());
+    formData.append('gender', this.user.gender);
+    formData.append('email', this.user.email);
+    formData.append('nickName', this.user.nickName);
+    formData.append('description', this.user.description);
 
     const userId = this.getLoggedInUserId();
-
-    if (!userId) {
-      this.alertMessage = 'Erro: ID do usuário não encontrado.';
-      this.alertType = 'error';
-      return;
-    }
-
     this.apiService.updateUserProfile(userId, formData).subscribe({
       next: () => {
         this.alertMessage = 'Perfil atualizado com sucesso!';
         this.alertType = 'success';
       },
       error: (error) => {
+        console.error('Erro ao atualizar o perfil:', error);
         this.alertMessage = 'Erro ao atualizar o perfil.';
         this.alertType = 'error';
       },
@@ -113,11 +108,6 @@ export class EditProfileComponent implements OnInit {
     if (this.user.description !== this.originalUser?.description) {
       updatedFields.description = this.user.description;
     }
-
-    if (this.fileToUpload) {
-      updatedFields.profilePic = this.fileToUpload.name;
-    }
-
     return updatedFields;
   }
 

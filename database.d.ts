@@ -1,6 +1,6 @@
 export type Post = {
   id: number;
-  mediaUrls: any;
+  media: any;
   content: string;
   owner: string;
   createdAt: Date;
