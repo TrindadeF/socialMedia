@@ -1,15 +1,85 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Threads - Página de Feed</title>
-    <link rel="stylesheet" href="nakedfeed.component.css" />
-  </head>
-  <body>
-    
-       
+<div class="container">
+  <!-- Seção da esquerda - Suas postagens -->
+  <div class="user-posts">
+    <div class="feed-header">
+      <h4>Minhas Postagens</h4>
+    </div>
+    <div class="post-form">
+      <textarea
+        class="form-control mb-2"
+        id="post-text"
+        placeholder="O que você vai nos mostrar hoje?"
+        [(ngModel)]="postContent"
+      ></textarea>
+      <div class="d-flex align-items-center mb-2">
+        <label class="mr-2" for="upload-photo" style="cursor: pointer">
+          <i class="fas fa-image fa-2x text-white"></i>
+          <input
+            type="file"
+            id="upload-photo"
+            accept="image/*,video/*"
+            style="display: none"
+            (change)="onImageSelected($event)"
+          />
+        </label>
+        <button
+          id="publish-button"
+          class="btn btn-danger"
+          (click)="publishPost()"
+          type="button"
+        >
+          Publicar
+        </button>
+      </div>
+      <img
+        id="preview-image"
+        class="preview-image mt-2"
+        style="display: none"
+        alt="Prévia da imagem"
+      />
+    </div>
+    <!-- Listar suas postagens -->
+    <div id="user-posts-container" class="posts mt-4">
+      <div *ngFor="let post of myPosts" class="post">
+        <!-- Suas postagens serão exibidas aqui -->
+        <div class="post-header d-flex align-items-center">
+          <img src="/src/assets/images/default.jpg" alt="Seu avatar" class="avatar" />
+          <div class="post-info ml-2">
+            <h1>{{ post.ownerName }}</h1>
+            <small>{{ post.createdAt | date : "short" }}</small>
+          </div>
+        </div>
+        <div class="post-content mt-2">
+          <p>{{ post.content }}</p>
+          <img *ngIf="post.imageUrl" [src]="post.imageUrl" class="post-image" alt="Imagem do post" />
+          <video *ngIf="post.videoUrl" [src]="post.videoUrl" controls class="post-video"></video>
+        </div>
+      </div>
+    </div>
+  </div>
 
-   
-  </body>
-</html>
+  <!-- Seção da direita - Postagens de outros usuários -->
+  <div class="other-users-posts">
+    <div class="feed-header">
+      <h4>Postagens dos Outros Usuários</h4>
+    </div>
+    <div id="posts-container" class="posts mt-4">
+      <div *ngFor="let post of otherPosts" class="post" (click)="goToUserProfile(post.owner)">
+
+
+        <div class="post-header d-flex align-items-center">
+          <img src="/src/assets/images/default.jpg" alt="Avatar do usuário" class="avatar" />
+          <div class="post-info ml-2">
+            <h1>{{ post.ownerName }}</h1>
+            <small>{{ post.createdAt | date : "short" }}</small>
+          </div>
+        </div>
+        <div class="post-content mt-2">
+          <p>{{ post.content }}</p>
+          <img *ngIf="post.imageUrl" [src]="post.imageUrl" class="post-image" alt="Imagem do post" />
+          <video *ngIf="post.videoUrl" [src]="post.videoUrl" controls class="post-video"></video>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

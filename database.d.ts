@@ -1,10 +1,12 @@
 export type Post = {
+  id: number;
   content: string;
   owner: string;
   createdAt: Date;
   likes: number;
   ownerName: string;
   imageUrl: string;
+  videoUrl: string;
   comments: string;
 };
 
@@ -20,3 +22,4 @@ export type User = {
 };
 
 type Gender = 'M' | 'F' | 'NB' | 'BI' | 'TR' | 'HOM';
+

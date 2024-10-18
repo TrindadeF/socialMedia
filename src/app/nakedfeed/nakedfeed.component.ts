@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Post {
-  user: string;
-  time: string;
-  content: string;
-  likes: number;
-  shares: number;
-}
+import { ApiService } from '../api.service';
+import { HttpClient } from '@angular/common/http';
+import { Post } from 'database';
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-love',
@@ -14,25 +10,46 @@ interface Post {
   styleUrls: ['./nakedfeed.component.css'],
 })
 export class NakedFeedComponent implements OnInit {
-  posts: Post[] = [];
-  errorMessage: string = '';
+  myPosts: Post[] = [];
+  otherPosts: Post[] = [];
+  postContent: string = '';
+  selectedImage: File | null = null;
+  loading: boolean = false;
 
-  constructor() {}
-
-  async fetchPosts() {
-    try {
-      const response = await fetch('/api/posts');
-      if (!response.ok) {
-        throw new Error('Erro ao buscar os dados');
-      }
-      this.posts = await response.json();
-    } catch (error) {
-      console.error('Erro:', error);
-      this.errorMessage = 'Erro ao carregar os posts';
-    }
-  }
+  constructor(private apiService: ApiService, private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
-    this.fetchPosts();
+    this.getPosts();
   }
+
+  getPosts() {
+    this.apiService.getPosts().subscribe({
+      next: (posts: Post[]) => {
+        const currentUserId = this.getCurrentUserId().toString();
+        this.myPosts = posts.filter((post: Post) => post.owner === currentUserId);
+        this.otherPosts = posts.filter((post: Post) => post.owner !== currentUserId);
+      },
+      error: (error) => {
+        console.error('Erro ao carregar os posts', error);
+      },
+    });
+  }
+
+  publishPost() {
+    // Lógica de publicação de post
+  }
+
+  onImageSelected(event: Event) {
+    // Lógica de seleção de imagem
+  }
+
+  getCurrentUserId(): number {
+    return 1; 
+  }
+
+  goToUserProfile(userId: string) {
+    const numericUserId = +userId; // Converte string para number usando o operador +
+    this.router.navigate(['/user-profile', numericUserId]);
+  }
+  
 }
