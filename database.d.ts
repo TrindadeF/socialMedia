@@ -1,4 +1,5 @@
 export type Post = {
+  id: number;
   mediaUrls: any;
   content: string;
   owner: string;
@@ -6,6 +7,7 @@ export type Post = {
   likes: number;
   ownerName: string;
   imageUrl: string;
+  videoUrl: string;
   comments: string;
 };
 

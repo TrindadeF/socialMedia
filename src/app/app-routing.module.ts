@@ -11,6 +11,9 @@ import { AuthGuard } from './auth.guard';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { RulesComponent } from './rules/rules.component';
+import { ChatComponent } from './chat/chat.component';
+import { PresentationComponent } from './presentation/presentation.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -24,7 +27,9 @@ const routes: Routes = [
   { path: 'edit-profile', component: EditProfileComponent },
   { path: 'payments', component: PaymentsComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  
+  { path: 'rules', component:RulesComponent},
+  { path: 'chat', component: ChatComponent},
+  { path: 'presentation', component: PresentationComponent }
 ];
 
 @NgModule({

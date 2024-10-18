@@ -44,6 +44,7 @@ import { ChatComponent } from './chat/chat.component';
     PaymentsComponent, 
     PresentationComponent, 
     ChatComponent,
+    NakedFeedComponent
     
   ],
   imports: [
