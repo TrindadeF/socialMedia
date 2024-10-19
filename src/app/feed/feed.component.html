@@ -18,7 +18,7 @@
           <input
             type="file"
             id="upload-image"
-            accept="image/*"
+            accept="image"
             style="display: none"
             (change)="onMediaSelected($event)"
           />
@@ -49,14 +49,14 @@
       <img
         id="preview-image"
         class="preview-image mt-2"
-        style="display: none; max-width: 100%"
+        style="display: none; max-width: 25%"
         alt="Prévia da imagem"
       />
 
       <video
         id="preview-video"
         class="preview-video mt-2"
-        style="display: none; max-width: 100%"
+        style="display: none; max-width: 35%"
         controls
         alt="Prévia do vídeo"
       ></video>
@@ -99,7 +99,7 @@
                 [src]="mediaUrl"
                 class="post-image"
                 alt="Imagem do post"
-                style="max-width: 35%; margin-top: 10px"
+                style="max-width: 25%; margin-top: 10px"
               />
 
               <video
@@ -107,14 +107,16 @@
                 [src]="mediaUrl"
                 class="post-video"
                 controls
-                style="max-width: 100%; margin-top: 10px"
+                style="max-width: 25%; margin-top: 10px"
               ></video>
             </div>
           </div>
         </div>
 
         <div class="post-actions mt-2">
-          <button><i class="fas fa-heart"></i> Curtir</button>
+          <button (click)="likePost(post)">
+            <i class="fas fa-heart"></i> Curtir ({{ post.likes }})
+          </button>
           <button><i class="fas fa-comment"></i> Comentar</button>
         </div>
       </div>

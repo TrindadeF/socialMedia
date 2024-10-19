@@ -1,5 +1,5 @@
 export type Post = {
-  id: number;
+  id: string;
   media: any;
   content: string;
   owner: string;

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Post } from 'database';
 
 @Injectable({
   providedIn: 'root',
@@ -50,5 +51,11 @@ export class ApiService {
 
   getUserById(userId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/profile/${userId}`);
+  }
+  likePost(postId: string) {
+    return this.http.post<Post>(
+      `http://localhost:3000/post/${postId}/like`,
+      {}
+    );
   }
 }

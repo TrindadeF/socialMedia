@@ -41,35 +41,33 @@ export class FeedComponent implements OnInit {
   }
 
   likePost(post: Post) {
-    post.likes += 1;
+    this.apiService.likePost(post.id.toString()).subscribe({
+      next: (updatedPost) => {
+        post.likes = updatedPost.likes;
+      },
+      error: (error: any) => {
+        console.error('Erro ao curtir o post:', error);
+      },
+    });
   }
 
   publishPost() {
     this.loading = true;
     const formData = new FormData();
 
-    // Valida se o conteúdo do post está preenchido
     if (!this.postContent.trim()) {
       this.alertMessage = 'O conteúdo do post é obrigatório!';
       this.alertType = 'error';
       this.loading = false;
       return;
     }
-
-    // Adiciona o conteúdo do post ao FormData
-    console.log('Adicionando conteúdo ao FormData:', this.postContent); // Debug
     formData.append('content', this.postContent);
-
-    // Adiciona os arquivos de mídia ao FormData
     this.selectedMedia.forEach((file, index) => {
-      console.log('Adicionando mídia ao FormData:', file.name); // Debug
-      formData.append('media', file);
+      formData.append('image', file);
     });
 
-    // Depuração: Verifique se o FormData tem conteúdo
     console.log('FormData:', formData);
 
-    // Envia o post via HTTP
     this.http.post<Post>('http://localhost:3000/post/', formData).subscribe({
       next: (response: Post) => {
         console.log('Post publicado com sucesso:', response);
@@ -101,7 +99,6 @@ export class FeedComponent implements OnInit {
         'preview-video'
       ) as HTMLVideoElement;
 
-      // Exibe as pré-visualizações de mídia
       this.selectedMedia.forEach((file) => {
         const fileReader = new FileReader();
 
@@ -122,12 +119,11 @@ export class FeedComponent implements OnInit {
         }
       });
 
-      this.checkFormValidity(); // Verifica se o formulário é válido após seleção dos arquivos
+      this.checkFormValidity();
     }
   }
 
   checkFormValidity() {
-    // Permite publicar se o conteúdo estiver preenchido ou se houver mídia selecionada
     this.canPublish =
       !!this.postContent.trim() || this.selectedMedia.length > 0;
   }
