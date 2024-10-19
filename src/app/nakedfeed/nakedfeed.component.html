@@ -43,7 +43,11 @@
       <div *ngFor="let post of myPosts" class="post">
         <!-- Suas postagens serão exibidas aqui -->
         <div class="post-header d-flex align-items-center">
-          <img src="/src/assets/images/default.jpg" alt="Seu avatar" class="avatar" />
+          <img
+            src="/src/assets/images/default.jpg"
+            alt="Seu avatar"
+            class="avatar"
+          />
           <div class="post-info ml-2">
             <h1>{{ post.ownerName }}</h1>
             <small>{{ post.createdAt | date : "short" }}</small>
@@ -51,8 +55,18 @@
         </div>
         <div class="post-content mt-2">
           <p>{{ post.content }}</p>
-          <img *ngIf="post.imageUrl" [src]="post.imageUrl" class="post-image" alt="Imagem do post" />
-          <video *ngIf="post.videoUrl" [src]="post.videoUrl" controls class="post-video"></video>
+          <img
+            *ngIf="post.imageUrl"
+            [src]="post.imageUrl"
+            class="post-image"
+            alt="Imagem do post"
+          />
+          <video
+            *ngIf="post.videoUrl"
+            [src]="post.videoUrl"
+            controls
+            class="post-video"
+          ></video>
         </div>
       </div>
     </div>
@@ -64,11 +78,17 @@
       <h4>Postagens dos Outros Usuários</h4>
     </div>
     <div id="posts-container" class="posts mt-4">
-      <div *ngFor="let post of otherPosts" class="post" (click)="goToUserProfile(post.owner)">
-
-
+      <div
+        *ngFor="let post of otherPosts"
+        class="post"
+        (click)="goToUserProfile(post.owner)"
+      >
         <div class="post-header d-flex align-items-center">
-          <img src="/src/assets/images/default.jpg" alt="Avatar do usuário" class="avatar" />
+          <img
+            src="/src/assets/images/default.jpg"
+            alt="Avatar do usuário"
+            class="avatar"
+          />
           <div class="post-info ml-2">
             <h1>{{ post.ownerName }}</h1>
             <small>{{ post.createdAt | date : "short" }}</small>
@@ -76,8 +96,18 @@
         </div>
         <div class="post-content mt-2">
           <p>{{ post.content }}</p>
-          <img *ngIf="post.imageUrl" [src]="post.imageUrl" class="post-image" alt="Imagem do post" />
-          <video *ngIf="post.videoUrl" [src]="post.videoUrl" controls class="post-video"></video>
+          <img
+            *ngIf="post.imageUrl"
+            [src]="post.imageUrl"
+            class="post-image"
+            alt="Imagem do post"
+          />
+          <video
+            *ngIf="post.videoUrl"
+            [src]="post.videoUrl"
+            controls
+            class="post-video"
+          ></video>
         </div>
       </div>
     </div>

@@ -40,12 +40,12 @@ export class FeedComponent implements OnInit {
     });
   }
 
-  likePost(post: Post) {
-    this.apiService.likePost(post.id.toString()).subscribe({
-      next: (updatedPost) => {
-        post.likes = updatedPost.likes;
+  likePost(postId: string) {
+    this.apiService.likePost(postId).subscribe({
+      next: (response) => {
+        console.log('Post curtido com sucesso!', response);
       },
-      error: (error: any) => {
+      error: (error) => {
         console.error('Erro ao curtir o post:', error);
       },
     });

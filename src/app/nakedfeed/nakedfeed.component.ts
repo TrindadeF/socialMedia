@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
 import { Post } from 'database';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-love',
@@ -16,7 +16,11 @@ export class NakedFeedComponent implements OnInit {
   selectedImage: File | null = null;
   loading: boolean = false;
 
-  constructor(private apiService: ApiService, private http: HttpClient, private router: Router) {}
+  constructor(
+    private apiService: ApiService,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.getPosts();
@@ -26,8 +30,12 @@ export class NakedFeedComponent implements OnInit {
     this.apiService.getPosts().subscribe({
       next: (posts: Post[]) => {
         const currentUserId = this.getCurrentUserId().toString();
-        this.myPosts = posts.filter((post: Post) => post.owner === currentUserId);
-        this.otherPosts = posts.filter((post: Post) => post.owner !== currentUserId);
+        this.myPosts = posts.filter(
+          (post: Post) => post.owner === currentUserId
+        );
+        this.otherPosts = posts.filter(
+          (post: Post) => post.owner !== currentUserId
+        );
       },
       error: (error) => {
         console.error('Erro ao carregar os posts', error);
@@ -35,21 +43,16 @@ export class NakedFeedComponent implements OnInit {
     });
   }
 
-  publishPost() {
-    // Lógica de publicação de post
-  }
+  publishPost() {}
 
-  onImageSelected(event: Event) {
-    // Lógica de seleção de imagem
-  }
+  onImageSelected(event: Event) {}
 
   getCurrentUserId(): number {
-    return 1; 
+    return 1;
   }
 
   goToUserProfile(userId: string) {
-    const numericUserId = +userId; // Converte string para number usando o operador +
+    const numericUserId = +userId;
     this.router.navigate(['/user-profile', numericUserId]);
   }
-  
 }

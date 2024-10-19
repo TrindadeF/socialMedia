@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Post } from 'database';
 
@@ -7,11 +7,17 @@ import { Post } from 'database';
   providedIn: 'root',
 })
 export class ApiService {
+  createPost(formData: FormData) {
+    throw new Error('Method not implemented.');
+  }
   private apiUrl = 'http://localhost:3000/auth';
   private apiPost = 'http://localhost:3000/post';
 
   constructor(private http: HttpClient) {}
-  private isLoggedIn: boolean = false;
+
+  private getAuthToken(): string | null {
+    return localStorage.getItem('authToken');
+  }
 
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, { email, password });
@@ -20,9 +26,11 @@ export class ApiService {
   register(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, { email, password });
   }
+
   resetPassword(email: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/reset-password`, { email });
   }
+
   getPosts(): Observable<any> {
     return this.http.get(`${this.apiPost}/`);
   }
@@ -32,30 +40,44 @@ export class ApiService {
   }
 
   getUserProfile(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/profile`);
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.get(`${this.apiUrl}/profile`, { headers });
   }
 
   publishPost(formData: FormData): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/post`, formData);
-  }
-
-  userIsLoggedIn(): boolean {
-    return this.isLoggedIn;
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post<any>(`${this.apiUrl}/post`, formData, { headers });
   }
 
   updateUserProfile(userId: string, profileData: FormData): Observable<any> {
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
     return this.http.put(`${this.apiUrl}/profile/edit/${userId}`, profileData, {
-      headers: {},
+      headers,
     });
   }
 
   getUserById(userId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/profile/${userId}`);
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.get(`${this.apiUrl}/profile/${userId}`, { headers });
   }
-  likePost(postId: string) {
-    return this.http.post<Post>(
-      `http://localhost:3000/post/${postId}/like`,
-      {}
-    );
+
+  likePost(postId: string): Observable<any> {
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post(`${this.apiPost}/${postId}/like`, {}, { headers });
   }
 }
