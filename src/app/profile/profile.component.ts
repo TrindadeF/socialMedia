@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router'; // Importa o Router para redirecionamento
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +16,7 @@ export class ProfileComponent implements OnInit {
   modalOpen: boolean = false;
   profilePicUrl: string = '';
 
-  constructor(private apiService: ApiService, private fb: FormBuilder) {
+  constructor(private apiService: ApiService, private fb: FormBuilder, private router: Router) {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
       description: [''],
@@ -23,8 +24,17 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.checkUserLogin(); // Verifica se o usuário está logado ao iniciar
     this.fetchUserProfile();
     this.fetchUserPosts();
+  }
+
+  // Função para verificar se o usuário está logado
+  private checkUserLogin() {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      this.router.navigate(['/']); // Redireciona para a página inicial se o usuário não estiver logado
+    }
   }
 
   fetchUserProfile() {

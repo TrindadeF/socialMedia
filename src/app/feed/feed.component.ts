@@ -55,8 +55,10 @@ export class FeedComponent implements OnInit {
   }
 
   likePost(postId: string) {
-    console.log('Curtindo post com ID:', postId);
-    this.apiService.likePost(postId).subscribe(
+    const currentUserId = this.getUserIdFromAuthService(); // Obter o ID do usuário atual
+    console.log('Curtindo post com ID:', postId, 'por usuário:', currentUserId);
+    
+    this.apiService.likePost(postId, currentUserId).subscribe( // Passar dois argumentos
       (updatedPost: Post) => {
         if (updatedPost) {
           this.posts = this.posts.map((post) =>
@@ -81,7 +83,7 @@ export class FeedComponent implements OnInit {
     }
 
     formData.append('content', this.postContent);
-    this.selectedMedia.forEach((file, index) => {
+    this.selectedMedia.forEach((file) => {
       formData.append('image', file);
     });
 
