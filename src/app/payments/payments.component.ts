@@ -10,7 +10,31 @@ import { Router } from '@angular/router';
 export class PaymentsComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
-  navigateToPayment() {
+  plan1() {
+    this.http
+      .post<{ url: string }>('http://localhost:3000/stripe/checkout', {})
+      .subscribe(
+        (response) => {
+          window.location.href = response.url;
+        },
+        (error) => {
+          console.error('Erro ao criar a sessão de checkout:', error);
+        }
+      );
+  }
+  plan2() {
+    this.http
+      .post<{ url: string }>('http://localhost:3000/stripe/checkout', {})
+      .subscribe(
+        (response) => {
+          window.location.href = response.url;
+        },
+        (error) => {
+          console.error('Erro ao criar a sessão de checkout:', error);
+        }
+      );
+  }
+  plan3() {
     this.http
       .post<{ url: string }>('http://localhost:3000/stripe/checkout', {})
       .subscribe(

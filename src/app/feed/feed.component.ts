@@ -17,21 +17,35 @@ export class FeedComponent implements OnInit {
   alertMessage: string = '';
   alertType: string = '';
   canPublish: boolean = false;
+  userId: string = '';
 
   constructor(private apiService: ApiService, private http: HttpClient) {}
 
   ngOnInit() {
     this.getPosts();
+    this.userId = this.getUserIdFromAuthService();
+  }
+
+  getUserIdFromAuthService(): string {
+    return localStorage.getItem('userId') || '';
   }
 
   getPosts() {
     this.apiService.getPosts().subscribe({
-      next: (posts) => {
-        this.posts = posts.sort((a: any, b: any) => {
-          return (
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          );
-        });
+      next: (posts: Post[]) => {
+        if (posts) {
+          this.posts = posts
+            .map((post) => ({
+              ...post,
+              likes: post.likes || [],
+            }))
+            .sort((a, b) => {
+              return (
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+              );
+            });
+        }
       },
       error: (error) => {
         this.errorMessage = 'Erro ao carregar os posts';
@@ -41,26 +55,31 @@ export class FeedComponent implements OnInit {
   }
 
   likePost(postId: string) {
-    this.apiService.likePost(postId).subscribe({
-      next: (response) => {
-        console.log('Post curtido com sucesso!', response);
+    console.log('Curtindo post com ID:', postId);
+    this.apiService.likePost(postId).subscribe(
+      (updatedPost: Post) => {
+        if (updatedPost) {
+          this.posts = this.posts.map((post) =>
+            post._id === updatedPost._id ? updatedPost : post
+          );
+        }
       },
-      error: (error) => {
+      (error) => {
         console.error('Erro ao curtir o post:', error);
-      },
-    });
+      }
+    );
   }
 
   publishPost() {
     this.loading = true;
     const formData = new FormData();
-
-    if (!this.postContent.trim()) {
-      this.alertMessage = 'O conteúdo do post é obrigatório!';
+    if (!this.postContent.trim() && this.selectedMedia.length === 0) {
+      this.alertMessage = 'O conteúdo do post ou mídia são obrigatórios!';
       this.alertType = 'error';
       this.loading = false;
       return;
     }
+
     formData.append('content', this.postContent);
     this.selectedMedia.forEach((file, index) => {
       formData.append('image', file);

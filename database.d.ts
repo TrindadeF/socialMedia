@@ -1,14 +1,15 @@
 export type Post = {
-  id: number;
+  _id: string;
   media: any;
   content: string;
   owner: string;
   createdAt: Date;
-  likes: number;
+  likes: string[];
   ownerName: string;
   imageUrl: string;
   videoUrl: string;
   comments: string;
+  ownerProfileImageUrl: string;
 };
 
 export type User = {
