@@ -1,29 +1,27 @@
-<section class="container">
-    
-    <link rel="stylesheet" href="chat.component.css"><!-- Login Section -->
-    <section class="login" *ngIf="!isLoggedIn">
-      <h2>Login</h2>
-      <form class="login__form" (ngSubmit)="login()">
-        <input type="text" class="login__input" [(ngModel)]="userName" placeholder="Seu nome" name="name" required />
-        <button type="submit" class="login__button">Entrar</button>
-      </form>
-    </section>
+<section class="container" style="background-image: url('/assets/images/Fundo Chat.png'); background-size: cover; background-position: center; height: 100vh;">
   
-    <!-- Chat Section -->
-    <section class="chat" *ngIf="isLoggedIn">
-      <section class="chat__messages">
-        <div *ngFor="let message of messages" [ngClass]="{'message--self': message.sender === userName, 'message--other': message.sender !== userName}">
-          <span *ngIf="message.sender !== userName" class="message--sender">{{ message.sender }}</span>
-          {{ message.content }}
-        </div>
-      </section>
-  
-      <form class="chat__form" (ngSubmit)="sendMessage()">
-        <input type="text" class="chat__input" [(ngModel)]="newMessage" placeholder="Digite uma mensagem" name="message" required />
-        <button type="submit" class="chat__button">
-          <span class="material-symbols-outlined">send</span>
-        </button>
-      </form>
-    </section>
+  <!-- Login Section -->
+  <section class="login" *ngIf="!isLoggedIn">
+    <h2>Login</h2>
+    <form class="login__form" (ngSubmit)="login()">
+      <input type="text" class="login__input" [(ngModel)]="userName" placeholder="Seu nome" name="name" required />
+      <button type="submit" class="login__button">Entrar</button>
+    </form>
   </section>
-  
+
+  <section class="chat" *ngIf="isLoggedIn">
+    <section class="chat__messages">
+      <div *ngFor="let message of messages" [ngClass]="{'message--self': message.sender === userName, 'message--other': message.sender !== userName}">
+        <span *ngIf="message.sender !== userName" class="message--sender">{{ message.sender }}</span>
+        {{ message.content }}
+      </div>
+    </section>
+
+    <form class="chat__form" (ngSubmit)="sendMessage()">
+      <input type="text" class="chat__input" [(ngModel)]="newMessage" placeholder="Digite uma mensagem" name="message" required />
+      <button type="submit" class="chat__button">
+        <span class="material-symbols-outlined">send</span>
+      </button>
+    </form>
+  </section>
+</section>

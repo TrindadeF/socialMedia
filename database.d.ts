@@ -4,12 +4,13 @@ export type Post = {
   content: string;
   owner: string;
   createdAt: Date;
-  likes: number;
+  likes: string[];
   ownerName: string;
   imageUrl: string;
   videoUrl: string;
   comments: string;
 };
+
 
 export type User = {
   name: string;

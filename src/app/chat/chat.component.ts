@@ -29,7 +29,7 @@ export class ChatComponent {
         content: this.newMessage
       };
       this.messages.push(message);
-      this.newMessage = ''; // Limpa a caixa de entrada
+      this.newMessage = ''; 
     }
   }
 }
