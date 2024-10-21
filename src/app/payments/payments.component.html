@@ -11,40 +11,45 @@
       alt="Pagamento"
       class="payment-image"
     />
-    <!-- Adicionando a imagem com a classe para estilização -->
 
-    <p>Faça o Pagamento abaixo para acessar a página +18:</p>
+    <h1>+18</h1>
 
-    <!-- Atualizando a classe para a animação -->
     <div class="additional-info animate">
       <h2>Acesso ao Conteúdo +18</h2>
-      <p>
-        Tenha acesso ao conteúdo +18 por apenas 5 Euros. Você poderá ver fotos e
-        vídeos íntimos de todos os usuários.
-      </p>
+      <h3>
+        Tenha acesso ao conteúdo +18.
+        Escolha o plano acessível a sua realidade e tenha acessos incríveis
+         de vídeos íntimos de todos os usuários.
+      </h3>
     </div>
 
     <div class="payment-options">
       <div class="option">
-        <h2>Cartão de Crédito</h2>
-        <p>Pague rapidamente com seu cartão de crédito.</p>
+        <h2>€ 17,99 Mensais( Por Mês )</h2>
+        <div class="actions">
+          <button class="btn" (click)="navigateToPayment()">
+            Realizar Pagamento
+          </button>
+        </div>
       </div>
       <div class="option">
-        <h2>PayPal</h2>
-        <p>Use sua conta do PayPal para um pagamento fácil.</p>
+        <h2>€ 89,94 Semestral ( A Cada 6 Meses )</h2>
+        <h3>VALOR PROMOCIONAL!</h3>
+        <div class="actions">
+          <button class="btn" (click)="navigateToPayment()">
+            Realizar Pagamento
+          </button>
+        </div>
       </div>
       <div class="option">
-        <h2>Boleto Bancário</h2>
-        <p>
-          Pague usando um boleto bancário, com 3 dias úteis para compensação.
-        </p>
+        <h2>€ 143,88 Anual ( Por Ano )</h2>
+        <h3>VALOR PROMOCIONAL!</h3>
+        <div class="actions">
+          <button class="btn" (click)="navigateToPayment()">
+            Realizar Pagamento
+          </button>
+        </div>
       </div>
-    </div>
-
-    <div class="actions">
-      <button class="btn" (click)="navigateToPayment()">
-        Realizar Pagamento
-      </button>
     </div>
   </div>
 
