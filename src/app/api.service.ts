@@ -118,4 +118,21 @@ export class ApiService {
     });
     return this.http.get(`${this.apiUrl}/profile/${userId}`, { headers });
   }
+  deletePostFromFirstFeed(postId: string): Observable<any> {
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.delete(`${this.apiFirstFeed}/post/${postId}`, { headers });
+  }
+
+  deletePostFromSecondFeed(postId: string): Observable<any> {
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.delete(`${this.apiSecondFeed}/post/${postId}`, {
+      headers,
+    });
+  }
 }

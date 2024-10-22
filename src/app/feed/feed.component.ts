@@ -55,10 +55,9 @@ export class FeedComponent implements OnInit {
   }
 
   likePost(postId: string) {
- 
-    console.log('Curtindo post com ID:', postId);
-    this.apiService.likePostInFirstFeed(postId).subscribe(
 
+
+    this.apiService.likePostInFirstFeed(postId).subscribe(
 
       (updatedPost: Post) => {
         if (updatedPost) {
@@ -177,5 +176,15 @@ export class FeedComponent implements OnInit {
 
   isImage(mediaUrl: string): boolean {
     return /\.(jpg|jpeg|png|gif)$/i.test(mediaUrl);
+  }
+  deletePostFromFirstFeed(postId: string) {
+    this.apiService.deletePostFromFirstFeed(postId).subscribe(
+      (response) => {
+        console.log('Post deletado com sucesso:', response);
+      },
+      (error) => {
+        console.error('Erro ao deletar o post:', error);
+      }
+    );
   }
 }

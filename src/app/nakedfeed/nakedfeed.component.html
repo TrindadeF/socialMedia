@@ -10,17 +10,31 @@
         placeholder="O que você vai nos mostrar hoje?"
         [(ngModel)]="postContent"
       ></textarea>
+
       <div class="d-flex align-items-center mb-2">
-        <label class="mr-2" for="upload-photo" style="cursor: pointer">
-          <i class="fas fa-image fa-2x text-white"></i>
+        <label class="mr-2" for="upload-image" style="cursor: pointer">
+          <i class="fas fa-image fa-2x text-white"></i> Incluir Imagem
           <input
             type="file"
-            id="upload-photo"
-            accept="image/*,video/*"
+            id="upload-image"
+            accept="image/*"
             style="display: none"
-            (change)="onImageSelected($event)"
+            (change)="onMediaSelected($event)"
           />
         </label>
+
+        <label class="mr-2" for="upload-media" style="cursor: pointer">
+          <i class="fas fa-video fa-2x text-white"></i> Incluir Vídeo
+          <input
+            type="file"
+            id="upload-media"
+            accept="image/*,video/*"
+            style="display: none"
+            (change)="onMediaSelected($event)"
+            multiple
+          />
+        </label>
+
         <button
           id="publish-button"
           class="btn btn-danger"
@@ -30,66 +44,34 @@
           Publicar
         </button>
       </div>
+
       <img
         id="preview-image"
         class="preview-image mt-2"
-        style="display: none"
+        style="display: none; max-width: 25%"
         alt="Prévia da imagem"
       />
-    </div>
-    <!-- Listar suas postagens -->
-    <div id="user-posts-container" class="posts mt-4">
-      <div *ngFor="let post of myPosts" class="post">
-        <!-- Suas postagens serão exibidas aqui -->
-        <div class="post-header d-flex align-items-center">
-          <img
-            src="/src/assets/images/default.jpg"
-            alt="Seu avatar"
-            class="avatar"
-          />
-          <div class="post-info ml-2">
-            <h1>{{ post.owner }}</h1>
-            <small>{{ post.createdAt | date : "short" }}</small>
-          </div>
-        </div>
-        <div class="post-content mt-2">
-          <p>{{ post.content }}</p>
-          <img
-            *ngIf="post.imageUrl"
-            [src]="post.imageUrl"
-            class="post-image"
-            alt="Imagem do post"
-          />
-          <video
-            *ngIf="post.videoUrl"
-            [src]="post.videoUrl"
-            controls
-            class="post-video"
-          ></video>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Seção da direita - Postagens de outros usuários -->
-  <div class="other-users-posts">
-    <div class="feed-header">
-      <h4>Usuários</h4>
+      <video
+        id="preview-video"
+        class="preview-video mt-2"
+        style="display: none; max-width: 35%"
+        controls
+        alt="Prévia do vídeo"
+      ></video>
     </div>
-    <div id="posts-container" class="posts mt-4">
-      <div
-        *ngFor="let post of otherPosts"
-        class="post"
-        (click)="goToUserProfile(post.owner)"
-      >
+    <div id="user-posts-container" class="posts mt-4">
+      <div *ngFor="let post of posts" class="post">
         <div class="post-header d-flex align-items-center">
           <img
-            src="/src/assets/images/default.jpg"
+            [src]="
+              post.ownerProfileImageUrl || '/src/assets/images/default.jpg'
+            "
             alt="Avatar do usuário"
             class="avatar"
           />
           <div class="post-info ml-2">
-            <h1>{{ post.owner }}</h1>
+            <h1>{{ post.ownerName }}</h1>
             <small>{{ post.createdAt | date : "short" }}</small>
           </div>
         </div>
@@ -109,7 +91,79 @@
           ></video>
         </div>
         <div class="post-actions mt-2">
-          <button (click)="likePost(post)">Curtir</button>
+          <button (click)="likePost(post)">
+            <i
+              *ngIf="post.likes && post.likes.includes(getCurrentUserId())"
+              class="fas fa-heart text-danger"
+            ></i>
+            <i
+              *ngIf="!post.likes || !post.likes.includes(getCurrentUserId())"
+              class="far fa-heart"
+            ></i>
+            {{ post.likes.length || 0 }} Curtidas
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="other-users-posts">
+    <div class="feed-header">
+      <h4>Postagens de Outros Usuários</h4>
+    </div>
+    <div id="posts-container" class="posts mt-4">
+      <div
+        *ngFor="let post of otherPosts"
+        class="post"
+        (click)="goToUserProfile(post.owner)"
+      >
+        <div class="post-header d-flex align-items-center">
+          <img
+            [src]="
+              post.ownerProfileImageUrl ||
+              '/src/assets/images/default-avatar.jpg'
+            "
+            alt="Avatar do usuário"
+            class="avatar"
+          />
+          <div class="post-info ml-2">
+            <h1>{{ post.ownerName }}</h1>
+            <small>{{ post.createdAt | date : "short" }}</small>
+          </div>
+        </div>
+        <div class="post-content mt-2">
+          <p>{{ post.content }}</p>
+          <div *ngIf="post.media && post.media.length > 0">
+            <div *ngFor="let mediaUrl of post.media">
+              <img
+                *ngIf="isImage(mediaUrl)"
+                [src]="mediaUrl"
+                class="post-image"
+                alt="Imagem do post"
+                style="max-width: 25%; margin-top: 10px"
+              />
+              <video
+                *ngIf="!isImage(mediaUrl)"
+                [src]="mediaUrl"
+                class="post-video"
+                controls
+                style="max-width: 25%; margin-top: 10px"
+              ></video>
+            </div>
+          </div>
+        </div>
+        <div class="post-actions mt-2">
+          <button (click)="likePost(post)">
+            <i
+              *ngIf="post.likes && post.likes.includes(getCurrentUserId())"
+              class="fas fa-heart text-danger"
+            ></i>
+            <i
+              *ngIf="!post.likes || !post.likes.includes(getCurrentUserId())"
+              class="far fa-heart"
+            ></i>
+            {{ post.likes.length || 0 }} Curtidas
+          </button>
         </div>
       </div>
     </div>

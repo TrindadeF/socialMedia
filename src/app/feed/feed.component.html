@@ -122,6 +122,14 @@
             ></i>
             {{ post.likes.length || 0 }} Curtidas
           </button>
+
+          <button
+            *ngIf="post.owner === userId"
+            (click)="deletePostFromFirstFeed(post._id)"
+            class="btn btn-danger"
+          >
+            Deletar
+          </button>
         </div>
       </div>
     </div>
