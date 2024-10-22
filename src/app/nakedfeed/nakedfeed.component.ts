@@ -27,7 +27,7 @@ export class NakedFeedComponent implements OnInit {
   }
 
   getPosts() {
-    this.apiService.getPosts().subscribe({
+    this.apiService.getPostsFromSecondFeed().subscribe({
       next: (posts: Post[]) => {
         const currentUserId = this.getCurrentUserId().toString();
         this.myPosts = posts.filter(
@@ -48,7 +48,7 @@ export class NakedFeedComponent implements OnInit {
   onImageSelected(event: Event) {}
 
   getCurrentUserId(): number {
-    return 1; // Aqui você deve colocar a lógica real de obtenção do ID do usuário
+    return 1;
   }
 
   goToUserProfile(userId: string) {
@@ -56,22 +56,16 @@ export class NakedFeedComponent implements OnInit {
     this.router.navigate(['/user-profile', numericUserId]);
   }
 
-  // Método que será chamado quando o usuário curtir uma postagem
   likePost(post: Post) {
     const currentUserId = this.getCurrentUserId().toString();
 
-    // Verifica se o usuário já curtiu a postagem
     const hasLiked = post.likes.includes(currentUserId);
-    
+
     if (!hasLiked) {
-      // Adiciona o usuário à lista de curtidas
       post.likes.push(currentUserId);
-      console.log(`Usuário ${currentUserId} curtiu a postagem ${post.id}.`);
+      console.log(`Usuário ${currentUserId} curtiu a postagem ${post._id}.`);
 
-      // Aqui você pode fazer uma chamada para o seu backend para salvar a curtida
-
-      // Verifique se o outro usuário também curtiu
-      const otherUserId = post.owner; // Supondo que o dono do post seja o outro usuário
+      const otherUserId = post.owner;
       if (post.likes.includes(otherUserId)) {
         const wantsToChat = confirm('Deseja iniciar uma conversa?');
         if (wantsToChat) {

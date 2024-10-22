@@ -31,7 +31,7 @@ export class FeedComponent implements OnInit {
   }
 
   getPosts() {
-    this.apiService.getPosts().subscribe({
+    this.apiService.getPostsFromFirstFeed().subscribe({
       next: (posts: Post[]) => {
         if (posts) {
           this.posts = posts
@@ -56,12 +56,18 @@ export class FeedComponent implements OnInit {
 
   likePost(postId: string) {
     console.log('Curtindo post com ID:', postId);
-    this.apiService.likePost(postId).subscribe(
+    this.apiService.likePostInFirstFeed(postId).subscribe(
       (updatedPost: Post) => {
         if (updatedPost) {
-          this.posts = this.posts.map((post) =>
-            post._id === updatedPost._id ? updatedPost : post
-          );
+          this.posts = this.posts.map((post) => {
+            if (post._id === updatedPost._id) {
+              return {
+                ...post,
+                likes: updatedPost.likes,
+              };
+            }
+            return post;
+          });
         }
       },
       (error) => {
@@ -87,23 +93,25 @@ export class FeedComponent implements OnInit {
 
     console.log('FormData:', formData);
 
-    this.http.post<Post>('http://localhost:3000/post/', formData).subscribe({
-      next: (response: Post) => {
-        console.log('Post publicado com sucesso:', response);
-        this.posts.unshift(response);
-        this.resetForm();
-        this.alertMessage = 'Post publicado com sucesso!';
-        this.alertType = 'success';
-      },
-      error: (error) => {
-        console.error('Erro ao publicar o post:', error);
-        this.alertMessage = 'Erro ao publicar o post.';
-        this.alertType = 'error';
-      },
-      complete: () => {
-        this.loading = false;
-      },
-    });
+    this.http
+      .post<Post>('http://localhost:3000/primaryFeed/', formData)
+      .subscribe({
+        next: (response: Post) => {
+          console.log('Post publicado com sucesso:', response);
+          this.posts.unshift(response);
+          this.resetForm();
+          this.alertMessage = 'Post publicado com sucesso!';
+          this.alertType = 'success';
+        },
+        error: (error) => {
+          console.error('Erro ao publicar o post:', error);
+          this.alertMessage = 'Erro ao publicar o post.';
+          this.alertType = 'error';
+        },
+        complete: () => {
+          this.loading = false;
+        },
+      });
   }
 
   onMediaSelected(event: Event) {

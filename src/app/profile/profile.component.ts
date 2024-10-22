@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
   }
 
   fetchUserPosts() {
-    this.apiService.getPosts().subscribe((response: any[]) => {
+    this.apiService.getPostsFromFirstFeed().subscribe((response: any[]) => {
       const userId = this.getUserId();
       this.posts = response.filter((post) => post.userId === userId);
     });

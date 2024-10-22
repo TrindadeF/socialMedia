@@ -7,11 +7,9 @@ import { Post } from 'database';
   providedIn: 'root',
 })
 export class ApiService {
-  createPost(formData: FormData) {
-    throw new Error('Method not implemented.');
-  }
   private apiUrl = 'http://localhost:3000/auth';
-  private apiPost = 'http://localhost:3000/post';
+  private apiFirstFeed = 'http://localhost:3000/primaryFeed';
+  private apiSecondFeed = 'http://localhost:3000/secondFeed';
 
   constructor(private http: HttpClient) {}
 
@@ -31,8 +29,56 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/reset-password`, { email });
   }
 
-  getPosts(): Observable<any> {
-    return this.http.get(`${this.apiPost}/`);
+  getPostsFromFirstFeed(): Observable<any> {
+    return this.http.get(`${this.apiFirstFeed}/`);
+  }
+
+  publishPostToFirstFeed(formData: FormData): Observable<any> {
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post<any>(`${this.apiFirstFeed}/post`, formData, {
+      headers,
+    });
+  }
+
+  likePostInFirstFeed(postId: string): Observable<any> {
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post(
+      `${this.apiFirstFeed}/${postId}/like`,
+      {},
+      { headers }
+    );
+  }
+
+  getPostsFromSecondFeed(): Observable<any> {
+    return this.http.get(`${this.apiSecondFeed}/`);
+  }
+
+  publishPostToSecondFeed(formData: FormData): Observable<any> {
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post<any>(`${this.apiSecondFeed}/post`, formData, {
+      headers,
+    });
+  }
+
+  likePostInSecondFeed(postId: string): Observable<any> {
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post(
+      `${this.apiSecondFeed}/${postId}/like`,
+      {},
+      { headers }
+    );
   }
 
   logout(): void {
@@ -45,14 +91,6 @@ export class ApiService {
       Authorization: `Bearer ${token}`,
     });
     return this.http.get(`${this.apiUrl}/profile`, { headers });
-  }
-
-  publishPost(formData: FormData): Observable<any> {
-    const token = this.getAuthToken();
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-    return this.http.post<any>(`${this.apiUrl}/post`, formData, { headers });
   }
 
   updateUserProfile(userId: string, profileData: FormData): Observable<any> {
@@ -71,13 +109,5 @@ export class ApiService {
       Authorization: `Bearer ${token}`,
     });
     return this.http.get(`${this.apiUrl}/profile/${userId}`, { headers });
-  }
-
-  likePost(postId: string): Observable<any> {
-    const token = this.getAuthToken();
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-    return this.http.post(`${this.apiPost}/${postId}/like`, {}, { headers });
   }
 }
