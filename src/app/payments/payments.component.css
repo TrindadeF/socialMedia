@@ -4,6 +4,7 @@ body {
     color: #fff; /* Cor do texto padrão */
     margin: 0; /* Remover margens */
     padding: 0; /* Remover preenchimento */
+    overflow-x: hidden; /* Evita rolagem horizontal */
 }
 
 .payment-container {
@@ -11,7 +12,7 @@ body {
     flex-direction: column; /* Alinhar os filhos verticalmente */
     justify-content: center; /* Centraliza horizontalmente */
     align-items: center; /* Centraliza verticalmente */
-    height: 100vh; /* Altura total da tela */
+    min-height: 100vh; /* Altura mínima da tela */
     position: relative; /* Para posicionar elementos internos */
     background-image: url('/src/assets/images/sensual 3.avif'); /* Imagem de fundo */
     background-size: cover; /* Cobrir todo o espaço disponível */
@@ -37,7 +38,7 @@ body {
 .payment-image {
     width: 50%; /* Reduz a largura para 50% */
     height: auto; /* Mantém a proporção da imagem */
-    max-width: 300px; /* Limita a largura máxima a 200px */
+    max-width: 300px; /* Limita a largura máxima a 300px */
     transition: transform 0.5s ease-in-out; /* Transição suave */
     border-radius: 50%; /* Torna a imagem redonda */
     border: 2px solid black; /* Contorno preto de 2px */
