@@ -62,17 +62,15 @@ textarea::placeholder {
   color: #999;
 }
 
+/* Alinhar imagens lado a lado e adicionar espaçamento */
 .post-form .d-flex {
+  display: flex;
+  align-items: center; /* Alinha as imagens verticalmente ao centro */
+  gap: 15px; /* Espaçamento de 15px entre as imagens */
   margin-top: 10px;
 }
 
-/* Estilização dos botões */
-#publish-button {
-  margin-left: 10px;
-}
-
-/* Ícones de imagem */
-.media-icon {
+.post-form .d-flex .media-icon {
   width: 50px;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
@@ -199,7 +197,6 @@ textarea::placeholder {
   margin-top: 10px;
   margin-left: 10px; /* Move o botão 20px para a direita */
 }
-
 
 .custom-btn:hover {
   background-color: #ff6f6f; /* Vermelho claro */
