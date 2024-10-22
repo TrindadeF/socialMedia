@@ -12,9 +12,9 @@
   </head>
   <body>
     <header>
-      <h1 class="logo">Ⓝ</h1>
+      <img src="assets/images/logo.jpg" alt="Logo" class="logo" /> <!-- Substituído pelo logo -->
       <div class="header-content">
-        <h1>Seja Bem-vindo ao NakedLove</h1>
+        <h1 class="typewriter">Seja Bem-vindo ao NakedLove<span class="cursor"></span></h1>
         <p>
           Descubra várias conexões emocionantes e explore seus desejos em um
           ambiente seguro e discreto.<br />
@@ -32,7 +32,6 @@
 
     <div class="image-container">
       <img src="assets/images/home.jpg" alt="Home" />
-
     </div>
 
     <footer>
@@ -42,5 +41,23 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      // Animação de digitação
+      const textElement = document.querySelector('.typewriter');
+      const text = textElement.textContent;
+      textElement.textContent = '';
+      let index = 0;
+
+      function type() {
+        if (index < text.length) {
+          textElement.textContent += text.charAt(index);
+          index++;
+          setTimeout(type, 100); // Ajuste a velocidade da digitação aqui (em milissegundos)
+        }
+      }
+
+      type(); // Inicia a animação ao carregar a página
+    </script>
   </body>
 </html>

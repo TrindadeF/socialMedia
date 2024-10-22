@@ -28,20 +28,35 @@ header {
 }
 
 .logo {
-  font-size: 35vh; /* Ajustado para tamanho menor */
-  color: #3b0101;
-  position: absolute; /* Posiciona o logo de forma absoluta */
-  top: 200px; /* Ajusta a distância do topo */
-  left: 95px; /* Ajusta a distância da esquerda */
-  margin: 0;
-  line-height: 0;
-  transition: transform 0.3s ease, filter 0.3s ease; /* Adiciona transições suaves */
-  animation: neonGlow 1.5s ease-in-out infinite; /* Adiciona a animação de brilho pulsante */
+  width: auto; /* Ajusta o tamanho da imagem do logo */
+  max-width: 130px; /* Define uma largura máxima para o logo */
+  margin: 20px 0; /* Margem superior e inferior para espaçamento */
+  border-radius: 60px; /* Adiciona bordas arredondadas */
+  overflow: hidden; /* Garante que o conteúdo que excede o contorno arredondado seja ocultado */
+  animation: glow 1.5s ease-in-out infinite; /* Animação de brilho */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave para transformação e sombra */
 }
 
+/* Animação de brilho */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.7), 
+                0 0 10px rgba(255, 0, 0, 0.5), 
+                0 0 15px rgba(255, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.9), 
+                0 0 20px rgba(255, 0, 0, 0.7), 
+                0 0 30px rgba(255, 0, 0, 0.5);
+  }
+}
+
+/* Efeito ao passar o mouse */
 .logo:hover {
-  transform: scale(1.1); /* Zoom suave */
-  filter: brightness(1.5); /* Brilho aumentado */
+  transform: scale(1.1); /* Aumenta o tamanho da imagem */
+  box-shadow: 0 0 15px rgba(255, 0, 0, 1), 
+              0 0 20px rgba(255, 0, 0, 0.7), 
+              0 0 30px rgba(255, 0, 0, 0.5); /* Sombra mais intensa */
 }
 
 .header-content {
@@ -76,14 +91,11 @@ header {
 
 /* Animação de brilho no fundo do header */
 @keyframes shine {
-  0% {
+  0%, 100% {
     background: rgba(0, 0, 0, 0.7);
   }
   50% {
     background: rgba(0, 0, 0, 0.5);
-  }
-  100% {
-    background: rgba(0, 0, 0, 0.7);
   }
 }
 
@@ -104,8 +116,7 @@ header::before {
   z-index: 0; /* Coloca a animação de fundo atrás do texto */
 }
 
-.cta,
-.login-btn {
+.cta {
   display: inline-block;
   padding: 15px;
   border-radius: 25px;
@@ -116,28 +127,17 @@ header::before {
   text-decoration: none;
   margin-top: 20px;
   margin-right: 15px;
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-.cta {
-  background-color: #ff6b6b;
-  border: none;
+  transition: background-color 0.3s, transform 0.3s, border 0.3s; /* Inclui transição para a borda */
+  background-color: #ff6b6b; /* Cor de fundo comum */
+  border: 2px solid white; /* Adiciona contorno branco */
 }
 
 .cta:hover {
-  background-color: #ff4b4b;
-  transform: scale(1.1);
+  background-color: #ff4b4b; /* Cor ao passar o mouse */
+  transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+  border-color: #ff4b4b; /* Muda a cor da borda ao passar o mouse */
 }
 
-.login-btn {
-  background-color: #ff6b6b;
-  border: none;
-}
-
-.login-btn:hover {
-  background-color: #ff4b4b;
-  transform: scale(1.1);
-}
 
 footer {
   background-color: #333;
@@ -174,8 +174,9 @@ footer p {
   filter: brightness(1.2);
 }
 
+/* Animação de brilho do texto */
 @keyframes neonGlow {
-  0% {
+  0%, 100% {
     text-shadow: 0 0 5px #ff6b6b, 0 0 10px #ff6b6b, 0 0 15px #ff6b6b,
       0 0 20px #ff6b6b, 0 0 25px #ff6b6b, 0 0 30px #ff6b6b, 0 0 35px #ff6b6b;
   }
@@ -183,20 +184,54 @@ footer p {
     text-shadow: 0 0 10px #ff6b6b, 0 0 20px #ff6b6b, 0 0 30px #ff6b6b,
       0 0 40px #ff6b6b, 0 0 50px #ff6b6b, 0 0 60px #ff6b6b, 0 0 70px #ff6b6b;
   }
+}
+
+/* Animação de digitação */
+@keyframes typewriter {
+  0% {
+    width: 0; /* Começa com a largura 0 */
+  }
+  50% {
+    width: 100%; /* Aumenta para 100% */
+  }
   100% {
-    text-shadow: 0 0 5px #ff6b6b, 0 0 10px #ff6b6b, 0 0 15px #ff6b6b,
-      0 0 20px #ff6b6b, 0 0 25px #ff6b6b, 0 0 30px #ff6b6b, 0 0 35px #ff6b6b;
+    width: 0; /* Retorna a 0% */
   }
 }
 
-.logo {
-  font-size: 35vh;
-  color: #3b0101;
-  position: absolute;
-  top: 200px;
-  left: 95px;
-  margin: 0;
-  line-height: 0;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  animation: neonGlow 1.5s ease-in-out infinite;
+@keyframes blinkCaret {
+  0%, 100% {
+    border-color: transparent; /* Cursor invisível */
+  }
+  50% {
+    border-color: rgb(245, 243, 243); /* Cursor visível */
+  }
+}
+
+.typewriter {
+  display: inline-block; /* Necessário para a animação de largura */
+  overflow: hidden; /* Esconde o conteúdo que sai da largura */
+  white-space: nowrap; /* Impede a quebra de linha */
+  border-right: 2px solid; /* Estilo do cursor */
+  animation: typewriter 4s steps(40, end) infinite, blinkCaret 0.75s step-end infinite;
+}
+.login-btn {
+  display: inline-block;
+  padding: 15px;
+  border-radius: 25px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 20px;
+  transition: background-color 0.3s, transform 0.3s, border 0.3s; /* Inclui transição para a borda */
+  background-color: #ff6b6b; /* Cor de fundo comum */
+  border: 2px solid white; /* Adiciona contorno branco */
+}
+
+.login-btn:hover {
+  background-color: #ff4b4b; /* Cor ao passar o mouse */
+  transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+  border-color: #ff4b4b; /* Muda a cor da borda ao passar o mouse */
 }

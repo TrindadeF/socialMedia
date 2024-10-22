@@ -93,6 +93,14 @@ export class ApiService {
     return this.http.get(`${this.apiUrl}/profile`, { headers });
   }
 
+  publishPost(formData: FormData): Observable<any> {
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post<any>(`${this.apiUrl}/post`, formData, { headers });
+  }
+
   updateUserProfile(userId: string, profileData: FormData): Observable<any> {
     const token = this.getAuthToken();
     const headers = new HttpHeaders({
