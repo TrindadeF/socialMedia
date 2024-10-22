@@ -47,13 +47,10 @@ export class NakedFeedComponent implements OnInit {
     // Implementação do método para selecionar uma imagem
   }
 
-<<<<<<< HEAD
-  getCurrentUserId(): number {
-    return 1;
-=======
+
   getCurrentUserId(): string {
     return localStorage.getItem('userId') || ''; // Aqui você deve colocar a lógica real de obtenção do ID do usuário
->>>>>>> 1f7256403c83e87860de3b3e55f0ce708a647fc5
+ 
   }
 
   goToUserProfile(userId: string) {
@@ -70,11 +67,9 @@ export class NakedFeedComponent implements OnInit {
       post.likes.push(currentUserId);
       console.log(`Usuário ${currentUserId} curtiu a postagem ${post._id}.`);
 
-<<<<<<< HEAD
-      const otherUserId = post.owner;
-=======
+
       // Chama o serviço de API para salvar a curtida no backend
-      this.apiService.likePost(post._id, currentUserId).subscribe(
+      this.apiService.likePostInSecondFeed(post._id).subscribe(
         (updatedPost: Post) => {
           // Atualiza o post localmente após a resposta do backend
           if (updatedPost) {
@@ -93,7 +88,7 @@ export class NakedFeedComponent implements OnInit {
 
       // Verifique se o outro usuário também curtiu
       const otherUserId = post.owner; // Supondo que o dono do post seja o outro usuário
->>>>>>> 1f7256403c83e87860de3b3e55f0ce708a647fc5
+
       if (post.likes.includes(otherUserId)) {
         const wantsToChat = confirm('Deseja iniciar uma conversa?');
         if (wantsToChat) {
