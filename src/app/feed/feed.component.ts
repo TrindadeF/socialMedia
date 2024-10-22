@@ -55,15 +55,7 @@ export class FeedComponent implements OnInit {
   }
 
   likePost(postId: string) {
-<<<<<<< HEAD
-    console.log('Curtindo post com ID:', postId);
     this.apiService.likePostInFirstFeed(postId).subscribe(
-=======
-    const currentUserId = this.getUserIdFromAuthService(); // Obter o ID do usuário atual
-    console.log('Curtindo post com ID:', postId, 'por usuário:', currentUserId);
-    
-    this.apiService.likePost(postId, currentUserId).subscribe( // Passar dois argumentos
->>>>>>> 1f7256403c83e87860de3b3e55f0ce708a647fc5
       (updatedPost: Post) => {
         if (updatedPost) {
           this.posts = this.posts.map((post) => {
@@ -181,5 +173,15 @@ export class FeedComponent implements OnInit {
 
   isImage(mediaUrl: string): boolean {
     return /\.(jpg|jpeg|png|gif)$/i.test(mediaUrl);
+  }
+  deletePostFromFirstFeed(postId: string) {
+    this.apiService.deletePostFromFirstFeed(postId).subscribe(
+      (response) => {
+        console.log('Post deletado com sucesso:', response);
+      },
+      (error) => {
+        console.error('Erro ao deletar o post:', error);
+      }
+    );
   }
 }
