@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Post } from 'database';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +9,7 @@ export class ApiService {
   private apiUrl = 'http://localhost:3000/auth';
   private apiFirstFeed = 'http://localhost:3000/primaryFeed';
   private apiSecondFeed = 'http://localhost:3000/secondFeed';
+  private api = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
@@ -26,7 +26,7 @@ export class ApiService {
   }
 
   resetPassword(email: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/reset-password`, { email });
+    return this.http.post(`${this.api}/reset-password`, { email });
   }
 
   getPostsFromFirstFeed(): Observable<any> {
