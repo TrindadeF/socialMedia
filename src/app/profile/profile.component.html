@@ -22,19 +22,12 @@
       </div>
     </div>
 
-    <div class="profile-tabs">
-      <button
-        [class.active]="selectedTab === 'feed'"
-        (click)="selectTab('feed')"
-      >
-        Minhas Postagens
-      </button>
-    </div>
-
-    <div *ngIf="selectedTab === 'feed'" class="profile-content">
-      <div *ngFor="let post of posts" class="post">
-        <p>{{ post.content }}</p>
-        <img *ngIf="post.imageUrl" [src]="post.imageUrl" alt="post image" />
+    <div class="gallery">
+      <h3>Feed</h3>
+      <div class="gallery-grid">
+        <div *ngFor="let post of posts" class="gallery-item">
+          <img [src]="post.imageUrl" alt="Post Image" />
+        </div>
       </div>
     </div>
   </div>

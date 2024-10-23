@@ -1,33 +1,28 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* Estilos globais */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #000;
+  margin: 0;
+  background-color: #000; /* Fundo preto da página */
   color: #fff;
+  font-family: Arial, sans-serif;
 }
 
+/* Layout principal */
 .container {
   display: flex;
-  height: 100vh;
+  flex-direction: column; /* Para permitir que a altura do feed se ajuste */
+  min-height: 100vh; /* Garante que a altura mínima seja 100% da tela */
+  background-color: #000; /* Fundo preto nos cantos */
 }
 
-/* Seção da esquerda - Minhas postagens */
-.user-posts {
-  width: 50%;
+.feed {
+  flex-grow: 1; /* Permite que o feed cresça */
   padding: 20px;
-  background-color: #161616;
-  overflow-y: auto;
-}
-
-.other-users-posts {
-  width: 50%;
-  padding: 20px;
-  background-color: #1c1c1c;
-  overflow-y: auto;
+  background-color: #161616; /* Cor de fundo do feed */
+  border-radius: 60px; /* Cantos arredondados */
+  overflow-y: auto; /* Permite rolagem vertical */
+  max-width: 800px; /* Largura máxima para o feed */
+  width: 100%; /* Largura total */
+  margin: auto; /* Centraliza horizontalmente */
 }
 
 .feed-header {
@@ -42,7 +37,14 @@ body {
 .feed-header h4 {
   margin: 0;
   font-size: 1.8rem;
-  color: #ff6347;
+  color: #ff6347; /* Cor dos títulos */
+}
+
+.post-form {
+  background-color: #1c1c1c;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 textarea {
@@ -58,22 +60,22 @@ textarea {
 textarea::placeholder {
   color: #999;
 }
-.avatar {
-  width: 600px;
-  height: 60px;
-  border-radius: 50%;
-}
-#publish-button {
-  margin-left: 10px;
-  background-color: #ff6347;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
+
+.post-form .d-flex {
+  display: flex;
+  align-items: center; /* Alinha as imagens verticalmente ao centro */
+  gap: 15px; /* Espaçamento de 15px entre as imagens */
+  margin-top: 10px;
 }
 
-#publish-button:hover {
-  background-color: #ff4500;
+.post-form .d-flex .media-icon {
+  width: 50px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.media-icon:hover {
+  transform: scale(1.1); /* Zoom */
+  filter: brightness(1.3); /* Efeito de brilho */
 }
 
 .preview-image {
@@ -83,70 +85,128 @@ textarea::placeholder {
   border: 1px solid #444;
 }
 
+/* Postagens */
 .posts {
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .post {
-  background-color: #1c1c1c;
+  background-color: #222;
+  border: 1px solid #fff;
+  border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
-  border-radius: 10px;
 }
 
-.user-info {
+.post-header {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Arredondar a imagem do avatar */
 }
 
-.username-time {
-  display: flex;
-  flex-direction: column;
+.post-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
 }
 
-.username-time strong {
-  color: #fff;
+.post-info span {
+  color: #777;
+  font-size: 0.8rem;
 }
 
-.username-time span {
-  font-size: 12px;
-  color: #888;
-}
-
-.content {
-  margin-top: 10px;
-  font-size: 14px;
+.post-content p {
+  margin: 10px 0;
+  color: #ccc;
 }
 
 .post-actions {
-  margin-top: 10px;
   display: flex;
-  gap: 10px;
-  color: #888;
+  gap: 5px;
+  align-items: center;
 }
 
 .post-actions button {
   background: none;
+  color: #fff;
   border: none;
-  color: #ff6347;
   cursor: pointer;
+  font-size: 1rem;
+  align-items: center;
 }
 
 .post-actions button:hover {
-  color: #ff4500;
+  color: #ff6347; /* Cor do hover para botões */
 }
 
-.post-image,
-.post-video {
+/* Barra de carregamento */
+.loading-bar {
   width: 100%;
-  height: auto;
-  border-radius: 10px;
+  height: 5px;
+  background-color: #dc3545; /* Cor da barra de carregamento */
+  animation: loading-animation 1s infinite; /* Animação */
+}
+
+@keyframes loading-animation {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Alertas */
+.alert {
   margin-top: 10px;
+  padding: 15px;
+  border-radius: 5px; /* Arredondar as quinas dos alertas */
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.custom-btn {
+  background-color: #201b1b; /* Vermelho */
+  border-radius: 10px;
+  color: white;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  position: sticky; /* Fixa dentro do contêiner ao rolar */
+  left: 800px;
+  margin-left: 10px; /* Move o botão 20px para a direita */
+}
+
+.custom-btn:hover {
+  background-color: #ff6f6f; /* Vermelho claro */
+  transform: scale(1.05); /* Zoom */
+}
+
+.custom-btn:active {
+  transform: scale(0.95); /* Efeito de clique */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .custom-btn {
+    bottom: 10px; /* Ajusta a distância para telas menores */
+    right: 10px; /* Ajuste para manter o botão visível em dispositivos móveis */
+  }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
 import { Post } from 'database';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-love',
@@ -19,32 +18,61 @@ export class NakedFeedComponent implements OnInit {
   alertType: string = '';
   canPublish: boolean = false;
   userId: string = '';
-  otherPosts!: Post[];
 
-  constructor(
-    private apiService: ApiService,
-    private http: HttpClient,
-    private router: Router
-  ) {}
+  constructor(private apiService: ApiService, private http: HttpClient) {}
 
   ngOnInit() {
     this.getPosts();
-    this.userId = this.getCurrentUserId();
+    this.userId = this.getUserIdFromAuthService();
+  }
+
+  getUserIdFromAuthService(): string {
+    return localStorage.getItem('userId') || '';
   }
 
   getPosts() {
     this.apiService.getPostsFromSecondFeed().subscribe({
       next: (posts: Post[]) => {
-        const currentUserId = this.userId;
-        this.posts = posts.filter((post: Post) => post.owner === currentUserId);
-        this.otherPosts = posts.filter(
-          (post: Post) => post.owner !== currentUserId
-        );
+        if (posts) {
+          this.posts = posts
+            .map((post) => ({
+              ...post,
+              likes: post.likes || [],
+            }))
+            .sort((a, b) => {
+              return (
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+              );
+            });
+        }
       },
       error: (error) => {
-        console.error('Erro ao carregar os posts', error);
+        this.errorMessage = 'Erro ao carregar os posts';
+        console.error(error);
       },
     });
+  }
+
+  likePost(postId: string) {
+    this.apiService.likePostInSecondFeed(postId).subscribe(
+      (updatedPost: Post) => {
+        if (updatedPost) {
+          this.posts = this.posts.map((post) => {
+            if (post._id === updatedPost._id) {
+              return {
+                ...post,
+                likes: updatedPost.likes,
+              };
+            }
+            return post;
+          });
+        }
+      },
+      (error) => {
+        console.error('Erro ao curtir o post:', error);
+      }
+    );
   }
 
   publishPost() {
@@ -65,7 +93,7 @@ export class NakedFeedComponent implements OnInit {
     console.log('FormData:', formData);
 
     this.http
-      .post<Post>('http://localhost:3000/secondFeed', formData)
+      .post<Post>('http://localhost:3000/secondFeed/', formData)
       .subscribe({
         next: (response: Post) => {
           console.log('Post publicado com sucesso:', response);
@@ -123,7 +151,7 @@ export class NakedFeedComponent implements OnInit {
 
   checkFormValidity() {
     this.canPublish =
-      this.postContent.trim().length > 0 || this.selectedMedia.length > 0;
+      !!this.postContent.trim() || this.selectedMedia.length > 0;
   }
 
   resetForm() {
@@ -135,96 +163,25 @@ export class NakedFeedComponent implements OnInit {
     const previewVideo = document.getElementById(
       'preview-video'
     ) as HTMLVideoElement;
+    previewImage.src = '';
     previewImage.style.display = 'none';
+    previewVideo.src = '';
     previewVideo.style.display = 'none';
     this.alertMessage = '';
-    this.alertType = '';
-  }
-
-
-
-  getCurrentUserId(): string {
-    const userId = localStorage.getItem('userId');
-    return userId && !isNaN(Number(userId)) ? userId : '';
+    this.canPublish = false;
   }
 
   isImage(mediaUrl: string): boolean {
     return /\.(jpg|jpeg|png|gif)$/i.test(mediaUrl);
-
   }
-
-  goToUserProfile(userId: string) {
-    const numericUserId = +userId;
-    if (!isNaN(numericUserId) && numericUserId > 0) {
-      this.router.navigate(['/profile', numericUserId]);
-    } else {
-      console.error('ID de usuário inválido:', userId);
-    }
-  }
-
-  likePost(post: Post) {
-    const currentUserId = this.getCurrentUserId().toString();
-    const hasLiked = post.likes.includes(currentUserId);
-
-    if (!hasLiked) {
-      post.likes.push(currentUserId);
-      console.log(`Usuário ${currentUserId} curtiu a postagem ${post._id}.`);
-
-
-
-      this.apiService.likePostInSecondFeed(post._id).subscribe(
-        (updatedPost: Post) => {
-          if (updatedPost) {
-            this.posts = this.posts.map((p) =>
-              p._id === updatedPost._id ? updatedPost : p
-            );
-            this.otherPosts = this.otherPosts.map((p) =>
-              p._id === updatedPost._id ? updatedPost : p
-            );
-          }
-        },
-        (error: any) => {
-          console.error('Erro ao curtir o post:', error);
-        }
-      );
-
-
-
-
-      const otherUserId = post.owner;
-
-      if (post.likes.includes(otherUserId)) {
-        const wantsToChat = confirm('Deseja iniciar uma conversa?');
-        if (wantsToChat) {
-          this.router.navigate(['/chat']);
-        } else {
-          console.log('Usuário escolheu não iniciar a conversa.');
-        }
+  deletePostFromFirstFeed(postId: string) {
+    this.apiService.deletePostFromFirstFeed(postId).subscribe(
+      (response) => {
+        console.log('Post deletado com sucesso:', response);
+      },
+      (error) => {
+        console.error('Erro ao deletar o post:', error);
       }
-    } else {
-      console.log('Usuário já curtiu esta postagem.');
-    }
-  }
-
-  deletePost(postId: string) {
-    if (confirm('Você tem certeza que deseja deletar este post?')) {
-      this.apiService.deletePostFromSecondFeed(postId).subscribe(
-        (response) => {
-          console.log('Post deletado com sucesso:', response);
-          // Remove o post deletado da lista
-          this.posts = this.posts.filter((post) => post._id !== postId);
-          this.otherPosts = this.otherPosts.filter(
-            (post) => post._id !== postId
-          );
-          this.alertMessage = 'Post deletado com sucesso!';
-          this.alertType = 'success';
-        },
-        (error) => {
-          console.error('Erro ao deletar o post:', error);
-          this.alertMessage = 'Erro ao deletar o post.';
-          this.alertType = 'error';
-        }
-      );
-    }
+    );
   }
 }

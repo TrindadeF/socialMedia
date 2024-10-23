@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from 'database';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +30,7 @@ export class ApiService {
     return this.http.post(`${this.api}/reset-password`, { email });
   }
 
-  getPostsFromFirstFeed(): Observable<any> {
+  getPostsFromFirstFeed(userId?: string): Observable<any> {
     return this.http.get(`${this.apiFirstFeed}/`);
   }
 
@@ -55,7 +56,7 @@ export class ApiService {
     );
   }
 
-  getPostsFromSecondFeed(): Observable<any> {
+  getPostsFromSecondFeed(userId?: string): Observable<any> {
     return this.http.get(`${this.apiSecondFeed}/`);
   }
 
@@ -134,5 +135,8 @@ export class ApiService {
     return this.http.delete(`${this.apiSecondFeed}/post/${postId}`, {
       headers,
     });
+  }
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>('http://localhost:3000/users');
   }
 }

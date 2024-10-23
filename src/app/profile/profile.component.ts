@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router'; // Importa o Router para redirecionamento
+import { Router } from '@angular/router';
+import { Post } from 'database';
 
 @Component({
   selector: 'app-profile',
@@ -10,13 +11,15 @@ import { Router } from '@angular/router'; // Importa o Router para redirecioname
 })
 export class ProfileComponent implements OnInit {
   user: any = {};
-  posts: any[] = [];
-  selectedTab: string = 'threads';
+  posts: Post[] = [];
   profileForm: FormGroup;
-  modalOpen: boolean = false;
   profilePicUrl: string = '';
 
-  constructor(private apiService: ApiService, private fb: FormBuilder, private router: Router) {
+  constructor(
+    private apiService: ApiService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
       description: [''],
@@ -24,16 +27,15 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.checkUserLogin(); // Verifica se o usuário está logado ao iniciar
+    this.checkUserLogin();
     this.fetchUserProfile();
     this.fetchUserPosts();
   }
 
-  // Função para verificar se o usuário está logado
   private checkUserLogin() {
     const userId = localStorage.getItem('userId');
     if (!userId) {
-      this.router.navigate(['/']); // Redireciona para a página inicial se o usuário não estiver logado
+      this.router.navigate(['/']);
     }
   }
 
@@ -41,8 +43,7 @@ export class ProfileComponent implements OnInit {
     this.apiService.getUserProfile().subscribe({
       next: (response) => {
         this.user = response;
-        this.profilePicUrl = this.user.profilePic ? this.user.profilePic : '';
-
+        this.profilePicUrl = this.user.profilePic || '';
         this.profileForm.patchValue({
           name: this.user.name,
           description: this.user.description,
@@ -55,17 +56,15 @@ export class ProfileComponent implements OnInit {
   }
 
   fetchUserPosts() {
-    this.apiService.getPostsFromFirstFeed().subscribe((response: any[]) => {
-      const userId = this.getUserId();
-      this.posts = response.filter((post) => post.userId === userId);
-    });
+    const userId = this.getUserId();
+    this.apiService
+      .getPostsFromSecondFeed(userId)
+      .subscribe((response: Post[]) => {
+        this.posts = response.filter((post) => post.imageUrl);
+      });
   }
 
   private getUserId(): string {
     return localStorage.getItem('userId') || '';
-  }
-
-  selectTab(tab: string) {
-    this.selectedTab = tab;
   }
 }
