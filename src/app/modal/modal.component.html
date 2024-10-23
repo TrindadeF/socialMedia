@@ -1,0 +1,58 @@
+<div class="modal" [ngClass]="{'is-active': showModal}">
+  <div class="modal-background" (click)="closeModal()"></div>
+  <div class="modal-content">
+    <div class="box">
+      <h2>{{ title }}</h2>
+      <textarea
+        class="form-control mb-2"
+        placeholder="O que você vai nos mostrar hoje?"
+        [(ngModel)]="postContent"
+      ></textarea>
+
+      <div class="d-flex align-items-center mb-2">
+        <label class="mr-2" for="upload-image" style="cursor: pointer">
+          <img src="/assets/images/Image.png" alt="Incluir Imagem" class="media-icon" />
+          <input
+            type="file"
+            id="upload-image"
+            accept="image/*"
+            style="display: none"
+            (change)="onMediaSelected($event)"
+          />
+        </label>
+
+        <label class="mr-2" for="upload-media" style="cursor: pointer">
+          <img src="/assets/images/vfxs.png" alt="Incluir Vídeo" class="media-icon" />
+          <input
+            type="file"
+            id="upload-media"
+            accept="image/*,video/*"
+            style="display: none"
+            (change)="onMediaSelected($event)"
+            multiple
+          />
+        </label>
+      </div>
+
+   
+        <h4>Pré-visualização de mídias:</h4>
+        
+          
+        </div>
+      
+
+      <div class="buttons">
+        <button
+          id="publish-button"
+          class="btn btn-danger custom-btn"
+          (click)="publishPost()"
+          type="button"
+        >
+          Publicar
+        </button> <!-- Botão de publicar transferido do feed -->
+        <button class="button" (click)="closeModal()">Fechar</button>
+      </div>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close" (click)="closeModal()"></button>
+

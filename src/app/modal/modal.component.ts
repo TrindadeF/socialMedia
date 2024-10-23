@@ -1,99 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Post } from 'database';
 import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
-import { Post } from 'database';
 
 @Component({
-  selector: 'app-love',
-  templateUrl: './feed.component.html',
-  styleUrls: ['./feed.component.css'],
+  selector: 'app-modal',
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.css']
 })
-export class FeedComponent implements OnInit {
+export class ModalComponent {
+  @Input() title: string = '';
+  @Input() content: string = '';
+  @Input() showModal: boolean = false;
+  @Input() postContent: string = ''; // Recebe o conteúdo do post do componente pai
+  @Output() close = new EventEmitter<void>();
+  @Output() publish = new EventEmitter<{ content: string; media: File[] }>(); // Altera o tipo de evento para incluir conteúdo e mídia
   posts: Post[] = [];
-  postContent: string = '';
-  selectedMedia: File[] = [];
+  modalContent: string = '';
+  canPublish: boolean = false;
   errorMessage: string = '';
   loading: boolean = false;
+  selectedMedia: File[] = [];
   alertMessage: string = '';
   alertType: string = '';
-  canPublish: boolean = false;
-  userId: string = '';
-  showModal: boolean = false;
-  modalContent: string = '';
-  content: string = 'conteúdo do modal';
-  title: string = 'Aqui é o título do modal feed'
-
-  constructor(private apiService: ApiService, private http: HttpClient) {}
-
-  openModal() {
-    this.modalContent = 'Modal';
-    this.showModal = true;
-  }
-
-  closeModal() {
-    this.showModal = false;
-  }
-
-
-
-
   
-  ngOnInit() {
-    this.getPosts();
-    this.userId = this.getUserIdFromAuthService();
-  }
-
-  getUserIdFromAuthService(): string {
-    return localStorage.getItem('userId') || '';
-  }
-
-  getPosts() {
-    this.apiService.getPostsFromFirstFeed().subscribe({
-      next: (posts: Post[]) => {
-        if (posts) {
-          this.posts = posts
-            .map((post) => ({
-              ...post,
-              likes: post.likes || [],
-            }))
-            .sort((a, b) => {
-              return (
-                new Date(b.createdAt).getTime() -
-                new Date(a.createdAt).getTime()
-              );
-            });
-        }
-      },
-      error: (error) => {
-        this.errorMessage = 'Erro ao carregar os posts';
-        console.error(error);
-      },
-    });
-  }
-
-  likePost(postId: string) {
-
-
-    this.apiService.likePostInFirstFeed(postId).subscribe(
-
-      (updatedPost: Post) => {
-        if (updatedPost) {
-          this.posts = this.posts.map((post) => {
-            if (post._id === updatedPost._id) {
-              return {
-                ...post,
-                likes: updatedPost.likes,
-              };
-            }
-            return post;
-          });
-        }
-      },
-      (error) => {
-        console.error('Erro ao curtir o post:', error);
-      }
-    );
-  }
+  constructor(private apiService: ApiService, private http: HttpClient) {}
 
   publishPost() {
     this.loading = true;
@@ -106,7 +37,7 @@ export class FeedComponent implements OnInit {
     }
 
     formData.append('content', this.postContent);
-    this.selectedMedia.forEach((file) => {
+    this.selectedMedia.forEach((file: string | Blob) => {
       formData.append('image', file);
     });
 
@@ -194,14 +125,8 @@ export class FeedComponent implements OnInit {
   isImage(mediaUrl: string): boolean {
     return /\.(jpg|jpeg|png|gif)$/i.test(mediaUrl);
   }
-  deletePostFromFirstFeed(postId: string) {
-    this.apiService.deletePostFromFirstFeed(postId).subscribe(
-      (response) => {
-        console.log('Post deletado com sucesso:', response);
-      },
-      (error) => {
-        console.error('Erro ao deletar o post:', error);
-      }
-    );
+
+  closeModal() {
+    this.close.emit();
   }
 }

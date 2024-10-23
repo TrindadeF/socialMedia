@@ -25,6 +25,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { PaymentsComponent } from './payments/payments.component';
 import { PresentationComponent } from './presentation/presentation.component';
 import { ChatComponent } from './chat/chat.component';
+import { ModalComponent } from './modal/modal.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { ChatComponent } from './chat/chat.component';
     PaymentsComponent, 
     PresentationComponent, 
     ChatComponent,
-    NakedFeedComponent
+    NakedFeedComponent,
+    ModalComponent
     
   ],
   imports: [

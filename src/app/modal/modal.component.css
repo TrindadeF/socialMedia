@@ -1,0 +1,90 @@
+/* Estilos do Modal */
+.modal {
+  display: none; /* Inicialmente oculto */
+  z-index: 1000; /* Certifique-se de que o modal esteja acima de outros elementos */
+}
+
+.modal.is-active {
+  display: block; /* Exibe o modal quando ativo */
+}
+
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centraliza o modal */
+  background-color: #222; /* Cor de fundo do modal */
+  padding: 20px;
+  border-radius: 10px;
+  color: #fff;
+  display: flex;
+  flex-direction: column; /* Organiza o conteúdo em coluna */
+  justify-content: space-between; /* Distribui o espaço entre os elementos */
+  width: 90%; /* Largura responsiva */
+  max-width: 800px; /* Aumenta a largura máxima para o modal */
+  height: auto; /* Altura automática para acomodar o conteúdo */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra ao redor do modal */
+}
+
+.modal-footer {
+  margin-top: auto; /* Empurra o botão para a parte inferior */
+  text-align: right; /* Alinha o botão à direita */
+}
+
+/* Estilo para imagens dentro do modal */
+.modal-content img {
+  max-width: 50px; /* Define o tamanho máximo das imagens */
+  height: auto; /* Mantém a proporção da imagem */
+  margin: 0 5px; /* Espaçamento horizontal entre as imagens */
+  display: inline-block; /* Permite que as imagens sejam exibidas lado a lado */
+}
+
+/* Estilo para a caixa de texto */
+/* Estilo para a caixa de texto */
+textarea {
+  width: 100%;
+  height: 100px; /* Altura fixa */
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 5px;
+  padding: 10px;
+  resize: none; /* Impede redimensionamento */
+}
+
+
+
+/* Botões personalizados */
+.custom-btn {
+  background-color: #ff4757; /* Cor de fundo do botão */
+  border: none; /* Remove a borda padrão */
+  color: white; /* Cor do texto do botão */
+  padding: 10px 20px; /* Espaçamento interno do botão */
+  border-radius: 5px; /* Bordas arredondadas */
+  cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+  transition: background-color 0.3s; /* Transição suave ao passar o mouse */
+}
+
+.custom-btn:hover {
+  background-color: #ff6b81; /* Cor do botão ao passar o mouse */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%; /* Largura maior em telas menores */
+    padding: 15px; /* Reduzir o preenchimento */
+  }
+  .custom-btn {
+    width: 100%; /* Botão ocupa a largura total */
+  }
+}
