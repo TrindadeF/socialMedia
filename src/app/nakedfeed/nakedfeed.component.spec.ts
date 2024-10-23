@@ -8,7 +8,7 @@ describe('NakedfeedComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NakedFeedComponent]
+      declarations: [NakedFeedComponent],
     });
     fixture = TestBed.createComponent(NakedFeedComponent);
     component = fixture.componentInstance;

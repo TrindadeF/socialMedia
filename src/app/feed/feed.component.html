@@ -15,7 +15,7 @@
 
       <div class="d-flex align-items-center mb-2">
         <label class="mr-2" for="upload-image" style="cursor: pointer">
-          <img src="/assets/images/Image.png" alt="Incluir Imagem" class="media-icon" />
+          <mat-icon>add_a_photo</mat-icon>
           <input
             type="file"
             id="upload-image"
@@ -26,7 +26,7 @@
         </label>
 
         <label class="mr-2" for="upload-media" style="cursor: pointer">
-          <img src="/assets/images/vfxs.png" alt="Incluir Vídeo" class="media-icon" />
+          <mat-icon>videocam</mat-icon>
           <input
             type="file"
             id="upload-media"
@@ -52,6 +52,14 @@
         controls
         alt="Prévia do vídeo"
       ></video>
+      <button
+        id="publish-button"
+        class="btn btn-danger custom-btn"
+        (click)="publishPost()"
+        type="button"
+      >
+        Publicar
+      </button>
     </div>
 
     <div *ngIf="loading" class="loading-bar"></div>
@@ -80,7 +88,7 @@
           />
           <div class="post-info ml-2">
             <h1>{{ post.ownerName }}</h1>
-            <small>{{ post.createdAt | date : 'short' }}</small>
+            <small>{{ post.createdAt | date : "short" }}</small>
           </div>
         </div>
 
@@ -113,15 +121,8 @@
             (click)="likePost(post._id)"
             [class.liked]="post.likes && post.likes.includes(userId)"
           >
-            <i
-              *ngIf="post.likes && post.likes.includes(userId)"
-              class="fas fa-heart text-danger"
-            ></i>
-            <i
-              *ngIf="post.likes && !post.likes.includes(userId)"
-              class="far fa-heart"
-            ></i>
-            {{ post.likes.length || 0 }} Curtidas
+            {{ post.likes.length || 0 }}
+            <mat-icon>thumb_up_alt</mat-icon>
           </button>
 
           <button

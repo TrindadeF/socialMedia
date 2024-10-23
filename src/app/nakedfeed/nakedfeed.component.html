@@ -1,8 +1,9 @@
 <div class="container">
-  <div class="user-posts">
-    <div class="feed-header">
-      <h4>Minhas Postagens</h4>
+  <div class="feed">
+    <div class="nakedfeed-header">
+      <h4>ⓃakedLove</h4>
     </div>
+
     <div class="post-form">
       <textarea
         class="form-control mb-2"
@@ -13,7 +14,7 @@
 
       <div class="d-flex align-items-center mb-2">
         <label class="mr-2" for="upload-image" style="cursor: pointer">
-          <i class="fas fa-image fa-2x text-white"></i> Incluir Imagem
+          <mat-icon>add_a_photo</mat-icon>
           <input
             type="file"
             id="upload-image"
@@ -24,7 +25,7 @@
         </label>
 
         <label class="mr-2" for="upload-media" style="cursor: pointer">
-          <i class="fas fa-video fa-2x text-white"></i> Incluir Vídeo
+          <mat-icon>videocam</mat-icon>
           <input
             type="file"
             id="upload-media"
@@ -34,15 +35,6 @@
             multiple
           />
         </label>
-
-        <button
-          id="publish-button"
-          class="btn btn-danger"
-          (click)="publishPost()"
-          type="button"
-        >
-          Publicar
-        </button>
       </div>
 
       <img
@@ -59,64 +51,31 @@
         controls
         alt="Prévia do vídeo"
       ></video>
-    </div>
-    <div id="user-posts-container" class="posts mt-4">
-      <div *ngFor="let post of posts" class="post">
-        <div class="post-header d-flex align-items-center">
-          <img
-            [src]="
-              post.ownerProfileImageUrl || '/src/assets/images/default.jpg'
-            "
-            alt="Avatar do usuário"
-            class="avatar"
-          />
-          <div class="post-info ml-2">
-            <h1>{{ post.ownerName }}</h1>
-            <small>{{ post.createdAt | date : "short" }}</small>
-          </div>
-        </div>
-        <div class="post-content mt-2">
-          <p>{{ post.content }}</p>
-          <img
-            *ngIf="post.imageUrl"
-            [src]="post.imageUrl"
-            class="post-image"
-            alt="Imagem do post"
-          />
-          <video
-            *ngIf="post.videoUrl"
-            [src]="post.videoUrl"
-            controls
-            class="post-video"
-          ></video>
-        </div>
-        <div class="post-actions mt-2">
-          <button (click)="likePost(post)">
-            <i
-              *ngIf="post.likes && post.likes.includes(getCurrentUserId())"
-              class="fas fa-heart text-danger"
-            ></i>
-            <i
-              *ngIf="!post.likes || !post.likes.includes(getCurrentUserId())"
-              class="far fa-heart"
-            ></i>
-            {{ post.likes.length || 0 }} Curtidas
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="other-users-posts">
-    <div class="feed-header">
-      <h4>Postagens de Outros Usuários</h4>
-    </div>
-    <div id="posts-container" class="posts mt-4">
-      <div
-        *ngFor="let post of otherPosts"
-        class="post"
-        (click)="goToUserProfile(post.owner)"
+      <button
+        id="publish-button"
+        class="btn btn-danger custom-btn"
+        (click)="publishPost()"
+        type="button"
       >
+        Publicar
+      </button>
+    </div>
+
+    <div *ngIf="loading" class="loading-bar"></div>
+
+    <div
+      *ngIf="alertMessage"
+      class="alert"
+      [ngClass]="{
+        'alert-success': alertType === 'success',
+        'alert-danger': alertType === 'error'
+      }"
+    >
+      {{ alertMessage }}
+    </div>
+
+    <div id="posts-container" class="posts mt-4">
+      <div *ngFor="let post of posts" class="post">
         <div class="post-header d-flex align-items-center">
           <img
             [src]="
@@ -131,8 +90,10 @@
             <small>{{ post.createdAt | date : "short" }}</small>
           </div>
         </div>
+
         <div class="post-content mt-2">
           <p>{{ post.content }}</p>
+
           <div *ngIf="post.media && post.media.length > 0">
             <div *ngFor="let mediaUrl of post.media">
               <img
@@ -142,6 +103,7 @@
                 alt="Imagem do post"
                 style="max-width: 25%; margin-top: 10px"
               />
+
               <video
                 *ngIf="!isImage(mediaUrl)"
                 [src]="mediaUrl"
@@ -152,17 +114,22 @@
             </div>
           </div>
         </div>
-        <div class="post-actions mt-2">
-          <button (click)="likePost(post)">
-            <i
-              *ngIf="post.likes && post.likes.includes(getCurrentUserId())"
-              class="fas fa-heart text-danger"
-            ></i>
-            <i
-              *ngIf="!post.likes || !post.likes.includes(getCurrentUserId())"
-              class="far fa-heart"
-            ></i>
-            {{ post.likes.length || 0 }} Curtidas
+
+        <div class="post-actions">
+          <button
+            (click)="likePost(post._id)"
+            [class.liked]="post.likes && post.likes.includes(userId)"
+          >
+            {{ post.likes.length || 0 }}
+            <mat-icon>thumb_up_alt</mat-icon>
+          </button>
+
+          <button
+            *ngIf="post.owner === userId"
+            (click)="deletePostFromFirstFeed(post._id)"
+            class="btn btn-danger"
+          >
+            Deletar
           </button>
         </div>
       </div>
