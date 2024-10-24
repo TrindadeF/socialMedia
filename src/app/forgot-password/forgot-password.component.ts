@@ -22,8 +22,6 @@ export class ForgotPasswordComponent {
       return;
     }
 
-    console.log('E-mail enviado:', this.email);
-
     this.apiService.resetPassword(this.email).subscribe({
       next: () => {
         this.successMessage = 'Verifique seu e-mail para redefinir sua senha.';

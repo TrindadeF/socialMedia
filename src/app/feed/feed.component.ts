@@ -21,7 +21,7 @@ export class FeedComponent implements OnInit {
   showModal: boolean = false;
   modalContent: string = '';
   content: string = 'conteúdo do modal';
-  title: string = 'Aqui é o título do modal feed'
+  title: string = 'Aqui é o título do modal feed';
 
   constructor(private apiService: ApiService, private http: HttpClient) {}
 
@@ -33,11 +33,6 @@ export class FeedComponent implements OnInit {
   closeModal() {
     this.showModal = false;
   }
-
-
-
-
-  
   ngOnInit() {
     this.getPosts();
     this.userId = this.getUserIdFromAuthService();
@@ -72,10 +67,7 @@ export class FeedComponent implements OnInit {
   }
 
   likePost(postId: string) {
-
-
     this.apiService.likePostInFirstFeed(postId).subscribe(
-
       (updatedPost: Post) => {
         if (updatedPost) {
           this.posts = this.posts.map((post) => {

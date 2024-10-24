@@ -10,7 +10,7 @@
         id="post-text"
         placeholder="O que você vai nos mostrar hoje?"
         [(ngModel)]="postContent"
-        (focus)="openModal()"  
+        (focus)="openModal()"
       ></textarea>
 
       <div class="d-flex align-items-center mb-2">
@@ -136,7 +136,6 @@
       </div>
     </div>
 
-    <!-- Botão de publicar dentro do feed, mas fixo -->
     <button
       id="publish-button"
       class="btn btn-danger custom-btn"
@@ -146,14 +145,14 @@
       Publicar
     </button>
 
-    <!-- Código do Modal -->
-    <app-modal 
-  [title]="'Seja Bem Vindo!'" 
-  [content]="modalContent" 
-  [showModal]="showModal" 
-  [postContent]="postContent" 
-  (close)="closeModal()"
-  (publish)="publishPost()"> <!-- Escutando o evento de publicação -->
-</app-modal>
+    <app-modal
+      [title]="'Seja Bem Vindo!'"
+      [content]="modalContent"
+      [showModal]="showModal"
+      [postContent]="postContent"
+      (close)="closeModal()"
+      (publish)="publishPost()"
+    >
+    </app-modal>
   </div>
 </div>
