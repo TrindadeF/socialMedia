@@ -1,5 +1,10 @@
 <mat-sidenav-container class="example-container">
-  <mat-sidenav mode="side" opened class="sidenav" *ngIf="isLoggedIn()">
+  <mat-sidenav
+    mode="side"
+    opened
+    class="sidenav"
+    *ngIf="isLoggedIn() && !isLoginRoute()"
+  >
     <div class="menu-icons">
       <a href="#" class="menu-item">
         <img src="assets/images/logo.jpg" alt="Logo" class="icon" />

@@ -89,7 +89,6 @@ export class FeedComponent implements OnInit {
     this.loading = true;
     const formData = new FormData();
 
-    // Verifica se o conteúdo do post ou mídia estão preenchidos
     if (!this.postContent.trim() && this.selectedMedia.length === 0) {
       this.alertMessage = 'O conteúdo do post ou mídia são obrigatórios!';
       this.alertType = 'error';
@@ -99,7 +98,7 @@ export class FeedComponent implements OnInit {
 
     formData.append('content', this.postContent);
     this.selectedMedia.forEach((file) => {
-      formData.append('media', file); // Use 'media' para corresponder ao backend
+      formData.append('media', file);
     });
 
     console.log('FormData:', formData);
@@ -192,7 +191,6 @@ export class FeedComponent implements OnInit {
     this.apiService.deletePostFromFirstFeed(postId).subscribe(
       (response) => {
         console.log('Post deletado com sucesso:', response);
-        // Atualiza a lista de posts após a exclusão
         this.posts = this.posts.filter((post) => post._id !== postId);
       },
       (error) => {

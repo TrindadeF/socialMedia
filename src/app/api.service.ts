@@ -160,4 +160,10 @@ export class ApiService {
       `${this.apiSecondFeed}/posts?userId=${userId}`
     );
   }
+
+  getPostsByUserId(userId: string): Observable<Post[]> {
+    return this.http.get<Post[]>(
+      `${this.apiSecondFeed}/posts?userId=${userId}`
+    );
+  }
 }

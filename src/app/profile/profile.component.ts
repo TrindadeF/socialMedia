@@ -44,10 +44,14 @@ export class ProfileComponent implements OnInit {
   }
 
   private checkUserLogin() {
-    const userId = localStorage.getItem('userId');
+    const userId = this.getUserId();
     if (!userId) {
       this.router.navigate(['/']);
     }
+  }
+
+  private getUserId(): string {
+    return localStorage.getItem('userId') || '';
   }
 
   openModal() {
@@ -61,6 +65,7 @@ export class ProfileComponent implements OnInit {
   fetchUserProfile() {
     const userId = this.route.snapshot.paramMap.get('id');
     if (userId) {
+      this.loading = true;
       this.apiService.getUserById(userId).subscribe({
         next: (response) => {
           this.user = response;
@@ -72,30 +77,54 @@ export class ProfileComponent implements OnInit {
         },
         error: (err) => {
           console.error('Erro ao buscar perfil do usuário:', err);
+          this.errorMessage = 'Erro ao carregar o perfil do usuário';
+        },
+        complete: () => {
+          this.loading = false;
         },
       });
     } else {
       console.error('ID do usuário não encontrado na URL');
+      this.errorMessage = 'ID do usuário não encontrado';
     }
   }
 
   fetchUserPosts() {
-    const userId = localStorage.getItem('userId');
-    if (userId) {
+    const userId = this.route.snapshot.paramMap.get('id');
+    const loggedUserId = this.getUserId();
+
+    this.loading = true;
+
+    if (userId && userId !== loggedUserId) {
+      this.apiService.getPostsByUserId(userId).subscribe({
+        next: (response: Post[]) => {
+          this.posts = response.filter((post) => post.media.length > 0);
+        },
+        error: (err) => {
+          console.error('Erro ao buscar posts do usuário selecionado:', err);
+          this.errorMessage =
+            'Erro ao carregar os posts do usuário selecionado';
+        },
+        complete: () => {
+          this.loading = false;
+        },
+      });
+    } else {
       this.apiService.getPostsByLoggedUser().subscribe({
         next: (response: Post[]) => {
           this.posts = response.filter((post) => post.media.length > 0);
         },
         error: (err) => {
-          console.error('Erro ao buscar posts do usuário:', err);
+          console.error('Erro ao buscar posts do usuário logado:', err);
+          this.errorMessage = 'Erro ao carregar os posts do usuário logado';
+        },
+        complete: () => {
+          this.loading = false;
         },
       });
-    } else {
-      console.error('ID do usuário não encontrado');
     }
   }
 
-  // Novo método para publicar post
   onPublish(event: {
     content: string;
     media: File[];
@@ -116,8 +145,6 @@ export class ProfileComponent implements OnInit {
       formData.append('media', file);
     });
 
-    console.log('FormData:', formData);
-
     const url =
       event.feedType === 'primaryFeed'
         ? 'http://localhost:3000/primaryFeed/'
@@ -125,7 +152,6 @@ export class ProfileComponent implements OnInit {
 
     this.http.post<Post>(url, formData).subscribe({
       next: (response: Post) => {
-        console.log('Post publicado com sucesso:', response);
         this.posts.unshift(response);
         this.alertMessage = 'Post publicado com sucesso!';
         this.alertType = 'success';
@@ -137,7 +163,7 @@ export class ProfileComponent implements OnInit {
       },
       complete: () => {
         this.loading = false;
-        this.closeModal(); // Fecha o modal após a publicação
+        this.closeModal();
       },
     });
   }

@@ -20,7 +20,7 @@ export class AppComponent {
   }
 
   isLoggedIn(): boolean {
-    return !!this.userId;
+    return !!localStorage.getItem('userId');
   }
 
   isLoginRoute(): boolean {
