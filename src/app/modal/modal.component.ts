@@ -6,15 +6,22 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css']
+  styleUrls: ['./modal.component.css'],
 })
 export class ModalComponent {
   @Input() title: string = '';
   @Input() content: string = '';
   @Input() showModal: boolean = false;
-  @Input() postContent: string = ''; // Recebe o conteúdo do post do componente pai
+  @Input() postContent: string = '';
+  @Input()
+  feedType!: 'primaryFeed' | 'secondFeed'; // Adicione esta linha
   @Output() close = new EventEmitter<void>();
-  @Output() publish = new EventEmitter<{ content: string; media: File[] }>(); // Altera o tipo de evento para incluir conteúdo e mídia
+  @Output() publish = new EventEmitter<{
+    content: string;
+    media: File[];
+    feedType: 'primaryFeed' | 'secondFeed';
+  }>();
+
   posts: Post[] = [];
   modalContent: string = '';
   canPublish: boolean = false;
@@ -23,12 +30,21 @@ export class ModalComponent {
   selectedMedia: File[] = [];
   alertMessage: string = '';
   alertType: string = '';
-  
+
   constructor(private apiService: ApiService, private http: HttpClient) {}
 
-  publishPost() {
+  onPublishPost() {
+    this.publish.emit({
+      content: this.postContent,
+      media: this.selectedMedia,
+      feedType: this.feedType,
+    });
+  }
+
+  publishPost(feedType: 'primaryFeed' | 'secondFeed') {
     this.loading = true;
     const formData = new FormData();
+
     if (!this.postContent.trim() && this.selectedMedia.length === 0) {
       this.alertMessage = 'O conteúdo do post ou mídia são obrigatórios!';
       this.alertType = 'error';
@@ -37,31 +53,34 @@ export class ModalComponent {
     }
 
     formData.append('content', this.postContent);
-    this.selectedMedia.forEach((file: string | Blob) => {
+    this.selectedMedia.forEach((file) => {
       formData.append('image', file);
     });
 
     console.log('FormData:', formData);
 
-    this.http
-      .post<Post>('http://localhost:3000/primaryFeed/', formData)
-      .subscribe({
-        next: (response: Post) => {
-          console.log('Post publicado com sucesso:', response);
-          this.posts.unshift(response);
-          this.resetForm();
-          this.alertMessage = 'Post publicado com sucesso!';
-          this.alertType = 'success';
-        },
-        error: (error) => {
-          console.error('Erro ao publicar o post:', error);
-          this.alertMessage = 'Erro ao publicar o post.';
-          this.alertType = 'error';
-        },
-        complete: () => {
-          this.loading = false;
-        },
-      });
+    const url =
+      feedType === 'primaryFeed'
+        ? 'http://localhost:3000/primaryFeed/'
+        : 'http://localhost:3000/secondFeed/';
+
+    this.http.post<Post>(url, formData).subscribe({
+      next: (response: Post) => {
+        console.log('Post publicado com sucesso:', response);
+        this.posts.unshift(response);
+        this.resetForm();
+        this.alertMessage = 'Post publicado com sucesso!';
+        this.alertType = 'success';
+      },
+      error: (error) => {
+        console.error('Erro ao publicar o post:', error);
+        this.alertMessage = 'Erro ao publicar o post.';
+        this.alertType = 'error';
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
   }
 
   onMediaSelected(event: Event) {

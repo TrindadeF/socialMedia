@@ -21,12 +21,24 @@
         <p class="username">{{ user?.username }}</p>
       </div>
     </div>
+    <app-modal
+      [title]="'Seja Bem Vindo!'"
+      [content]="modalContent"
+      [showModal]="showModal"
+      [postContent]="postContent"
+      (close)="closeModal()"
+      (publish)="onPublish($event)"
+    >
+    </app-modal>
+    <button mat-icon-button (click)="openModal()" aria-label="Adicionar Post">
+      <mat-icon>library_add</mat-icon>
+    </button>
 
     <div class="gallery">
       <h3>Feed</h3>
       <div class="gallery-grid">
         <div *ngFor="let post of posts" class="gallery-item">
-          <img [src]="post.imageUrl" alt="Post Image" />
+          <img [src]="post.media" alt="Post Image" />
         </div>
       </div>
     </div>

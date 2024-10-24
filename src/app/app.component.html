@@ -16,9 +16,10 @@
       <a routerLink="/edit-profile" class="menu-item">
         <mat-icon>edit</mat-icon>
       </a>
-      <a routerLink="/profile" class="menu-item">
+      <a [routerLink]="['/profile', userId]" class="menu-item">
         <mat-icon>person</mat-icon>
       </a>
+
       <a routerLink="/payments" class="menu-item">
         <mat-icon>payment</mat-icon>
       </a>

@@ -1,15 +1,8 @@
 body {
   margin: 0;
   background-color: #000;
-  color: #000;
+  color: #fff; /* Altera a cor do texto para branco */
   font-family: Arial, sans-serif;
-}
-
-.feed {
-  flex-grow: 1;
-  padding: 20px;
-  background-color: #161616;
-  overflow-y: auto;
 }
 
 .container {
@@ -147,15 +140,13 @@ body {
   background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
 }
 
-/* Conteúdo do modal */
 .modal-content {
-  background-color: #fff;
+  background-color: white;
   margin: 10% auto;
   padding: 20px;
   border-radius: 10px;
   width: 80%;
   max-width: 400px;
-  position: relative;
   color: #000;
 }
 
@@ -168,19 +159,20 @@ body {
   cursor: pointer;
 }
 
+/* Formulário */
 .form-group {
   margin-bottom: 15px;
 }
 
-label {
+.form-group label {
   display: block;
   font-size: 14px;
   margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="url"],
-textarea {
+.form-group input[type="text"],
+.form-group input[type="url"],
+.form-group textarea {
   width: 100%;
   padding: 10px;
   border-radius: 5px;
@@ -188,11 +180,11 @@ textarea {
   font-size: 14px;
 }
 
-textarea {
+.form-group textarea {
   height: 80px;
 }
 
-input[type="checkbox"] {
+.form-group input[type="checkbox"] {
   margin-right: 10px;
 }
 
@@ -208,83 +200,7 @@ input[type="checkbox"] {
 #save-btn:hover {
   background-color: #333;
 }
-modal {
-  display: block;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-}
 
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  margin: 100px auto;
-  width: 50%;
-  border-radius: 10px;
-}
-
-.close {
-  float: right;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.form-group input[type="checkbox"] {
-  width: auto;
-}
-
-.profile-container {
-  margin-top: 20px;
-}
-
-.profile-header {
-  display: flex;
-  align-items: center;
-}
-
-.profile-image img {
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-}
-
-.profile-info {
-  margin-left: 20px;
-}
-
-.edit-btn {
-  padding: 10px 20px;
-  margin-top: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.edit-btn:hover {
-  background-color: #0056b3;
-}
 .gallery {
   margin-top: 20px;
 }

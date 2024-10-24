@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Post } from 'database';
 
 @Component({
-  selector: 'app-love',
+  selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css'],
 })
@@ -20,27 +20,20 @@ export class FeedComponent implements OnInit {
   userId: string = '';
   showModal: boolean = false;
   modalContent: string = '';
-  content: string = 'conteúdo do modal';
-  title: string = 'Aqui é o título do modal feed'
+  title: string = 'Aqui é o título do modal feed';
 
   constructor(private apiService: ApiService, private http: HttpClient) {}
 
+  ngOnInit() {
+    this.getPosts();
+    this.userId = this.getUserIdFromAuthService();
+  }
   openModal() {
-    this.modalContent = 'Modal';
     this.showModal = true;
   }
 
   closeModal() {
     this.showModal = false;
-  }
-
-
-
-
-  
-  ngOnInit() {
-    this.getPosts();
-    this.userId = this.getUserIdFromAuthService();
   }
 
   getUserIdFromAuthService(): string {
@@ -72,10 +65,7 @@ export class FeedComponent implements OnInit {
   }
 
   likePost(postId: string) {
-
-
     this.apiService.likePostInFirstFeed(postId).subscribe(
-
       (updatedPost: Post) => {
         if (updatedPost) {
           this.posts = this.posts.map((post) => {
@@ -98,6 +88,8 @@ export class FeedComponent implements OnInit {
   publishPost() {
     this.loading = true;
     const formData = new FormData();
+
+    // Verifica se o conteúdo do post ou mídia estão preenchidos
     if (!this.postContent.trim() && this.selectedMedia.length === 0) {
       this.alertMessage = 'O conteúdo do post ou mídia são obrigatórios!';
       this.alertType = 'error';
@@ -107,30 +99,30 @@ export class FeedComponent implements OnInit {
 
     formData.append('content', this.postContent);
     this.selectedMedia.forEach((file) => {
-      formData.append('image', file);
+      formData.append('media', file); // Use 'media' para corresponder ao backend
     });
 
     console.log('FormData:', formData);
 
-    this.http
-      .post<Post>('http://localhost:3000/primaryFeed/', formData)
-      .subscribe({
-        next: (response: Post) => {
-          console.log('Post publicado com sucesso:', response);
-          this.posts.unshift(response);
-          this.resetForm();
-          this.alertMessage = 'Post publicado com sucesso!';
-          this.alertType = 'success';
-        },
-        error: (error) => {
-          console.error('Erro ao publicar o post:', error);
-          this.alertMessage = 'Erro ao publicar o post.';
-          this.alertType = 'error';
-        },
-        complete: () => {
-          this.loading = false;
-        },
-      });
+    const url = 'http://localhost:3000/primaryFeed/';
+
+    this.http.post<Post>(url, formData).subscribe({
+      next: (response: Post) => {
+        console.log('Post publicado com sucesso:', response);
+        this.posts.unshift(response);
+        this.resetForm();
+        this.alertMessage = 'Post publicado com sucesso!';
+        this.alertType = 'success';
+      },
+      error: (error) => {
+        console.error('Erro ao publicar o post:', error);
+        this.alertMessage = 'Erro ao publicar o post.';
+        this.alertType = 'error';
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
   }
 
   onMediaSelected(event: Event) {
@@ -183,6 +175,7 @@ export class FeedComponent implements OnInit {
     const previewVideo = document.getElementById(
       'preview-video'
     ) as HTMLVideoElement;
+
     previewImage.src = '';
     previewImage.style.display = 'none';
     previewVideo.src = '';
@@ -194,10 +187,13 @@ export class FeedComponent implements OnInit {
   isImage(mediaUrl: string): boolean {
     return /\.(jpg|jpeg|png|gif)$/i.test(mediaUrl);
   }
+
   deletePostFromFirstFeed(postId: string) {
     this.apiService.deletePostFromFirstFeed(postId).subscribe(
       (response) => {
         console.log('Post deletado com sucesso:', response);
+        // Atualiza a lista de posts após a exclusão
+        this.posts = this.posts.filter((post) => post._id !== postId);
       },
       (error) => {
         console.error('Erro ao deletar o post:', error);
