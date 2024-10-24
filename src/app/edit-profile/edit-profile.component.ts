@@ -17,6 +17,7 @@ export class EditProfileComponent implements OnInit {
     password: '',
     nickName: '',
     description: '',
+    _id: '',
   };
 
   originalUser: User | null = null;
@@ -33,7 +34,8 @@ export class EditProfileComponent implements OnInit {
   }
 
   fetchUserProfile() {
-    this.apiService.getUserProfile().subscribe({
+    const userId = this.getLoggedInUserId();
+    this.apiService.getUserById(userId).subscribe({
       next: (response) => {
         this.user = response;
         this.originalUser = { ...response };
@@ -85,30 +87,6 @@ export class EditProfileComponent implements OnInit {
       };
       reader.readAsDataURL(fileInput.files[0]);
     }
-  }
-
-  getUpdatedFields(): Partial<User> {
-    const updatedFields: Partial<User> = {};
-
-    if (this.user.name !== this.originalUser?.name) {
-      updatedFields.name = this.user.name;
-    }
-    if (this.user.age !== this.originalUser?.age) {
-      updatedFields.age = this.user.age;
-    }
-    if (this.user.gender !== this.originalUser?.gender) {
-      updatedFields.gender = this.user.gender;
-    }
-    if (this.user.email !== this.originalUser?.email) {
-      updatedFields.email = this.user.email;
-    }
-    if (this.user.nickName !== this.originalUser?.nickName) {
-      updatedFields.nickName = this.user.nickName;
-    }
-    if (this.user.description !== this.originalUser?.description) {
-      updatedFields.description = this.user.description;
-    }
-    return updatedFields;
   }
 
   private getLoggedInUserId(): string {

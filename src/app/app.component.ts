@@ -7,11 +7,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  userId: string | null = '';
+
   constructor(private router: Router) {}
 
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('userId');
+  ngOnInit() {
+    this.loadUserId();
   }
+
+  private loadUserId() {
+    this.userId = localStorage.getItem('userId');
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.userId;
+  }
+
   isLoginRoute(): boolean {
     return this.router.url === '/login';
   }
