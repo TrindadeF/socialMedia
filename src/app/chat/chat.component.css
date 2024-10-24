@@ -12,15 +12,15 @@
 }
 
 body {
-    background: url('/assets/images/Fundo Chat.png') no-repeat center center fixed; /* Ajuste o caminho e adicione center center */
-    background-size: cover; /* Garante que a imagem cubra todo o fundo */
+    background: url('/assets/images/Fundo Chat.png') no-repeat center center fixed;
+    background-size: cover;
     color: #f2f2f2;
-    height: 100vh; /* Garante que o corpo ocupe 100% da altura da viewport */
+    height: 100vh;
 }
 
 .container {
     width: 100%;
-    height: 100vh; /* Corrigido de 100dvh para 100vh */
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -29,7 +29,7 @@ body {
 .login {
     width: 100%;
     max-width: 330px;
-    background-color: rgba(33, 33, 33, 0.9); /* Fundo semi-transparente */
+    background-color: rgba(33, 33, 33, 0.9);
     border-radius: 5px;
     padding: 20px;
 }
@@ -77,9 +77,10 @@ body {
     background-color: #fff;
 }
 
+/* Chat */
 .chat {
     width: 100%;
-    height: 100%;
+    height: 80%; /* Reduz a altura geral do chat */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -87,36 +88,41 @@ body {
 
 .chat__messages {
     flex-grow: 1;
-    padding: 30px 30px 90px;
+    padding: 20px 20px 60px; /* Reduz o padding da área de mensagens */
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
 }
 
 .chat__form {
-    background-color: rgba(25, 25, 25, 0.9); /* Fundo semi-transparente */
-    padding: 15px 20px;
+    background-color: rgba(25, 25, 25, 0.9);
+    padding: 5px 10px; /* Reduz o padding da caixa de envio de mensagem */
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px; /* Reduz o espaço entre os elementos */
     position: fixed;
     bottom: 0;
-    left: 0;
-    width: 100%;
+    left: 90px;
+    width: 95%;
+    height: 60px; /* Reduz a altura da caixa de envio */
 }
 
 .chat__input {
-    border: none;
-    padding: 15px;
-    border-radius: 8px;
+    padding: 10px; /* Reduz o padding do campo de input */
+    border-radius: 5px;
     flex-grow: 1;
     background-color: #212121;
+    font-size: 0.9rem; /* Diminui o tamanho da fonte */
+    color: #f2f2f2; /* Garante que o texto escrito seja branco */
     outline: none;
-    color: #f2f2f2;
-    font-size: 1rem;
+}
+
+.chat__input::placeholder {
+    color: #999; /* Deixa o placeholder mais claro */
 }
 
 .chat__button {
+    font-size: 1.0rem; /* Reduz o tamanho do botão de envio */
     border: none;
     background: none;
     color: #f2f2f2;
@@ -124,21 +130,21 @@ body {
 }
 
 .chat__button > span {
-    font-size: 1.8rem;
+    font-size: 1.0rem; /* Reduz o tamanho do ícone */
 }
 
 .chat__messages > div {
-    padding: 10px;
+    padding: 8px; /* Reduz o padding das mensagens */
     width: 100%;
-    max-width: 250px;
-    font-size: 0.9rem;
+    max-width: 200px; /* Reduz a largura máxima das mensagens */
+    font-size: 0.8rem; /* Reduz o tamanho da fonte */
     font-weight: 500;
-    margin-bottom: 15px;
-    line-height: 22px;
+    margin-bottom: 10px; /* Reduz o espaçamento entre as mensagens */
+    line-height: 18px; /* Diminui a altura da linha */
 }
 
 .message--self {
-    background-color: #f2f2f2;
+    background-color: #cacd92;
     color: #121212;
     border-radius: 10px 10px 0 10px;
     align-self: flex-end;
