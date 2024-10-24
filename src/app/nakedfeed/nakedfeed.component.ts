@@ -9,6 +9,7 @@ import { Post } from 'database';
   styleUrls: ['./nakedfeed.component.css'],
 })
 export class NakedFeedComponent implements OnInit {
+  
   posts: Post[] = [];
   postContent: string = '';
   selectedMedia: File[] = [];
