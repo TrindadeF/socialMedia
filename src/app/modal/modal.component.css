@@ -78,6 +78,13 @@ textarea {
   background-color: #ff6b81; /* Cor do botão ao passar o mouse */
 }
 
+.modal-footer {
+  display: flex; /* Exibe os botões lado a lado */
+  justify-content: flex-end; /* Alinha os botões à direita */
+  gap: 10px; /* Espaçamento entre os botões */
+  
+}
+
 /* Responsividade para telas menores */
 @media (max-width: 768px) {
   .modal-content {
@@ -87,4 +94,46 @@ textarea {
   .custom-btn {
     width: 100%; /* Botão ocupa a largura total */
   }
+}
+
+.close-btn {
+  background-color: #e74c3c; /* Cor vermelha */
+  border: none; /* Remove a borda padrão */
+  color: white; /* Cor do texto */
+  padding: 10px 20px; /* Espaçamento interno */
+  border-radius: 5px; /* Bordas arredondadas */
+  cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+  transition: background-color 0.3s ease; /* Transição suave ao passar o mouse */
+  
+}
+
+.close-btn:hover {
+  background-color: #ff6b81; /* Cor vermelha clara ao passar o mouse */
+}
+
+.button {
+  background-color: #ff4757; /* Cor vermelha para o botão fechar */
+  border: none; /* Remove a borda padrão */
+  color: white; /* Cor do texto */
+  padding: 10px 20px; /* Espaçamento interno */
+  border-radius: 5px; /* Bordas arredondadas */
+  cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transição suave */
+}
+
+.button:hover {
+  background-color: #ff6b81; /* Cor mais clara ao passar o mouse */
+  transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+}
+/* Adicione este estilo à classe .buttons */
+.buttons {
+  display: flex; /* Alinha os botões em uma linha */
+  justify-content: flex-end; /* Alinha os botões à direita */
+  gap: 15px; /* Espaçamento entre os botões */
+  margin-top: 20px; /* Adiciona um espaçamento superior */
+}
+
+/* O restante do código permanece o mesmo */
+.d-flex label {
+  margin-right: 15px; /* Adiciona espaçamento entre os ícones */
 }

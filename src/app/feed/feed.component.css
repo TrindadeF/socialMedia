@@ -23,6 +23,7 @@ body {
   max-width: 800px; /* Largura máxima para o feed */
   width: 100%; /* Largura total */
   margin: auto; /* Centraliza horizontalmente */
+  border: 2px solid #8d8d8d; /* Contorno cinza claro */
 }
 
 .feed-header {
@@ -94,11 +95,75 @@ textarea::placeholder {
 }
 
 .post {
-  background-color: #222;
-  border: 1px solid #fff;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
+  background-color: #222; /* Cor de fundo escura */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borda suave e translúcida */
+  border-radius: 12px; /* Cantos arredondados */
+  padding: 20px; /* Espaçamento interno */
+  margin-bottom: 20px; /* Espaçamento entre os posts */
+  position: relative; /* Para permitir efeitos de sobreposição */
+  overflow: hidden; /* Esconde partes que podem transbordar */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra para profundidade */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transições suaves */
+  color: rgb(206, 89, 89);
+  border: 2px solid #ffffff49; /* Contorno vermelho escuro */
+}
+
+/* Efeito de elevação ao passar o mouse */
+.post:hover {
+  transform: translateY(-5px); /* Eleva o post ao passar o mouse */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7); /* Sombra mais intensa ao passar o mouse */
+}
+
+/* Estilo do título do post */
+.post-header h3 {
+  color: #ff6347; /* Cor vibrante para o título */
+  font-size: 1.5rem; /* Tamanho do texto do título */
+  margin-bottom: 10px; /* Espaço abaixo do título */
+}
+
+
+/* Estilo do conteúdo do post */
+.post-content p {
+  color: #ffffff; /* Cor suave para o texto */
+  line-height: 1.5; /* Aumenta o espaçamento entre linhas */
+  margin: 10px 0; /* Margens para espaçamento */
+  border: 2px solid  #fdfdfd; /* Contorno ao redor do texto */
+  padding: 10px; /* Espaçamento interno do contorno */
+  border-radius: 10px; /* Cantos arredondados do contorno */
+  background-color: #333; /* Fundo para o conteúdo do post */
+
+}
+
+/* Estilo do autor do post */
+.post-info h3 {
+  color: rgb(196, 62, 62); /* Cor do nome do usuário */
+  margin-bottom: 5px; /* Espaço abaixo do nome */
+  position: relative; /* Para permitir a linha de sublinhado */
+}
+
+.post-info h3::after {
+  content: ''; /* Necessário para o pseudo-elemento */
+  display: block; /* Faz com que o elemento ocupe espaço */
+  height: 2px; /* Espessura da linha */
+  background-color: rgb(249, 3, 3); /* Cor da linha */
+  width: 100%; /* Largura total */
+  margin-top: 2px; /* Espaço entre o texto e a linha */
+}
+
+/* Estilo para a data do post */
+.post-info span {
+  color: #777; /* Cor para a data */
+  font-size: 0.9rem; /* Tamanho do texto da data */
+  position: relative; /* Para permitir a linha de sublinhado */
+}
+
+.post-info span::after {
+  content: ''; /* Necessário para o pseudo-elemento */
+  display: block; /* Faz com que o elemento ocupe espaço */
+  height: 1px; /* Espessura da linha */
+  background-color: rgb(250, 4, 4); /* Cor da linha */
+  width: 100%; /* Largura total */
+  margin-top: 2px; /* Espaço entre o texto e a linha */
 }
 
 .post-header {
@@ -111,11 +176,13 @@ textarea::placeholder {
   width: 50px;
   height: 50px;
   border-radius: 50%; /* Arredondar a imagem do avatar */
+  border: 2px solid #fa02028d; /* Adiciona um contorno vermelho escuro */
 }
 
 .post-info h3 {
   margin: 0;
   font-size: 1.2rem;
+  color: red;
 }
 
 .post-info span {
@@ -182,7 +249,7 @@ textarea::placeholder {
 }
 
 .custom-btn {
-  background-color: #201b1b; /* Vermelho */
+  background-color: #ff0404; /* Vermelho */
   border-radius: 10px;
   color: white;
   transition: transform 0.2s ease, background-color 0.2s ease;
@@ -211,4 +278,15 @@ textarea::placeholder {
     bottom: 10px; /* Ajusta a distância para telas menores */
     right: 10px; /* Ajuste para manter o botão visível em dispositivos móveis */
   }
+}
+
+.icon-container {
+  display: flex; /* Usar flexbox para alinhar os ícones */
+  align-items: center; /* Alinha verticalmente ao centro */
+  gap: 15px; /* Espaçamento entre os ícones */
+}
+
+.white-icon {
+  color: white; /* Cor branca para os ícones */
+  font-size: 40px; /* Tamanho dos ícones */
 }
