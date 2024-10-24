@@ -27,9 +27,10 @@ const routes: Routes = [
   { path: 'edit-profile', component: EditProfileComponent },
   { path: 'payments', component: PaymentsComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'rules', component:RulesComponent},
-  { path: 'chat', component: ChatComponent},
-  { path: 'presentation', component: PresentationComponent }
+  { path: 'rules', component: RulesComponent },
+  { path: 'chat', component: ChatComponent },
+  { path: 'presentation', component: PresentationComponent },
+  { path: 'profile/:id', component: ProfileComponent },
 ];
 
 @NgModule({

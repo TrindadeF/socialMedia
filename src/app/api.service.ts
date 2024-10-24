@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from 'database';
+import { Post, User } from 'database';
 
 @Injectable({
   providedIn: 'root',
@@ -117,7 +117,7 @@ export class ApiService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    return this.http.get(`${this.apiUrl}/profile/${userId}`, { headers });
+    return this.http.get(`${this.api}/users/${userId}`, { headers });
   }
   deletePostFromFirstFeed(postId: string): Observable<any> {
     const token = this.getAuthToken();
@@ -138,5 +138,26 @@ export class ApiService {
   }
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>('http://localhost:3000/users');
+  }
+  likeUser(userId: string, likedUserId: string): Observable<any> {
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.post(
+      `${this.apiUrl}/like-user`,
+      { userId, likedUserId },
+      { headers }
+    );
+  }
+  getPostsByLoggedUser(): Observable<Post[]> {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      throw new Error('Usuário não logado');
+    }
+    return this.http.get<Post[]>(
+      `${this.apiSecondFeed}/posts?userId=${userId}`
+    );
   }
 }
