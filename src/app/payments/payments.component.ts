@@ -19,15 +19,20 @@ export class PaymentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.apiService.getUserProfile().subscribe(
-      (response: { userId: string; email: string }) => {
-        this.userId = response.userId;
-        this.userEmail = response.email;
-      },
-      (error) => {
-        console.error('Erro ao buscar perfil do usuário:', error);
-      }
-    );
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      this.apiService.getUserById(userId).subscribe(
+        (response: { userId: string; email: string }) => {
+          this.userId = response.userId;
+          this.userEmail = response.email;
+        },
+        (error) => {
+          console.error('Erro ao buscar perfil do usuário:', error);
+        }
+      );
+    } else {
+      console.error('User ID não encontrado no localStorage');
+    }
   }
 
   subscribeToPlan(planId: string) {

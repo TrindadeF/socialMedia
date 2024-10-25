@@ -1,8 +1,6 @@
 <div class="container">
   <div class="profile-container">
-    <!-- Cabeçalho do perfil -->
     <div class="profile-header">
-      <!-- Imagem do perfil -->
       <div class="profile-image">
         <img
           *ngIf="user?.profilePic; else noProfilePic"
@@ -11,12 +9,11 @@
         />
         <ng-template #noProfilePic>
           <img
-            src="assets/default-profile-pic.jpg"
+            src="assets/images/default-avatar.jpg"
             alt="Imagem de perfil padrão"
           />
         </ng-template>
       </div>
-      <!-- Informações do perfil -->
       <div class="profile-info">
         <h2>{{ user.name }}</h2>
         <h3>{{ user.age }}</h3>
@@ -25,9 +22,8 @@
       </div>
     </div>
 
-    <!-- Modal para adicionar novo post -->
     <app-modal
-      [title]="'Seja Bem Vindo!'"
+      [title]="title"
       [content]="modalContent"
       [showModal]="showModal"
       [postContent]="postContent"
@@ -35,18 +31,14 @@
       (publish)="onPublish($event)"
     ></app-modal>
 
-    <!-- Botão para abrir o modal -->
     <button mat-icon-button (click)="openModal()" aria-label="Adicionar Post">
       <mat-icon>library_add</mat-icon>
     </button>
 
-    <!-- Galeria de posts -->
     <div class="gallery">
       <h3>Feed</h3>
       <div class="gallery-grid">
-        <!-- Loop para exibir cada post -->
         <div *ngFor="let post of posts" class="gallery-item">
-          <!-- Verificação se o post tem múltiplas mídias -->
           <div *ngFor="let mediaUrl of post.media">
             <img
               *ngIf="isImage(mediaUrl)"

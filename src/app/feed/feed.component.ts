@@ -21,6 +21,7 @@ export class FeedComponent implements OnInit {
   showModal: boolean = false;
   modalContent: string = '';
   title: string = 'Aqui é o título do modal feed';
+  currentFeedType: 'primaryFeed' | 'secondFeed' = 'primaryFeed';
 
   constructor(private apiService: ApiService, private http: HttpClient) {}
 
@@ -28,11 +29,9 @@ export class FeedComponent implements OnInit {
     this.getPosts();
     this.userId = this.getUserIdFromAuthService();
   }
-  openModal() {
-    this.showModal = true;
-  }
 
   closeModal() {
+    this.resetForm(); // Limpa o formulário ao fechar o modal
     this.showModal = false;
   }
 
@@ -85,41 +84,44 @@ export class FeedComponent implements OnInit {
     );
   }
 
-  publishPost() {
-    this.loading = true;
+  openModal(feedType: 'primaryFeed' | 'secondFeed') {
+    this.currentFeedType = feedType;
+    this.showModal = true;
+  }
+
+  onPublish(event: { content: string; media: File[] }) {
+    this.publishPost(event.content, event.media, this.currentFeedType);
+  }
+
+  publishPost(
+    content: string,
+    media: File[],
+    feedType: 'primaryFeed' | 'secondFeed'
+  ) {
     const formData = new FormData();
+    formData.append('content', content);
+    media.forEach((file) => formData.append('media', file));
 
-    if (!this.postContent.trim() && this.selectedMedia.length === 0) {
-      this.alertMessage = 'O conteúdo do post ou mídia são obrigatórios!';
-      this.alertType = 'error';
-      this.loading = false;
-      return;
-    }
+    const url =
+      feedType === 'primaryFeed'
+        ? 'http://localhost:3000/primaryFeed/'
+        : 'http://localhost:3000/secondFeed/';
 
-    formData.append('content', this.postContent);
-    this.selectedMedia.forEach((file) => {
-      formData.append('media', file);
-    });
-
-    console.log('FormData:', formData);
-
-    const url = 'http://localhost:3000/primaryFeed/';
+    this.loading = true; // Indica que a publicação está em progresso
 
     this.http.post<Post>(url, formData).subscribe({
       next: (response: Post) => {
-        console.log('Post publicado com sucesso:', response);
         this.posts.unshift(response);
-        this.resetForm();
         this.alertMessage = 'Post publicado com sucesso!';
         this.alertType = 'success';
       },
-      error: (error) => {
-        console.error('Erro ao publicar o post:', error);
+      error: () => {
         this.alertMessage = 'Erro ao publicar o post.';
         this.alertType = 'error';
       },
       complete: () => {
-        this.loading = false;
+        this.loading = false; // Indica que a publicação foi concluída
+        this.resetForm(); // Limpa o formulário após a publicação
       },
     });
   }

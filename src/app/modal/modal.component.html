@@ -7,6 +7,7 @@
         class="form-control mb-2"
         placeholder="O que você vai nos mostrar hoje?"
         [(ngModel)]="postContent"
+        (input)="checkFormValidity()"
       ></textarea>
 
       <div class="d-flex align-items-center mb-2">
@@ -32,30 +33,32 @@
             multiple
           />
         </label>
+
         <img
           id="preview-image"
           class="preview-image mt-2"
           style="display: none; max-width: 25%"
           alt="Prévia da imagem"
         />
-
         <video
           id="preview-video"
           class="preview-video mt-2"
           style="display: none; max-width: 35%"
           controls
-          alt="Prévia do vídeo"
         ></video>
       </div>
+
+      <p *ngIf="alertMessage" [class]="alertType">{{ alertMessage }}</p>
 
       <div class="buttons">
         <button
           id="publish-button"
           class="btn btn-danger custom-btn"
-          (click)="publishPost('secondFeed')"
+          (click)="onPublishPost()"
+          [disabled]="!canPublish || loading"
           type="button"
         >
-          Publicar
+          {{ loading ? "Publicando..." : "Publicar" }}
         </button>
         <button class="button" (click)="closeModal()">Fechar</button>
       </div>

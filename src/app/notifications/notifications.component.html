@@ -1,0 +1,8 @@
+<h2>Notificações</h2>
+<h3>Usuários que curtiram seu perfil</h3>
+<ul>
+  <li *ngFor="let user of usersWhoLikedProfile">
+    <img [src]="user.profilePic" alt="{{ user.name }}" width="40" />
+    {{ user.name }} ({{ user.email }})
+  </li>
+</ul>

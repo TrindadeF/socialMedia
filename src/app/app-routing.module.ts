@@ -14,6 +14,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { RulesComponent } from './rules/rules.component';
 import { ChatComponent } from './chat/chat.component';
 import { PresentationComponent } from './presentation/presentation.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'chat', component: ChatComponent },
   { path: 'presentation', component: PresentationComponent },
   { path: 'profile/:id', component: ProfileComponent },
+  { path: 'notifications', component: NotificationsComponent },
 ];
 
 @NgModule({

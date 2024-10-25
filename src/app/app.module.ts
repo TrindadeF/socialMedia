@@ -27,6 +27,7 @@ import { PresentationComponent } from './presentation/presentation.component';
 import { ChatComponent } from './chat/chat.component';
 import { ModalComponent } from './modal/modal.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
     ChatComponent,
     NakedFeedComponent,
     ModalComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    NotificationsComponent
     
   ],
   imports: [

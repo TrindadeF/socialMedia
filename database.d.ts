@@ -1,4 +1,5 @@
 export type Post = {
+  id: string;
   _id: string;
   media: any;
   content: string;

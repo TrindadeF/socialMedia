@@ -14,7 +14,7 @@ export class ModalComponent {
   @Input() showModal: boolean = false;
   @Input() postContent: string = '';
   @Input()
-  feedType!: 'primaryFeed' | 'secondFeed'; // Adicione esta linha
+  feedType!: 'primaryFeed' | 'secondFeed';
   @Output() close = new EventEmitter<void>();
   @Output() publish = new EventEmitter<{
     content: string;
@@ -41,7 +41,7 @@ export class ModalComponent {
     });
   }
 
-  publishPost(feedType: 'primaryFeed' | 'secondFeed') {
+  publishPost() {
     this.loading = true;
     const formData = new FormData();
 
@@ -53,14 +53,10 @@ export class ModalComponent {
     }
 
     formData.append('content', this.postContent);
-    this.selectedMedia.forEach((file) => {
-      formData.append('image', file);
-    });
-
-    console.log('FormData:', formData);
+    this.selectedMedia.forEach((file) => formData.append('media', file));
 
     const url =
-      feedType === 'primaryFeed'
+      this.feedType === 'primaryFeed'
         ? 'http://localhost:3000/primaryFeed/'
         : 'http://localhost:3000/secondFeed/';
 

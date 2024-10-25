@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Post, User } from 'database';
+import { LikesResponse } from 'response.types';
 
 @Injectable({
   providedIn: 'root',
@@ -86,12 +87,12 @@ export class ApiService {
     localStorage.removeItem('authToken');
   }
 
-  getUserProfile(): Observable<any> {
+  getUserProfile(userId: string): Observable<any> {
     const token = this.getAuthToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    return this.http.get(`${this.apiUrl}/profile`, { headers });
+    return this.http.get(`${this.apiUrl}/profile/${userId}`, { headers });
   }
 
   publishPost(formData: FormData): Observable<any> {
@@ -165,5 +166,37 @@ export class ApiService {
     return this.http.get<Post[]>(
       `${this.apiSecondFeed}/posts?userId=${userId}`
     );
+  }
+
+  getPostsFromFirstFeedByUserId(userId: string): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.apiFirstFeed}/posts?userId=${userId}`);
+  }
+
+  getPostsFromSecondFeedByUserId(userId: string): Observable<Post[]> {
+    return this.http.get<Post[]>(
+      `${this.apiSecondFeed}/posts?userId=${userId}`
+    );
+  }
+
+  getUsersWhoLikedPost(postId: string): Observable<LikesResponse> {
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<LikesResponse>(`${this.apiUrl}/${postId}/likes`, {
+      headers,
+    });
+  }
+
+  getUsersWhoLikedProfile(userId: string): Observable<User[]> {
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<User[]>(`${this.apiUrl}/profile/${userId}/likes`, {
+      headers,
+    });
   }
 }

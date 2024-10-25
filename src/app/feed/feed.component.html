@@ -10,7 +10,7 @@
         id="post-text"
         placeholder="O que você vai nos mostrar hoje?"
         [(ngModel)]="postContent"
-        (focus)="openModal()"
+        (focus)="openModal('primaryFeed')"
       ></textarea>
       <div *ngIf="loading" class="loading-bar"></div>
 
@@ -91,8 +91,9 @@
         [content]="modalContent"
         [showModal]="showModal"
         [postContent]="postContent"
+        [feedType]="currentFeedType"
         (close)="closeModal()"
-        (publish)="publishPost()"
+        (publish)="onPublish($event)"
       >
       </app-modal>
     </div>

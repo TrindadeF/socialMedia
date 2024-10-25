@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
   title: string = 'Aqui é o título do modal feed';
   modalContent: string = '';
   postContent: string = '';
+  currentFeedType: 'primaryFeed' | 'secondFeed' = 'secondFeed';
 
   constructor(
     private apiService: ApiService,
@@ -54,12 +55,9 @@ export class ProfileComponent implements OnInit {
     return localStorage.getItem('userId') || '';
   }
 
-  openModal() {
-    this.showModal = true;
-  }
-
   closeModal() {
     this.showModal = false;
+    this.resetForm();
   }
 
   fetchUserProfile() {
@@ -125,28 +123,33 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  openModal() {
+    this.showModal = true;
+    this.postContent = '';
+  }
+
   onPublish(event: {
     content: string;
     media: File[];
     feedType: 'primaryFeed' | 'secondFeed';
   }) {
-    this.loading = true;
-    const formData = new FormData();
+    this.publishPost(event.content, event.media, event.feedType);
+  }
 
-    if (!event.content.trim() && event.media.length === 0) {
-      this.alertMessage = 'O conteúdo do post ou mídia são obrigatórios!';
-      this.alertType = 'error';
-      this.loading = false;
-      return;
+  publishPost(
+    content: string,
+    media: File[],
+    feedType: 'primaryFeed' | 'secondFeed'
+  ) {
+    const formData = new FormData();
+    formData.append('content', content);
+
+    if (media && media.length > 0) {
+      media.forEach((file) => formData.append('media', file));
     }
 
-    formData.append('content', event.content);
-    event.media.forEach((file) => {
-      formData.append('media', file);
-    });
-
     const url =
-      event.feedType === 'primaryFeed'
+      feedType === 'primaryFeed'
         ? 'http://localhost:3000/primaryFeed/'
         : 'http://localhost:3000/secondFeed/';
 
@@ -155,21 +158,20 @@ export class ProfileComponent implements OnInit {
         this.posts.unshift(response);
         this.alertMessage = 'Post publicado com sucesso!';
         this.alertType = 'success';
+        this.closeModal();
       },
-      error: (error) => {
-        console.error('Erro ao publicar o post:', error);
+      error: (err) => {
+        console.error('Erro ao publicar o post:', err);
         this.alertMessage = 'Erro ao publicar o post.';
         this.alertType = 'error';
       },
-      complete: () => {
-        this.loading = false;
-        this.closeModal();
-      },
+      complete: () => (this.loading = false),
     });
   }
 
   resetForm() {
     this.alertMessage = '';
+    this.postContent = '';
   }
 
   isImage(mediaUrl: string): boolean {
