@@ -8,7 +8,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center; /* Centraliza verticalmente */
-  height: 100vh; /* Ocupa toda a altura da viewport */
+  min-height: 100vh; /* Ocupa toda a altura da viewport */
   overflow: hidden; /* Evita rolagem da página */
 }
 
@@ -18,26 +18,27 @@ header {
   align-items: center; /* Centraliza horizontalmente */
   justify-content: center; /* Centraliza verticalmente */
   width: 100%;
-  height: 50vh;
+  height: 80vh; /* Aumenta a altura do header */
   position: relative;
   text-align: center; /* Centraliza o texto dentro do header */
   background: rgba(0, 0, 0, 0.7); /* Preto transparente */
-  border-radius: 10px; /* Bordas arredondadas para efeito 3D */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para efeito 3D */
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra */
   overflow: hidden; /* Oculta partes da animação que saem da área do header */
 }
 
+/* Logo */
 .logo {
   width: auto; /* Ajusta o tamanho da imagem do logo */
   max-width: 130px; /* Define uma largura máxima para o logo */
-  margin: 20px 0; /* Margem superior e inferior para espaçamento */
-  border-radius: 60px; /* Adiciona bordas arredondadas */
-  overflow: hidden; /* Garante que o conteúdo que excede o contorno arredondado seja ocultado */
+  margin: 20px 0; /* Margem superior e inferior */
+  border-radius: 60px; /* Bordas arredondadas */
+  overflow: hidden; /* Oculta conteúdo que excede o contorno arredondado */
   animation: glow 1.5s ease-in-out infinite; /* Animação de brilho */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave para transformação e sombra */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
 }
 
-/* Animação de brilho */
+/* Animações */
 @keyframes glow {
   0%, 100% {
     box-shadow: 0 0 5px rgba(255, 0, 0, 0.7), 
@@ -51,7 +52,7 @@ header {
   }
 }
 
-/* Efeito ao passar o mouse */
+/* Efeito ao passar o mouse sobre o logo */
 .logo:hover {
   transform: scale(1.1); /* Aumenta o tamanho da imagem */
   box-shadow: 0 0 15px rgba(255, 0, 0, 1), 
@@ -63,7 +64,7 @@ header {
   color: #fff;
   position: relative; /* Para centralizar o texto dentro do header */
   z-index: 1; /* Garante que o texto fique acima da animação de fundo */
-  margin-top: 10px; /* Ajusta a margem superior para não sobrepor o logo */
+  margin-top: 10px; /* Ajusta a margem superior */
 }
 
 .header-content h1,
@@ -106,17 +107,15 @@ header::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.2),
-    rgba(0, 0, 0, 0.7)
-  );
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.7));
   opacity: 0.6;
   animation: shine 3s infinite; /* Animação de brilho em câmera lenta */
   z-index: 0; /* Coloca a animação de fundo atrás do texto */
 }
 
-.cta {
+/* Botões */
+.cta,
+.login-btn {
   display: inline-block;
   padding: 15px;
   border-radius: 25px;
@@ -125,19 +124,18 @@ header::before {
   font-weight: bold;
   text-align: center;
   text-decoration: none;
-  margin-top: 20px;
-  margin-right: 15px;
+  margin: 20px 15px 0 0; /* Margem superior e lateral */
   transition: background-color 0.3s, transform 0.3s, border 0.3s; /* Inclui transição para a borda */
   background-color: #ff6b6b; /* Cor de fundo comum */
   border: 2px solid white; /* Adiciona contorno branco */
 }
 
-.cta:hover {
+.cta:hover,
+.login-btn:hover {
   background-color: #ff4b4b; /* Cor ao passar o mouse */
   transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
   border-color: #ff4b4b; /* Muda a cor da borda ao passar o mouse */
 }
-
 
 footer {
   background-color: #333;
@@ -154,6 +152,7 @@ footer p {
   font-size: 14px;
 }
 
+/* Container de imagem */
 .image-container {
   width: 100%;
   display: flex;
@@ -174,38 +173,32 @@ footer p {
   filter: brightness(1.2);
 }
 
-/* Animação de brilho do texto */
+/* Animações de texto */
 @keyframes neonGlow {
   0%, 100% {
-    text-shadow: 0 0 5px #ff6b6b, 0 0 10px #ff6b6b, 0 0 15px #ff6b6b,
-      0 0 20px #ff6b6b, 0 0 25px #ff6b6b, 0 0 30px #ff6b6b, 0 0 35px #ff6b6b;
+    text-shadow: 0 0 5px #ff6b6b, 0 0 10px #ff6b6b, 
+                 0 0 15px #ff6b6b, 0 0 20px #ff6b6b, 
+                 0 0 25px #ff6b6b, 0 0 30px #ff6b6b, 
+                 0 0 35px #ff6b6b;
   }
   50% {
-    text-shadow: 0 0 10px #ff6b6b, 0 0 20px #ff6b6b, 0 0 30px #ff6b6b,
-      0 0 40px #ff6b6b, 0 0 50px #ff6b6b, 0 0 60px #ff6b6b, 0 0 70px #ff6b6b;
+    text-shadow: 0 0 10px #ff6b6b, 0 0 20px #ff6b6b, 
+                 0 0 30px #ff6b6b, 0 0 40px #ff6b6b, 
+                 0 0 50px #ff6b6b, 0 0 60px #ff6b6b, 
+                 0 0 70px #ff6b6b;
   }
 }
 
 /* Animação de digitação */
 @keyframes typewriter {
-  0% {
-    width: 0; /* Começa com a largura 0 */
-  }
-  50% {
-    width: 100%; /* Aumenta para 100% */
-  }
-  100% {
-    width: 0; /* Retorna a 0% */
-  }
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
 }
 
 @keyframes blinkCaret {
-  0%, 100% {
-    border-color: transparent; /* Cursor invisível */
-  }
-  50% {
-    border-color: rgb(245, 243, 243); /* Cursor visível */
-  }
+  0%, 100% { border-color: transparent; }
+  50% { border-color: rgb(245, 243, 243); }
 }
 
 .typewriter {
@@ -214,24 +207,4 @@ footer p {
   white-space: nowrap; /* Impede a quebra de linha */
   border-right: 2px solid; /* Estilo do cursor */
   animation: typewriter 4s steps(40, end) infinite, blinkCaret 0.75s step-end infinite;
-}
-.login-btn {
-  display: inline-block;
-  padding: 15px;
-  border-radius: 25px;
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  margin-top: 20px;
-  transition: background-color 0.3s, transform 0.3s, border 0.3s; /* Inclui transição para a borda */
-  background-color: #ff6b6b; /* Cor de fundo comum */
-  border: 2px solid white; /* Adiciona contorno branco */
-}
-
-.login-btn:hover {
-  background-color: #ff4b4b; /* Cor ao passar o mouse */
-  transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
-  border-color: #ff4b4b; /* Muda a cor da borda ao passar o mouse */
 }

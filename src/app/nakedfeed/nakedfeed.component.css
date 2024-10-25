@@ -1,19 +1,48 @@
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #060606; /* Fundo preto para a página inteira */
+  color: #fff;
+  font-family: Arial, sans-serif;
+  min-height: 100vh; /* Garante que o corpo ocupe pelo menos 100% da altura da viewport */
+  display: flex;
+  flex-direction: column; /* Faz com que o conteúdo seja distribuído verticalmente */
+  width: 100%;
+  overflow-x: hidden; /* Evita qualquer scroll horizontal que pode estar causando barras brancas */
+}
+
+/* Container principal */
 .profile-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 20px;
+  background-color: #f9f9f9; /* Fundo preto */
+  flex-grow: 1; /* Garante que o container cresça conforme a página aumenta */
 }
 
+/* Estilos do card do perfil */
 .profile-card {
   width: 180px;
   margin: 15px;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.723);
+  background-color: #222; /* Fundo escuro */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borda translúcida */
+  color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animação suave */
 }
 
+/* Efeito de hover no card */
+.profile-card:hover {
+  transform: translateY(-5px); /* Elevação ao passar o mouse */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7); /* Sombra mais intensa */
+}
+
+/* Imagem do perfil */
 .profile-pic {
   height: 200px;
   overflow: hidden;
@@ -22,32 +51,51 @@
 .profile-pic img {
   width: 100%;
   height: auto;
+  border-bottom: 2px solid #ff6347; /* Adiciona uma borda vermelha vibrante */
 }
 
+/* Informações do perfil */
 .profile-info {
   padding: 10px;
+  background-color: #1c1c1c; /* Fundo mais escuro para contraste */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ccc; /* Cor suave para o texto */
 }
 
+/* Botões de mensagem e curtir */
 .message-btn,
 .like-btn {
   width: 80%;
-  margin: 5px 0;
-  padding: 8px;
+  margin: 10px 0;
+  padding: 10px;
   border: none;
-  border-radius: 5px;
-  background-color: #ff5a5f;
-  color: white;
+  border-radius: 8px;
+  background-color: #ff6347; /* Cor vibrante */
+  color: #fff;
   cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.message-btn:hover,
+.like-btn:hover {
+  background-color: #ff3b3b;
+  transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
 }
 
 .like-btn i {
-  color: white;
+  color: #fff;
 }
 
-.message-btn {
-  background-color: #ff5a5f;
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .profile-card {
+    width: 100%; /* Para ocupar a largura total em dispositivos menores */
+  }
 }
 
-.like-btn:hover {
-  background-color: #ff3b3b;
+/* Responsividade para telas maiores */
+@media (min-width: 1200px) {
+  .profile-card {
+    width: 220px; /* Aumenta o tamanho das cards em telas maiores */
+  }
 }

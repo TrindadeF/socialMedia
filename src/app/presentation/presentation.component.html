@@ -1,22 +1,53 @@
-<div *ngIf="isLoading" id="loading">
-    <div class="heart"></div>
-  </div>
-  
-  <div class="carousel-wrapper" *ngIf="!isLoading">
-    <div class="container">
-      <div class="image-container">
-        <img [src]="images[currentIndex].src" [alt]="images[currentIndex].alt">
-        <div class="overlay">{{ images[currentIndex].description }}</div>
+<div class="carousel-wrapper" [ngClass]="{ 'visible': !isLoading }">
+  <div class="container">
+    <div class="image-container" *ngIf="currentIndex === 0">
+      <img src="assets/images/ERO 1.jpg" alt="Imagem 1" />
+      <div class="overlay">
+        
+        <p>Encontrar a nossa alma gémea é sempre complicado.</p>
       </div>
-  
-      <button (click)="prevImage()" class="arrow-btn">&lt;</button>
-      <button (click)="nextImage()" class="arrow-btn">&gt;</button>
-  
-      <div class="dots">
-        <div *ngFor="let dot of images; let i = index" [class.active]="i === currentIndex" class="dot"></div>
+    </div>
+    <div class="image-container" *ngIf="currentIndex === 1">
+      <img src="assets/images/ERO 2.jpg" alt="Imagem 2" />
+      <div class="overlay">
+        <p>Existem várias aplicações, redes sociais, sites de encontro e mesmo assim, continuámos à procura do verdadeiro amor.</p>
       </div>
-  
-      <button id="specialButton" class="special-button" (click)="goToHomePage()">Ir para a Página Inicial</button>
+    </div>
+    <div class="image-container" *ngIf="currentIndex === 2">
+      <img src="assets/images/ERO 3.jpg" alt="Imagem 3" />
+      <div class="overlay">
+        <p>Quando se fala de amor e da pessoa certa, perder tempo para quê? No Naked Love, livrámo-nos de todos os filtros e roupas para ver se existe uma forma mais instintiva de o encontrar.</p>
+      </div>
+    </div>
+    <div class="image-container" *ngIf="currentIndex === 3">
+      <img src="assets/images/ERO 4.jpg" alt="Imagem 4" />
+      <div class="overlay">
+        <p>Como encontramos a pessoa certa? Seria bom poder evitar erros, surpresas desagradáveis e sobretudo perda de tempo. No Naked Love, temos a forma ideal para encontrar a sua alma gémea.</p>
+      </div>
+    </div>
+    <div class="image-container" *ngIf="currentIndex === 4">
+      <img src="assets/images/ERO 5.jpg" alt="Imagem 5" />
+      <div class="overlay">
+        <p>O que é preciso para nos apaixonarmos, o que desencadeia a faísca e o que nos influencia na escolha de um parceiro? No Naked Love, temos a oportunidade de descobrir um parceiro e começar como terminamos, nus.</p>
+      </div>
+    </div>
+    <div class="image-container" *ngIf="currentIndex === 5">
+      <img src="assets/images/sensual 1.jpg" alt="Imagem 6" />
+      <div class="overlay">
+        <p>Quanto tempo demoramos para nos apaixonarmos? Para a ciência, segundos; para os poetas, uma vida inteira não é suficiente.</p>
+      </div>
     </div>
   </div>
+
+  <button id="prevBtn" class="arrow-btn" (click)="prevImage()">&#10094;</button>
+  <button id="nextBtn" class="arrow-btn" (click)="nextImage()">&#10095;</button>
   
+  <div class="dots">
+    <span *ngFor="let image of images; let i = index" 
+          class="dot" 
+          [class.active]="i === currentIndex" 
+          (click)="goToImage(i)"></span>
+  </div>
+
+  <button class="special-button" (click)="goToHomePage()">Ir para a Home</button>
+</div>

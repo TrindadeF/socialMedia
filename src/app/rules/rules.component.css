@@ -20,6 +20,11 @@ body {
   padding: 20px;
   text-align: center;
   position: relative;
+  transition: transform 0.3s ease; /* Animação de movimento no container */
+}
+
+.carousel-container:hover {
+  transform: translateY(-5px); /* Move o container para cima ao passar o mouse */
 }
 
 .carousel-item {
@@ -44,11 +49,20 @@ body {
   color: #fff;
   cursor: pointer;
   margin: 0 10px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Animação de transição */
 }
 
 .carousel-controls button:hover {
   background-color: #ff4b4b;
+  transform: scale(1.1); /* Zoom ao passar o mouse */
+}
+
+.carousel-controls button:active {
+  transform: scale(0.95); /* Animação ao clicar */
+}
+
+.carousel-controls button:focus {
+  outline: 2px solid #fff;
 }
 
 @keyframes fadeIn {
@@ -57,5 +71,17 @@ body {
   }
   to {
     opacity: 1;
+  }
+}
+
+/* Media query for smaller screens */
+@media (max-width: 480px) {
+  .carousel-container {
+    width: 90%;
+    padding: 15px;
+  }
+  .carousel-controls button {
+    padding: 8px 15px;
+    font-size: 0.9em;
   }
 }

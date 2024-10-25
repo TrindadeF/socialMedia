@@ -8,31 +8,10 @@
 </head>
 <body>
     <div class="carousel-container">
-        <div class="carousel-item active">
-            <h2>Bem-vindo(a) ao NakedLove</h2>
-            <p>Siga estas Regras da casa:</p>
-        </div>
-        <div class="carousel-item">
-            <h2>Seja você mesmo</h2>
-            <p>
-                Certifique-se de que as suas fotos, idade e biografia são fiéis à sua
-                pessoa.
-            </p>
-        </div>
-        <div class="carousel-item">
-            <h2>Seja prudente</h2>
-            <p>Não tenha muita pressa em dar os seus dados pessoais.</p>
-        </div>
-        <div class="carousel-item">
-            <h2>Tenha encontros seguros</h2>
-            <p>
-                Seja simpático. Respeite os outros e trate-os como gostaria de ser
-                tratado.
-            </p>
-        </div>
-        <div class="carousel-item">
-            <h2>Seja proativo</h2>
-            <p>Denuncie sempre os comportamentos incorretos.</p>
+       
+        <div *ngFor="let item of items; let i = index" class="carousel-item" [ngClass]="{'active': isActive(i)}">
+            <h2>{{ item.title }}</h2>
+            <p>{{ item.description }}</p>
         </div>
 
         <div class="carousel-controls">
