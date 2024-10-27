@@ -21,12 +21,12 @@
       <a routerLink="/edit-profile" class="menu-item">
         <mat-icon>edit</mat-icon>
       </a>
-      <a [routerLink]="['/profile', userId]" class="menu-item">
+      <a [routerLink]="['/profile', userId!]" class="menu-item">
         <mat-icon>person</mat-icon>
       </a>
-      <button mat-icon-button [routerLink]="['/notifications']">
+      <a routerLink="/notifications" class="menu-item">
         <mat-icon>notifications</mat-icon>
-      </button>
+      </a>
       <a routerLink="/payments" class="menu-item">
         <mat-icon>payment</mat-icon>
       </a>

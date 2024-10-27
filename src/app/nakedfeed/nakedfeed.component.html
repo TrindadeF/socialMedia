@@ -14,8 +14,13 @@
         <h3>{{ user.nickName }}</h3>
       </a>
       <p>{{ user.age }} anos</p>
-
-      <button class="message-btn">Mensagem</button>
+      <button
+        class="message-btn"
+        *ngIf="mutualLikes[user._id]"
+        (click)="goToChat(user._id)"
+      >
+        Mensagem
+      </button>
 
       <button class="like-btn" (click)="likeUser(user._id)">Conectar</button>
     </div>

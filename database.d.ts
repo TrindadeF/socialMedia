@@ -25,4 +25,18 @@ export type User = {
   nickName: string;
 };
 
+export type Chat = {
+  userId: any;
+  participants: User[];
+  lastMessage: Message;
+  messages: Message[];
+  userName: string;
+};
+
+export type Message = {
+  sender: string;
+  receiver: string;
+  content: string;
+  timestamp: Date;
+};
 type Gender = 'M' | 'F' | 'NB' | 'BI' | 'TR' | 'HOM';

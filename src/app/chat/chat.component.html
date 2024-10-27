@@ -1,27 +1,70 @@
-<section class="container" style="background-image: url('/assets/images/Fundo Chat.png'); background-size: cover; background-position: center; height: 100vh;">
-  
-  <!-- Login Section -->
-  <section class="login" *ngIf="!isLoggedIn">
-    <h2>Login</h2>
-    <form class="login__form" (ngSubmit)="login()">
-      <input type="text" class="login__input" [(ngModel)]="userName" placeholder="Seu nome" name="name" required />
-      <button type="submit" class="login__button">Entrar</button>
-    </form>
-  </section>
+<section
+  class="container"
+  style="
+    background-image: url('/assets/images/Fundo Chat.png');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+  "
+>
+  <aside
+    class="chat-list"
+    style="flex: 1; padding: 10px; border-right: 1px solid #ccc"
+  >
+    <h2>Chats</h2>
+    <ul>
+      <li
+        *ngFor="let chat of chats"
+        (click)="selectChat(chat)"
+        [ngClass]="{ 'active-chat': selectedChat?.userId === chat.userId }"
+      >
+        {{ chat.userName }}
+      </li>
+    </ul>
+  </aside>
 
-  <section class="chat" *ngIf="isLoggedIn">
-    <section class="chat__messages">
-      <div *ngFor="let message of messages" [ngClass]="{'message--self': message.sender === userName, 'message--other': message.sender !== userName}">
-        <span *ngIf="message.sender !== userName" class="message--sender">{{ message.sender }}</span>
-        {{ message.content }}
+  <section class="chat-window" style="flex: 3; padding: 10px">
+    <h2 *ngIf="selectedChat">Chat com {{ selectedChat.userName }}</h2>
+
+    <section class="chat__messages" *ngIf="selectedChat">
+      <div
+        *ngFor="let message of messages"
+        [ngClass]="{
+          'message--self': message.sender === currentUser._id,
+          'message--other': message.sender !== currentUser._id
+        }"
+        class="chat__message"
+      >
+        <span
+          *ngIf="message.sender !== currentUser._id"
+          class="message--sender"
+        >
+          {{ message.sender }}:
+        </span>
+        <span class="message--content">{{ message.content }}</span>
       </div>
     </section>
 
     <form class="chat__form" (ngSubmit)="sendMessage()">
-      <input type="text" class="chat__input" [(ngModel)]="newMessage" placeholder="Digite uma mensagem" name="message" required />
+      <input
+        type="text"
+        class="chat__input"
+        [(ngModel)]="newMessage"
+        placeholder="Digite uma mensagem"
+        name="message"
+        required
+      />
       <button type="submit" class="chat__button">
-        <span class="material-symbols-outlined">Enviar</span>
+        <span class="material-symbols-outlined">send</span>
       </button>
     </form>
+
+    <section class="no-chat-access" *ngIf="!mutualLike">
+      <p>
+        Vocês ainda não têm um match. Dê um like no perfil do usuário para
+        iniciar uma conversa.
+      </p>
+    </section>
   </section>
 </section>
