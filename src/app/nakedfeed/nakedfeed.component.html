@@ -19,11 +19,12 @@
         *ngIf="mutualLikes[user._id]"
         (click)="goToChat(user._id)"
       >
-        Mensagem
+        Iniciar Conversa
       </button>
 
-      <button class="like-btn" (click)="likeUser(user._id)">Conectar</button>
+      <button class="like-btn" (click)="likeUser(user._id)">
+         <mat-icon>favorite</mat-icon>
+      </button>
     </div>
   </div>
 </div>
-
