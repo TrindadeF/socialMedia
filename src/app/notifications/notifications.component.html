@@ -1,8 +1,10 @@
-<h2>Notificações</h2>
-<h3>Usuários que curtiram seu perfil</h3>
-<ul>
-  <li *ngFor="let user of usersWhoLikedProfile">
-    <img [src]="user.profilePic" alt="{{ user.name }}" width="40" />
-    {{ user.name }}
-  </li>
-</ul>
+<div class="container">
+  <h1 class="typing-animation">Notificações</h1>
+  <ul>
+    <li *ngFor="let user of usersWhoLikedProfile">
+      <img [src]="user.profilePic" alt="{{ user.name }}" width="40" />
+      <span>{{ user.name }}</span>
+      <mat-icon style="color: rgba(253, 2, 2, 0.625)">favorite</mat-icon>
+    </li>
+  </ul>
+</div>
