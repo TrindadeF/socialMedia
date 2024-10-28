@@ -1,6 +1,8 @@
+// nakedfeed.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'database';
 
 @Component({
@@ -10,21 +12,25 @@ import { User } from 'database';
 })
 export class NakedFeedComponent implements OnInit {
   users: User[] = [];
-  currentUser: User | null = null;
-  selectedUser: User | null = null;
+  currentUser!: User;
+  mutualLikes: { [key: string]: boolean } = {};
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) {}
+  constructor(
+    private apiService: ApiService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadUsers();
     this.getCurrentUser();
-    this.loadSelectedUser();
   }
 
   loadUsers(): void {
+    const currentUserId = this.getLoggedUserId();
     this.apiService.getAllUsers().subscribe(
       (data: User[]) => {
-        this.users = data;
+        this.users = data.filter((user) => user._id !== currentUserId);
       },
       (error) => {
         console.error('Erro ao carregar os usuários:', error);
@@ -37,6 +43,7 @@ export class NakedFeedComponent implements OnInit {
     this.apiService.getUserById(currentUserId).subscribe(
       (data: User) => {
         this.currentUser = data;
+        this.checkMutualLikes();
       },
       (error) => {
         console.error('Erro ao carregar o perfil do usuário atual:', error);
@@ -44,22 +51,19 @@ export class NakedFeedComponent implements OnInit {
     );
   }
 
-  loadSelectedUser(): void {
-    const userId = this.route.snapshot.paramMap.get('id');
+  checkMutualLikes(): void {
+    if (!this.currentUser) return;
 
-    if (userId) {
-      this.apiService.getUserById(userId).subscribe(
-        (data: User) => {
-          this.selectedUser = data;
+    this.users.forEach((user) => {
+      this.apiService.checkMutualLike(this.currentUser._id, user._id).subscribe(
+        (response) => {
+          this.mutualLikes[user._id] = response.mutualLike;
         },
         (error) => {
-          console.error(
-            'Erro ao carregar o perfil do usuário selecionado:',
-            error
-          );
+          console.error('Erro ao verificar reciprocidade de likes:', error);
         }
       );
-    }
+    });
   }
 
   likeUser(likedUserId: string): void {
@@ -72,11 +76,20 @@ export class NakedFeedComponent implements OnInit {
     this.apiService.likeUser(userId, likedUserId).subscribe(
       (response) => {
         console.log('Like registrado com sucesso!', response);
+        this.checkMutualLikes();
       },
       (error) => {
         console.error('Erro ao registrar o like:', error);
       }
     );
+  }
+
+  goToChat(userId: string): void {
+    if (!this.currentUser) {
+      console.error('Usuário atual não encontrado.');
+      return;
+    }
+    this.router.navigate(['/chat', userId]);
   }
 
   getLoggedUserId(): string {

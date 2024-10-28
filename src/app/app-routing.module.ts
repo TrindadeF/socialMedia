@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'payments', component: PaymentsComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'rules', component: RulesComponent },
-  { path: 'chat', component: ChatComponent },
+  { path: 'chat/:userId', component: ChatComponent },
   { path: 'presentation', component: PresentationComponent },
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'notifications', component: NotificationsComponent },

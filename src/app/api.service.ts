@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Post, User } from 'database';
+import { catchError, Observable, throwError } from 'rxjs';
+import { Chat, Post, User } from 'database';
 import { LikesResponse } from 'response.types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
+  getMessages(_id: string, userId: any) {
+    throw new Error('Method not implemented.');
+  }
   private apiUrl = 'http://localhost:3000/auth';
   private apiFirstFeed = 'http://localhost:3000/primaryFeed';
   private apiSecondFeed = 'http://localhost:3000/secondFeed';
@@ -198,5 +201,48 @@ export class ApiService {
     return this.http.get<User[]>(`${this.apiUrl}/profile/${userId}/likes`, {
       headers,
     });
+  }
+  checkMutualLike(
+    userId: string,
+    otherUserId: string
+  ): Observable<{ mutualLike: boolean }> {
+    return this.http.get<{ mutualLike: boolean }>(
+      `${this.apiUrl}/profile/check-mutual-like?userId=${userId}&otherUserId=${otherUserId}`
+    );
+  }
+
+  sendMessage(
+    senderId: string,
+    receiverId: string,
+    content: string
+  ): Observable<any> {
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
+
+    const messageData = { sender: senderId, receiver: receiverId, content };
+
+    return this.http
+      .post(`${this.apiUrl}/send-message`, messageData, { headers })
+      .pipe(
+        catchError((error) => {
+          console.error('Erro ao enviar mensagem:', error);
+          return throwError(error);
+        })
+      );
+  }
+
+  getMessagesBetweenUsers(
+    senderId: string,
+    receiverId: string
+  ): Observable<any> {
+    return this.http.get(`${this.apiUrl}/messages`, {
+      params: { senderId, receiverId },
+    });
+  }
+  getChats(userId: string): Observable<Chat[]> {
+    return this.http.get<Chat[]>(`${this.apiUrl}/chats/${userId}`);
   }
 }
