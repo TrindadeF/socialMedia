@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Chat, Post, User } from 'database';
+import { Chat, Message, Post, User } from 'database';
 import { LikesResponse } from 'response.types';
 
 @Injectable({
@@ -216,33 +216,28 @@ export class ApiService {
     receiverId: string,
     content: string
   ): Observable<any> {
-    const token = this.getAuthToken();
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    });
-
-    const messageData = { sender: senderId, receiver: receiverId, content };
-
-    return this.http
-      .post(`${this.apiUrl}/send-message`, messageData, { headers })
-      .pipe(
-        catchError((error) => {
-          console.error('Erro ao enviar mensagem:', error);
-          return throwError(error);
-        })
-      );
+    const url = `${this.apiUrl}/send-message`;
+    const body = { sender: senderId, receiver: receiverId, content };
+    return this.http.post<any>(url, body);
   }
 
   getMessagesBetweenUsers(
     senderId: string,
     receiverId: string
-  ): Observable<any> {
-    return this.http.get(`${this.apiUrl}/messages`, {
-      params: { senderId, receiverId },
-    });
+  ): Observable<Message[]> {
+    return this.http.get<Message[]>(
+      `/auth/messages?senderId=${senderId}&receiverId=${receiverId}`
+    );
   }
-  getChats(userId: string): Observable<Chat[]> {
+
+  getChats(userId: string, receiverId: string): Observable<Chat[]> {
     return this.http.get<Chat[]>(`${this.apiUrl}/chats/${userId}`);
+  }
+
+  createOrGetChat(senderId: string, receiverId: string): Observable<Chat> {
+    return this.http.post<Chat>(`${this.apiUrl}/createOrGetChat`, {
+      senderId,
+      receiverId,
+    });
   }
 }

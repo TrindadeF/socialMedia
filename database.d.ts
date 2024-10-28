@@ -26,6 +26,7 @@ export type User = {
 };
 
 export type Chat = {
+  _id: any;
   userId: any;
   participants: User[];
   lastMessage: Message;

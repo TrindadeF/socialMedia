@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,8 +6,8 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  userId: string | null = '';
+export class AppComponent implements OnInit {
+  userId: string | null = null;
 
   constructor(private router: Router) {}
 
@@ -20,7 +20,7 @@ export class AppComponent {
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('userId');
+    return !!this.userId;
   }
 
   isLoginRoute(): boolean {
