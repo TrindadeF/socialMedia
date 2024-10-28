@@ -1,60 +1,95 @@
 /* Estilo geral da página de notificações */
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #d44646;
-  background-color: rgb(122, 122, 122);
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-h3 {
-  text-align: center;
-  margin-bottom: 10px;
-  color: #ea6666;
-  background-color: #747373;
+.container {
+  width: 100%;
+  height: 100vh; /* Define a altura total da tela */
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #050505;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column; /* Organiza os elementos em coluna */
 }
 
-/* Estilo para a lista */
 ul {
-  list-style-type: none; /* Remove os marcadores da lista */
-  padding: 0; /* Remove o padding padrão */
-  margin: 0; /* Remove a margem padrão */
-  animation: fadeIn 0.5s ease-in; /* Animação ao aparecer a lista */
-  background-color: #a5a4a4;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  animation: fadeIn 0.5s ease-in;
+  background-color: #212121;
+  border-radius: 8px;
+  flex-grow: 1; /* Permite que a lista preencha o espaço restante */
+  overflow-y: auto; /* Adiciona rolagem se o conteúdo exceder a altura */
 }
 
 li {
-  display: flex; /* Para alinhar a imagem e o texto lado a lado */
-  align-items: center; /* Centraliza verticalmente os itens */
-  padding: 10px; /* Espaçamento interno */
-  border: 1px solid #fc0202; /* Borda leve ao redor de cada item */
-  border-radius: 5px; /* Cantos arredondados */
-  margin: 5px 0; /* Margem entre os itens */
-  transition: background-color 0.3s, transform 0.3s; /* Transições suaves */
-  width: 300px; /* Definindo uma largura fixa para os itens da lista */
-  height: 80px; /* Definindo uma altura fixa para os itens da lista */
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #585858a1;
+  background-color: #212121;
+  border-radius: 5px;
+  margin: 5px 0;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 /* Efeito de hover */
 li:hover {
-  background-color: #bebebe72; /* Muda a cor de fundo ao passar o mouse */
-  transform: translateY(-2px); /* Eleva o item levemente ao passar o mouse */
+  background-color: #2c2c2c72;
+  transform: translateY(-2px);
 }
 
 /* Animação de fade-in */
 @keyframes fadeIn {
   from {
-      opacity: 0; /* Começa invisível */
+    opacity: 0;
   }
   to {
-      opacity: 1; /* Fica totalmente visível */
+    opacity: 1;
   }
 }
 
 /* Estilo para a imagem */
 img {
-  width: 50px; /* Definindo uma largura fixa para a imagem */
-  height: 50px; /* Definindo uma altura fixa para a imagem */
-  border-radius: 50%; /* Torna a imagem circular */
-  margin-right: 10px; /* Espaço entre a imagem e o texto */
-  border: 1px solid red; /* Contorno vermelho em volta da imagem */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 1px solid red;
+  filter: blur(5px); /* Mantém o embaçamento constante */
+  transition: filter 0.3s; /* Suaviza a transição se houver outras alterações */
+}
+
+/* Estilo para o nome do usuário */
+li span {
+  color: white; /* Mude para branco */
+  font-weight: bold; /* Torna o texto em negrito */
+  filter: blur(5px); /* Aplique o efeito de embaçamento */
+}
+
+mat-icon {
+  margin-left: 8px; /* Espaçamento à esquerda do ícone */
+  vertical-align: middle; /* Alinha o ícone verticalmente com o texto */
+}
+
+
+.typing-animation {
+  display: inline-block;
+  font-size: 24px;
+  color: rgb(155, 154, 154); /* Mudado para branco */
+  border-right: 2px solid white; /* Cursor */
+  white-space: nowrap; /* Impede quebra de linha */
+  overflow: hidden; /* Oculta o texto extra */
+  animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
 }
