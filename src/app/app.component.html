@@ -21,7 +21,7 @@
       <a routerLink="/edit-profile" class="menu-item">
         <mat-icon>edit</mat-icon>
       </a>
-      <a [routerLink]="['/profile', userId!]" class="menu-item">
+      <a *ngIf="userId" [routerLink]="['/profile', userId!]" class="menu-item">
         <mat-icon>person</mat-icon>
       </a>
       <a routerLink="/notifications" class="menu-item">

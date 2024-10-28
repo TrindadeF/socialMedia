@@ -3,6 +3,6 @@
 <ul>
   <li *ngFor="let user of usersWhoLikedProfile">
     <img [src]="user.profilePic" alt="{{ user.name }}" width="40" />
-    {{ user.name }} ({{ user.email }})
+    {{ user.name }}
   </li>
 </ul>
