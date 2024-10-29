@@ -1,3 +1,5 @@
+// chat.component.ts
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,7 +19,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   socket: Socket;
   messages: Message[] = [];
   senderId: string = '';
-  receiverId: string = '';
 
   constructor(
     private apiService: ApiService,
@@ -50,27 +51,28 @@ export class ChatComponent implements OnInit, OnDestroy {
       });
   }
 
-  loadMessages(receiverId: string): void {
-    this.apiService
-      .getMessagesBetweenUsers(this.senderId, receiverId)
-      .subscribe((messages) => {
-        this.messages = messages;
-      });
-  }
-
   selectChat(chat: Chat): void {
     console.log('Chat selecionado:', chat);
     this.selectedChat = chat;
 
     const receiverId =
       chat.participants.find((p) => p._id !== this.currentUser._id)?._id || '';
-
     if (receiverId) {
       console.log('Receiver ID encontrado:', receiverId);
-      this.loadMessages(receiverId);
+      this.loadMessagesForChat(receiverId);
     } else {
       console.warn('Receiver não encontrado');
     }
+  }
+
+  loadMessagesForChat(receiverId: string): void {
+    this.apiService
+      .getChats(this.senderId, receiverId)
+      .subscribe((chats: Chat[]) => {
+        if (chats.length > 0) {
+          this.messages = chats[0].messages;
+        }
+      });
   }
 
   sendMessage(): void {
@@ -120,9 +122,11 @@ export class ChatComponent implements OnInit, OnDestroy {
         (p) => p._id === message.sender || p._id === message.receiver
       )
     );
+
     if (chat) {
       chat.messages.push(message);
       chat.lastMessage = message;
+
       if (
         this.selectedChat?.participants.some(
           (p) => p._id === message.sender || p._id === message.receiver
@@ -134,15 +138,14 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.loadChats();
     }
   }
-
-  ngOnDestroy(): void {
-    this.socket.disconnect();
-  }
-
-  getParticipantName(chat: Chat): string | undefined {
+  getParticipantName(chat: Chat): string {
     const participant = chat.participants.find(
       (p) => p._id !== this.currentUser._id
     );
-    return participant ? participant.name : undefined;
+    return participant ? participant.name : 'Desconhecido';
+  }
+
+  ngOnDestroy(): void {
+    this.socket.disconnect();
   }
 }

@@ -96,4 +96,3 @@ export class NakedFeedComponent implements OnInit {
     return localStorage.getItem('userId') || '';
   }
 }
-

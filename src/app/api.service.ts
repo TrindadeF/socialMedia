@@ -8,9 +8,6 @@ import { LikesResponse } from 'response.types';
   providedIn: 'root',
 })
 export class ApiService {
-  getMessages(_id: string, userId: any) {
-    throw new Error('Method not implemented.');
-  }
   private apiUrl = 'http://localhost:3000/auth';
   private apiFirstFeed = 'http://localhost:3000/primaryFeed';
   private apiSecondFeed = 'http://localhost:3000/secondFeed';
@@ -221,23 +218,7 @@ export class ApiService {
     return this.http.post<any>(url, body);
   }
 
-  getMessagesBetweenUsers(
-    senderId: string,
-    receiverId: string
-  ): Observable<Message[]> {
-    return this.http.get<Message[]>(
-      `/auth/messages?senderId=${senderId}&receiverId=${receiverId}`
-    );
-  }
-
   getChats(userId: string, receiverId: string): Observable<Chat[]> {
     return this.http.get<Chat[]>(`${this.apiUrl}/chats/${userId}`);
-  }
-
-  createOrGetChat(senderId: string, receiverId: string): Observable<Chat> {
-    return this.http.post<Chat>(`${this.apiUrl}/createOrGetChat`, {
-      senderId,
-      receiverId,
-    });
   }
 }

@@ -1,106 +1,39 @@
-<section
-  class="container"
-  style="
-    background-image: url('/assets/images/Fundo Chat.png');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    display: flex;
-  "
->
-  <aside
-    class="chat-list"
-    style="flex: 1; padding: 10px; border-right: 1px solid #ccc"
-  >
+<div class="chat-container">
+  <div class="chat-list">
     <h2>Chats</h2>
     <ul>
       <li
         *ngFor="let chat of chats"
         (click)="selectChat(chat)"
         [ngClass]="{ 'active-chat': selectedChat?._id === chat._id }"
-        style="cursor: pointer; padding: 5px; border-bottom: 1px solid #ccc"
       >
         {{ getParticipantName(chat) }}
-        <span *ngIf="chat.lastMessage" style="font-size: 0.8em; color: gray">
-          {{ chat.lastMessage.content }}
-        </span>
       </li>
     </ul>
-  </aside>
+  </div>
 
-  <section
-    class="chat-window"
-    style="flex: 3; padding: 10px; display: flex; flex-direction: column"
-  >
-    <h2 *ngIf="selectedChat">
-      Chat com {{ getParticipantName(selectedChat) }}
-    </h2>
-
-    <section
-      class="chat__messages"
-      style="flex: 1; overflow-y: auto; margin-bottom: 10px"
-    >
-      <div
-        *ngFor="let message of messages"
-        [ngClass]="{
-          'message--self': message.sender === currentUser._id,
-          'message--other': message.sender !== currentUser._id
-        }"
-        class="chat__message"
-        style="
-          padding: 10px;
-          margin: 5px;
-          border-radius: 5px;
-          background-color: #f1f1f1;
-        "
-      >
-        <span
-          *ngIf="message.sender !== currentUser._id"
-          class="message--sender"
-          style="font-weight: bold"
+  <div class="chat-window" *ngIf="selectedChat">
+    <div class="messages">
+      <div *ngFor="let message of messages">
+        <div
+          [ngClass]="{
+            'message-sent': message.sender === currentUser._id,
+            'message-received': message.receiver === currentUser._id
+          }"
         >
-          {{ message.sender }}:
-        </span>
-        <span class="message--content">{{ message.content }}</span>
-        <span class="message--timestamp" style="font-size: 0.8em; color: gray">
-          {{ message.timestamp | date : "short" }}
-        </span>
+          <strong
+            >{{
+              message.sender === currentUser._id ? "Eu" : message.sender
+            }}:</strong
+          >
+          {{ message.content }}
+        </div>
       </div>
-    </section>
+    </div>
 
-    <form
-      class="chat__form"
-      (ngSubmit)="sendMessage()"
-      style="display: flex; align-items: center"
-    >
-      <input
-        type="text"
-        class="chat__input"
-        [(ngModel)]="newMessage"
-        placeholder="Digite uma mensagem"
-        name="message"
-        required
-        style="
-          flex: 1;
-          padding: 10px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-        "
-      />
-      <button
-        type="submit"
-        class="chat__button"
-        style="
-          margin-left: 5px;
-          padding: 10px;
-          border: none;
-          background-color: #007bff;
-          color: white;
-          border-radius: 5px;
-        "
-      >
-        <span class="material-symbols-outlined">send</span>
-      </button>
-    </form>
-  </section>
-</section>
+    <div class="message-input">
+      <input [(ngModel)]="newMessage" placeholder="Digite sua mensagem..." />
+      <button (click)="sendMessage()">Enviar</button>
+    </div>
+  </div>
+</div>
