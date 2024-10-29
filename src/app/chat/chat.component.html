@@ -1,39 +1,67 @@
-<div class="chat-container">
-  <div class="chat-list">
-    <h2>Chats</h2>
-    <ul>
-      <li
-        *ngFor="let chat of chats"
-        (click)="selectChat(chat)"
-        [ngClass]="{ 'active-chat': selectedChat?._id === chat._id }"
-      >
-        {{ getParticipantName(chat) }}
-      </li>
-    </ul>
-  </div>
-
-  <div class="chat-window" *ngIf="selectedChat">
-    <div class="messages">
-      <div *ngFor="let message of messages">
-        <div
-          [ngClass]="{
-            'message-sent': message.sender === currentUser._id,
-            'message-received': message.receiver === currentUser._id
-          }"
-        >
-          <strong
-            >{{
-              message.sender === currentUser._id ? "Eu" : message.sender
-            }}:</strong
-          >
-          {{ message.content }}
-        </div>
-      </div>
-    </div>
-
-    <div class="message-input">
-      <input [(ngModel)]="newMessage" placeholder="Digite sua mensagem..." />
-      <button (click)="sendMessage()">Enviar</button>
-    </div>
-  </div>
+<div>
+  <h2>Chats</h2>
+  <ul>
+    <li
+      *ngFor="let chat of chats"
+      (click)="selectChat(chat)"
+      [class.selected]="selectedChat === chat"
+      style="cursor: pointer"
+    >
+      Chat com {{ getParticipantNames(chat) }}
+    </li>
+  </ul>
 </div>
+
+<div *ngIf="selectedChat">
+  <h3>Mensagens com {{ getParticipantNames(selectedChat) }}</h3>
+  <div *ngFor="let message of messages">
+    <p>
+      <strong>{{ getParticipantNickname(message.sender) }}:</strong>
+      {{ message.content }}
+    </p>
+  </div>
+
+  <input
+    [(ngModel)]="newMessage"
+    placeholder="Digite uma mensagem..."
+    style="width: 100%; padding: 8px; margin-top: 10px"
+  />
+  <button (click)="sendMessage()" style="margin-top: 10px">Enviar</button>
+</div>
+
+<style>
+  .selected {
+    font-weight: bold;
+    background-color: #f0f0f0;
+  }
+
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    margin-top: 20px;
+  }
+
+  p {
+    margin: 5px 0;
+  }
+
+  input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+</style>

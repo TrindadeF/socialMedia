@@ -84,12 +84,12 @@ export class NakedFeedComponent implements OnInit {
     );
   }
 
-  goToChat(userId: string): void {
+  goToChat(otherUserId: string): void {
     if (!this.currentUser) {
-      console.error('Usuário atual não encontrado.');
+      console.error('Usuário não encontrado.');
       return;
     }
-    this.router.navigate(['/chat', userId]);
+    this.router.navigate(['/chat', otherUserId]);
   }
 
   getLoggedUserId(): string {

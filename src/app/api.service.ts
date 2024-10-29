@@ -8,6 +8,9 @@ import { LikesResponse } from 'response.types';
   providedIn: 'root',
 })
 export class ApiService {
+  getChats(_id: string, receiverId: string) {
+    throw new Error('Method not implemented.');
+  }
   private apiUrl = 'http://localhost:3000/auth';
   private apiFirstFeed = 'http://localhost:3000/primaryFeed';
   private apiSecondFeed = 'http://localhost:3000/secondFeed';
@@ -199,6 +202,7 @@ export class ApiService {
       headers,
     });
   }
+
   checkMutualLike(
     userId: string,
     otherUserId: string
@@ -218,7 +222,14 @@ export class ApiService {
     return this.http.post<any>(url, body);
   }
 
-  getChats(userId: string, receiverId: string): Observable<Chat[]> {
-    return this.http.get<Chat[]>(`${this.apiUrl}/chats/${userId}`);
+  getChatById(chatId: string) {
+    return this.http.get<Chat>(`http://localhost:3000/chat/${chatId}`);
+  }
+
+  getChatByUsers(userId1: String, userId2: String): Observable<Chat> {
+    return this.http.get<Chat>(`${this.apiUrl}/chats/${userId1}/${userId2}`);
+  }
+  getChatsByUserId(): Observable<Chat[]> {
+    return this.http.get<Chat[]>(`${this.apiUrl}/chats`);
   }
 }
