@@ -16,7 +16,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   socket: Socket;
   participants: { id: string; nickname: string }[] = [];
   selectedChat!: Chat;
-  chats: Chat[] = []; // Array para armazenar todos os chats
+  chats: Chat[] = [];
 
   constructor(private apiService: ApiService, private route: ActivatedRoute) {
     this.socket = io('http://localhost:3000');
@@ -28,20 +28,17 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.apiService.getUserById(userId).subscribe((user: User) => {
         this.currentUser = user;
 
-        // Carrega todos os chats do usuário
         this.loadChats();
       });
     }
   }
 
-  // Função para carregar todos os chats do usuário
   loadChats(): void {
     this.apiService.getChatsByUserId().subscribe(
       (chats: Chat[]) => {
         this.chats = chats;
-        // Se houver chats, selecionar o primeiro por padrão
         if (this.chats.length > 0) {
-          this.selectChat(this.chats[0]); // Seleciona o primeiro chat ao carregar
+          this.selectChat(this.chats[0]);
         }
       },
       (error) => {

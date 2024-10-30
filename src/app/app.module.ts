@@ -28,7 +28,7 @@ import { ChatComponent } from './chat/chat.component';
 import { ModalComponent } from './modal/modal.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { NotificationsComponent } from './notifications/notifications.component';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -43,15 +43,14 @@ import { NotificationsComponent } from './notifications/notifications.component'
     NakedFeedComponent,
     EditProfileComponent,
     ForgotPasswordComponent,
-    AppComponent, 
-    PaymentsComponent, 
-    PresentationComponent, 
+    AppComponent,
+    PaymentsComponent,
+    PresentationComponent,
     ChatComponent,
     NakedFeedComponent,
     ModalComponent,
     CheckboxComponent,
-    NotificationsComponent
-    
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +63,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
     MatSidenavModule,
     MatIconModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

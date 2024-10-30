@@ -128,7 +128,7 @@ export class ApiService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    return this.http.delete(`${this.apiFirstFeed}/post/${postId}`, { headers });
+    return this.http.delete(`${this.apiFirstFeed}/${postId}`, { headers });
   }
 
   deletePostFromSecondFeed(postId: string): Observable<any> {

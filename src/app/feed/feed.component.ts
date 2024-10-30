@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
 import { Post } from 'database';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-feed',
@@ -23,7 +24,11 @@ export class FeedComponent implements OnInit {
   title: string = 'Aqui é o título do modal feed';
   currentFeedType: 'primaryFeed' | 'secondFeed' = 'primaryFeed';
 
-  constructor(private apiService: ApiService, private http: HttpClient) {}
+  constructor(
+    private apiService: ApiService,
+    private http: HttpClient,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.getPosts();
@@ -31,7 +36,7 @@ export class FeedComponent implements OnInit {
   }
 
   closeModal() {
-    this.resetForm(); // Limpa o formulário ao fechar o modal
+    this.resetForm();
     this.showModal = false;
   }
 
@@ -39,15 +44,36 @@ export class FeedComponent implements OnInit {
     return localStorage.getItem('userId') || '';
   }
 
+  isOwner(postOwnerId: any): boolean {
+    if (
+      typeof postOwnerId === 'object' &&
+      postOwnerId !== null &&
+      '_id' in postOwnerId
+    ) {
+      postOwnerId = postOwnerId._id;
+    }
+
+    if (typeof postOwnerId !== 'string') {
+      console.error('postOwnerId deve ser uma string', postOwnerId);
+      return false;
+    }
+    const currentUserId = this.getUserIdFromAuthService();
+    const isOwner = currentUserId === String(postOwnerId);
+
+    return isOwner;
+  }
+
   getPosts() {
     this.apiService.getPostsFromFirstFeed().subscribe({
       next: (posts: Post[]) => {
         if (posts) {
           this.posts = posts
-            .map((post) => ({
-              ...post,
-              likes: post.likes || [],
-            }))
+            .map((post) => {
+              return {
+                ...post,
+                likes: post.likes || [],
+              };
+            })
             .sort((a, b) => {
               return (
                 new Date(b.createdAt).getTime() -
@@ -189,15 +215,20 @@ export class FeedComponent implements OnInit {
     return /\.(jpg|jpeg|png|gif)$/i.test(mediaUrl);
   }
 
-  deletePostFromFirstFeed(postId: string) {
-    this.apiService.deletePostFromFirstFeed(postId).subscribe(
-      (response) => {
-        console.log('Post deletado com sucesso:', response);
-        this.posts = this.posts.filter((post) => post._id !== postId);
+  deletePost(postId: string): void {
+    this.apiService.deletePostFromFirstFeed(postId).subscribe({
+      next: (response) => {
+        this.snackBar.open('Post deletado com sucesso', 'Fechar', {
+          duration: 3000,
+        });
+        this.getPosts();
       },
-      (error) => {
-        console.error('Erro ao deletar o post:', error);
-      }
-    );
+      error: (error) => {
+        console.error('Erro ao deletar post:', error);
+        this.snackBar.open('Erro ao deletar post', 'Fechar', {
+          duration: 3000,
+        });
+      },
+    });
   }
 }

@@ -74,12 +74,7 @@
               {{ post.likes.length || 0 }}
               <mat-icon>thumb_up_alt</mat-icon>
             </button>
-
-            <button
-              *ngIf="post.owner === userId"
-              (click)="deletePostFromFirstFeed(post._id)"
-              class="btn btn-danger"
-            >
+            <button *ngIf="isOwner(post.owner)" (click)="deletePost(post._id)">
               Deletar
             </button>
           </div>
