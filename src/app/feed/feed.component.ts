@@ -193,11 +193,12 @@ export class FeedComponent implements OnInit {
     this.apiService.deletePostFromFirstFeed(postId).subscribe(
       (response) => {
         console.log('Post deletado com sucesso:', response);
-        this.posts = this.posts.filter((post) => post._id !== postId);
+        this.posts = this.posts.filter((post) => post._id !== postId); // Usando post._id
       },
       (error) => {
         console.error('Erro ao deletar o post:', error);
       }
     );
   }
+  
 }

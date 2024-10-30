@@ -290,3 +290,14 @@ textarea::placeholder {
   color: white; /* Cor branca para os ícones */
   font-size: 40px; /* Tamanho dos ícones */
 }
+
+.delete-icon {
+  color: #ff0404; /* Cor vermelha para o ícone */
+  font-size: 20px; /* Tamanho do ícone */
+  cursor: pointer; /* Muda o cursor para indicar que é clicável */
+  transition: color 0.2s; /* Transição suave ao mudar de cor */
+}
+
+.delete-icon:hover {
+  color: #ff6f6f; /* Cor do ícone ao passar o mouse */
+}

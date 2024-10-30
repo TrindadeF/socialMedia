@@ -206,13 +206,23 @@ body {
 }
 
 .gallery-grid {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 10px;
 }
 
+.gallery-item{
+  flex: 1  1 200px;
+
+
+
+}
+
+
 .gallery-item img {
   width: 100%;
-  height: auto;
+  height: 200px; /* Defina a altura fixa desejada */
+  object-fit: cover; /* Ajusta a imagem para cobrir o espaço */
   border-radius: 8px;
 }

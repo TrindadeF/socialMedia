@@ -3,15 +3,19 @@ body {
   font-family: Arial, sans-serif;
   color: #ffffff;
   width: 100%;
+  height: 117vh; /* Altura da viewport */
+  margin: 0; /* Remove margens padrão */
+  padding: 0; /* Remove padding padrão */
 }
 
 .container {
-  max-width: 600px; /* Largura máxima do contêiner */
+  max-width: 500px; /* Largura máxima do contêiner */
   margin: 0 auto; /* Centraliza o contêiner */
-  padding: 40px; /* Espaçamento interno */
+  padding: 30px; /* Espaçamento interno */
   background-color: #1e1e1e; /* Cor de fundo do contêiner */
   border-radius: 8px; /* Bordas arredondadas */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Sombra suave */
+  min-height: 100px; /* Define uma altura mínima mais baixa */
 }
 
 /* Estilo para o título */
@@ -38,7 +42,6 @@ input[type="email"],
 input[type="file"],
 input[type="number"], /* Adicionado para o campo de idade */
 select {
-  /* Adicionado para o campo de gênero */
   display: inline-block; /* Alinha o campo de entrada na mesma linha */
   width: 100%; /* Largura completa */
   padding: 12px; /* Espaçamento interno */
@@ -67,15 +70,21 @@ textarea {
   background-color: #fa0606; /* Cor de fundo do botão */
   color: white; /* Cor do texto do botão */
   border: none; /* Remove a borda padrão */
-  padding: 12px 20px; /* Espaçamento interno do botão */
-  border-radius: 4px; /* Bordas arredondadas */
+  padding: 15px; /* Aumenta o espaçamento interno do botão */
+  border-radius: 6px; /* Bordas arredondadas mais pronunciadas */
   cursor: pointer; /* Muda o cursor para indicar que é clicável */
-  transition: background-color 0.3s; /* Transição suave para o efeito de hover */
+  transition: background-color 0.3s, transform 0.3s; /* Transições suaves para o efeito de hover */
   width: 100%; /* Largura total do botão */
+  font-size: 16px; /* Aumenta o tamanho da fonte */
+  font-weight: bold; /* Deixa o texto em negrito */
+  text-align: center; /* Centraliza o texto dentro do botão */
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
 }
 
 .btn-primary:hover {
   background-color: #b40505; /* Cor do botão ao passar o mouse */
+  transform: scale(1.05); /* Aumenta levemente o botão ao passar o mouse */
 }
 
 /* Estilo para pré-visualização da foto de perfil */
@@ -90,4 +99,29 @@ textarea {
   border-radius: 50%; /* Faz a imagem ser redonda */
   border: 2px solid #050505; /* Adiciona uma borda */
   object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
+}
+
+.btn-danger {
+  background-color: #f10000; /* Cor de fundo do botão de deletar */
+  color: white; /* Cor do texto do botão */
+  border: none; /* Remove a borda padrão */
+  padding: 15px; /* Aumenta o espaçamento interno do botão */
+  border-radius: 4px; /* Bordas arredondadas */
+  cursor: pointer; /* Muda o cursor para indicar que é clicável */
+  transition: background-color 0.3s, transform 0.3s; /* Transição suave para o efeito de hover */
+  width: 100%; /* Largura total do botão */
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+}
+
+.btn-danger:hover {
+  background-color: #d92e2e; /* Cor do botão ao passar o mouse */
+  transform: scale(1.05); /* Aumenta levemente o botão ao passar o mouse */
+}
+
+.button-container {
+  display: flex; /* Usa flexbox para alinhar os botões */
+  justify-content: space-between; /* Espaça os botões igualmente */
+  margin-top: 20px; /* Espaço acima do contêiner de botões */
+  gap: 10px; /* Espaçamento entre os botões */
 }

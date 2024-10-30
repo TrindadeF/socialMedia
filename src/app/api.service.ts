@@ -128,7 +128,7 @@ export class ApiService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    return this.http.delete(`${this.apiFirstFeed}/post/${postId}`, { headers });
+    return this.http.delete(`${this.apiFirstFeed}/${postId}`, { headers });
   }
 
   deletePostFromSecondFeed(postId: string): Observable<any> {
@@ -232,4 +232,8 @@ export class ApiService {
   getChatsByUserId(): Observable<Chat[]> {
     return this.http.get<Chat[]>(`${this.apiUrl}/chats`);
   }
+  deleteprofile(userId: string): Observable<User> {
+    return this.http.delete<User>(`${this.apiUrl}/profile/${userId}`);
+  }
 }
+

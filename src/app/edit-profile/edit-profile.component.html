@@ -102,13 +102,19 @@
         </select>
       </div>
 
-      <button
-        type="submit"
-        class="btn-primary"
-        [disabled]="editProfileForm.invalid"
-      >
-        Salvar
-      </button>
+      <div class="button-container">
+        <button
+          type="submit"
+          class="btn-primary"
+          [disabled]="editProfileForm.invalid"
+        >
+          Salvar
+        </button>
+
+        <button class="btn-danger" (click)="confirmDelete()">
+          Deletar Perfil
+        </button>
+      </div>
     </form>
 
     <div

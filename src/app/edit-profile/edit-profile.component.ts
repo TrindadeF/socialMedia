@@ -92,4 +92,26 @@ export class EditProfileComponent implements OnInit {
   private getLoggedInUserId(): string {
     return localStorage.getItem('userId') || '';
   }
+
+  confirmDelete() {
+    if (confirm('Tem certeza de que deseja deletar seu perfil? Esta ação não pode ser desfeita.')) {
+      const userId = this.getLoggedInUserId();
+      this.deleteProfile(userId);
+    }
+  }
+
+  deleteProfile(userId: string) {
+    this.apiService.deleteprofile(userId).subscribe({
+      next: () => {
+        this.alertMessage = 'Perfil deletado com sucesso!';
+        this.alertType = 'success';
+        // Opcionalmente, redirecione ou faça outras ações após a deleção
+      },
+      error: (error) => {
+        console.error('Erro ao deletar perfil:', error);
+        this.alertMessage = 'Erro ao deletar perfil.';
+        this.alertType = 'error';
+      },
+    });
+  }
 }
