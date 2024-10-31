@@ -138,6 +138,9 @@ export class FeedComponent implements OnInit {
     this.http.post<Post>(url, formData).subscribe({
       next: (response: Post) => {
         this.posts.unshift(response);
+        this.snackBar.open('Post publicado com sucesso!', 'Fechar', {
+          duration: 3000,
+        });
         this.alertMessage = 'Post publicado com sucesso!';
         this.alertType = 'success';
       },

@@ -1,165 +1,136 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Inter", sans-serif;
-}
-
-:root {
-    font-size: 16px;
-}
-
 body {
-    background: url('/assets/images/Fundo Chat.png') no-repeat center center fixed;
-    background-size: cover;
-    color: #f2f2f2;
-    height: 100vh;
+    margin: 0; /* Remove a margem padrão */
+    height: 100vh; /* Define a altura da página */
+    background-image: url('/assets/images/Fundo Chat.png'); /* Define a imagem de fundo para a página inteira */
+    background-size: cover; /* Ajusta a imagem para cobrir a tela inteira */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita a repetição da imagem */
 }
 
-.container {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.chat-container {
+    max-width: 600px;
+    margin: 0 auto; /* Centraliza o contêiner na página */
+    padding: 10px;
+    background: rgba(131, 41, 41, 0); /* Fundo branco semitransparente para o contêiner */
+    border-radius: 8px; /* Borda arredondada para o contêiner */
+    border: none; /* Remove a borda do contêiner */
+    box-shadow: none; /* Remove a sombra do contêiner */
+    transition: transform 0.3s; /* Adiciona uma transição suave para a transformação */
 }
 
-.login {
-    width: 100%;
-    max-width: 330px;
-    background-color: rgba(33, 33, 33, 0.9);
-    border-radius: 5px;
-    padding: 20px;
+.chat-container:hover {
+    transform: scale(1.05); /* Aumenta o tamanho do contêiner em 5% ao passar o mouse */
 }
 
-.login > h2 {
+.chat-title {
     text-align: center;
-    font-weight: 600;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 1px;
+    font-size: 24px;
+    background-image: url('/assets/images/Fundo Chat.png'); /* Imagem de fundo para o título */
+    background-size: cover; /* Ajusta a imagem para cobrir a área do título */
+    color: white; /* Define a cor do texto como branco para contraste */
+    padding: 30px; /* Adiciona espaçamento interno para o texto */
+    border-radius: 40px; /* Arredonda os cantos do fundo do título */
+    border: none; /* Remove qualquer borda */
+    box-shadow: none; /* Remove qualquer sombra que possa estar causando o contorno */
+  
 }
 
-.login__form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+
+.chat-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
 }
 
-.login__input {
-    border: none;
-    padding: 15px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    background-color: #121212;
-    color: #f2f2f2;
-    outline: none;
-    border-radius: 5px;
-}
-
-.login__input:focus {
-    outline: 2px solid #f2f2f2;
-}
-
-.login__button {
-    border: none;
-    padding: 15px;
-    border-radius: 5px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    background-color: #ddd;
+.chat-item {
+    padding: 10px;
     cursor: pointer;
-    color: #121212;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    
 }
 
-.login__button:hover {
-    background-color: #fff;
+.chat-item.selected {
+    background-color: #ff78788d; /* Destaque para o chat selecionado */
 }
 
-/* Chat */
-.chat {
-    width: 100%;
-    height: 80%; /* Reduz a altura geral do chat */
+.messages-container {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 20px;
+    height: 500px; /* Ajuste conforme necessário */
+    overflow-y: auto;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: column; /* Alinha os itens na coluna */
+    
 }
 
-.chat__messages {
-    flex-grow: 1;
-    padding: 20px 20px 60px; /* Reduz o padding da área de mensagens */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+.message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 15px;
+    max-width: 10%;
+    clear: both; /* Clear floats */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para as mensagens */
 }
 
-.chat__form {
-    background-color: rgba(25, 25, 25, 0.9);
-    padding: 5px 10px; /* Reduz o padding da caixa de envio de mensagem */
-    display: flex;
-    align-items: center;
-    gap: 5px; /* Reduz o espaço entre os elementos */
-    position: fixed;
-    bottom: 0;
-    left: 90px;
-    width: 95%;
-    height: 60px; /* Reduz a altura da caixa de envio */
+.sent {
+    background-color: #af564c; /* Cor verde para mensagens enviadas */
+    color: #fff; /* Texto branco para contraste */
+    float: right; /* Posiciona as mensagens enviadas à direita */
+    text-align: right; /* Alinha o texto à direita */
+    border-radius: 15px 0 15px 15px; /* Bordas arredondadas */
+    max-width: 70%; /* Largura máxima para o balão */
+    margin-right: 0; /* Remove margem direita para encostar no canto */
+    margin-left: auto; /* Garante que o balão encoste totalmente à direita */
 }
 
-.chat__input {
-    padding: 10px; /* Reduz o padding do campo de input */
-    border-radius: 5px;
-    flex-grow: 1;
-    background-color: #212121;
-    font-size: 0.9rem; /* Diminui o tamanho da fonte */
-    color: #f2f2f2; /* Garante que o texto escrito seja branco */
-    outline: none;
+.received {
+    background-color: #b1b0b081; /* Cor para mensagens recebidas */
+    color: #faf8f8; /* Texto preto para contraste */
+    float: left; /* Posiciona as mensagens recebidas à esquerda */
+    text-align: left; /* Alinha o texto à esquerda */
+    border-radius: 0 15px 15px 15px; /* Bordas arredondadas */
 }
 
-.chat__input::placeholder {
-    color: #999; /* Deixa o placeholder mais claro */
+.message-sender {
+    font-weight: bold;
 }
 
-.chat__button {
-    font-size: 1.0rem; /* Reduz o tamanho do botão de envio */
+/* Estilos para a área de entrada de mensagens */
+.input-container-wrapper {
+    margin-top: auto; /* Empurra o contêiner para o fundo */
+    padding: 10px 0; /* Adiciona espaçamento vertical */
+    border-top: 1px solid #6a6868; /* Borda superior para separar visualmente */
+}
+
+.input-container {
+    display: flex; /* Flexbox para alinhar itens horizontalmente */
+}
+
+.message-input {
+    flex: 1; /* Ocupa o máximo de espaço disponível */
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #828080;
+    background-color: #242323;
+    color: #fff;
+}
+
+.send-button {
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #a73d28;
+    color: white;
     border: none;
-    background: none;
-    color: #f2f2f2;
     cursor: pointer;
+    transition: background-color 0.3s ease; /* Transição suave */
+    margin-left: 10px; /* Espaço entre o input e o botão */
 }
 
-.chat__button > span {
-    font-size: 1.0rem; /* Reduz o tamanho do ícone */
-}
-
-.chat__messages > div {
-    padding: 8px; /* Reduz o padding das mensagens */
-    width: 100%;
-    max-width: 200px; /* Reduz a largura máxima das mensagens */
-    font-size: 0.8rem; /* Reduz o tamanho da fonte */
-    font-weight: 500;
-    margin-bottom: 10px; /* Reduz o espaçamento entre as mensagens */
-    line-height: 18px; /* Diminui a altura da linha */
-}
-
-.message--self {
-    background-color: #cacd92;
-    color: #121212;
-    border-radius: 10px 10px 0 10px;
-    align-self: flex-end;
-}
-
-.message--other {
-    background-color: #333;
-    color: #f2f2f2;
-    border-radius: 0 10px 10px 10px;
-    align-self: flex-start;
-}
-
-.message--sender {
-    display: block;
-    margin-bottom: 15px;
-    font-weight: 700;
-    color: cadetblue;
+.send-button:hover {
+    background-color: #d9928d;
 }

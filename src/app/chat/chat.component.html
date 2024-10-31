@@ -1,67 +1,50 @@
-<div>
-  <h2>Chats</h2>
-  <ul>
-    <li
-      *ngFor="let chat of chats"
-      (click)="selectChat(chat)"
-      [class.selected]="selectedChat === chat"
-      style="cursor: pointer"
-    >
-      Chat com {{ getParticipantNames(chat) }}
-    </li>
-  </ul>
-</div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="chat.component.css" />
+</head>
+<body>
+    <!-- Contêiner principal da página -->
+    <div class="chat-container">
+        <h2 class="chat-title">Chats</h2>
+        <ul class="chat-list">
+            <li
+                *ngFor="let chat of chats"
+                (click)="selectChat(chat)"
+                [class.selected]="selectedChat === chat"
+                class="chat-item"
+            >
+                Chat com {{ getParticipantNames(chat) }}
+            </li>
+        </ul>
+    </div>
 
-<div *ngIf="selectedChat">
-  <h3>Mensagens com {{ getParticipantNames(selectedChat) }}</h3>
-  <div *ngFor="let message of messages">
-    <p>
-      <strong>{{ getParticipantNickname(message.sender) }}:</strong>
-      {{ message.content }}
-    </p>
-  </div>
+    <!-- Área de mensagens -->
+    <div *ngIf="selectedChat" class="messages-container">
+        <h3 class="messages-title">Mensagens com {{ getParticipantNames(selectedChat) }}</h3>
+        <div *ngFor="let message of messages" class="message"
+             [class.sent]="message.sender === currentUser._id"
+             [class.received]="message.sender !== currentUser._id">
+            <div class="message-content">
+                <strong class="message-sender">{{ getParticipantNickname(message.sender) }}:</strong>
+                <span>{{ message.content }}</span>
+            </div>
+        </div>
+    </div>
 
-  <input
-    [(ngModel)]="newMessage"
-    placeholder="Digite uma mensagem..."
-    style="width: 100%; padding: 8px; margin-top: 10px"
-  />
-  <button (click)="sendMessage()" style="margin-top: 10px">Enviar</button>
-</div>
-
-<style>
-  .selected {
-    font-weight: bold;
-    background-color: #f0f0f0;
-  }
-
-  h2 {
-    margin-bottom: 10px;
-  }
-
-  h3 {
-    margin-top: 20px;
-  }
-
-  p {
-    margin: 5px 0;
-  }
-
-  input {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-
-  button {
-    padding: 8px 12px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  button:hover {
-    background-color: #0056b3;
-  }
-</style>
+    <!-- Novo contêiner para o input de mensagem e botão de enviar -->
+    <div class="input-container-wrapper">
+        <div class="input-container">
+            <input
+                [(ngModel)]="newMessage"
+                placeholder="Digite uma mensagem..."
+                class="message-input"
+            />
+            <button (click)="sendMessage()" class="send-button">Enviar</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -56,6 +56,7 @@ html, body {
   height: 100%;
   object-fit: cover; /* Preenche o espaço da imagem mantendo as proporções */
   border-bottom: 2px solid #ff6347; /* Adiciona uma borda vermelha vibrante */
+  filter: blur(15px); /* Aplica o efeito de embaçamento */
 }
 
 /* Informações do perfil */
@@ -64,8 +65,19 @@ html, body {
   background-color: #1c1c1c; /* Fundo mais escuro para contraste */
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: #ccc; /* Cor suave para o texto */
+  filter: blur(0px); /* Embaça o texto */
 }
 
+/* Estilo para nome do usuário */
+.profile-info h4 {
+  margin: 0; /* Remove margens */
+  filter: blur(5px); /* Remove embaçamento do texto do nome */
+}
+
+.profile-info h3 {
+  margin: 0; /* Remove margens */
+  filter: blur(5px); /* Remove embaçamento do texto do nome */
+}
 /* Botões de mensagem e curtir */
 .message-btn,
 .like-btn {
@@ -77,6 +89,7 @@ html, body {
   background-color: #ff6347; /* Cor vibrante */
   color: #fff;
   cursor: pointer;
+  filter:blur(0.5px);
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -103,6 +116,7 @@ html, body {
     width: 220px; /* Aumenta o tamanho das cards em telas maiores */
   }
 }
+
 .like-btn {
   width: 50px;
   height: 50px;
