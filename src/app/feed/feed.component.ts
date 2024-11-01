@@ -36,10 +36,9 @@ export class FeedComponent implements OnInit {
   }
 
   closeModal() {
-    this.resetForm();
     this.showModal = false;
+    this.resetForm();
   }
-
   getUserIdFromAuthService(): string {
     return localStorage.getItem('userId') || '';
   }
@@ -126,14 +125,14 @@ export class FeedComponent implements OnInit {
   ) {
     const formData = new FormData();
     formData.append('content', content);
-    media.forEach((file) => formData.append('media', file));
+    media.forEach((file) => formData.append('image', file));
 
     const url =
       feedType === 'primaryFeed'
         ? 'http://localhost:3000/primaryFeed/'
         : 'http://localhost:3000/secondFeed/';
 
-    this.loading = true; // Indica que a publicação está em progresso
+    this.loading = true;
 
     this.http.post<Post>(url, formData).subscribe({
       next: (response: Post) => {
@@ -149,8 +148,8 @@ export class FeedComponent implements OnInit {
         this.alertType = 'error';
       },
       complete: () => {
-        this.loading = false; // Indica que a publicação foi concluída
-        this.resetForm(); // Limpa o formulário após a publicação
+        this.loading = false;
+        this.resetForm();
       },
     });
   }
@@ -234,5 +233,4 @@ export class FeedComponent implements OnInit {
       },
     });
   }
-  
 }

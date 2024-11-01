@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Post } from 'database';
 import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -20,17 +21,19 @@ export class ProfileComponent implements OnInit {
   alertMessage: string = '';
   alertType: string = '';
   showModal: boolean = false;
-  title: string = 'Aqui é o título do modal feed';
+  title: string = 'NakedFeed';
   modalContent: string = '';
   postContent: string = '';
   currentFeedType: 'primaryFeed' | 'secondFeed' = 'secondFeed';
+  isFollowing: boolean = false;
 
   constructor(
     private apiService: ApiService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private snackBar: MatSnackBar
   ) {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
@@ -51,7 +54,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  private getUserId(): string {
+  public getUserId(): string {
     return localStorage.getItem('userId') || '';
   }
 
@@ -62,6 +65,8 @@ export class ProfileComponent implements OnInit {
 
   fetchUserProfile() {
     const userId = this.route.snapshot.paramMap.get('id');
+    const loggedUserId = this.getUserId();
+
     if (userId) {
       this.loading = true;
       this.apiService.getUserById(userId).subscribe({
@@ -71,6 +76,15 @@ export class ProfileComponent implements OnInit {
           this.profileForm.patchValue({
             name: this.user.name,
             description: this.user.description,
+          });
+          this.user.followerCount = this.user.followers.length;
+          this.apiService.isFollowing(loggedUserId, userId).subscribe({
+            next: (isFollowing) => {
+              this.isFollowing = isFollowing;
+            },
+            error: (err) => {
+              console.error('Erro ao verificar o estado de seguir:', err);
+            },
           });
         },
         error: (err) => {
@@ -84,6 +98,24 @@ export class ProfileComponent implements OnInit {
     } else {
       console.error('ID do usuário não encontrado na URL');
       this.errorMessage = 'ID do usuário não encontrado';
+    }
+  }
+
+  toggleFollow() {
+    const userId = this.route.snapshot.paramMap.get('id');
+    if (userId) {
+      this.apiService.toggleFollow(userId).subscribe({
+        next: (response) => {
+          this.isFollowing = !this.isFollowing;
+          this.alertMessage = response.message;
+          this.alertType = 'success';
+        },
+        error: (err) => {
+          console.error('Erro ao seguir/desseguir usuário:', err);
+          this.alertMessage = 'Erro ao seguir/desseguir o usuário.';
+          this.alertType = 'error';
+        },
+      });
     }
   }
 
@@ -129,7 +161,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onPublish(event: {
-    content: string;
+    content: string | null;
     media: File[];
     feedType: 'primaryFeed' | 'secondFeed';
   }) {
@@ -137,16 +169,16 @@ export class ProfileComponent implements OnInit {
   }
 
   publishPost(
-    content: string,
+    content: string | null,
     media: File[],
     feedType: 'primaryFeed' | 'secondFeed'
   ) {
     const formData = new FormData();
-    formData.append('content', content);
 
-    if (media && media.length > 0) {
-      media.forEach((file) => formData.append('media', file));
+    if (content) {
+      formData.append('content', content);
     }
+    media.forEach((file) => formData.append('image', file));
 
     const url =
       feedType === 'primaryFeed'
@@ -156,9 +188,12 @@ export class ProfileComponent implements OnInit {
     this.http.post<Post>(url, formData).subscribe({
       next: (response: Post) => {
         this.posts.unshift(response);
-        this.alertMessage = 'Post publicado com sucesso!';
+        this.snackBar.open('Post publicado com sucesso!', 'Fechar', {
+          duration: 3000,
+        });
         this.alertType = 'success';
         this.closeModal();
+        this.fetchUserProfile();
       },
       error: (err) => {
         console.error('Erro ao publicar o post:', err);

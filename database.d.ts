@@ -23,6 +23,7 @@ export type User = {
   password: string;
   description: string;
   nickName: string;
+  followerCount?: number;
 };
 
 export type Chat = {
@@ -41,4 +42,3 @@ export type Message = {
   timestamp: Date;
 };
 type Gender = 'M' | 'F' | 'NB' | 'BI' | 'TR' | 'HOM';
-

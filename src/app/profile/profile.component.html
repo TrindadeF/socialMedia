@@ -9,7 +9,7 @@
         />
         <ng-template #noProfilePic>
           <img
-            src="assets/images/default-avatar.jpg"
+            src="../../assets/images/default-avatar.jpg"
             alt="Imagem de perfil padrão"
           />
         </ng-template>
@@ -18,7 +18,16 @@
         <h2>{{ user.name }}</h2>
         <h3>{{ user.age }}</h3>
         <h4>{{ user.description }}</h4>
+        <p>Seguidores: {{ user.followerCount }}</p>
         <p class="username">{{ user?.username }}</p>
+
+        <button *ngIf="user._id !== getUserId()" (click)="toggleFollow()">
+          {{ isFollowing ? "Deixar de Seguir" : "Seguir" }}
+        </button>
+
+        <div *ngIf="alertMessage" class="alert" [ngClass]="alertType">
+          {{ alertMessage }}
+        </div>
       </div>
     </div>
 

@@ -232,8 +232,15 @@ export class ApiService {
   getChatsByUserId(): Observable<Chat[]> {
     return this.http.get<Chat[]>(`${this.apiUrl}/chats`);
   }
+  toggleFollow(targetUserId: string): Observable<{ message: string }> {
+    const url = `${this.apiUrl}/profile/${targetUserId}/follow`;
+    return this.http.post<{ message: string }>(url, {});
+  }
   deleteprofile(userId: string): Observable<User> {
     return this.http.delete<User>(`${this.apiUrl}/profile/${userId}`);
   }
+  isFollowing(loggedUserId: string, targetUserId: string): Observable<boolean> {
+    const url = `${this.apiUrl}/profile/${loggedUserId}/isFollowing/${targetUserId}`;
+    return this.http.get<boolean>(url);
+  }
 }
-

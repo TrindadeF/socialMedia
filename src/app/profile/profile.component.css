@@ -6,16 +6,16 @@ body {
   height: auto; /* Permite que o body cresça com o conteúdo */
   display: flex; /* Permite o uso de flexbox para centrar conteúdos */
   flex-direction: column; /* Alinha itens em coluna */
+  background-size: cover;
 }
 
 .container {
   display: flex;
   flex-direction: column; /* Se você deseja que os itens fiquem em coluna */
-  /* Remova a altura fixa ou ajuste conforme necessário */
   height: auto; /* Permite que o container cresça com o conteúdo */
   background-color: #000; /* Opcional: repete o fundo do body */
+  background-size: cover;
 }
-
 
 .profile-container {
   display: flex;
@@ -28,6 +28,7 @@ body {
   margin: 0 auto;
   padding: 20px;
   flex-grow: 1; /* Permite que a profile-container cresça para preencher o espaço */
+  background-size: cover;
 }
 
 .profile-header {
