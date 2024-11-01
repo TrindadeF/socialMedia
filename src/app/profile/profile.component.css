@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background-color: #000;
+  background-color: #070707;
   color: #fff; /* Altera a cor do texto para branco */
   font-family: Arial, sans-serif;
   height: auto; /* Permite que o body cresça com o conteúdo */
@@ -12,7 +12,7 @@ body {
 .container {
   display: flex;
   flex-direction: column; /* Se você deseja que os itens fiquem em coluna */
-  height: auto; /* Permite que o container cresça com o conteúdo */
+  min-height: 100vh; /* Permite que o container cresça com o conteúdo */
   background-color: #000; /* Opcional: repete o fundo do body */
   background-size: cover;
 }
@@ -239,4 +239,24 @@ body {
 .gallery-item img:hover {
   transform: scale(1.1); /* Aumenta o tamanho da imagem */
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Efeito de brilho */
+}
+
+.follow-btn {
+  background-color: red; /* Cor de fundo vermelha */
+  color: white; /* Cor do texto em branco */
+  padding: 8px 15px; /* Espaciamento interno */
+  border: none; /* Sem borda */
+  border-radius: 20px; /* Bordas arredondadas */
+  cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+  font-size: 14px; /* Tamanho da fonte */
+  transition: transform 0.2s ease, background-color 0.2s ease; /* Transição suave para transformações e cor */
+}
+
+.follow-btn:hover {
+  background-color: darkred; /* Cor ao passar o mouse */
+  transform: scale(1.1); /* Aumenta o tamanho do botão */
+}
+
+.follow-btn:active {
+  transform: scale(0.95); /* Diminui o tamanho do botão quando clicado */
 }

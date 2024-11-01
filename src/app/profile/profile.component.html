@@ -21,7 +21,8 @@
         <p>Seguidores: {{ user.followerCount }}</p>
         <p class="username">{{ user?.username }}</p>
 
-        <button *ngIf="user._id !== getUserId()" (click)="toggleFollow()">
+        <button *ngIf="user._id !== getUserId()" (click)="toggleFollow()" class="follow-btn">
+          
           {{ isFollowing ? "Deixar de Seguir" : "Seguir" }}
         </button>
 
