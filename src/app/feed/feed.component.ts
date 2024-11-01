@@ -23,6 +23,8 @@ export class FeedComponent implements OnInit {
   modalContent: string = '';
   title: string = 'Aqui é o título do modal feed';
   currentFeedType: 'primaryFeed' | 'secondFeed' = 'primaryFeed';
+  showCommentModal = false;
+  selectedPostId: string = '';
 
   constructor(
     private apiService: ApiService,
@@ -60,6 +62,14 @@ export class FeedComponent implements OnInit {
     const isOwner = currentUserId === String(postOwnerId);
 
     return isOwner;
+  }
+  openCommentModal(postId: string, feedType: 'primaryFeed' | 'secondFeed') {
+    this.selectedPostId = postId;
+    this.currentFeedType = feedType;
+    this.showCommentModal = true;
+  }
+  onCommentAdded() {
+    this.showCommentModal = false;
   }
 
   getPosts() {

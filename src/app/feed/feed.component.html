@@ -74,6 +74,18 @@
               {{ post.likes.length || 0 }}
               <mat-icon>thumb_up_alt</mat-icon>
             </button>
+
+            <mat-icon (click)="openCommentModal(post._id, 'primaryFeed')"
+              >chat_bubble_outline</mat-icon
+            >
+
+            <app-comment-modal
+              *ngIf="showCommentModal"
+              [postId]="selectedPostId"
+              [feedType]="currentFeedType"
+              (commentAdded)="onCommentAdded()"
+            ></app-comment-modal>
+
             <button *ngIf="isOwner(post.owner)" (click)="deletePost(post._id)">
               Deletar
             </button>

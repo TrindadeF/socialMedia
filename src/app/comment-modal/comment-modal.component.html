@@ -1,0 +1,11 @@
+<div class="modal-content">
+  <div class="post-content"></div>
+
+  <div class="comment-input">
+    <textarea
+      [(ngModel)]="commentText"
+      placeholder="Adicione um comentário..."
+    ></textarea>
+    <button (click)="postComment()">Comentar</button>
+  </div>
+</div>

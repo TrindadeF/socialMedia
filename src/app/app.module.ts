@@ -13,7 +13,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FeedComponent } from './feed/feed.component';
-import { CommonModule } from '@angular/common';
 import { NakedFeedComponent } from './nakedfeed/nakedfeed.component';
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth.interceptor';
@@ -29,6 +28,7 @@ import { ModalComponent } from './modal/modal.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CommentModalComponent } from './comment-modal/comment-modal.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +51,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ModalComponent,
     CheckboxComponent,
     NotificationsComponent,
+    CommentModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -243,4 +243,12 @@ export class ApiService {
     const url = `${this.apiUrl}/profile/${loggedUserId}/isFollowing/${targetUserId}`;
     return this.http.get<boolean>(url);
   }
+  addCommentInFirstFeed(postId: string, content: string): Observable<any> {
+    const url = `${this.apiFirstFeed}/posts/${postId}/comments`;
+    return this.http.post(url, { content });
+  }
+  addCommentInSecondFeed(postId: string, content: string): Observable<any> {
+    const url = `${this.apiSecondFeed}/posts/${postId}/comments`;
+    return this.http.post(url, { content });
+  }
 }
