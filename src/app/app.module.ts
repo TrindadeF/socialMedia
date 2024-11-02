@@ -29,6 +29,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommentModalComponent } from './comment-modal/comment-modal.component';
+import { ModalProfileComponent } from './modal-profile/modal-profile.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { CommentModalComponent } from './comment-modal/comment-modal.component';
     CheckboxComponent,
     NotificationsComponent,
     CommentModalComponent,
+    ModalProfileComponent,
   ],
   imports: [
     BrowserModule,

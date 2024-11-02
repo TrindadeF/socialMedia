@@ -26,6 +26,10 @@ export class ProfileComponent implements OnInit {
   postContent: string = '';
   currentFeedType: 'primaryFeed' | 'secondFeed' = 'secondFeed';
   isFollowing: boolean = false;
+  isModalOpen: boolean = false;
+  selectedImageUrl: string = '';
+  selectedImage: string = '';
+  showImageViewer: boolean = false;
 
   constructor(
     private apiService: ApiService,
@@ -159,6 +163,7 @@ export class ProfileComponent implements OnInit {
     this.showModal = true;
     this.postContent = '';
   }
+  
 
   onPublish(event: {
     content: string | null;
@@ -209,7 +214,21 @@ export class ProfileComponent implements OnInit {
     this.postContent = '';
   }
 
-  isImage(mediaUrl: string): boolean {
-    return /\.(jpg|jpeg|png|gif)$/i.test(mediaUrl);
+  isImage(url: string): boolean {
+    return url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.png'); // Adicione outras extensões conforme necessário
+  }
+  openImageViewer(imageUrl: string) {
+    this.selectedImage = imageUrl; // Define a imagem a ser exibida
+    this.showImageViewer = true; // Abre o modal
+  }
+
+  closeImageViewer() {
+    this.showImageViewer = false;
   }
 }
+
+
+
+
+
+

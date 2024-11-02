@@ -260,3 +260,15 @@ body {
 .follow-btn:active {
   transform: scale(0.95); /* Diminui o tamanho do botão quando clicado */
 }
+
+.profile-images {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile-images img {
+  width: 100px; /* Ajuste o tamanho das miniaturas */
+  margin: 5px;
+  cursor: pointer; /* Mostra que é clicável */
+  border-radius: 5px; /* Cantos arredondados */
+}
