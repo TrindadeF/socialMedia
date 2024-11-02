@@ -1,5 +1,3 @@
-// nakedfeed.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -85,11 +83,22 @@ export class NakedFeedComponent implements OnInit {
   }
 
   goToChat(otherUserId: string): void {
-    if (!this.currentUser) {
-      console.error('Usuário não encontrado.');
+    if (!this.currentUser || !this.currentUser._id) {
+      console.error('Usuário atual não encontrado.');
       return;
     }
-    this.router.navigate(['/chat', otherUserId]);
+
+    this.apiService
+      .getOrCreateChat(this.currentUser._id, otherUserId)
+      .subscribe({
+        next: (response) => {
+          const chatId = response.chatId;
+          this.router.navigate(['/chat', chatId]);
+        },
+        error: (error) => {
+          console.error('Erro ao iniciar ou obter conversa:', error);
+        },
+      });
   }
 
   getLoggedUserId(): string {

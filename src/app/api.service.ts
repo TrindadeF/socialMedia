@@ -222,10 +222,6 @@ export class ApiService {
     return this.http.post<any>(url, body);
   }
 
-  getChatById(chatId: string) {
-    return this.http.get<Chat>(`http://localhost:3000/chat/${chatId}`);
-  }
-
   getChatByUsers(userId1: String, userId2: String): Observable<Chat> {
     return this.http.get<Chat>(`${this.apiUrl}/chats/${userId1}/${userId2}`);
   }
@@ -250,5 +246,8 @@ export class ApiService {
   addCommentInSecondFeed(postId: string, content: string): Observable<any> {
     const url = `${this.apiSecondFeed}/posts/${postId}/comments`;
     return this.http.post(url, { content });
+  }
+  getOrCreateChat(userId1: string, userId2: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/chats`, { userId1, userId2 });
   }
 }
