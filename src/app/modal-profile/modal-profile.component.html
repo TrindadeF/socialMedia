@@ -1,6 +1,20 @@
 <div class="modal" *ngIf="show">
   <div class="modal-content">
-    <span class="close" (click)="close()">&times;</span> <!-- Aqui você apenas chama o método close -->
-    <img [src]="imageSrc" alt="Imagem do perfil" />
+    <span class="close" (click)="close()">&times;</span>
+    <div class="image-container">
+      <img [src]="imageSrc" alt="Imagem do perfil" />
+    </div>
+    <div class="gray-container">
+      <div class="icon-container">
+        
+        <button mat-icon-button class="like-button">
+          <mat-icon>thumb_up_alt</mat-icon>
+          <span>{{ post.likes.length || 0 }}</span>
+        </button>
+        
+      
+        <i class="comment-icon">💬</i>
+      </div>
+    </div>
   </div>
 </div>

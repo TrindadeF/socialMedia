@@ -251,4 +251,27 @@ export class ApiService {
     const url = `${this.apiSecondFeed}/posts/${postId}/comments`;
     return this.http.post(url, { content });
   }
+
+  checkOrCreateChat(userId: string, otherUserId: string): Observable<Chat> {
+    // Primeiro, tente obter a conversa existente
+    return this.http.get<Chat>(`/api/chats/${userId}/${otherUserId}`).pipe(
+        catchError((error) => {
+            // Se não houver conversa, crie uma nova
+            if (error.status === 404) {
+                return this.createChat(userId, otherUserId); // Método para criar um novo chat
+            }
+            return throwError(error); // Para outros erros, propague
+        })
+    );
+}
+
+createChat(userId: string, otherUserId: string): Observable<Chat> {
+    // Chame sua API para criar um novo chat
+    return this.http.post<Chat>(`/api/chats`, { userId, otherUserId });
+}
+
+
+
+
+
 }

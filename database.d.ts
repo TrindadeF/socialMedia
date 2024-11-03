@@ -35,6 +35,8 @@ export type Chat = {
   userName: string;
 };
 
+
+
 export type Message = {
   sender: string;
   receiver: string;

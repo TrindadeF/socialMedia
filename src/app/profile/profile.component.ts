@@ -30,6 +30,10 @@ export class ProfileComponent implements OnInit {
   selectedImageUrl: string = '';
   selectedImage: string = '';
   showImageViewer: boolean = false;
+  selectedPost: Post | null = null; 
+  
+
+
 
   constructor(
     private apiService: ApiService,
@@ -225,6 +229,30 @@ export class ProfileComponent implements OnInit {
   closeImageViewer() {
     this.showImageViewer = false;
   }
+
+  likePost(postId: string) {
+    this.apiService.likePostInSecondFeed(postId).subscribe(
+      (updatedPost: Post) => {
+        if (updatedPost) {
+          this.posts = this.posts.map((post) => {
+            if (post._id === updatedPost._id) {
+              return {
+                ...post,
+                likes: updatedPost.likes,
+              };
+            }
+            return post;
+          });
+        }
+      },
+      (error) => {
+        console.error('Erro ao curtir o post:', error);
+      }
+    );
+  }
+
+
+
 }
 
 
