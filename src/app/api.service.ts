@@ -222,10 +222,6 @@ export class ApiService {
     return this.http.post<any>(url, body);
   }
 
-  getChatById(chatId: string) {
-    return this.http.get<Chat>(`http://localhost:3000/chat/${chatId}`);
-  }
-
   getChatByUsers(userId1: String, userId2: String): Observable<Chat> {
     return this.http.get<Chat>(`${this.apiUrl}/chats/${userId1}/${userId2}`);
   }
@@ -251,27 +247,7 @@ export class ApiService {
     const url = `${this.apiSecondFeed}/posts/${postId}/comments`;
     return this.http.post(url, { content });
   }
-
-  checkOrCreateChat(userId: string, otherUserId: string): Observable<Chat> {
-    // Primeiro, tente obter a conversa existente
-    return this.http.get<Chat>(`/api/chats/${userId}/${otherUserId}`).pipe(
-        catchError((error) => {
-            // Se não houver conversa, crie uma nova
-            if (error.status === 404) {
-                return this.createChat(userId, otherUserId); // Método para criar um novo chat
-            }
-            return throwError(error); // Para outros erros, propague
-        })
-    );
-}
-
-createChat(userId: string, otherUserId: string): Observable<Chat> {
-    // Chame sua API para criar um novo chat
-    return this.http.post<Chat>(`/api/chats`, { userId, otherUserId });
-}
-
-
-
-
-
+  getOrCreateChat(userId1: string, userId2: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/chats`, { userId1, userId2 });
+  }
 }
