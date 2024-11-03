@@ -33,6 +33,7 @@ export type Chat = {
   lastMessage: Message;
   messages: Message[];
   userName: string;
+  
 };
 
 

@@ -73,6 +73,7 @@ export class ChatComponent implements OnInit, OnDestroy {
           this.participants = chat.participants.map((user: User) => ({
             id: user._id,
             nickname: user.nickName,
+            profilePic: user.profilePic,
           }));
         } else {
           this.messages = [];
@@ -119,6 +120,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.socket.disconnect();
   }
 
+  
   
 
   
