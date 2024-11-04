@@ -15,6 +15,9 @@ export class PostDetailComponent implements OnInit {
   loading: boolean = true;
   error: string | null = null;
   newComment: string = '';
+  user: any;
+
+
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) {
     this.postId = this.route.snapshot.paramMap.get('postId') || '';
@@ -101,4 +104,6 @@ export class PostDetailComponent implements OnInit {
   isImage(url: string): boolean {
     return /\.(jpg|jpeg|png|gif)$/.test(url);
   }
+
+  
 }

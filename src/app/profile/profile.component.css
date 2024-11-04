@@ -1,19 +1,19 @@
 body {
   margin: 0;
   background-color: #070707;
-  color: #fff; /* Altera a cor do texto para branco */
+  color: #fff; 
   font-family: Arial, sans-serif;
-  height: auto; /* Permite que o body cresça com o conteúdo */
-  display: flex; /* Permite o uso de flexbox para centrar conteúdos */
-  flex-direction: column; /* Alinha itens em coluna */
+  height: auto; 
+  display: flex; 
+  flex-direction: column; 
   background-size: cover;
 }
 
 .container {
   display: flex;
-  flex-direction: column; /* Se você deseja que os itens fiquem em coluna */
-  min-height: 100vh; /* Permite que o container cresça com o conteúdo */
-  background-color: #000; /* Opcional: repete o fundo do body */
+  flex-direction: column; 
+  min-height: 100vh; 
+  background-color: #000; 
   background-size: cover;
 }
 
@@ -27,7 +27,7 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  flex-grow: 1; /* Permite que a profile-container cresça para preencher o espaço */
+  flex-grow: 1; 
   background-size: cover;
 }
 
@@ -43,10 +43,10 @@ body {
 
 .profile-image img {
   border-radius: 50%;
-  width: 150px; /* Mantenha esta largura ou ajuste conforme necessário */
-  height: 150px; /* Mantenha esta altura ou ajuste conforme necessário */
-  object-fit: cover; /* Estica a imagem para cobrir a área sem distorcer */
-  border: 2px solid #ff030383; /* Adiciona um contorno cinza */
+  width: 150px; 
+  height: 150px; 
+  object-fit: cover; 
+  border: 2px solid #ff030383; 
 }
 
 .profile-info {
@@ -88,7 +88,7 @@ body {
   background-color: #0d8bec;
 }
 
-/* Estilo das abas */
+
 .profile-tabs {
   display: flex;
   justify-content: space-around;
@@ -114,7 +114,7 @@ body {
   color: white;
 }
 
-/* Estilo do conteúdo */
+
 .profile-content {
   background-color: #1c1c1c;
   padding: 15px;
@@ -128,7 +128,7 @@ body {
   margin-top: 10px;
 }
 
-/* Estilo de cada post */
+
 .post {
   background-color: #222;
   padding: 10px;
@@ -136,9 +136,9 @@ body {
   margin-bottom: 15px;
 }
 
-/* Estilos gerais do modal */
+
 .modal {
-  display: none; /* Escondido por padrão */
+  display: none; 
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -146,7 +146,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+  background-color: rgba(0, 0, 0, 0.7); 
 }
 
 .modal-content {
@@ -159,7 +159,7 @@ body {
   color: #000;
 }
 
-/* Fechar o modal */
+
 .close {
   position: absolute;
   top: 10px;
@@ -168,7 +168,7 @@ body {
   cursor: pointer;
 }
 
-/* Formulário */
+
 .form-group {
   margin-bottom: 15px;
 }
@@ -212,53 +212,53 @@ body {
 
 .gallery {
   margin-top: 20px;
-  flex-grow: 1; /* Permite que a galeria cresça para preencher o espaço restante */
+  flex-grow: 1; 
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Define três colunas */
+  grid-template-columns: repeat(3, 1fr); 
   gap: 40px;
   width: 100%;
-  max-width: 900px; /* Define a largura máxima da galeria */
+  max-width: 900px; 
 }
 
 .gallery-item {
   flex: 1 1 200px;
-  border: none; /* Removido */
+  border: none;
 }
 
 .gallery-item img {
-  width: 100%; /* Ajustado para ocupar toda a largura do item */
-  height: 300px; /* Altura fixa */
+  width: 100%; 
+  height: 300px; 
   border-radius: 20px;
-  object-fit: cover; /* Estica a imagem para cobrir a área sem distorcer */
-  transition: transform 0.3s, box-shadow 0.3s; /* Transição suave */
+  object-fit: cover; 
+  transition: transform 0.3s, box-shadow 0.3s; 
 }
 
 .gallery-item img:hover {
-  transform: scale(1.1); /* Aumenta o tamanho da imagem */
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Efeito de brilho */
+  transform: scale(1.1); 
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); 
 }
 
 .follow-btn {
-  background-color: red; /* Cor de fundo vermelha */
-  color: white; /* Cor do texto em branco */
-  padding: 8px 15px; /* Espaciamento interno */
-  border: none; /* Sem borda */
-  border-radius: 20px; /* Bordas arredondadas */
-  cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
-  font-size: 14px; /* Tamanho da fonte */
-  transition: transform 0.2s ease, background-color 0.2s ease; /* Transição suave para transformações e cor */
+  background-color: red; 
+  color: white; 
+  padding: 8px 15px; 
+  border: none; 
+  border-radius: 20px; 
+  cursor: pointer;
+  font-size: 14px; 
+  transition: transform 0.2s ease, background-color 0.2s ease; 
 }
 
 .follow-btn:hover {
-  background-color: darkred; /* Cor ao passar o mouse */
-  transform: scale(1.1); /* Aumenta o tamanho do botão */
+  background-color: darkred; 
+  transform: scale(1.1); 
 }
 
 .follow-btn:active {
-  transform: scale(0.95); /* Diminui o tamanho do botão quando clicado */
+  transform: scale(0.95); 
 }
 
 .profile-images {
@@ -267,8 +267,8 @@ body {
 }
 
 .profile-images img {
-  width: 100px; /* Ajuste o tamanho das miniaturas */
+  width: 100px; 
   margin: 5px;
-  cursor: pointer; /* Mostra que é clicável */
-  border-radius: 5px; /* Cantos arredondados */
+  cursor: pointer; 
+  border-radius: 5px; 
 }

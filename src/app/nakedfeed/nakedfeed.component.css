@@ -1,17 +1,17 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #060606; /* Fundo preto para a página inteira */
+  background-color: #060606;
   color: #fff;
   font-family: Arial, sans-serif;
-  min-height: 100vh; /* Garante que o corpo ocupe pelo menos 100% da altura da viewport */
+  min-height: 100vh; 
   display: flex;
   flex-direction: column;
   width: 100%;
   overflow-x: hidden;
 }
 
-/* Container principal */
+
 .profile-container {
   display: flex;
   flex-wrap: wrap;
@@ -20,11 +20,10 @@ html, body {
   padding: 0;
   height: 100vh;
   width: 100%;
-  background-color: #060606; /* Fundo preto para o container */
+  background-color: #060606; 
   box-sizing: border-box;
 }
 
-/* Estilos do card do perfil */
 .profile-card {
   width: 180px;
   margin: 15px;
@@ -32,19 +31,19 @@ html, body {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.723);
-  background-color: #222; /* Fundo escuro para os cards */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Borda translúcida */
+  background-color: #222; 
+  border: 1px solid rgba(255, 255, 255, 0.2); 
   color: #fff;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animação suave */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
-/* Efeito de hover no card */
+
 .profile-card:hover {
-  transform: translateY(-5px); /* Elevação ao passar o mouse */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7); /* Sombra mais intensa */
+  transform: translateY(-5px); 
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7); 
 }
 
-/* Imagem do perfil */
+
 .profile-pic {
   width: 100%;
   height: 200px;
@@ -54,31 +53,31 @@ html, body {
 .profile-pic img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Preenche o espaço da imagem mantendo as proporções */
-  border-bottom: 2px solid #ff6347; /* Adiciona uma borda vermelha vibrante */
-  filter: blur(15px); /* Aplica o efeito de embaçamento */
+  object-fit: cover; 
+  border-bottom: 2px solid #ff6347; 
+  filter: blur(15px); 
 }
 
-/* Informações do perfil */
+
 .profile-info {
   padding: 10px;
-  background-color: #1c1c1c; /* Fundo mais escuro para contraste */
+  background-color: #1c1c1c; 
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: #ccc; /* Cor suave para o texto */
-  filter: blur(0px); /* Embaça o texto */
+  color: #ccc;
+  filter: blur(0px); 
 }
 
-/* Estilo para nome do usuário */
+
 .profile-info h4 {
-  margin: 0; /* Remove margens */
-  filter: blur(5px); /* Remove embaçamento do texto do nome */
+  margin: 0; 
+  filter: blur(5px); 
 }
 
 .profile-info h3 {
-  margin: 0; /* Remove margens */
-  filter: blur(5px); /* Remove embaçamento do texto do nome */
+  margin: 0; 
+  filter: blur(5px);
 }
-/* Botões de mensagem e curtir */
+
 .message-btn,
 .like-btn {
   width: 80%;
@@ -86,7 +85,7 @@ html, body {
   padding: 10px;
   border: none;
   border-radius: 8px;
-  background-color: #ff6347; /* Cor vibrante */
+  background-color: #ff6347;
   color: #fff;
   cursor: pointer;
   filter:blur(0.5px);
@@ -96,24 +95,24 @@ html, body {
 .message-btn:hover,
 .like-btn:hover {
   background-color: #ff3b3b;
-  transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+  transform: scale(1.05); 
 }
 
 .like-btn i {
   color: #fff;
 }
 
-/* Responsividade para telas menores */
+
 @media (max-width: 768px) {
   .profile-card {
-    width: 100%; /* Para ocupar a largura total em dispositivos menores */
+    width: 100%; 
   }
 }
 
-/* Responsividade para telas maiores */
+
 @media (min-width: 1200px) {
   .profile-card {
-    width: 220px; /* Aumenta o tamanho das cards em telas maiores */
+    width: 220px;
   }
 }
 

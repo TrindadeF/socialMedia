@@ -105,7 +105,7 @@ export class EditProfileComponent implements OnInit {
       next: () => {
         this.alertMessage = 'Perfil deletado com sucesso!';
         this.alertType = 'success';
-        // Opcionalmente, redirecione ou faça outras ações após a deleção
+        
       },
       error: (error) => {
         console.error('Erro ao deletar perfil:', error);

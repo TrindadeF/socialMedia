@@ -6,11 +6,13 @@ export type Post = {
   owner: string;
   createdAt: Date;
   likes: string[];
-  ownerName: string;
+  ownerName: User;
   imageUrl: string;
   videoUrl: string;
   comments: string;
   ownerProfileImageUrl: string;
+  
+  
 };
 
 export type User = {

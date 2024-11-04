@@ -222,8 +222,8 @@ export class ProfileComponent implements OnInit {
     return url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.png'); // Adicione outras extensões conforme necessário
   }
   openImageViewer(imageUrl: string) {
-    this.selectedImage = imageUrl; // Define a imagem a ser exibida
-    this.showImageViewer = true; // Abre o modal
+    this.selectedImage = imageUrl; 
+    this.showImageViewer = true; 
   }
 
   closeImageViewer() {

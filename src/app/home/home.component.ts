@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, Renderer2 } from '@angular/core';
-import { Router } from '@angular/router'; // Importa o Router para redirecionar
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-home',
@@ -8,7 +8,7 @@ import { Router } from '@angular/router'; // Importa o Router para redirecionar
 })
 export class HomeComponent implements AfterViewInit {
   constructor(private renderer: Renderer2, private router: Router) {
-    this.redirectIfLoggedIn(); // Chama a função de redirecionamento no construtor
+    this.redirectIfLoggedIn(); 
   }
 
   ngAfterViewInit(): void {
@@ -16,12 +16,12 @@ export class HomeComponent implements AfterViewInit {
     this.setupDomContentLoaded();
   }
 
-  // Verifica se o usuário está logado e redireciona se necessário
+  
   private redirectIfLoggedIn() {
-    const userId = localStorage.getItem('userId'); // Verifique como você armazena o estado de login
+    const userId = localStorage.getItem('userId'); 
     if (userId) {
-      // Se o userId existir, redireciona para outra página
-      this.router.navigate(['/profile']); // Altere para a rota que deseja redirecionar, por exemplo, o perfil
+      
+      this.router.navigate(['/profile']); 
     }
   }
 

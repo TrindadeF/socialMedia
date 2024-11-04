@@ -20,7 +20,7 @@ export class LoginComponent {
         localStorage.setItem('userId', response.userId);
         localStorage.setItem('token', response.token);
         console.log('Login bem-sucedido', response);
-        this.router.navigate(['/rules']); // Redireciona para a página de regras
+        this.router.navigate(['/rules']);
       },
       error: (err) => {
         this.errorMessage = 'E-mail ou senha inválidos. Tente novamente.';

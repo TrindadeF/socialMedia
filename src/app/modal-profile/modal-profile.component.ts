@@ -8,9 +8,9 @@ import { Post, User } from 'database';
   styleUrls: ['./modal-profile.component.css'],
 })
 export class ModalProfileComponent {
-  @Input() imageSrc!: string; // URL da imagem a ser exibida
-  @Input() show: boolean = false; // Controle de visibilidade
-  @Output() closeEvent = new EventEmitter<void>(); // Evento de fechamento
+  @Input() imageSrc!: string; 
+  @Input() show: boolean = false; 
+  @Output() closeEvent = new EventEmitter<void>();
   @Input() post!: Post;
   userId: string = '';
   selectedPostId: string = '';
@@ -21,8 +21,8 @@ export class ModalProfileComponent {
   @Input() postContent: string = '';
   @Input() feedType: 'primaryFeed' | 'secondFeed' = 'primaryFeed'
 
-  comments: string[] = []; // Lista de comentários
-  newComment: string = ''; // Comentário que está sendo adicionado
+  comments: string[] = []; 
+  newComment: string = ''; 
   apiService: any;
   @Output() publish = new EventEmitter<{ content: string | null; media: File[]; feedType: 'primaryFeed' | 'secondFeed' }>();
 

@@ -16,7 +16,7 @@ export class CommentModalComponent {
   @Input() showModal: boolean = false;
   @Input() title: string = '';
   @Output() closeEvent = new EventEmitter<void>();
-  isModalOpen: boolean = true; 
+  isModalOpen: boolean = false; 
   selectedPost: any;
   selectedPostId: string | null = null;
   canPublish: boolean = false;
@@ -30,6 +30,7 @@ export class CommentModalComponent {
   closeModal() {
     this.closeEvent.emit();
     this.showModal = false;
+    this.isModalOpen = false;
   }
   
   checkFormValidity() {

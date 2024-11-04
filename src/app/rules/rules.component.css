@@ -20,11 +20,11 @@ body {
   padding: 20px;
   text-align: center;
   position: relative;
-  transition: transform 0.3s ease; /* Animação de movimento no container */
+  transition: transform 0.3s ease; 
 }
 
 .carousel-container:hover {
-  transform: translateY(-5px); /* Move o container para cima ao passar o mouse */
+  transform: translateY(-5px); 
 }
 
 .carousel-item {
@@ -49,16 +49,16 @@ body {
   color: #fff;
   cursor: pointer;
   margin: 0 10px;
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Animação de transição */
+  transition: background-color 0.3s ease, transform 0.2s ease; 
 }
 
 .carousel-controls button:hover {
   background-color: #ff4b4b;
-  transform: scale(1.1); /* Zoom ao passar o mouse */
+  transform: scale(1.1);
 }
 
 .carousel-controls button:active {
-  transform: scale(0.95); /* Animação ao clicar */
+  transform: scale(0.95); 
 }
 
 .carousel-controls button:focus {
@@ -74,7 +74,7 @@ body {
   }
 }
 
-/* Media query for smaller screens */
+
 @media (max-width: 480px) {
   .carousel-container {
     width: 90%;

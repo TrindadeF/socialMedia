@@ -28,7 +28,7 @@ export class RulesComponent {
     if (this.currentIndex < this.items.length - 1) {
       this.currentIndex++;
     } else {
-      // Redireciona para a página de perfil ao finalizar a leitura das regras
+     
       this.router.navigate(['/profile']);
     }
   }
