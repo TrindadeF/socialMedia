@@ -71,7 +71,7 @@
               (click)="likePost(post._id)"
               [class.liked]="post.likes && post.likes.includes(userId)"
             >
-              {{ post.likes.length || 0 }}
+             {{ post.likes ? post.likes.length : 0 }}
               <mat-icon>thumb_up_alt</mat-icon>
             </button>
 
@@ -81,9 +81,13 @@
 
             <app-comment-modal
               *ngIf="showCommentModal"
+              [content]="modalContent"
+              [showModal]="showModal"
+              [postContent]="postContent"
               [postId]="selectedPostId"
               [feedType]="currentFeedType"
               (commentAdded)="onCommentAdded()"
+              (close)="closeComentModal()"
             ></app-comment-modal>
 
             <button *ngIf="isOwner(post.owner)" (click)="deletePost(post._id)">

@@ -1,11 +1,20 @@
-<div class="modal-content">
-  <div class="post-content"></div>
-
-  <div class="comment-input">
-    <textarea
-      [(ngModel)]="commentText"
-      placeholder="Adicione um comentário..."
-    ></textarea>
-    <button (click)="postComment()">Comentar</button>
+<div *ngIf="isModalOpen" class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" >
+    <div class="post-content">
+      
+      {{ selectedPost?.content }}
+    </div>
+    <div class="comment-input">
+      <textarea
+        [(ngModel)]="commentText"
+        (input)="checkFormValidity()"
+        placeholder="Adicione um comentário..."
+        aria-label="Campo para adicionar comentário"
+        
+      ></textarea>
+      <button (click)="postComment()" aria-label="Botão para enviar comentário">
+        Comentar
+      </button>
+    </div>
   </div>
 </div>

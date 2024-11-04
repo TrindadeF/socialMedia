@@ -41,6 +41,12 @@ export class FeedComponent implements OnInit {
     this.showModal = false;
     this.resetForm();
   }
+
+  closeComentModal() {
+    this.showCommentModal = false;
+    this.resetForm();
+  }
+
   getUserIdFromAuthService(): string {
     return localStorage.getItem('userId') || '';
   }

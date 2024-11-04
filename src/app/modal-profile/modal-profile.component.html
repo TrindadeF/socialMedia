@@ -7,10 +7,15 @@
     <div class="gray-container">
       <div class="icon-container">
         
-        <button mat-icon-button class="like-button">
-          <mat-icon>thumb_up_alt</mat-icon>
-          <span>{{ post.likes.length || 0 }}</span>
-        </button>
+        <button
+              (click)="likePost(post.id)"
+              [class.liked]="post.likes && post.likes.includes(userId)"
+            >
+             
+              <mat-icon>thumb_up_alt</mat-icon>
+            </button>
+
+        
         
       
         <i class="comment-icon">💬</i>

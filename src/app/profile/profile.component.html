@@ -49,8 +49,17 @@
     <app-modal-profile
       [imageSrc]="selectedImage" 
       [show]="showImageViewer" 
-      (closeEvent)="closeImageViewer()"
+      (closeEvent)="closeImageViewer()" 
+      [postContent]="postContent"
+      [feedType]="currentFeedType"
+      (publish)="onPublish($event)"
+      (close)="closeModal()"
+
+
+      
     ></app-modal-profile>
+    
+    
 
     <div class="gallery">
       <h3>Feed</h3>

@@ -11,10 +11,37 @@ export class CommentModalComponent {
   @Input() postId!: string;
   @Input() feedType!: 'primaryFeed' | 'secondFeed';
   @Output() commentAdded = new EventEmitter<void>();
-
+  @Input() content: any;
+  @Input() postContent: any;
+  @Input() showModal: boolean = false;
+  @Input() title: string = '';
+  @Output() closeEvent = new EventEmitter<void>();
+  isModalOpen: boolean = true; 
+  selectedPost: any;
+  selectedPostId: string | null = null;
+  canPublish: boolean = false;
   commentText: string = '';
+  selectedMedia: any;
+  
+
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
+
+  closeModal() {
+    this.closeEvent.emit();
+    this.showModal = false;
+  }
+  
+  checkFormValidity() {
+    this.canPublish =
+      !!this.postContent.trim() || this.selectedMedia.length > 0;
+  }
+
+  
+
+
+
+
 
   postComment() {
     if (!this.commentText.trim()) {
@@ -42,4 +69,5 @@ export class CommentModalComponent {
       },
     });
   }
+      
 }
