@@ -3,6 +3,7 @@ import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
 import { Post } from 'database';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-feed',
@@ -29,7 +30,8 @@ export class FeedComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private http: HttpClient,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -63,6 +65,10 @@ export class FeedComponent implements OnInit {
 
     return isOwner;
   }
+  viewPostDetails(postId: string): void {
+    this.router.navigate([`primaryFeed/posts/${postId}/comments`]);
+  }
+
   openCommentModal(postId: string, feedType: 'primaryFeed' | 'secondFeed') {
     this.selectedPostId = postId;
     this.currentFeedType = feedType;

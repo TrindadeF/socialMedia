@@ -30,6 +30,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommentModalComponent } from './comment-modal/comment-modal.component';
 import { ModalProfileComponent } from './modal-profile/modal-profile.component';
+import { PostDetailComponent } from './post-detail/post-detail.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ModalProfileComponent } from './modal-profile/modal-profile.component';
     NotificationsComponent,
     CommentModalComponent,
     ModalProfileComponent,
+    PostDetailComponent,
   ],
   imports: [
     BrowserModule,
