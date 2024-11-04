@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chat</title>
-  <link rel="stylesheet" href="chat.component.css" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat</title>
+    <link rel="stylesheet" href="chat.component.css" />
+  </head>
+  <body>
+    <div class="chat-container">
+      <h2 class="chat-title">Chats</h2>
+      <ul class="chat-list">
+        <li
+          *ngFor="let chat of chats"
+          (click)="selectChat(chat)"
+          [class.active]="selectedChat === chat"
+          [class.selected]="selectedChat === chat"
+          class="chat-item"
+        >
+          Chat com {{ getParticipantNames(chat) }}
+        </li>
+      </ul>
+    </div>
 
-  <div class="chat-container">
-    <h2 class="chat-title">Chats</h2>
-    <ul class="chat-list">
-      <li
-        *ngFor="let chat of chats"
-        (click)="selectChat(chat)"
-        [class.active]="selectedChat === chat"
-        [class.selected]="selectedChat === chat"
-        class="chat-item"
-      >
-        Chat com {{ getParticipantNames(chat) }}
-      </li>
-    </ul>
-  </div>
+    <div *ngIf="selectedChat" class="messages-container">
+      <h3 class="messages-title">
+        Mensagens com {{ getParticipantNames(selectedChat) }}
+        <button (click)="deleteSelectedChat()" class="delete-chat-button">
+          Apagar Chat
+        </button>
+      </h3>
+      <div class="messages-list">
+        <div
+          *ngFor="let message of messages"
+          class="message"
+          [class.sent]="message.sender === currentUser._id"
+          [class.received]="message.sender !== currentUser._id"
+        >
+          <div class="message-content">
+            <strong class="message-sender">
+              {{ getParticipantNickname(message.sender) }}:
+            </strong>
+            <span>{{ message.content }}</span>
+          </div>
+        </div>
+      </div>
 
-  <div *ngIf="selectedChat" class="messages-container">
-    <h3 class="messages-title">
-      Mensagens com {{ getParticipantNames(selectedChat) }}
-    </h3>
-    <div class="messages-list">
-      <div
-        *ngFor="let message of messages"
-        class="message"
-        [class.sent]="message.sender === currentUser._id"
-        [class.received]="message.sender !== currentUser._id"
-      >
-        <div class="message-content">
-          <strong class="message-sender">
-            {{ getParticipantNickname(message.sender) }}:
-          </strong>
-          <span>{{ message.content }}</span>
+      <div class="input-container-wrapper">
+        <div class="input-container">
+          <input
+            [(ngModel)]="newMessage"
+            placeholder="Digite uma mensagem..."
+            class="message-input"
+          />
+          <button (click)="sendMessage()" class="send-button">Enviar</button>
         </div>
       </div>
     </div>
-
-    <!-- Campo de entrada e botão de envio, posicionado logo abaixo das mensagens -->
-    <div class="input-container-wrapper">
-      <div class="input-container">
-        <input
-          [(ngModel)]="newMessage"
-          placeholder="Digite uma mensagem..."
-          class="message-input"
-        />
-        <button (click)="sendMessage()" class="send-button">Enviar</button>
-      </div>
-    </div>
-  </div>
-
-</body>
+  </body>
 </html>

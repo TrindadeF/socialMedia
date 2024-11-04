@@ -250,4 +250,12 @@ export class ApiService {
   getOrCreateChat(userId1: string, userId2: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/chats`, { userId1, userId2 });
   }
+  deleteChat(userId1: string, userId2: string): Observable<void> {
+    return this.http.delete<void>(
+      `${this.apiSecondFeed}/chats/${userId1}/${userId2}`
+    );
+  }
+  getPostWithComments(postId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiFirstFeed}/posts/${postId}/comments`);
+  }
 }

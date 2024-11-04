@@ -1,0 +1,40 @@
+<div *ngIf="loading">Carregando...</div>
+<div *ngIf="error">{{ error }}</div>
+<div *ngIf="post">
+  <div class="post-detail-header">
+    <h1>{{ post.ownerName }}</h1>
+    <small>{{ post.createdAt | date : "short" }}</small>
+  </div>
+  <p>{{ post.content }}</p>
+
+  <div *ngIf="post.media && post.media.length > 0">
+    <img
+      *ngIf="isImage(post.media[0])"
+      [src]="post.media[0]"
+      alt="Imagem do post"
+    />
+    <video
+      *ngIf="!isImage(post.media[0])"
+      [src]="post.media[0]"
+      controls
+    ></video>
+  </div>
+
+  <h3>Comentários:</h3>
+  <div *ngFor="let comment of comments" class="comment">
+    <img
+      [src]="comment.owner?.profilePic"
+      alt="Avatar do comentário"
+      class="avatar"
+    />
+    <p>
+      <strong>{{ comment.owner?.nickName }}:</strong> {{ comment.content }}
+    </p>
+    <small>{{ comment.createdAt | date : "short" }}</small>
+  </div>
+
+  <div>
+    <input [(ngModel)]="newComment" placeholder="Adicionar um comentário" />
+    <button (click)="addComment()">Comentar</button>
+  </div>
+</div>

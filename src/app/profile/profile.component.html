@@ -21,7 +21,11 @@
         <p>Seguidores: {{ user.followerCount }}</p>
         <p class="username">{{ user?.username }}</p>
 
-        <button *ngIf="user._id !== getUserId()" (click)="toggleFollow()" class="follow-btn">
+        <button
+          *ngIf="user._id !== getUserId()"
+          (click)="toggleFollow()"
+          class="follow-btn"
+        >
           {{ isFollowing ? "Deixar de Seguir" : "Seguir" }}
         </button>
 
@@ -38,15 +42,14 @@
       [postContent]="postContent"
       (close)="closeModal()"
       (publish)="onPublish($event)"
-      
     ></app-modal>
 
     <button mat-icon-button (click)="openModal()" aria-label="Adicionar Post">
       <mat-icon>library_add</mat-icon>
     </button>
 
-    <!-- Modal para visualização de imagens -->
     <app-modal-profile
+<<<<<<< HEAD
       [imageSrc]="selectedImage" 
       [show]="showImageViewer" 
       (closeEvent)="closeImageViewer()" 
@@ -57,6 +60,11 @@
 
 
       
+=======
+      [imageSrc]="selectedImage"
+      [show]="showImageViewer"
+      (closeEvent)="closeImageViewer()"
+>>>>>>> 34c2f8d8e332ac7ec6f9baf7daab2dd75b0ff9ec
     ></app-modal-profile>
     
     
@@ -79,7 +87,6 @@
               controls
               class="post-video"
             ></video>
-            
           </div>
         </div>
       </div>

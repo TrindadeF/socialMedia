@@ -3,6 +3,7 @@ import { ApiService } from '../api.service';
 import { ActivatedRoute } from '@angular/router';
 import { Message, User, Chat } from 'database';
 import { io, Socket } from 'socket.io-client';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-chat',
@@ -15,10 +16,14 @@ export class ChatComponent implements OnInit, OnDestroy {
   newMessage: string = '';
   socket: Socket;
   participants: { id: string; nickname: string }[] = [];
-  selectedChat!: Chat;
+  selectedChat: Chat | null = null;
   chats: Chat[] = [];
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) {
+  constructor(
+    private apiService: ApiService,
+    private route: ActivatedRoute,
+    private http: HttpClient
+  ) {
     this.socket = io('http://localhost:3000');
   }
 
@@ -85,6 +90,32 @@ export class ChatComponent implements OnInit, OnDestroy {
     );
   }
 
+  deleteSelectedChat() {
+    if (!this.selectedChat) return;
+
+    const userId1 = this.currentUser._id;
+    const userId2 = this.selectedChat.participants.find(
+      (p: any) => p._id !== userId1
+    )?._id;
+
+    if (!userId2) {
+      console.error('Usuário destinatário não encontrado.');
+      return;
+    }
+
+    this.apiService.deleteChat(userId1, userId2).subscribe(
+      () => {
+        this.chats = this.chats.filter((chat) => chat !== this.selectedChat);
+        this.selectedChat = null as any;
+        this.messages = [];
+        console.log('Chat deletado com sucesso');
+      },
+      (error) => {
+        console.error('Erro ao deletar chat:', error);
+      }
+    );
+  }
+
   sendMessage(): void {
     if (!this.newMessage.trim()) {
       return;
@@ -119,9 +150,4 @@ export class ChatComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.socket.disconnect();
   }
-
-  
-  
-
-  
 }

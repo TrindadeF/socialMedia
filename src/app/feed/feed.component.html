@@ -78,6 +78,9 @@
             <mat-icon (click)="openCommentModal(post._id, 'primaryFeed')"
               >chat_bubble_outline</mat-icon
             >
+            <button (click)="viewPostDetails(post._id)">
+              <mat-icon>chat_bubble_outline</mat-icon> Ver Comentários
+            </button>
 
             <app-comment-modal
               *ngIf="showCommentModal"
