@@ -5,38 +5,62 @@
 
     <div class="post-detail-header">
       <img
-        [src]="post.ownerName.profilePic || 'assets/images/default-avatar.jpg'" 
+        [src]="post.ownerName.profilePic || 'assets/images/default-avatar.jpg'"
         [alt]="post.ownerName"
         class="avatar"
-      >
-      <h1 class="post-title">{{ post.ownerName }}</h1> 
-      <small class="post-date">{{ post.createdAt | date: "short" }}</small> 
+      />
+      <h1 class="post-title">{{ post.ownerName }}</h1>
+      <small class="post-date">{{ post.createdAt | date : "short" }}</small>
     </div>
-    
-    <p class="post-caption">{{ post.content }}</p> 
+    <p class="post-caption">{{ post.content }}</p>
 
     <div class="post-and-comments">
       <div *ngIf="post.media && post.media.length > 0" class="post-media">
-        <img *ngIf="isImage(post.media[0])" [src]="post.media[0]" alt="Imagem do post" />
-        <video *ngIf="!isImage(post.media[0])" [src]="post.media[0]" controls></video>
+        <img
+          *ngIf="isImage(post.media[0])"
+          [src]="post.media[0]"
+          alt="Imagem do post"
+        />
+        <video
+          *ngIf="!isImage(post.media[0])"
+          [src]="post.media[0]"
+          controls
+        ></video>
       </div>
-     
+
       <div class="comments-container">
         <h3>Comentários:</h3>
         <div *ngFor="let comment of comments" class="comment">
-          <img [src]="comment.owner?.profilePic" alt="Avatar do comentário" class="avatar" />
+          <img
+            [src]="
+              comment.owner?.profilePic || 'assets/images/default-avatar.jpg'
+            "
+            alt="Avatar do comentário"
+            class="avatar"
+          />
           <div class="comment-content">
             <hr class="comment-divider" />
             <p>
-              <strong>{{ comment.owner?.nickName }}:</strong> {{ comment.content }}
+              <strong>{{ comment.owner?.nickName }}:</strong>
+              {{ comment.content }}
             </p>
-            <small>{{ comment.createdAt | date: "short" }}</small>
+            <small>{{ comment.createdAt | date : "short" }}</small>
+
+            <button
+              *ngIf="isCommentOwner(comment.owner?._id)"
+              (click)="deleteComment(comment._id)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
         </div>
         <hr class="comment-divider" />
         
         <div class="comment-input">
-          <input [(ngModel)]="newComment" placeholder="Adicionar um comentário" />
+          <input
+            [(ngModel)]="newComment"
+            placeholder="Adicionar um comentário"
+          />
           <button (click)="addComment()">Comentar</button>
         </div>
         <hr class="comment-divider" />

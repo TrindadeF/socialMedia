@@ -35,10 +35,7 @@ export type Chat = {
   lastMessage: Message;
   messages: Message[];
   userName: string;
-  
 };
-
-
 
 export type Message = {
   sender: string;
