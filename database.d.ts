@@ -6,7 +6,7 @@ export type Post = {
   owner: string;
   createdAt: Date;
   likes: string[];
-  ownerName: string;
+  ownerName: User;
   imageUrl: string;
   videoUrl: string;
   comments: string;
@@ -33,10 +33,7 @@ export type Chat = {
   lastMessage: Message;
   messages: Message[];
   userName: string;
-  
 };
-
-
 
 export type Message = {
   sender: string;

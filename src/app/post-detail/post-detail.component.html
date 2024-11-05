@@ -3,6 +3,11 @@
 <div *ngIf="post">
   <div class="post-detail-header">
     <h1>{{ post.ownerName }}</h1>
+    <img
+      [src]="post.ownerName.profilePic"
+      alt="Avatar do usuário"
+      class="avatar"
+    />
     <small>{{ post.createdAt | date : "short" }}</small>
   </div>
   <p>{{ post.content }}</p>
