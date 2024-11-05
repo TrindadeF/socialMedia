@@ -7,7 +7,6 @@
         class="avatar"
       />
       <h1 class="post-title">{{ post.ownerName }}</h1>
-
       <small class="post-date">{{ post.createdAt | date : "short" }}</small>
     </div>
     <p class="post-caption">{{ post.content }}</p>
@@ -30,7 +29,9 @@
         <h3>Comentários:</h3>
         <div *ngFor="let comment of comments" class="comment">
           <img
-            [src]="comment.owner?.profilePic"
+            [src]="
+              comment.owner?.profilePic || 'assets/images/default-avatar.jpg'
+            "
             alt="Avatar do comentário"
             class="avatar"
           />
@@ -41,6 +42,13 @@
               {{ comment.content }}
             </p>
             <small>{{ comment.createdAt | date : "short" }}</small>
+
+            <button
+              *ngIf="isCommentOwner(comment.owner?._id)"
+              (click)="deleteComment(comment._id)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
         </div>
         <hr class="comment-divider" />

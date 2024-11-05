@@ -15,9 +15,7 @@ export class PostDetailComponent implements OnInit {
   loading: boolean = true;
   error: string | null = null;
   newComment: string = '';
-  user: any;
-
-
+  userId: string | undefined;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) {
     this.postId = this.route.snapshot.paramMap.get('postId') || '';
@@ -25,6 +23,9 @@ export class PostDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userId = this.getUserIdFromAuthService();
+    console.log('ID do usuário logado:', this.userId);
+
     if (this.postId) {
       this.loadPostDetails();
       this.loadComments();
@@ -32,6 +33,31 @@ export class PostDetailComponent implements OnInit {
       this.error = 'ID do post não encontrado na rota.';
       this.loading = false;
     }
+  }
+
+  getUserIdFromAuthService(): string {
+    return localStorage.getItem('userId') || '';
+  }
+
+  // Verifica se o usuário logado é o dono do comentário, com log para depuração
+  isCommentOwner(commentOwnerId: string): boolean {
+    const isOwner = commentOwnerId === this.userId;
+    console.log(`Verificando dono do comentário: ${isOwner ? 'Sim' : 'Não'}`);
+    return isOwner;
+  }
+
+  deleteComment(commentId: string) {
+    this.apiService.deleteComment(commentId).subscribe(
+      () => {
+        this.comments = this.comments.filter(
+          (comment) => comment._id !== commentId
+        );
+        console.log('Comentário deletado com sucesso.');
+      },
+      (error) => {
+        console.error('Erro ao deletar o comentário:', error);
+      }
+    );
   }
 
   loadPostDetails(): void {
@@ -59,29 +85,6 @@ export class PostDetailComponent implements OnInit {
     );
   }
 
-  likePost(): void {
-    this.apiService.likePostInFirstFeed(this.postId).subscribe(
-      () => {
-        console.log('Post curtido com sucesso!');
-        this.loadPostDetails();
-      },
-      (error: any) => {
-        console.error('Erro ao curtir o post:', error);
-      }
-    );
-  }
-
-  deletePost(): void {
-    this.apiService.deletePostFromFirstFeed(this.postId).subscribe(
-      () => {
-        console.log('Post apagado com sucesso!');
-      },
-      (error: any) => {
-        console.error('Erro ao apagar o post:', error);
-      }
-    );
-  }
-
   addComment(): void {
     if (this.newComment.trim()) {
       this.apiService
@@ -104,6 +107,4 @@ export class PostDetailComponent implements OnInit {
   isImage(url: string): boolean {
     return /\.(jpg|jpeg|png|gif)$/.test(url);
   }
-
-  
 }
