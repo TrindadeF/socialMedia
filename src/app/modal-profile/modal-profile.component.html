@@ -1,19 +1,30 @@
 <div class="modal" *ngIf="show">
   <div class="modal-content">
-    <span class="close" (click)="close()">&times;</span>
+    <span class="close" (click)="close()" aria-label="Fechar modal">&times;</span>
+
     <div class="image-container">
       <img [src]="imageSrc" alt="Imagem do perfil" />
     </div>
+    
     <div class="gray-container">
       <div class="icon-container">
-        
-        <button
-          (click)="likePost(post.id)">
-         <mat-icon>favorite</mat-icon>
-          {{ post.likes ? post.likes.length : 0 }}
+        <button (click)="likePost(post.id)" aria-label="Curtir postagem">
+          <mat-icon>favorite</mat-icon>
+     
         </button>
-              
-        <i class="comment-icon">💬</i>
+      </div>
+
+      <p class="post-caption">{{ post.content }}</p> 
+
+      <div class="comment-input">
+        <input [(ngModel)]="newComment" placeholder="Adicionar um comentário" />
+        <button (click)="addComment()">Comentar</button>
+      </div>
+      
+      <div class="comments-list">
+        <div *ngFor="let comment of comments">
+          <p>{{ comment }}</p>
+        </div>
       </div>
     </div>
   </div>

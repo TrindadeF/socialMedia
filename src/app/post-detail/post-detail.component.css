@@ -1,10 +1,35 @@
+/* Personalização de scroll com design moderno */
+.modal-content::-webkit-scrollbar,
+.comments-container::-webkit-scrollbar {
+  width: 8px; /* Largura da barra de rolagem */
+}
+
+.modal-content::-webkit-scrollbar-track,
+.comments-container::-webkit-scrollbar-track {
+  background: #1c1c1c; /* Cor do track (fundo do scroll) */
+  border-radius: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb,
+.comments-container::-webkit-scrollbar-thumb {
+  background-color: #5a5a5a; /* Cor do thumb (indicador) */
+  border-radius: 8px;
+  border: 2px solid #1c1c1c; /* Borda para um efeito mais moderno */
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover,
+.comments-container::-webkit-scrollbar-thumb:hover {
+  background-color: #757575; /* Cor do thumb ao passar o mouse */
+}
+
+/* Código original */
 .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8); /* Altere esta linha para preto */
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,7 +41,7 @@
   padding: 20px;
   border-radius: 8px;
   width: 90%;
-  max-width: 800px; 
+  max-width: 1000px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   position: relative;
   overflow-y: auto;
@@ -41,9 +66,12 @@
 
 .post-media img,
 .post-media video {
-  width: 100%; 
-  border-radius: 8px;
+  width: 103%;
+  height: 200%; /* Mantém a proporção da imagem */
+  max-height: 500px; /* Ajuste conforme desejado para controlar a altura */
+  border-radius: 5px;
   margin-top: 10px;
+  object-fit: cover; /* Garante que a imagem preencha a área sem distorções */
 }
 
 .post-and-comments {
@@ -101,7 +129,7 @@
   border: none;
   height: 2px;
   width: 290%; 
-  background: linear-gradient(to right, rgba(75, 74, 74, 0.559), white 80%, rgba(255, 255, 255, 0)); /* Ajuste 80% conforme desejado */
+  background: linear-gradient(to right, rgba(75, 74, 74, 0.559), white 80%, rgba(255, 255, 255, 0));
   margin: 10px 0;
   align-self: stretch; 
 }
@@ -137,4 +165,17 @@
   height: 50px; 
   border-radius: 50%; 
   margin-right: 10px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #fd2d2d9d;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.back-link:hover {
+  color: #ff7979;
+  text-decoration: underline;
 }

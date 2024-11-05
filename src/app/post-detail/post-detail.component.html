@@ -1,24 +1,25 @@
 <div *ngIf="post" class="modal-backdrop">
   <div class="modal-content">
+    
+    <a href="/feed" class="back-link">Voltar</a>
+
     <div class="post-detail-header">
-    <img
-    [src]="post.ownerName.profilePic || 'assets/images/default-avatar.jpg'" 
-    [alt]="post.ownerName"
-    class="avatar"
-    >
+      <img
+        [src]="post.ownerName.profilePic || 'assets/images/default-avatar.jpg'" 
+        [alt]="post.ownerName"
+        class="avatar"
+      >
       <h1 class="post-title">{{ post.ownerName }}</h1> 
-      
       <small class="post-date">{{ post.createdAt | date: "short" }}</small> 
     </div>
+    
     <p class="post-caption">{{ post.content }}</p> 
 
     <div class="post-and-comments">
-   
       <div *ngIf="post.media && post.media.length > 0" class="post-media">
         <img *ngIf="isImage(post.media[0])" [src]="post.media[0]" alt="Imagem do post" />
         <video *ngIf="!isImage(post.media[0])" [src]="post.media[0]" controls></video>
       </div>
-
      
       <div class="comments-container">
         <h3>Comentários:</h3>
@@ -33,11 +34,10 @@
           </div>
         </div>
         <hr class="comment-divider" />
-
+        
         <div class="comment-input">
           <input [(ngModel)]="newComment" placeholder="Adicionar um comentário" />
           <button (click)="addComment()">Comentar</button>
-          
         </div>
         <hr class="comment-divider" />
       </div>
