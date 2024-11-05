@@ -14,27 +14,27 @@ export class PresentationComponent implements OnInit {
     description: 'Encontrar a nossa alma gémea é sempre complicado.' 
   },
   { 
-    src: 'assets/imagems/ERO 2.jpg', // Adicione a URL da segunda imagem
+    src: 'assets/imagems/ERO 2.jpg', 
     alt: 'Imagem 2', 
     description: 'Existem várias aplicações, redes sociais, sites de encontro e mesmo assim, continuámos à procura do verdadeiro amor.' 
   },
   { 
-    src: 'assets/imagems/ERO 3.jpg', // Adicione a URL da terceira imagem
+    src: 'assets/imagems/ERO 3.jpg', 
     alt: 'Imagem 3', 
     description: 'Quando se fala de amor e da pessoa certa, perder tempo para quê? No Naked Love, livrámo-nos de todos os filtros e roupas para ver se existe uma forma mais instintiva de o encontrar.' 
   },
   { 
-    src: 'assets/imagems/ERO 4.jpg', // Adicione a URL da quarta imagem
+    src: 'assets/imagems/ERO 4.jpg',
     alt: 'Imagem 4', 
     description: 'Como encontramos a pessoa certa? Seria bom poder evitar erros, surpresas desagradáveis e sobretudo perda de tempo. No Naked Love, temos a forma ideal para encontrar a sua alma gémea.' 
   },
   { 
-    src: 'assets/imagems/ERO 5.jpg', // Adicione a URL da quinta imagem
+    src: 'assets/imagems/ERO 5.jpg', 
     alt: 'Imagem 5', 
     description: 'O que é preciso para nos apaixonarmos, o que desencadeia a faísca e o que nos influencia na escolha de um parceiro? No Naked Love, temos a oportunidade de descobrir um parceiro e começar como terminamos, nus.' 
   },
   { 
-    src: 'assets/imagems/ERO 6.jpg', // Adicione a URL da sexta imagem
+    src: 'assets/imagems/ERO 6.jpg', 
     alt: 'Imagem 6', 
     description: 'Quanto tempo demoramos para nos apaixonarmos? Para a ciência, segundos; para os poetas, uma vida inteira não é suficiente.' 
   },
@@ -49,13 +49,13 @@ export class PresentationComponent implements OnInit {
     setTimeout(() => {
       this.isLoading = false;
       this.startSlideshow();
-    }, 2000); // Simula um carregamento inicial de 2 segundos
+    }, 2000); 
   }
 
   startSlideshow(): void {
     this.slideshowInterval = setInterval(() => {
       this.nextImage();
-    }, 5000); // Troca a imagem a cada 5 segundos
+    }, 5000); 
   }
 
   nextImage(): void {
@@ -68,10 +68,10 @@ export class PresentationComponent implements OnInit {
 
   goToImage(index: number): void {
     this.currentIndex = index;
-    clearInterval(this.slideshowInterval); // Para o slideshow automático ao clicar manualmente
+    clearInterval(this.slideshowInterval); 
   }
 
   goToHomePage(): void {
-    this.router.navigate(['/home']); // Navega para a página inicial
+    this.router.navigate(['/home']); 
   }
 }

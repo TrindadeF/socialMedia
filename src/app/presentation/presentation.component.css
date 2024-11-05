@@ -1,18 +1,17 @@
-/* Define o fundo preto para o corpo da página */
 body {
     margin: 0;
     padding: 0;
-    background: black !important; /* Fundo preto */
-    color: white; /* Define o texto para branco */
+    background: black !important; 
+    color: white; 
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Altura da tela inteira */
+    height: 100vh; 
     overflow: hidden;
 }
 
-/* Estilo do carregamento com o coração */
+
 #loading {
     position: fixed;
     top: 0;
@@ -27,7 +26,7 @@ body {
     transition: opacity 1s ease;
 }
 
-/* Estilo para o coração */
+
 .heart {
     width: 100px;
     height: 100px;
@@ -63,7 +62,7 @@ body {
     100% { transform: scale(1) rotate(-45deg); }
 }
 
-/* Estilo para o contêiner do carrossel */
+
 .carousel-wrapper {
     position: relative;
     width: 80%;
@@ -73,22 +72,22 @@ body {
     overflow: hidden;
     border-radius: 10px;
     opacity: 0;
-    transform: translateY(50vh); /* Começa fora da tela, mais baixo */
+    transform: translateY(50vh); 
     transition: opacity 1s ease, transform 1s ease;
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.5) inset;
     animation: borderGlow 2s infinite;
     margin-top: 170px;
-    color: white; /* Define o texto do carrossel para branco */
+    color: white; 
     right: -600px;
 }
 
-/* Torna o carrossel visível ao carregamento */
+
 .carousel-wrapper.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Estilo para o contêiner das imagens */
+
 .container {
     position: relative;
     width: 100%;
@@ -100,7 +99,6 @@ body {
     background-color: black;
 }
 
-/* Estilo para a imagem dentro do carrossel */
 .image-container {
     position: relative;
     width: 100%;
@@ -126,12 +124,11 @@ body {
     50% { box-shadow: 0 0 30px rgba(255, 0, 0, 1); }
 }
 
-/* Zoom leve ao passar o mouse na imagem */
+
 .image-container:hover {
     transform: scale(1.05);
 }
 
-/* Estilo para o overlay das imagens */
 .overlay {
     position: absolute;
     top: 0;
@@ -139,7 +136,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    color: white; /* Define o texto do overlay para branco */
+    color: white;
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
@@ -156,12 +153,12 @@ body {
     opacity: 1;
 }
 
-/* Estilo para botões de seta */
+
 .arrow-btn {
     position: absolute;
     top: 50%;
     background: rgba(0, 0, 0, 0.6);
-    color: white; /* Define o texto do botão para branco */
+    color: white; 
     border: none;
     font-size: 2rem;
     cursor: pointer;
@@ -188,7 +185,7 @@ body {
     50% { opacity: 0.5; }
 }
 
-/* Estilo para pontos de navegação */
+
 .dots {
     position: absolute;
     bottom: 10px;
@@ -201,7 +198,7 @@ body {
 .dot {
     width: 10px;
     height: 10px;
-    background-color: white; /* Define a cor dos pontos para branco */
+    background-color: white; 
     border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -216,7 +213,7 @@ body {
     top: 70%;
     right: 30px;
     background: rgba(255, 0, 0, 0.8);
-    color: white; /* Define o texto do botão especial para branco */
+    color: white; 
     border: none;
     padding: 10px 20px;
     border-radius: 5px;

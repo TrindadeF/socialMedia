@@ -3,125 +3,125 @@ body {
   font-family: Arial, sans-serif;
   color: #ffffff;
   width: 100%;
-  height: 117vh; /* Altura da viewport */
-  margin: 0; /* Remove margens padrão */
-  padding: 0; /* Remove padding padrão */
+  height: 117vh; 
+  margin: 0; 
+  padding: 0; 
 }
 
 .container {
-  max-width: 500px; /* Largura máxima do contêiner */
-  margin: 0 auto; /* Centraliza o contêiner */
-  padding: 30px; /* Espaçamento interno */
-  background-color: #1e1e1e; /* Cor de fundo do contêiner */
-  border-radius: 8px; /* Bordas arredondadas */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Sombra suave */
-  min-height: 100px; /* Define uma altura mínima mais baixa */
+  max-width: 500px; 
+  margin: 0 auto; 
+  padding: 30px; 
+  background-color: #1e1e1e; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); 
+  min-height: 100px; 
 }
 
-/* Estilo para o título */
+
 h2 {
-  text-align: center; /* Centraliza o título */
-  color: #fa0606; /* Cor do título */
-  margin-bottom: 30px; /* Espaço abaixo do título */
+  text-align: center; 
+  color: #fa0606; 
+  margin-bottom: 30px; 
 }
 
-/* Estilo para grupos de formulário */
+
 .form-group {
-  margin-bottom: 20px; /* Espaço abaixo do grupo de campos */
+  margin-bottom: 20px; 
 }
 
-/* Estilo para rótulos */
+
 label {
-  font-weight: bold; /* Fonte em negrito */
-  color: #ffffff; /* Cor do texto do rótulo */
+  font-weight: bold; 
+  color: #ffffff; 
 }
 
-/* Estilo para campos de texto, e-mail e arquivo */
+
 input[type="text"],
 input[type="email"],
 input[type="file"],
-input[type="number"], /* Adicionado para o campo de idade */
+input[type="number"],
 select {
-  display: inline-block; /* Alinha o campo de entrada na mesma linha */
-  width: 100%; /* Largura completa */
-  padding: 12px; /* Espaçamento interno */
-  border: 1px solid #444; /* Borda suave */
-  border-radius: 4px; /* Bordas arredondadas */
-  background-color: #2c2c2c; /* Cor de fundo dos campos */
-  color: #ffffff; /* Cor do texto nos campos */
-  box-sizing: border-box; /* Para incluir o padding e a borda na largura total */
+  display: inline-block; 
+  width: 100%; 
+  padding: 12px; 
+  border: 1px solid #444; 
+  border-radius: 4px; 
+  background-color: #2c2c2c; 
+  color: #ffffff; 
+  box-sizing: border-box; 
 }
 
-/* Estilo para área de texto */
+
 textarea {
-  width: 100%; /* Largura total */
-  height: 100px; /* Altura fixa */
-  resize: none; /* Desativa o redimensionamento */
-  padding: 12px; /* Espaçamento interno */
-  border: 1px solid #444; /* Borda suave */
-  border-radius: 4px; /* Bordas arredondadas */
-  background-color: #2c2c2c; /* Cor de fundo do campo */
-  color: #ffffff; /* Cor do texto */
-  box-sizing: border-box; /* Inclui o padding e a borda na largura total */
+  width: 100%; 
+  height: 100px; 
+  resize: none; 
+  padding: 12px; 
+  border: 1px solid #444; 
+  border-radius: 4px; 
+  background-color: #2c2c2c; 
+  color: #ffffff; 
+  box-sizing: border-box; 
 }
 
-/* Estilo para botão primário */
+
 .btn-primary {
-  background-color: #fa0606; /* Cor de fundo do botão */
-  color: white; /* Cor do texto do botão */
-  border: none; /* Remove a borda padrão */
-  padding: 15px; /* Aumenta o espaçamento interno do botão */
-  border-radius: 6px; /* Bordas arredondadas mais pronunciadas */
-  cursor: pointer; /* Muda o cursor para indicar que é clicável */
-  transition: background-color 0.3s, transform 0.3s; /* Transições suaves para o efeito de hover */
-  width: 100%; /* Largura total do botão */
-  font-size: 16px; /* Aumenta o tamanho da fonte */
-  font-weight: bold; /* Deixa o texto em negrito */
-  text-align: center; /* Centraliza o texto dentro do botão */
+  background-color: #fa0606; 
+  color: white; 
+  border: none; 
+  padding: 15px; 
+  border-radius: 6px; 
+  cursor: pointer; 
+  transition: background-color 0.3s, transform 0.3s; 
+  width: 100%;
+  font-size: 16px; 
+  font-weight: bold; 
+  text-align: center; 
   display: flex;
-  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  justify-content: center;
 }
 
 .btn-primary:hover {
-  background-color: #b40505; /* Cor do botão ao passar o mouse */
-  transform: scale(1.05); /* Aumenta levemente o botão ao passar o mouse */
+  background-color: #b40505; 
+  transform: scale(1.05); 
 }
 
-/* Estilo para pré-visualização da foto de perfil */
+
 .profile-picture-preview {
   text-align: center;
   margin-bottom: 20px;
 }
 
 .profile-picture-preview img {
-  width: 150px; /* Define a largura da imagem */
-  height: 150px; /* Define a altura da imagem igual à largura */
-  border-radius: 50%; /* Faz a imagem ser redonda */
-  border: 2px solid #050505; /* Adiciona uma borda */
-  object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
+  width: 150px; 
+  height: 150px; 
+  border-radius: 50%; 
+  border: 2px solid #050505; 
+  object-fit: cover;
 }
 
 .btn-danger {
-  background-color: #f10000; /* Cor de fundo do botão de deletar */
-  color: white; /* Cor do texto do botão */
-  border: none; /* Remove a borda padrão */
-  padding: 15px; /* Aumenta o espaçamento interno do botão */
-  border-radius: 4px; /* Bordas arredondadas */
-  cursor: pointer; /* Muda o cursor para indicar que é clicável */
-  transition: background-color 0.3s, transform 0.3s; /* Transição suave para o efeito de hover */
-  width: 100%; /* Largura total do botão */
+  background-color: #f10000; 
+  color: white; 
+  border: none; 
+  padding: 15px; 
+  border-radius: 4px; 
+  cursor: pointer; 
+  transition: background-color 0.3s, transform 0.3s; 
+  width: 100%; 
   display: flex;
-  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  justify-content: center; 
 }
 
 .btn-danger:hover {
-  background-color: #d92e2e; /* Cor do botão ao passar o mouse */
-  transform: scale(1.05); /* Aumenta levemente o botão ao passar o mouse */
+  background-color: #d92e2e; 
+  transform: scale(1.05); 
 }
 
 .button-container {
-  display: flex; /* Usa flexbox para alinhar os botões */
-  justify-content: space-between; /* Espaça os botões igualmente */
-  margin-top: 20px; /* Espaço acima do contêiner de botões */
-  gap: 10px; /* Espaçamento entre os botões */
+  display: flex; 
+  justify-content: space-between; 
+  margin-top: 20px; 
+  gap: 10px; 
 }

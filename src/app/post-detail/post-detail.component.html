@@ -1,45 +1,59 @@
-<div *ngIf="loading">Carregando...</div>
-<div *ngIf="error">{{ error }}</div>
-<div *ngIf="post">
-  <div class="post-detail-header">
-    <h1>{{ post.ownerName }}</h1>
-    <img
-      [src]="post.ownerName.profilePic"
-      alt="Avatar do usuário"
-      class="avatar"
-    />
-    <small>{{ post.createdAt | date : "short" }}</small>
-  </div>
-  <p>{{ post.content }}</p>
+<div *ngIf="post" class="modal-backdrop">
+  <div class="modal-content">
+    <div class="post-detail-header">
+      <img
+        [src]="post.ownerName.profilePic || 'assets/images/default-avatar.jpg'"
+        [alt]="post.ownerName"
+        class="avatar"
+      />
+      <h1 class="post-title">{{ post.ownerName }}</h1>
 
-  <div *ngIf="post.media && post.media.length > 0">
-    <img
-      *ngIf="isImage(post.media[0])"
-      [src]="post.media[0]"
-      alt="Imagem do post"
-    />
-    <video
-      *ngIf="!isImage(post.media[0])"
-      [src]="post.media[0]"
-      controls
-    ></video>
-  </div>
+      <small class="post-date">{{ post.createdAt | date : "short" }}</small>
+    </div>
+    <p class="post-caption">{{ post.content }}</p>
 
-  <h3>Comentários:</h3>
-  <div *ngFor="let comment of comments" class="comment">
-    <img
-      [src]="comment.owner?.profilePic"
-      alt="Avatar do comentário"
-      class="avatar"
-    />
-    <p>
-      <strong>{{ comment.owner?.nickName }}:</strong> {{ comment.content }}
-    </p>
-    <small>{{ comment.createdAt | date : "short" }}</small>
-  </div>
+    <div class="post-and-comments">
+      <div *ngIf="post.media && post.media.length > 0" class="post-media">
+        <img
+          *ngIf="isImage(post.media[0])"
+          [src]="post.media[0]"
+          alt="Imagem do post"
+        />
+        <video
+          *ngIf="!isImage(post.media[0])"
+          [src]="post.media[0]"
+          controls
+        ></video>
+      </div>
 
-  <div>
-    <input [(ngModel)]="newComment" placeholder="Adicionar um comentário" />
-    <button (click)="addComment()">Comentar</button>
+      <div class="comments-container">
+        <h3>Comentários:</h3>
+        <div *ngFor="let comment of comments" class="comment">
+          <img
+            [src]="comment.owner?.profilePic"
+            alt="Avatar do comentário"
+            class="avatar"
+          />
+          <div class="comment-content">
+            <hr class="comment-divider" />
+            <p>
+              <strong>{{ comment.owner?.nickName }}:</strong>
+              {{ comment.content }}
+            </p>
+            <small>{{ comment.createdAt | date : "short" }}</small>
+          </div>
+        </div>
+        <hr class="comment-divider" />
+
+        <div class="comment-input">
+          <input
+            [(ngModel)]="newComment"
+            placeholder="Adicionar um comentário"
+          />
+          <button (click)="addComment()">Comentar</button>
+        </div>
+        <hr class="comment-divider" />
+      </div>
+    </div>
   </div>
 </div>

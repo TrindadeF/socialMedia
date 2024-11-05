@@ -26,6 +26,7 @@ export class FeedComponent implements OnInit {
   currentFeedType: 'primaryFeed' | 'secondFeed' = 'primaryFeed';
   showCommentModal = false;
   selectedPostId: string = '';
+ 
 
   constructor(
     private apiService: ApiService,
@@ -43,6 +44,12 @@ export class FeedComponent implements OnInit {
     this.showModal = false;
     this.resetForm();
   }
+
+  closeCommentModal() {
+    this.showCommentModal = false;
+    this.resetForm();
+  }
+
   getUserIdFromAuthService(): string {
     return localStorage.getItem('userId') || '';
   }

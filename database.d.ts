@@ -11,6 +11,8 @@ export type Post = {
   videoUrl: string;
   comments: string;
   ownerProfileImageUrl: string;
+  
+  
 };
 
 export type User = {

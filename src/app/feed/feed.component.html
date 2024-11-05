@@ -67,28 +67,25 @@
           </div>
 
           <div class="post-actions">
+            
             <button
               (click)="likePost(post._id)"
               [class.liked]="post.likes && post.likes.includes(userId)"
             >
-              {{ post.likes.length || 0 }}
-              <mat-icon>thumb_up_alt</mat-icon>
+            <mat-icon>thumb_up_alt</mat-icon>
+            {{ post.likes ? post.likes.length : 0 }}
+              
             </button>
 
-            <mat-icon (click)="openCommentModal(post._id, 'primaryFeed')"
-              >chat_bubble_outline</mat-icon
-            >
+           
+            
             <button (click)="viewPostDetails(post._id)">
-              <mat-icon>chat_bubble_outline</mat-icon> Ver Comentários
+              <mat-icon>chat_bubble_outline</mat-icon> 
+              {{ post.comments ? post.comments.length : 0 }}
+              
             </button>
 
-            <app-comment-modal
-              *ngIf="showCommentModal"
-              [postId]="selectedPostId"
-              [feedType]="currentFeedType"
-              (commentAdded)="onCommentAdded()"
-            ></app-comment-modal>
-
+            
             <button *ngIf="isOwner(post.owner)" (click)="deletePost(post._id)">
               Deletar
             </button>
