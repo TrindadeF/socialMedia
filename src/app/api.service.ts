@@ -269,8 +269,15 @@ export class ApiService {
     return this.http.get<{ hasActiveSubscription: boolean }>(
       `/stripe/subscription-status`
     );
+
+    
   }
+
   getPostDetails(postId: string): Observable<any> {
     return this.http.get<any>(`${this.apiSecondFeed}/posts/${postId}/comments`);
   }
+
+  
+
+  
 }

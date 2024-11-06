@@ -39,6 +39,7 @@ export class PostDetailComponent implements OnInit {
     return localStorage.getItem('userId') || '';
   }
 
+ 
   isCommentOwner(commentOwnerId: string): boolean {
     const isOwner = commentOwnerId === this.userId;
     return isOwner;

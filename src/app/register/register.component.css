@@ -9,6 +9,9 @@ body {
   margin: 0;
   position: relative;
   animation: fadeInBackground 2s ease-out;
+  background-size: cover; 
+  background-position: center; 
+  background-attachment: fixed; 
 }
 
 img {
@@ -26,50 +29,34 @@ img {
   transition: transform 0.3s, filter 0.3s;
 }
 
-#top-image {
-  top: -50px;
-  right: 0;
-  width: 760px;
-  animation: fadeInTopImage 4s ease-out forwards;
-}
+
 
 #couple-image {
-  top: -50px;
-  left: 0;
-  width: 800px;
+  top: 10px;
+  left: 50;
+  width: 47%;
+ 
+  
   animation: fadeInCoupleImage 6s ease-out forwards;
 }
 
 #sexy-image {
   bottom: 0;
   left: 0;
-  width: 200px;
+  width: 50vw;
+  height: 50vh;
+  
   animation: fadeInSexyImage 1s ease-out forwards;
 }
 
-#footer-image {
-  bottom: 30px;
-  right: 230px;
-  width: 450px;
-  background: url("/src/assets/images/proibido.png") no-repeat center center;
-  background-size: cover;
-  animation: fadeInImage 1s ease-out forwards;
-  border: none;
-  box-shadow: none;
-}
 
-#top-image:hover,
-#couple-image:hover,
-#sexy-image:hover,
-#footer-image:hover {
-  transform: scale(1.05);
-  filter: brightness(1.2);
-}
+
 
 #form-container {
-  max-width: 400px;
+  max-width: 480px;
   width: 100%;
-  background-color: #141313;
+  height: 71%;
+  background-color: rgba(20, 19, 19, 0.7); 
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(128, 128, 128, 0.5);
@@ -77,7 +64,16 @@ img {
   animation: fadeInContainer 1.5s 0.1s ease-out forwards;
   z-index: 2;
   transform: translateY(-150px);
+  position: absolute;
+  left: 0.5%;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
+
+#form-container:hover {
+  transform: scale(0.98); 
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8); 
+}
+
 
 .profile-container {
   position: relative;
@@ -86,17 +82,7 @@ img {
   top: 20px;
 }
 
-.profile-picture {
-  width: 120px;
-  height: 120px;
-  background: url("/NakedLove/no user.png") no-repeat center center;
-  background-size: cover;
-  border-radius: 50%;
-  border: 1.8px solid #fbf8f83f;
-  box-shadow: 0 0 10px rgba(246, 245, 245, 0.6);
-  animation: shadowAnimation 1s infinite;
-  transition: transform 0.3s, filter 0.3s;
-}
+
 
 .profile-container:hover .profile-picture {
   transform: scale(1.05);
@@ -114,30 +100,6 @@ button:hover,
   filter: brightness(1.2);
 }
 
-#symbol-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  bottom: 10px;
-  width: 100%;
-  z-index: 3;
-}
-
-#zoom-symbol {
-  font-size: 100px;
-  color: #800000;
-  text-shadow: 1px 1px 0 #000000, -1px -1px 0 #000000, 1px -1px 0 #000000,
-    -1px 1px 0 #000000, 0 1px 0 #000000, 0 -1px 0 #000000, 1px 0 0 #000000,
-    -1px 0 0 #000000;
-  opacity: 0;
-  animation: fadeInSymbol 1s ease-out forwards, neonAnimation 1.5s infinite;
-  transition: transform 0.4s ease;
-}
-
-#zoom-symbol:hover {
-  transform: scale(1.2);
-}
 
 textarea {
   width: 100%;
@@ -168,12 +130,6 @@ button:hover {
   background-color: #e00404;
 }
 
-#photo-button img {
-  width: 20px;
-  height: 20px;
-  vertical-align: middle;
-  margin-right: 5px;
-}
 
 .file-input-label {
   background-color: #d73f3f;
@@ -286,4 +242,9 @@ button:hover {
     text-shadow: 0 0 5px #1f0101, 0 0 10px #120000, 0 0 15px #0c0101,
       0 0 20px #180202, 0 0 25px #070707, 0 0 30px #800000;
   }
+
+  
+
+
+  
 }
