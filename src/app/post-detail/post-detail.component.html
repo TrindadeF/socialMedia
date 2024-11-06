@@ -49,6 +49,8 @@
             <button
               *ngIf="isCommentOwner(comment.owner?._id)"
               (click)="deleteComment(comment._id)"
+              class="delete-button"
+              title="Excluir comentário"
             >
               <mat-icon>delete</mat-icon>
             </button>
