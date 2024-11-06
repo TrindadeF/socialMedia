@@ -179,3 +179,30 @@
   color: #ff7979;
   text-decoration: underline;
 }
+
+/* Botão de deletar pequeno e redondo */
+.delete-button {
+  background-color: #ff4c4c; /* Cor de fundo vermelha */
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+.delete-button mat-icon {
+  color: #ffffff; /* Cor do ícone */
+  font-size: 20px; /* Aumenta o tamanho do ícone */
+}
+
+.delete-button:hover {
+  background-color: #ff6666; /* Cor ao passar o mouse */
+}
+
+.delete-button:active {
+  transform: scale(0.9); /* Animação de clique */
+}
