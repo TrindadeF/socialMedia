@@ -39,7 +39,7 @@ export class PostDetailComponent implements OnInit {
     return localStorage.getItem('userId') || '';
   }
 
-  // Verifica se o usuário logado é o dono do comentário, com log para depuração
+ 
   isCommentOwner(commentOwnerId: string): boolean {
     const isOwner = commentOwnerId === this.userId;
     console.log(`Verificando dono do comentário: ${isOwner ? 'Sim' : 'Não'}`);
