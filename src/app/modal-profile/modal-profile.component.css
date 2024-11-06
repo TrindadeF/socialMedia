@@ -118,3 +118,25 @@
 .comment-input button:hover {
   background-color: #fa817d; /* Cor de fundo do botão ao passar o mouse */
 }
+
+.icon-container input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 6px;
+  background-color: #2f2f2f;
+  color: #e0e0e0;
+}
+.icon-container button {
+  padding: 10px 15px;
+  background-color: #ff000091;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.icon-container button:hover {
+  background-color: #fa817d;
+}
