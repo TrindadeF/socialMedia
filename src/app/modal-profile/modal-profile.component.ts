@@ -8,72 +8,56 @@ import { Post, User } from 'database';
   styleUrls: ['./modal-profile.component.css'],
 })
 export class ModalProfileComponent {
-  @Input() imageSrc!: string; 
-  @Input() show: boolean = false; 
+  @Input() imageSrc!: string;
+  @Input() show: boolean = false;
   @Output() closeEvent = new EventEmitter<void>();
-  @Input() post!: Post;
+  @Input() postContent: string = '';
+  @Input() feedType: 'primaryFeed' | 'secondFeed' = 'primaryFeed';
+  @Input() postId!: string;
+  @Output() publish = new EventEmitter<{
+    content: string | null;
+    media: File[];
+    feedType: 'primaryFeed' | 'secondFeed';
+  }>();
   userId: string = '';
-  selectedPostId: string = '';
-  posts: Post[] = [];
   users: User[] = [];
   currentUser!: User;
   mutualLikes: { [key: string]: boolean } = {};
-  @Input() postContent: string = '';
-  @Input() feedType: 'primaryFeed' | 'secondFeed' = 'primaryFeed'
+  comments: string[] = [];
+  newComment: string = '';
+  post!: Post;
 
-  comments: string[] = []; 
-  newComment: string = ''; 
-  apiService: any;
-  @Output() publish = new EventEmitter<{ content: string | null; media: File[]; feedType: 'primaryFeed' | 'secondFeed' }>();
-
-  open() {
-    this.show = true;
+  constructor(private apiService: ApiService) {}
+  ngOnInit(): void {
+    if (this.postId) {
+      this.getPostDetails(this.postId);
+    }
   }
-
   close() {
     this.show = false;
     this.closeEvent.emit();
   }
 
   likePost(postId: string) {
-    this.apiService.likePostInSecondFeed(postId).subscribe({
-      next: () => console.log(`Post ${postId} curtido com sucesso!`),
-      error: (error:any) => console.error(`Erro ao curtir o post:`, error),
-    });
+    if (postId)
+      this.apiService.likePostInSecondFeed(postId).subscribe({
+        next: () => console.log(`Post ${postId} curtido com sucesso!`),
+        error: (error: any) => console.error(`Erro ao curtir o post:`, error),
+      });
   }
 
-  
-  addComment() {
-    if (this.newComment.trim() !== '') {
-      this.comments.push(this.newComment);
-      this.newComment = '';
+  getPostDetails(postId: string): void {
+    if (postId) {
+      this.apiService.getPostDetails(postId).subscribe(
+        (response: { post: Post; comments: string[] }) => {
+          console.log('Dados recebidos do post:', response.post);
+          this.post = response.post;
+          this.comments = response.comments;
+        },
+        (error: any) => {
+          console.error('Erro ao carregar post e comentários:', error);
+        }
+      );
     }
   }
-
- 
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

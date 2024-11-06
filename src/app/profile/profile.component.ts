@@ -30,10 +30,7 @@ export class ProfileComponent implements OnInit {
   selectedImageUrl: string = '';
   selectedImage: string = '';
   showImageViewer: boolean = false;
-  selectedPost: Post | null = null; 
-  
-
-
+  selectedPost: string = '';
 
   constructor(
     private apiService: ApiService,
@@ -64,6 +61,10 @@ export class ProfileComponent implements OnInit {
 
   public getUserId(): string {
     return localStorage.getItem('userId') || '';
+  }
+
+  openModal() {
+    this.showModal = true;
   }
 
   closeModal() {
@@ -163,12 +164,6 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  openModal() {
-    this.showModal = true;
-    this.postContent = '';
-  }
-  
-
   onPublish(event: {
     content: string | null;
     media: File[];
@@ -219,15 +214,20 @@ export class ProfileComponent implements OnInit {
   }
 
   isImage(url: string): boolean {
-    return url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.png'); // Adicione outras extensões conforme necessário
+    return (
+      url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.png')
+    );
   }
-  openImageViewer(imageUrl: string) {
-    this.selectedImage = imageUrl; 
-    this.showImageViewer = true; 
+  openImageViewer(postId: string) {
+    console.log('Imagem clicada, ID do post:', postId);
+    this.selectedPost = postId;
+    this.showImageViewer = true;
+    console.log('Modal aberto:', this.isModalOpen);
   }
 
   closeImageViewer() {
     this.showImageViewer = false;
+    console.log('Modal fechado:', this.isModalOpen);
   }
 
   likePost(postId: string) {
@@ -250,13 +250,4 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
-
-
-
 }
-
-
-
-
-
-

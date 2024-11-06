@@ -48,21 +48,6 @@
       <mat-icon>library_add</mat-icon>
     </button>
 
-    <app-modal-profile
-      [imageSrc]="selectedImage" 
-      [show]="showImageViewer" 
-      (closeEvent)="closeImageViewer()" 
-      [postContent]="postContent"
-      [feedType]="currentFeedType"
-      (publish)="onPublish($event)"
-      (close)="closeModal()"
-
-
-      
-    ></app-modal-profile>
-    
-    
-
     <div class="gallery">
       <h3>Feed</h3>
       <div class="gallery-grid">
@@ -73,13 +58,14 @@
               [src]="mediaUrl"
               alt="Imagem do Post"
               class="post-image"
-              (click)="openImageViewer(mediaUrl)"
+              (click)="openImageViewer(post._id)"
             />
             <video
               *ngIf="!isImage(mediaUrl)"
               [src]="mediaUrl"
               controls
               class="post-video"
+              (click)="openImageViewer(post._id)"
             ></video>
           </div>
         </div>
@@ -87,3 +73,11 @@
     </div>
   </div>
 </div>
+
+<app-modal-profile
+  *ngIf="showImageViewer"
+  [show]="showImageViewer"
+  [postId]="selectedPost"
+  (closeEvent)="closeImageViewer()"
+>
+</app-modal-profile>

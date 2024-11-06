@@ -1,19 +1,23 @@
 <div class="modal" *ngIf="show">
   <div class="modal-content">
     <span class="close" (click)="close()">&times;</span>
-    <div class="image-container">
-      <img [src]="imageSrc" alt="Imagem do perfil" />
+
+    <div class="image-container" *ngIf="post?.media?.length">
+      <img [src]="post.media[0]" alt="Imagem do Post" class="post-image" />
     </div>
+
     <div class="gray-container">
+      <div class="content-container">
+        <ng-container *ngIf="post">
+          <p>{{ post.ownerName }} : {{ post.content }}</p>
+          <p>Likes: {{ post.likes }}</p>
+          <p>Data de criação: {{ post.createdAt | date : "short" }}</p>
+        </ng-container>
+      </div>
       <div class="icon-container">
-        
-        <button
-          (click)="likePost(post.id)">
-         <mat-icon>favorite</mat-icon>
-          {{ post.likes ? post.likes.length : 0 }}
+        <button (click)="likePost(post._id)">
+          <mat-icon>favorite</mat-icon>
         </button>
-              
-        <i class="comment-icon">💬</i>
       </div>
     </div>
   </div>
