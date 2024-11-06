@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Post, User } from 'database';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-modal-profile',

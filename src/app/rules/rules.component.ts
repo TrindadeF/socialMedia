@@ -28,8 +28,8 @@ export class RulesComponent {
     if (this.currentIndex < this.items.length - 1) {
       this.currentIndex++;
     } else {
-     
-      this.router.navigate(['/profile']);
+      // Alteração aqui para redirecionar para a rota 'presentation'
+      this.router.navigate(['/presentation']);
     }
   }
 

@@ -14,7 +14,7 @@ export class PresentationComponent implements OnInit {
     description: 'Encontrar a nossa alma gémea é sempre complicado.' 
   },
   { 
-    src: 'assets/imagems/ERO 2.jpg', 
+    src: 'assets/imagems/ERO 2.avif', 
     alt: 'Imagem 2', 
     description: 'Existem várias aplicações, redes sociais, sites de encontro e mesmo assim, continuámos à procura do verdadeiro amor.' 
   },

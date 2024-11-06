@@ -1,14 +1,15 @@
 <div class="carousel-wrapper" [ngClass]="{ 'visible': !isLoading }">
+  <button class="arrow-btn left" (click)="prevImage()">&#10094;</button> <!-- Botão de voltar -->
+
   <div class="container">
     <div class="image-container" *ngIf="currentIndex === 0">
       <img src="assets/images/ERO 1.jpg" alt="Imagem 1" />
       <div class="overlay">
-        
         <p>Encontrar a nossa alma gémea é sempre complicado.</p>
       </div>
     </div>
     <div class="image-container" *ngIf="currentIndex === 1">
-      <img src="assets/images/ERO 2.jpg" alt="Imagem 2" />
+      <img src="assets/images/ERO 2.avif" alt="Imagem 2" />
       <div class="overlay">
         <p>Existem várias aplicações, redes sociais, sites de encontro e mesmo assim, continuámos à procura do verdadeiro amor.</p>
       </div>
@@ -39,9 +40,8 @@
     </div>
   </div>
 
-  <button id="prevBtn" class="arrow-btn" (click)="prevImage()">&#10094;</button>
-  <button id="nextBtn" class="arrow-btn" (click)="nextImage()">&#10095;</button>
-  
+  <button class="arrow-btn right" (click)="nextImage()">&#10095;</button> <!-- Botão de avançar -->
+
   <div class="dots">
     <span *ngFor="let image of images; let i = index" 
           class="dot" 

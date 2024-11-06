@@ -258,7 +258,12 @@ export class ApiService {
   getPostWithComments(postId: string): Observable<any> {
     return this.http.get<any>(`${this.apiFirstFeed}/posts/${postId}/comments`);
   }
-  getPostDetails(postId: string): Observable<any> {
-    return this.http.get<any>(`${this.apiSecondFeed}/posts/${postId}/comments`);
+  deleteComment(commentId: string): Observable<any> {
+    return this.http.delete(`${this.apiFirstFeed}/comments/${commentId}`);
+  }
+  checkSubscriptionStatus() {
+    return this.http.get<{ hasActiveSubscription: boolean }>(
+      `/stripe/subscription-status`
+    );
   }
 }

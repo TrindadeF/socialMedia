@@ -12,12 +12,12 @@ body {
 }
 
 .chat-container {
-  width: 130%; /* Largura reduzida da lista de chats */
+  width: 130%; 
   background-color: rgba(20, 20, 20, 0.9);
   padding: 20px;
   overflow-y: auto;
   border-right: 1px solid #ccc;
-  height: 95vh; /* Altura da lista para ocupar a tela inteira */
+  height: 95vh; 
 }
 
 .chat-title {
@@ -50,23 +50,23 @@ body {
 }
 
 .messages-container {
-  width: 800%; /* Aumentar a largura do chat ativo */
+  width: 800%; 
   background: rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Altura do chat ativo para ocupar a tela inteira */
-  margin: 0 auto; /* Centraliza o contêiner na página */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Adiciona uma sombra para destaque */
-  overflow-y: auto; /* Permite rolagem vertical se necessário */
-  border-radius: 8px; /* Adiciona bordas arredondadas */
+  height: 100vh; 
+  margin: 0 auto; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+  overflow-y: auto; 
+  border-radius: 8px; 
 }
 
 .messages-list {
-  flex-grow: 1; /* Permite que a lista de mensagens ocupe o espaço restante */
-  overflow-y: auto; /* Permite rolagem vertical */
-  margin-right: -10px; /* Remove espaço extra à direita */
-  margin-bottom: 10px; /* Espaço inferior para não encostar na entrada de mensagem */
-  padding-right: 10px; /* Espaço para a barra de rolagem */
+  flex-grow: 1; 
+  overflow-y: auto; 
+  margin-right: -10px; 
+  margin-bottom: 10px; 
+  padding-right: 10px; 
 }
 
 .message {
@@ -80,21 +80,21 @@ body {
 .sent {
   background-color: #af564c;
   color: #fff;
-  align-self: flex; /* Alinha o balão à direita */
+  align-self: flex; 
   text-align: left;
   border-radius: 15px 0 15px 15px;
-  margin-left: 80%; /* Garante que o balão fique à direita */
-  max-width: 10%; /* Limita a largura máxima do balão */
-  padding: 10px; /* Ajuste do espaçamento interno */
+  margin-left: 80%; 
+  max-width: 10%; 
+  padding: 10px; 
 }
 
 .received {
   background-color: #b1b0b081;
   color: #faf8f8;
-  align-self: flex-start; /* Alinha à esquerda */
+  align-self: flex-start; 
   text-align: left;
   border-radius: 0 15px 15px 15px;
-  margin-left: 155px; /* Ajuste o valor conforme desejado */
+  margin-left: 155px; 
 }
 
 .message-sender {
