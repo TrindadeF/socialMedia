@@ -261,6 +261,10 @@ export class ApiService {
   deleteComment(commentId: string): Observable<any> {
     return this.http.delete(`${this.apiFirstFeed}/comments/${commentId}`);
   }
+  deleteCommentSecondFeed(commentId: string): Observable<any> {
+    const url = `${this.apiSecondFeed}/comments/${commentId}`;
+    return this.http.delete(url);
+  }
   checkSubscriptionStatus() {
     return this.http.get<{ hasActiveSubscription: boolean }>(
       `/stripe/subscription-status`

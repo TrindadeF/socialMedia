@@ -75,7 +75,6 @@ export class ModalProfileComponent {
     if (postId) {
       this.apiService.getPostDetails(postId).subscribe(
         (response: { post: Post; comments: string[] }) => {
-          console.log('Dados recebidos do post:', response.post);
           this.post = response.post;
           this.comments = response.comments;
         },
@@ -84,5 +83,22 @@ export class ModalProfileComponent {
         }
       );
     }
+  }
+
+  canDeleteComment(commentOwnerId: string): boolean {
+    return this.userId === commentOwnerId;
+  }
+
+  deleteComment(commentId: string) {
+    this.apiService.deleteComment(commentId).subscribe({
+      next: () => {
+        this.comments = this.comments.filter(
+          (comment) => comment._id !== commentId
+        );
+      },
+      error: (error) => {
+        console.error('Erro ao excluir comentário:', error);
+      },
+    });
   }
 }

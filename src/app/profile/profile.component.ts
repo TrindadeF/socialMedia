@@ -219,15 +219,12 @@ export class ProfileComponent implements OnInit {
     );
   }
   openImageViewer(postId: string) {
-    console.log('Imagem clicada, ID do post:', postId);
     this.selectedPost = postId;
     this.showImageViewer = true;
-    console.log('Modal aberto:', this.isModalOpen);
   }
 
   closeImageViewer() {
     this.showImageViewer = false;
-    console.log('Modal fechado:', this.isModalOpen);
   }
 
   likePost(postId: string) {
