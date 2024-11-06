@@ -245,7 +245,7 @@ export class ApiService {
   }
   addCommentInSecondFeed(postId: string, content: string): Observable<any> {
     const url = `${this.apiSecondFeed}/posts/${postId}/comments`;
-    return this.http.post(url, { content });
+    return this.http.post(url, { postId, content });
   }
   getOrCreateChat(userId1: string, userId2: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/chats`, { userId1, userId2 });

@@ -42,7 +42,6 @@ export class PostDetailComponent implements OnInit {
  
   isCommentOwner(commentOwnerId: string): boolean {
     const isOwner = commentOwnerId === this.userId;
-    console.log(`Verificando dono do comentário: ${isOwner ? 'Sim' : 'Não'}`);
     return isOwner;
   }
 

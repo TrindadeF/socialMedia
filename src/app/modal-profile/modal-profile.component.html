@@ -12,21 +12,30 @@
           <p>{{ post.ownerName }} : {{ post.content }}</p>
           <p>Likes: {{ post.likes }}</p>
           <p>Data de criação: {{ post.createdAt | date : "short" }}</p>
+          <div class="icon-container">
+            <button (click)="likePost(postId)">
+              <mat-icon>favorite</mat-icon>
+            </button>
+            <input
+              #commentInput
+              type="text"
+              placeholder="Adicionar comentário"
+            />
+            <button (click)="addComment(postId, commentInput.value)">
+              <mat-icon> chat_bubble_outline</mat-icon>
+            </button>
+          </div>
         </ng-container>
-      </div>
-      <div class="icon-container">
-        <button (click)="likePost(post._id)">
-          <mat-icon>favorite</mat-icon>
-        </button>
-
-      
-
-  
-        
-
-
-
-
+        <div *ngFor="let comment of comments" class="comment">
+          <div class="comment-content">
+            <hr class="comment-divider" />
+            <p>
+              <strong>{{ comment.owner?.nickName }}:</strong>
+              {{ comment.content }}
+            </p>
+            <small>{{ comment.createdAt | date : "short" }}</small>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -24,9 +24,10 @@ export class ModalProfileComponent {
   users: User[] = [];
   currentUser!: User;
   mutualLikes: { [key: string]: boolean } = {};
-  comments: string[] = [];
+  comments: any[] = [];
   newComment: string = '';
   post!: Post;
+  detailedComments: any;
 
   constructor(private apiService: ApiService) {}
   ngOnInit(): void {
@@ -45,6 +46,29 @@ export class ModalProfileComponent {
         next: () => console.log(`Post ${postId} curtido com sucesso!`),
         error: (error: any) => console.error(`Erro ao curtir o post:`, error),
       });
+  }
+
+  loadPostDetails() {
+    this.apiService.getPostDetails(this.post._id).subscribe({
+      next: (response) => {
+        this.post = response.post;
+        this.comments = response.comments;
+      },
+      error: (error) => {
+        console.error('Erro ao carregar detalhes do post:', error);
+      },
+    });
+  }
+  addComment(postId: string, content: string) {
+    this.apiService.addCommentInSecondFeed(postId, content).subscribe({
+      next: (response) => {
+        console.log('Comentário adicionado com sucesso:', response);
+        this.loadPostDetails;
+      },
+      error: (error) => {
+        console.error('Erro ao adicionar o comentário:', error);
+      },
+    });
   }
 
   getPostDetails(postId: string): void {
