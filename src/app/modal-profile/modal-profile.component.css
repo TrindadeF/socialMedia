@@ -82,12 +82,35 @@
   background-color: #3f3f3f; /* Fundo da lista de comentários */
 }
 
-.comments-list p {
-  margin: 5px 0; /* Margem em torno de cada comentário */
-  padding: 8px; /* Espaçamento interno */
-  background-color: #4a4a4a; /* Fundo dos comentários individuais */
-  border-radius: 6px; /* Bordas arredondadas para cada comentário */
-  color: #e0e0e0; /* Cor do texto dos comentários */
+.comment {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaço entre a imagem e o conteúdo do comentário */
+  padding: 10px 0;
+}
+
+.comment .avatar {
+  width: 40px; /* Define um tamanho pequeno para a imagem */
+  height: 40px;
+  border-radius: 50%; /* Deixa a imagem redonda */
+  object-fit: cover; /* Ajusta a imagem para cobrir todo o espaço sem distorção */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombras para destacar a imagem */
+}
+
+.comment-content {
+  flex: 1;
+}
+
+.comment-content p {
+  margin: 0;
+  color: #e0e0e0;
+}
+
+.comment-divider {
+  margin: 5px 0;
+  border: none;
+  height: 1px;
+  background-color: #555;
 }
 
 .comment-input {
@@ -127,6 +150,7 @@
   background-color: #2f2f2f;
   color: #e0e0e0;
 }
+
 .icon-container button {
   padding: 10px 15px;
   background-color: #ff000091;
