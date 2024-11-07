@@ -1,16 +1,16 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   background-color: #060606;
   color: #fff;
   font-family: Arial, sans-serif;
-  min-height: 100vh; 
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   width: 100%;
   overflow-x: hidden;
 }
-
 
 .profile-container {
   display: flex;
@@ -20,7 +20,7 @@ html, body {
   padding: 0;
   height: 100vh;
   width: 100%;
-  background-color: #060606; 
+  background-color: #060606;
   box-sizing: border-box;
 }
 
@@ -31,18 +31,16 @@ html, body {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.723);
-  background-color: #222; 
-  border: 1px solid rgba(255, 255, 255, 0.2); 
+  background-color: #222;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 
 .profile-card:hover {
-  transform: translateY(-5px); 
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7); 
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
 }
-
 
 .profile-pic {
   width: 100%;
@@ -53,28 +51,26 @@ html, body {
 .profile-pic img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
-  border-bottom: 2px solid #ff6347; 
-  filter: blur(15px); 
+  object-fit: cover;
+  border-bottom: 2px solid #ff6347;
+  filter: blur(15px);
 }
-
 
 .profile-info {
   padding: 10px;
-  background-color: #1c1c1c; 
+  background-color: #1c1c1c;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: #ccc;
-  filter: blur(0px); 
+  filter: blur(0px);
 }
 
-
 .profile-info h4 {
-  margin: 0; 
-  filter: blur(5px); 
+  margin: 0;
+  filter: blur(5px);
 }
 
 .profile-info h3 {
-  margin: 0; 
+  margin: 0;
   filter: blur(5px);
 }
 
@@ -88,27 +84,25 @@ html, body {
   background-color: #ff6347;
   color: #fff;
   cursor: pointer;
-  filter:blur(0.5px);
+  filter: blur(0.5px);
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .message-btn:hover,
 .like-btn:hover {
   background-color: #ff3b3b;
-  transform: scale(1.05); 
+  transform: scale(1.05);
 }
 
 .like-btn i {
   color: #fff;
 }
 
-
 @media (max-width: 768px) {
   .profile-card {
-    width: 100%; 
+    width: 100%;
   }
 }
-
 
 @media (min-width: 1200px) {
   .profile-card {
@@ -130,4 +124,19 @@ html, body {
   align-items: center;
   justify-content: center;
   transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.page-content.disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }

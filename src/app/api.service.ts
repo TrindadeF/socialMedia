@@ -265,19 +265,15 @@ export class ApiService {
     const url = `${this.apiSecondFeed}/comments/${commentId}`;
     return this.http.delete(url);
   }
-  checkSubscriptionStatus() {
+  checkSubscriptionStatus(
+    userId: string
+  ): Observable<{ hasActiveSubscription: boolean }> {
     return this.http.get<{ hasActiveSubscription: boolean }>(
-      `/stripe/subscription-status`
+      `${this.api}/stripe/subscription-status/${userId}`
     );
-
-    
   }
 
   getPostDetails(postId: string): Observable<any> {
     return this.http.get<any>(`${this.apiSecondFeed}/posts/${postId}/comments`);
   }
-
-  
-
-  
 }
