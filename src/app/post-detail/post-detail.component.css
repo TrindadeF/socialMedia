@@ -91,6 +91,7 @@
   border-radius: 8px;
   overflow-y: auto;
   max-height: 80vh;
+  margin-left: 20px; /* Move o container de comentários para a direita */
 }
 
 .comments-container h3 {

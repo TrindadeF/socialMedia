@@ -5,6 +5,7 @@ body {
     margin: 0;
     padding: 0; 
     overflow-x: hidden; 
+    font-size: 16px; /* Tamanho padrão para o texto */
 }
 
 .payment-container {
@@ -30,7 +31,7 @@ body {
 .payment h1 {
     color: #fa0606; 
     margin-bottom: 20px; 
-    font-size: 24px; 
+    font-size: 16px; /* Tamanho do título ajustado para ser igual ao do corpo */
 }
 
 .payment-image {
@@ -59,6 +60,7 @@ body {
     padding: 15px; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
     transition: transform 0.2s;
+    font-size: 17px; /* Aumenta o tamanho da fonte */
 }
 
 .option:hover {
@@ -83,7 +85,6 @@ body {
     margin-top: 20px;
 }
 
-
 .btn {
     background-color: #fa0606; 
     border: none;
@@ -95,20 +96,17 @@ body {
     transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.2s ease; 
 }
 
-
 .btn:hover {
     transform: scale(1.1); 
     background-color: #ff6688; 
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-
 .btn:active {
     transform: scale(0.95);
     background-color: #ff0044; 
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2); 
 }
-
 
 .center-image {
     position: absolute; 

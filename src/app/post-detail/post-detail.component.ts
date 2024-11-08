@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
-import { Post } from 'database';
+import { Post, User } from 'database';
 
 @Component({
   selector: 'app-post-details',
@@ -15,11 +15,21 @@ export class PostDetailComponent implements OnInit {
   loading: boolean = true;
   error: string | null = null;
   newComment: string = '';
-  userId: string | undefined;
+  userId: string = '';
+  users: User[] = [];
+  currentUser!: User;
+  mutualLikes: { [key: string]: boolean } = {};
+  detailedComments: any;
+  authService: any;
+
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) {
     this.postId = this.route.snapshot.paramMap.get('postId') || '';
     console.log('ID do post:', this.postId);
+  }
+
+  public getuserid() {
+    this.userId = localStorage.getItem('userId') || '';
   }
 
   ngOnInit(): void {
@@ -45,19 +55,27 @@ export class PostDetailComponent implements OnInit {
     return isOwner;
   }
 
-  deleteComment(commentId: string) {
+  deleteComment(commentId: string): void {
+    console.log('Comentário ID:', commentId); 
+    if (!commentId) {
+      console.error('ID do comentário não fornecido');
+      return; 
+    }
+  
     this.apiService.deleteComment(commentId).subscribe(
-      () => {
-        this.comments = this.comments.filter(
-          (comment) => comment._id !== commentId
-        );
-        console.log('Comentário deletado com sucesso.');
+      (response) => {
+        console.log('Comentário deletado com sucesso', response);
+        this.comments = this.comments.filter(comment => comment._id !== commentId);
+        this.loadPostDetails();
+
       },
       (error) => {
-        console.error('Erro ao deletar o comentário:', error);
+        console.error('Erro ao deletar comentário', error);
       }
     );
   }
+  
+
 
   loadPostDetails(): void {
     this.apiService.getPostWithComments(this.postId).subscribe(
@@ -106,4 +124,13 @@ export class PostDetailComponent implements OnInit {
   isImage(url: string): boolean {
     return /\.(jpg|jpeg|png|gif)$/.test(url);
   }
+
+
+
+
+
+
+
+
+  
 }

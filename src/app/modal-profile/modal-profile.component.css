@@ -84,8 +84,9 @@
 
 .comment {
   display: flex;
+  justify-content: space-between; /* Alinha o conteúdo do comentário e o botão de deletar */
   align-items: center;
-  gap: 10px; /* Espaço entre a imagem e o conteúdo do comentário */
+  gap: 10px;
   padding: 10px 0;
 }
 
@@ -104,6 +105,35 @@
 .comment-content p {
   margin: 0;
   color: #e0e0e0;
+}
+
+.delete-btn {
+  background-color: red; /* Cor de fundo vermelha */
+  color: white; /* Cor do texto branca */
+  border: none; /* Remove bordas */
+  border-radius: 4px; /* Bordas arredondadas */
+  padding: 8px 16px; /* Espaçamento interno */
+  cursor: pointer; /* Indica que é clicável */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
+  font-size: 0.9em; /* Tamanho do texto */
+}
+
+/* Efeito de hover no botão */
+.delete-btn:hover {
+  background-color: darkred; /* Cor de fundo escura quando o mouse passar */
+  transform: scale(1.05); /* Aumenta um pouco o tamanho do botão */
+}
+
+/* Efeito de foco para acessibilidade */
+.delete-btn:focus {
+  outline: 2px solid #ffcc00; /* Adiciona um contorno amarelo quando o botão está em foco */
+  box-shadow: 0 0 5px 2px rgba(255, 204, 0, 0.5); /* Sombra suave para indicar foco */
+}
+
+/* Efeito de clique */
+.delete-btn:active {
+  transform: scale(0.95); /* Reduz o tamanho do botão ao ser clicado */
+  background-color: #b30000; /* Cor de fundo escura quando pressionado */
 }
 
 .comment-divider {

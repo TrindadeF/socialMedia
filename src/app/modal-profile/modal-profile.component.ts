@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ApiService } from '../api.service';
-import { Post, User } from 'database';
+import { Post, User } from 'database'; // Verifique o caminho correto
 import { MatIconModule } from '@angular/material/icon';
+
+
 
 @Component({
   selector: 'app-modal-profile',
@@ -20,21 +22,37 @@ export class ModalProfileComponent {
     media: File[];
     feedType: 'primaryFeed' | 'secondFeed';
   }>();
+  
   userId: string = '';
   users: User[] = [];
   currentUser!: User;
   mutualLikes: { [key: string]: boolean } = {};
-  comments: any[] = [];
+  comments: any[] = []; 
   newComment: string = '';
   post!: Post;
   detailedComments: any;
+  authService: any;
+  
+  
 
   constructor(private apiService: ApiService) {}
+
+  public getuserid() {
+    this.userId = localStorage.getItem('userId') || '';
+  }
+
   ngOnInit(): void {
+    this.getuserid();
     if (this.postId) {
       this.getPostDetails(this.postId);
+    } else {
+      console.error('Post ID is not provided');
     }
+    console.log("valor user id",this.userId)
+    
   }
+  
+
   close() {
     this.show = false;
     this.closeEvent.emit();
@@ -59,11 +77,22 @@ export class ModalProfileComponent {
       },
     });
   }
+  loadComments(): void {
+    this.apiService.getPostWithComments(this.postId).subscribe(
+      (data: { comments: any[] }) => {
+        this.comments = data.comments;
+      },
+      (error: any) => {
+        console.error('Erro ao carregar comentários:', error);
+      }
+    );
+  }
+
   addComment(postId: string, content: string) {
     this.apiService.addCommentInSecondFeed(postId, content).subscribe({
       next: (response) => {
         console.log('Comentário adicionado com sucesso:', response);
-        this.loadPostDetails;
+        this.loadPostDetails(); 
       },
       error: (error) => {
         console.error('Erro ao adicionar o comentário:', error);
@@ -87,18 +116,36 @@ export class ModalProfileComponent {
 
   canDeleteComment(commentOwnerId: string): boolean {
     return this.userId === commentOwnerId;
+  
+  
   }
+  
+  deleteComment(commentId: string): void {
+    console.log('Comentário ID:', commentId); 
+    if (!commentId) {
+      console.error('ID do comentário não fornecido');
+      return; 
+    }
+  
+    this.apiService.deleteCommentSecondFeed(commentId).subscribe(
+      (response) => {
+        console.log('Comentário deletado com sucesso', response);
+        this.comments = this.comments.filter(comment => comment._id !== commentId);
+        this.loadPostDetails();
 
-  deleteComment(commentId: string) {
-    this.apiService.deleteComment(commentId).subscribe({
-      next: () => {
-        this.comments = this.comments.filter(
-          (comment) => comment._id !== commentId
-        );
       },
-      error: (error) => {
-        console.error('Erro ao excluir comentário:', error);
-      },
-    });
+      (error) => {
+        console.error('Erro ao deletar comentário', error);
+      }
+    );
   }
-}
+  
+  
+  
+
+  
+  
+  }
+  
+  
+

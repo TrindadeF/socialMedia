@@ -8,6 +8,9 @@ import { LikesResponse } from 'response.types';
   providedIn: 'root',
 })
 export class ApiService {
+  deleteCommentFirstFeed(commentId: string) {
+    throw new Error('Method not implemented.');
+  }
   getChats(_id: string, receiverId: string) {
     throw new Error('Method not implemented.');
   }
@@ -276,4 +279,6 @@ export class ApiService {
   getPostDetails(postId: string): Observable<any> {
     return this.http.get<any>(`${this.apiSecondFeed}/posts/${postId}/comments`);
   }
+ 
+  
 }

@@ -3,7 +3,7 @@ export type Post = {
   _id: string;
   media: any;
   content: string;
-  owner: string;
+  owner: User;
   createdAt: Date;
   likes: string[];
   ownerName: User;
