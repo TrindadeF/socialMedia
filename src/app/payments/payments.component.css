@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 0; 
     overflow-x: hidden; 
-    font-size: 16px; /* Tamanho padrão para o texto */
+    font-size: 16px;
 }
 
 .payment-container {
@@ -31,7 +31,7 @@ body {
 .payment h1 {
     color: #fa0606; 
     margin-bottom: 20px; 
-    font-size: 16px; /* Tamanho do título ajustado para ser igual ao do corpo */
+    font-size: 16px; 
 }
 
 .payment-image {
@@ -60,7 +60,7 @@ body {
     padding: 15px; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
     transition: transform 0.2s;
-    font-size: 17px; /* Aumenta o tamanho da fonte */
+    font-size: 17px; 
 }
 
 .option:hover {
