@@ -8,9 +8,9 @@ import { LikesResponse } from 'response.types';
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = 'http://145.223.31.88:3000/auth';
-  private apiFirstFeed = 'http://145.223.31.88:3000/primaryFeed';
-  private apiSecondFeed = 'http://145.223.31.88:3000/secondFeed';
+  private apiFirstFeed = '/api/primaryFeed';
+  private apiSecondFeed = '/api/secondFeed';
+  private apiUrl = '/api/auth';
   private api = 'http://145.223.31.88:3000';
 
   constructor(private http: HttpClient) {}
