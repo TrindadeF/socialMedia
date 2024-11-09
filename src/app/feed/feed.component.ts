@@ -26,7 +26,6 @@ export class FeedComponent implements OnInit {
   currentFeedType: 'primaryFeed' | 'secondFeed' = 'primaryFeed';
   showCommentModal = false;
   selectedPostId: string = '';
- 
 
   constructor(
     private apiService: ApiService,
@@ -152,8 +151,8 @@ export class FeedComponent implements OnInit {
 
     const url =
       feedType === 'primaryFeed'
-        ? 'http://localhost:3000/primaryFeed/'
-        : 'http://localhost:3000/secondFeed/';
+        ? 'http://145.223.31.88:3000/primaryFeed/'
+        : 'http://145.223.31.88:3000/secondFeed/';
 
     this.loading = true;
 

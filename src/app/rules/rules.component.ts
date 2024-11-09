@@ -4,17 +4,34 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-rules',
   templateUrl: './rules.component.html',
-  styleUrls: ['./rules.component.css']
+  styleUrls: ['./rules.component.css'],
 })
 export class RulesComponent {
   currentIndex = 0;
   items = [
-    { title: 'Bem-vindo(a) ao NakedLove', description: 'Siga estas Regras da casa:' },
-    { title: 'Seja você mesmo', description: 'Certifique-se de que as suas fotos, idade e biografia são fiéis à sua pessoa.' },
-    { title: 'Seja prudente', description: 'Não tenha muita pressa em dar os seus dados pessoais.' },
-    { title: 'Tenha encontros seguros', description: 'Seja simpático. Respeite os outros e trate-os como gostaria de ser tratado.' },
-    { title: 'Seja proativo', description: 'Denuncie sempre os comportamentos incorretos.' }
-  ]; // Lista de regras
+    {
+      title: 'Bem-vindo(a) ao NakedLove',
+      description: 'Siga estas Regras da casa:',
+    },
+    {
+      title: 'Seja você mesmo',
+      description:
+        'Certifique-se de que as suas fotos, idade e biografia são fiéis à sua pessoa.',
+    },
+    {
+      title: 'Seja prudente',
+      description: 'Não tenha muita pressa em dar os seus dados pessoais.',
+    },
+    {
+      title: 'Tenha encontros seguros',
+      description:
+        'Seja simpático. Respeite os outros e trate-os como gostaria de ser tratado.',
+    },
+    {
+      title: 'Seja proativo',
+      description: 'Denuncie sempre os comportamentos incorretos.',
+    },
+  ];
 
   constructor(private router: Router) {}
 
@@ -28,7 +45,6 @@ export class RulesComponent {
     if (this.currentIndex < this.items.length - 1) {
       this.currentIndex++;
     } else {
-      // Alteração aqui para redirecionar para a rota 'presentation'
       this.router.navigate(['/presentation']);
     }
   }

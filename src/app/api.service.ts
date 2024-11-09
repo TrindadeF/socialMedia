@@ -8,16 +8,10 @@ import { LikesResponse } from 'response.types';
   providedIn: 'root',
 })
 export class ApiService {
-  deleteCommentFirstFeed(commentId: string) {
-    throw new Error('Method not implemented.');
-  }
-  getChats(_id: string, receiverId: string) {
-    throw new Error('Method not implemented.');
-  }
-  private apiUrl = 'http://localhost:3000/auth';
-  private apiFirstFeed = 'http://localhost:3000/primaryFeed';
-  private apiSecondFeed = 'http://localhost:3000/secondFeed';
-  private api = 'http://localhost:3000';
+  private apiUrl = 'http://145.223.31.88:3000/auth';
+  private apiFirstFeed = 'http://145.223.31.88:3000/primaryFeed';
+  private apiSecondFeed = 'http://145.223.31.88:3000/secondFeed';
+  private api = 'http://145.223.31.88:3000';
 
   constructor(private http: HttpClient) {}
 
@@ -29,8 +23,15 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/login`, { email, password });
   }
 
-  register(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, { email, password });
+  register(
+    email: string,
+    password: string,
+    name: string,
+    gender: string,
+    age: number
+  ): Observable<any> {
+    const userData = { name, email, password, gender, age };
+    return this.http.post(`${this.apiUrl}/register`, { userData });
   }
 
   resetPassword(email: string): Observable<any> {
@@ -144,7 +145,7 @@ export class ApiService {
     });
   }
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>('http://localhost:3000/users');
+    return this.http.get<User[]>(`${this.api}/users`);
   }
   likeUser(userId: string, likedUserId: string): Observable<any> {
     const token = this.getAuthToken();
@@ -279,6 +280,4 @@ export class ApiService {
   getPostDetails(postId: string): Observable<any> {
     return this.http.get<any>(`${this.apiSecondFeed}/posts/${postId}/comments`);
   }
- 
-  
 }

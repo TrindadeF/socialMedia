@@ -1,6 +1,7 @@
 import { Component, Renderer2, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-form',
@@ -13,13 +14,14 @@ export class RegisterComponent implements OnInit {
   password: string = '';
   confirmPassword: string = '';
   gender: string = '';
-  age: string = '';
+  age: number | undefined;
   errorMessage: string = '';
 
   constructor(
     private renderer: Renderer2,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private apiService: ApiService
   ) {}
 
   ngOnInit(): void {
@@ -114,15 +116,17 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this.http.post('http://localhost:3000/auth/register', userData).subscribe({
-      next: (response) => {
-        console.log('Usuário registrado com sucesso!', response);
-        this.router.navigate(['/login']);
-      },
-      error: (error) => {
-        console.error('Erro ao registrar o usuário:', error);
-        this.errorMessage = 'Erro ao registrar. Tente novamente.';
-      },
-    });
+    this.apiService
+      .register(this.name, this.email, this.password, this.gender, this.age)
+      .subscribe({
+        next: (response) => {
+          console.log('Usuário registrado com sucesso!', response);
+          this.router.navigate(['/login']);
+        },
+        error: (error) => {
+          console.error('Erro ao registrar o usuário:', error);
+          this.errorMessage = 'Erro ao registrar. Tente novamente.';
+        },
+      });
   }
 }

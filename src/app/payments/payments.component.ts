@@ -43,7 +43,7 @@ export class PaymentsComponent implements OnInit {
 
     this.http
       .post<{ url: string }>(
-        `http://localhost:3000/stripe/checkout/${planId}`,
+        `http://145.223.31.88:3000/stripe/checkout/${planId}`,
         requestBody
       )
       .subscribe(

@@ -16,14 +16,12 @@ export class CommentModalComponent {
   @Input() showModal: boolean = false;
   @Input() title: string = '';
   @Output() closeEvent = new EventEmitter<void>();
-  isModalOpen: boolean = false; 
+  isModalOpen: boolean = false;
   selectedPost: any;
   selectedPostId: string | null = null;
   canPublish: boolean = false;
   commentText: string = '';
   selectedMedia: any;
-  
-
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
 
@@ -32,17 +30,11 @@ export class CommentModalComponent {
     this.showModal = false;
     this.isModalOpen = false;
   }
-  
+
   checkFormValidity() {
     this.canPublish =
       !!this.postContent.trim() || this.selectedMedia.length > 0;
   }
-
-  
-
-
-
-
 
   postComment() {
     if (!this.commentText.trim()) {
@@ -51,8 +43,8 @@ export class CommentModalComponent {
 
     const url =
       this.feedType === 'primaryFeed'
-        ? `http://localhost:3000/primaryFeed/posts/${this.postId}/comments`
-        : `http://localhost:3000/secondFeed//posts/${this.postId}/comments`;
+        ? `http://145.223.31.88/primaryFeed/posts/${this.postId}/comments`
+        : `http://145.223.31.88/secondFeed//posts/${this.postId}/comments`;
 
     this.http.post(url, { content: this.commentText }).subscribe({
       next: () => {
@@ -70,5 +62,4 @@ export class CommentModalComponent {
       },
     });
   }
-      
 }

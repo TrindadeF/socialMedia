@@ -24,7 +24,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private http: HttpClient
   ) {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('http://145.223.31.88:3000');
   }
 
   ngOnInit(): void {
