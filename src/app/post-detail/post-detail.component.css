@@ -1,28 +1,28 @@
-/* Personalização de scroll com design moderno */
+
 .modal-content::-webkit-scrollbar,
 .comments-container::-webkit-scrollbar {
-  width: 8px; /* Largura da barra de rolagem */
+  width: 8px; 
 }
 
 .modal-content::-webkit-scrollbar-track,
 .comments-container::-webkit-scrollbar-track {
-  background: #1c1c1c; /* Cor do track (fundo do scroll) */
+  background: #1c1c1c; 
   border-radius: 8px;
 }
 
 .modal-content::-webkit-scrollbar-thumb,
 .comments-container::-webkit-scrollbar-thumb {
-  background-color: #5a5a5a; /* Cor do thumb (indicador) */
+  background-color: #5a5a5a; 
   border-radius: 8px;
-  border: 2px solid #1c1c1c; /* Borda para um efeito mais moderno */
+  border: 2px solid #1c1c1c; 
 }
 
 .modal-content::-webkit-scrollbar-thumb:hover,
 .comments-container::-webkit-scrollbar-thumb:hover {
-  background-color: #757575; /* Cor do thumb ao passar o mouse */
+  background-color: #757575; 
 }
 
-/* Código original */
+
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -67,11 +67,11 @@
 .post-media img,
 .post-media video {
   width: 103%;
-  height: 200%; /* Mantém a proporção da imagem */
-  max-height: 500px; /* Ajuste conforme desejado para controlar a altura */
+  height: 200%; 
+  max-height: 500px;
   border-radius: 5px;
   margin-top: 10px;
-  object-fit: cover; /* Garante que a imagem preencha a área sem distorções */
+  object-fit: cover; 
 }
 
 .post-and-comments {
@@ -91,7 +91,7 @@
   border-radius: 8px;
   overflow-y: auto;
   max-height: 80vh;
-  margin-left: 20px; /* Move o container de comentários para a direita */
+  margin-left: 20px; 
 }
 
 .comments-container h3 {
@@ -181,9 +181,9 @@
   text-decoration: underline;
 }
 
-/* Botão de deletar pequeno e redondo */
+
 .delete-button {
-  background-color: #ff4c4c; /* Cor de fundo vermelha */
+  background-color: #ff4c4c; 
   border: none;
   border-radius: 50%;
   width: 32px;
@@ -196,14 +196,14 @@
 }
 
 .delete-button mat-icon {
-  color: #ffffff; /* Cor do ícone */
-  font-size: 20px; /* Aumenta o tamanho do ícone */
+  color: #ffffff; 
+  font-size: 20px; 
 }
 
 .delete-button:hover {
-  background-color: #ff6666; /* Cor ao passar o mouse */
+  background-color: #ff6666; 
 }
 
 .delete-button:active {
-  transform: scale(0.9); /* Animação de clique */
+  transform: scale(0.9); 
 }
