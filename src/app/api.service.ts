@@ -8,10 +8,10 @@ import { LikesResponse } from 'response.types';
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = 'http://145.223.31.88:3000/auth';
-  private apiFirstFeed = 'http://145.223.31.88:3000/primaryFeed';
-  private apiSecondFeed = 'http://145.223.31.88:3000/secondFeed';
-  private api = 'http://145.223.31.88:3000';
+  private apiUrl = 'https://nakedlove.eu/api/auth';
+  private apiFirstFeed = 'https://nakedlove.eu/api/primaryFeed';
+  private apiSecondFeed = 'https://nakedlove.eu/api/secondFeed';
+  private api = 'https://nakedlove.eu/api';
 
   constructor(private http: HttpClient) {}
 
@@ -31,7 +31,11 @@ export class ApiService {
     age: number
   ): Observable<any> {
     const userData = { name, email, password, gender, age };
-    return this.http.post(`${this.apiUrl}/register`, { userData });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    return this.http.post(`${this.apiUrl}/register`, userData, { headers });
   }
 
   resetPassword(email: string): Observable<any> {
