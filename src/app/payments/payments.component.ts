@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-love',
@@ -15,7 +16,9 @@ export class PaymentsComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private snackBar: MatSnackBar,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -25,6 +28,7 @@ export class PaymentsComponent implements OnInit {
         (response: { userId: string; email: string }) => {
           this.userId = response.userId;
           this.userEmail = response.email;
+          this.cdr.detectChanges();
         },
         (error) => {
           console.error('Erro ao buscar perfil do usuário:', error);
@@ -66,5 +70,42 @@ export class PaymentsComponent implements OnInit {
 
   plan3() {
     this.subscribeToPlan('plan3');
+  }
+
+  cancelSubscription(): void {
+    if (!this.userId) {
+      console.error('ID do usuário não está definido.');
+      return;
+    }
+
+    const confirmation = confirm(
+      'Tem certeza que deseja cancelar sua assinatura?'
+    );
+    if (!confirmation) {
+      return;
+    }
+
+    this.http
+      .delete<{ message: string }>(
+        `https://nakedlove.eu/api/stripe/cancel-subscription/${this.userId}`
+      )
+      .subscribe(
+        (response) => {
+          console.log('Assinatura cancelada com sucesso:', response.message);
+          this.snackBar.open('Assinatura cancelada com sucesso.', 'Fechar', {
+            duration: 5000,
+            verticalPosition: 'top',
+          });
+        },
+        (error) => {
+          console.error('Erro ao cancelar a assinatura:', error);
+          const errorMessage =
+            error.error?.message || 'Erro ao cancelar a assinatura.';
+          this.snackBar.open(errorMessage, 'Fechar', {
+            duration: 5000,
+            verticalPosition: 'top',
+          });
+        }
+      );
   }
 }

@@ -182,30 +182,46 @@ export class ProfileComponent implements OnInit {
     if (content) {
       formData.append('content', content);
     }
-    media.forEach((file) => formData.append('image', file));
 
-    const url =
-      feedType === 'primaryFeed'
-        ? 'https://nakedlove.eu/api/primaryFeed/'
-        : 'https://nakedlove.eu/api/secondFeed/';
+    // Redimensionando imagens antes de enviá-las
+    const resizedImagesPromises = media.map((file) =>
+      this.resizeImage(file, 800, 800) // Defina a largura e altura máxima aqui
+    );
 
-    this.http.post<Post>(url, formData).subscribe({
-      next: (response: Post) => {
-        this.posts.unshift(response);
-        this.snackBar.open('Post publicado com sucesso!', 'Fechar', {
-          duration: 3000,
+    Promise.all(resizedImagesPromises)
+      .then((resizedImages) => {
+        resizedImages.forEach((resizedFile) => {
+          formData.append('image', resizedFile);
         });
-        this.alertType = 'success';
-        this.closeModal();
-        this.fetchUserProfile();
-      },
-      error: (err) => {
-        console.error('Erro ao publicar o post:', err);
-        this.alertMessage = 'Erro ao publicar o post.';
+
+        const url =
+          feedType === 'primaryFeed'
+            ? 'https://nakedlove.eu/api/primaryFeed/'
+            : 'https://nakedlove.eu/api/secondFeed/';
+
+        this.http.post<Post>(url, formData).subscribe({
+          next: (response: Post) => {
+            this.posts.unshift(response);
+            this.snackBar.open('Post publicado com sucesso!', 'Fechar', {
+              duration: 3000,
+            });
+            this.alertType = 'success';
+            this.closeModal();
+            this.fetchUserProfile();
+          },
+          error: (err) => {
+            console.error('Erro ao publicar o post:', err);
+            this.alertMessage = 'Erro ao publicar o post.';
+            this.alertType = 'error';
+          },
+          complete: () => (this.loading = false),
+        });
+      })
+      .catch((err) => {
+        console.error('Erro ao redimensionar as imagens:', err);
+        this.alertMessage = 'Erro ao redimensionar as imagens.';
         this.alertType = 'error';
-      },
-      complete: () => (this.loading = false),
-    });
+      });
   }
 
   resetForm() {
@@ -218,6 +234,7 @@ export class ProfileComponent implements OnInit {
       url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.png') || url.endsWith('.gif') || url.endsWith('.webp') || url.endsWith('.bmp') || url.endsWith('.ico') || url.endsWith('.svg') || url.endsWith('.heif') || url.endsWith('.heic') || url.endsWith('.tiff')
     );
   }
+
   openImageViewer(postId: string) {
     this.selectedPost = postId;
     this.showImageViewer = true;
@@ -246,5 +263,45 @@ export class ProfileComponent implements OnInit {
         console.error('Erro ao curtir o post:', error);
       }
     );
+  }
+
+  resizeImage(file: File, maxWidth: number, maxHeight: number): Promise<File> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const canvas = document.createElement('canvas');
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        img.src = e.target?.result as string;
+      };
+
+      img.onload = () => {
+        const ctx = canvas.getContext('2d');
+        const scale = Math.min(maxWidth / img.width, maxHeight / img.height);
+
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+
+        ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const resizedFile = new File([blob], file.name, {
+              type: file.type,
+              lastModified: file.lastModified,
+            });
+            resolve(resizedFile);
+          } else {
+            reject('Erro ao redimensionar a imagem');
+          }
+        }, file.type);
+      };
+
+      img.onerror = (error) => {
+        reject(error);
+      };
+
+      reader.readAsDataURL(file);
+    });
   }
 }

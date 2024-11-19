@@ -1,34 +1,30 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NakedLove</title>
-    <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link href="home.component.css" rel="stylesheet" />
-  </head>
-  <body>
-    <header>
-      <img src="assets/images/nova logo.jpg" alt="Logo" class="logo" />
-      <div class="header-content">
-        <h1 class="typewriter">Seja Bem-vindo ao NakedLove<span class="cursor"></span></h1>
-        <p>
-          Descubra várias conexões emocionantes e explore seus desejos em um
-          ambiente seguro e discreto.<br />
-          Faça parte de uma comunidade vibrante de pessoas que buscam
-          relacionamentos quentes e intensos.
-        </p>
-        <button [routerLink]="['/register']" class="btn btn-primary cta">
-          Cadastre-se Agora
-        </button>
-        <button [routerLink]="['/login']" class="btn btn-secondary login-btn">
-          Login
-        </button>
-      </div>
-    </header>
+<header>
+  <img src="assets/images/nova logo.jpg" alt="Logo" class="logo" />
+  <div class="header-content">
+    <h1 class="typewriter">Seja Bem-vindo ao NakedLove<span class="cursor"></span></h1>
+    <p>
+      Descubra várias conexões emocionantes e explore seus desejos em um
+      ambiente seguro e discreto.<br />
+      Faça parte de uma comunidade vibrante de pessoas que buscam
+      relacionamentos quentes e intensos.
+    </p>
+    <button [routerLink]="['/register']" class="btn btn-primary cta">
+      Cadastre-se Agora
+    </button>
+    <button [routerLink]="['/login']" class="btn btn-secondary login-btn">
+      Login
+    </button>
+  </div>
+</header>
+
+
+<div *ngIf="showAgeVerification" class="age-verification-container">
+  <div class="age-verification-content">
+    <p>Este site é destinado exclusivamente a maiores de 18 anos. Ao continuar, confirmas que tens idade legal para explorar conteúdos voltados para um público adulto.</p>
+    <button (click)="acceptAgeVerification()" class="btn btn-primary">Tenho 18 Anos ou Mais - Entrar</button>
+    <button (click)="declineAgeVerification()" class="btn btn-secondary">Tenho Menos de 18 Anos - Sair</button>
+  </div>
+</div>
 
    
     <div *ngIf="showAgeVerification" class="age-verification-container">

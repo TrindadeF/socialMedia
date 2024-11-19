@@ -64,6 +64,7 @@ export class ModalProfileComponent {
         next: () => console.log(`Post ${postId} curtido com sucesso!`),
         error: (error: any) => console.error(`Erro ao curtir o post:`, error),
       });
+      this.loadPostDetails();
   }
 
   loadPostDetails() {
@@ -125,6 +126,7 @@ export class ModalProfileComponent {
     if (!commentId) {
       console.error('ID do comentário não fornecido');
       return; 
+      this.loadPostDetails();
     }
   
     this.apiService.deleteCommentSecondFeed(commentId).subscribe(

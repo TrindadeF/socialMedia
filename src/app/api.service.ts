@@ -284,4 +284,9 @@ export class ApiService {
   getPostDetails(postId: string): Observable<any> {
     return this.http.get<any>(`${this.apiSecondFeed}/posts/${postId}/comments`);
   }
+  cancelSubscription(userId: string): Observable<any> {
+    return this.http.delete<any>(
+      `${this.api}/stripe/cancel-subscription/${userId}`
+    );
+  }
 }

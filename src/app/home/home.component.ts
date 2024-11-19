@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, Renderer2 } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements AfterViewInit {
   showAgeVerification = true;
   constructor(private renderer: Renderer2, private router: Router) {
-    this.redirectIfLoggedIn(); 
+    this.redirectIfLoggedIn();
   }
 
   ngAfterViewInit(): void {
@@ -17,12 +17,10 @@ export class HomeComponent implements AfterViewInit {
     this.setupDomContentLoaded();
   }
 
-  
   private redirectIfLoggedIn() {
-    const userId = localStorage.getItem('userId'); 
+    const userId = localStorage.getItem('userId');
     if (userId) {
-      
-      this.router.navigate(['/profile']); 
+      this.router.navigate(['/profile']);
     }
   }
 
