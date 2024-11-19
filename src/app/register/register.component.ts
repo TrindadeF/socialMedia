@@ -17,6 +17,8 @@ export class RegisterComponent implements OnInit {
   gender: string = '';
   age: number | undefined;
   errorMessage: string = '';
+  termsAccepted: boolean = false;
+
 
   constructor(
     private renderer: Renderer2,
@@ -144,4 +146,6 @@ export class RegisterComponent implements OnInit {
         },
       });
   }
+
+  
 }

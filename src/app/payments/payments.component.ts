@@ -70,6 +70,7 @@ export class PaymentsComponent implements OnInit {
     this.subscribeToPlan('plan3');
   }
 
+
   cancelSubscription(): void {
     if (!this.userId) {
       console.error('ID do usuário não está definido.');
@@ -105,5 +106,6 @@ export class PaymentsComponent implements OnInit {
           });
         }
       );
+
   }
 }
