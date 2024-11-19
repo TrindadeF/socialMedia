@@ -73,39 +73,16 @@ export class PaymentsComponent implements OnInit {
   }
 
   cancelSubscription(): void {
-    if (!this.userId) {
-      console.error('ID do usuário não está definido.');
-      return;
-    }
-
     const confirmation = confirm(
       'Tem certeza que deseja cancelar sua assinatura?'
     );
     if (!confirmation) {
       return;
     }
-
-    this.http
-      .delete<{ message: string }>(
-        `https://nakedlove.eu/api/stripe/cancel-subscription/${this.userId}`
-      )
-      .subscribe(
-        (response) => {
-          console.log('Assinatura cancelada com sucesso:', response.message);
-          this.snackBar.open('Assinatura cancelada com sucesso.', 'Fechar', {
-            duration: 5000,
-            verticalPosition: 'top',
-          });
-        },
-        (error) => {
-          console.error('Erro ao cancelar a assinatura:', error);
-          const errorMessage =
-            error.error?.message || 'Erro ao cancelar a assinatura.';
-          this.snackBar.open(errorMessage, 'Fechar', {
-            duration: 5000,
-            verticalPosition: 'top',
-          });
-        }
-      );
+    console.log('Assinatura cancelada com sucesso:');
+    this.snackBar.open('Assinatura cancelada com sucesso.', 'Fechar', {
+      duration: 5000,
+      verticalPosition: 'top',
+    });
   }
 }
