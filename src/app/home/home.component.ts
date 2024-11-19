@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, Renderer2 } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements AfterViewInit {
-  showAgeVerification = true; // Controla a exibição do container de verificação de idade
-  
+  showAgeVerification = true;
+
   constructor(private renderer: Renderer2, private router: Router) {
     this.redirectIfLoggedIn();
   }
@@ -19,9 +19,9 @@ export class HomeComponent implements AfterViewInit {
   }
 
   private redirectIfLoggedIn() {
-    const userId = localStorage.getItem('userId'); 
+    const userId = localStorage.getItem('userId');
     if (userId) {
-      this.router.navigate(['/profile']); 
+      this.router.navigate(['/profile']);
     }
   }
 
@@ -45,8 +45,7 @@ export class HomeComponent implements AfterViewInit {
   setupDomContentLoaded() {
     this.renderer.listen('document', 'DOMContentLoaded', () => {
       console.log('DOM totalmente carregado e analisado.');
-      
-      // Alerta de boas-vindas
+
       alert('Bem-vindo ao NakedLove!');
 
       const contentWrapper = document.getElementById('content-wrapper');
@@ -64,22 +63,19 @@ export class HomeComponent implements AfterViewInit {
     });
   }
 
-  // Método para aceitar a verificação de idade
   acceptAgeVerification(): void {
-    localStorage.setItem('ageVerified', 'true'); // Salva a aceitação
-    this.showAgeVerification = false; // Fecha o container de verificação
+    localStorage.setItem('ageVerified', 'true');
+    this.showAgeVerification = false;
   }
 
-  // Método para recusar e redirecionar o usuário
   declineAgeVerification(): void {
-    window.location.href = 'https://www.google.com'; // Redireciona para outro site
+    window.location.href = 'https://www.google.com';
   }
 
-  // Verifica se o usuário já aceitou a verificação de idade
   ngOnInit() {
     const ageVerified = localStorage.getItem('ageVerified');
     if (ageVerified) {
-      this.showAgeVerification = false; // Esconde o container caso já tenha aceitado
+      this.showAgeVerification = true;
     }
   }
 }

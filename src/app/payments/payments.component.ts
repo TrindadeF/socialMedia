@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
-import { MatSnackBar } from '@angular/material/snack-bar'; // Para notificações
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-love',
@@ -17,7 +17,8 @@ export class PaymentsComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private apiService: ApiService,
-    private snackBar: MatSnackBar // Para notificações
+    private snackBar: MatSnackBar,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -27,6 +28,7 @@ export class PaymentsComponent implements OnInit {
         (response: { userId: string; email: string }) => {
           this.userId = response.userId;
           this.userEmail = response.email;
+          this.cdr.detectChanges();
         },
         (error) => {
           console.error('Erro ao buscar perfil do usuário:', error);
@@ -70,7 +72,6 @@ export class PaymentsComponent implements OnInit {
     this.subscribeToPlan('plan3');
   }
 
-
   cancelSubscription(): void {
     if (!this.userId) {
       console.error('ID do usuário não está definido.');
@@ -106,6 +107,5 @@ export class PaymentsComponent implements OnInit {
           });
         }
       );
-
   }
 }

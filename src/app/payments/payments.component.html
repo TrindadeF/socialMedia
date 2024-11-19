@@ -9,13 +9,9 @@
     />
 
     <h1>+18</h1>
-    <div>
-      <button
-        mat-raised-button
-        color="warn"
-        (click)="cancelSubscription()"
-        *ngIf="userId"
-      >
+
+    <div class="cancel-subscription">
+      <button class="btn cancel-btn" (click)="cancelSubscription()">
         Cancelar Assinatura
       </button>
     </div>
@@ -46,11 +42,6 @@
           <button class="btn" (click)="plan3()">Realizar Pagamento</button>
         </div>
       </div>
-    </div>
-
-    
-    <div class="cancel-subscription">
-      <button class="btn cancel-btn" (click)="cancelSubscription()">Cancelar Assinatura</button>
     </div>
   </div>
 
