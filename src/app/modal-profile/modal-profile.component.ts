@@ -64,6 +64,7 @@ export class ModalProfileComponent {
         next: () => console.log(`Post ${postId} curtido com sucesso!`),
         error: (error: any) => console.error(`Erro ao curtir o post:`, error),
       });
+      this.loadPostDetails();
   }
 
   loadPostDetails() {
@@ -93,6 +94,7 @@ export class ModalProfileComponent {
       next: (response) => {
         console.log('Comentário adicionado com sucesso:', response);
         this.loadPostDetails(); 
+        this.loadComments();
       },
       error: (error) => {
         console.error('Erro ao adicionar o comentário:', error);
@@ -125,6 +127,7 @@ export class ModalProfileComponent {
     if (!commentId) {
       console.error('ID do comentário não fornecido');
       return; 
+      this.loadPostDetails();
     }
   
     this.apiService.deleteCommentSecondFeed(commentId).subscribe(

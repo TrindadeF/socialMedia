@@ -135,4 +135,27 @@ body {
     .btn {
         font-size: 14px;
     }
+    cancel-subscription {
+        text-align: center;
+        margin-top: 20px;
+      }
+      
+      .cancel-btn {
+        background-color: red;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      
+      .cancel-btn:hover {
+        background-color: darkred;
+      }
+
+
+
+
 }
+

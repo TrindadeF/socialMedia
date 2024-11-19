@@ -67,4 +67,9 @@ export class PaymentsComponent implements OnInit {
   plan3() {
     this.subscribeToPlan('plan3');
   }
+  cancelSubscription() {
+ 
+    console.log('Assinatura cancelada');
+    alert('Sua assinatura foi cancelada com sucesso.');
+  }
 }

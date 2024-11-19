@@ -1,1 +1,13 @@
-<p>modal-alert works!</p>
+<div *ngIf="isModalVisible" id="ageModal" class="age-modal">
+    <div class="modal-content">
+      <h2>Bem-vindo ao NakedLove</h2>
+      <p>Este site é destinado exclusivamente a maiores de 18 anos. </p>
+      <p>Ao continuar, confirmas que tens idade legal para explorar conteúdos voltados para um público adulto.</p>
+      <div class="modal-footer">
+        <button (click)="acceptAction()" class="accept-btn">Aceitar</button>
+        <button (click)="declineAction()" class="decline-btn">Recusar</button>
+      </div>
+      <p class="footer-text">www.nakedlove.eu</p>
+    </div>
+  </div>
+  
