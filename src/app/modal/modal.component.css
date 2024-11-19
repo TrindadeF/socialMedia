@@ -1,4 +1,4 @@
-.modal {
+.modal { 
   display: none;
   z-index: 1000;
 }
@@ -81,9 +81,44 @@ textarea {
   .modal-content {
     width: 95%;
     padding: 15px;
+    max-height: 90%; /* Permite rolar em dispositivos menores */
+    overflow-y: auto;
   }
+
   .custom-btn {
     width: 100%;
+    padding: 12px 15px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .custom-btn, .close-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  textarea {
+    height: 80px;
+  }
+
+  .modal-content img {
+    max-width: 40px;
   }
 }
 
