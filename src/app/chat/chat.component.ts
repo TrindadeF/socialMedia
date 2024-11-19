@@ -136,6 +136,7 @@ export class ChatComponent implements OnInit, OnDestroy {
           this.newMessage = '';
           this.messages.push(response);
           this.socket.emit('sendMessage', response);
+          this.loadMessagesForChat;
         },
         error: (error) => {
           console.error('Erro ao enviar mensagem:', error);

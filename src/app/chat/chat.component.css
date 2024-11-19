@@ -13,7 +13,7 @@ body {
 
 .chat-container {
   width: 90%;
-  max-width: 400px;
+  max-width: 800px;
   background-color: rgba(20, 20, 20, 0.9);
   padding: 20px;
   overflow-y: auto;
