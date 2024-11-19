@@ -26,10 +26,50 @@
   </div>
 </div>
 
-<div class="image-container">
-  <img src="assets/images/home.jpg" alt="Home" />
-</div>
+   
+    <div *ngIf="showAgeVerification" class="age-verification-container">
+      <div class="age-verification-content">
+        <p>
+          Este site é destinado exclusivamente a maiores de 18 anos. Ao
+          continuar, confirmas que tens idade legal para explorar conteúdos
+          voltados para um público adulto.
+        </p>
+        <button (click)="acceptAgeVerification()" class="btn btn-primary">
+          Tenho 18 Anos ou Mais - Entrar
+        </button>
+        <button (click)="declineAgeVerification()" class="btn btn-secondary">
+          Tenho Menos de 18 Anos - Sair
+        </button>
+      </div>
+    </div>
 
-<footer>
-  © 2024 Site de Relacionamento Adulto. Todos os direitos reservados.
-</footer>
+    <div class="image-container">
+      <img src="assets/images/home.jpg" alt="Home" />
+    </div>
+
+    <footer>
+      © 2024 Site de Relacionamento Adulto. Todos os direitos reservados.
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      const textElement = document.querySelector('.typewriter');
+      const text = textElement.textContent;
+      textElement.textContent = '';
+      let index = 0;
+
+      function type() {
+        if (index < text.length) {
+          textElement.textContent += text.charAt(index);
+          index++;
+          setTimeout(type, 100);
+        }
+      }
+
+      type();
+    </script>
+  </body>
+</html>

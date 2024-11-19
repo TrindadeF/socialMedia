@@ -188,6 +188,7 @@ footer p {
   border-right: 2px solid;
   animation: typewriter 4s steps(40, end) infinite, blinkCaret 0.75s step-end infinite;
 }
+
 .cursor {
   display: inline-block;
   width: 10px;
@@ -201,60 +202,50 @@ footer p {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7); /* Fundo escuro */
+  background: rgba(31, 31, 31, 0.7); 
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
 }
-
 .age-verification-content {
-  background: #000; /* Fundo preto */
-  color: #fff; /* Texto branco */
-  padding: 40px; /* Aumentando o padding para um maior espaço */
-  border-radius: 10px; /* Borda arredondada */
+  background: #000; 
+  color: #fff; 
+  padding: 40px; 
+  border-radius: 10px; 
   text-align: center;
-  max-width: 600px; /* Aumentando a largura máxima do container */
+  max-width: 600px; 
   width: 100%;
-  box-sizing: border-box; /* Para garantir que o padding não ultrapasse a largura */
+  box-sizing: border-box; 
 }
-
 .age-verification-content img {
-  width: 100px; /* Ajustando o tamanho da imagem */
-  height: 100px; /* Garantindo a altura para manter o formato arredondado */
-  border-radius: 50%; /* Imagem arredondada */
-  margin-bottom: 20px; /* Espaçamento abaixo da imagem */
+  width: 100px; 
+  height: 100px; 
+  border-radius: 50%; 
+  margin-bottom: 20px; 
 }
-
 .age-verification-content p {
-  font-size: 18px; /* Aumentando o tamanho da fonte */
+  font-size: 18px; 
   margin-bottom: 20px;
 }
-
 .age-verification-content button {
   margin: 10px;
   padding: 10px 20px;
-  background-color: #ff6b6b; /* Botão vermelho */
-  color: #fff; /* Texto branco */
+  background-color: #ff6b6b; 
+  color: #fff; 
   border: none;
   border-radius: 25px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
 }
-
 .age-verification-content button:hover {
-  background-color: #ff4b4b; /* Botão vermelho mais claro ao passar o mouse */
+  background-color: #ff4b4b; 
   transform: scale(1.1);
 }
-
-
-
 @keyframes blink {
   50% {
     opacity: 0;
   }
-
   
 }
-

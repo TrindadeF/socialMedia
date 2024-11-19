@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements AfterViewInit {
   showAgeVerification = true;
-
   constructor(private renderer: Renderer2, private router: Router) {
     this.redirectIfLoggedIn();
   }
@@ -64,18 +63,18 @@ export class HomeComponent implements AfterViewInit {
   }
 
   acceptAgeVerification(): void {
-    localStorage.setItem('ageVerified', 'true');
-    this.showAgeVerification = false;
+    localStorage.setItem('ageVerified', 'true'); 
+    this.showAgeVerification = false; 
   }
-
+  
   declineAgeVerification(): void {
-    window.location.href = 'https://www.google.com';
+    window.location.href = 'https://www.google.com'; 
   }
-
+  
   ngOnInit() {
     const ageVerified = localStorage.getItem('ageVerified');
     if (ageVerified) {
-      this.showAgeVerification = true;
-    }
+      this.showAgeVerification = false; 
   }
 }
+ }

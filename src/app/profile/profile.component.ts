@@ -231,7 +231,7 @@ export class ProfileComponent implements OnInit {
 
   isImage(url: string): boolean {
     return (
-      url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.png')
+      url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.png') || url.endsWith('.gif') || url.endsWith('.webp') || url.endsWith('.bmp') || url.endsWith('.ico') || url.endsWith('.svg') || url.endsWith('.heif') || url.endsWith('.heic') || url.endsWith('.tiff')
     );
   }
 
