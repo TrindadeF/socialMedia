@@ -64,7 +64,7 @@ export class ModalProfileComponent {
         next: () => console.log(`Post ${postId} curtido com sucesso!`),
         error: (error: any) => console.error(`Erro ao curtir o post:`, error),
       });
-      this.loadPostDetails();
+      
   }
 
   loadPostDetails() {
