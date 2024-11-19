@@ -112,18 +112,21 @@
             name="termsAccepted"
           />
           <label class="form-check-label" for="termsCheck">
-            Aceito os <a href="assets/docs/TERMOS DE USO – NAKED LOVE ( LEIA COM ATENÇÃO!!! ).pdf" download>termos e condições</a>
+            Aceito os
+            <a
+              href="assets/docs/TERMOS DE USO – NAKED LOVE ( LEIA COM ATENÇÃO!!! ).pdf"
+              download
+              >termos e condições</a
+            >
           </label>
         </div>
-        
+
         <button
           type="button"
           class="btn btn-danger btn-block"
           (click)="registerUser()"
           [disabled]="!termsAccepted"
         >
-        
-        
           Cadastrar
         </button>
 
