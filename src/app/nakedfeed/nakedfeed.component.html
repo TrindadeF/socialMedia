@@ -11,19 +11,25 @@
 
     <div class="profile-card" *ngFor="let user of users">
       <div class="profile-pic">
-        <a [routerLink]="['/profile', user._id]">
-          <img
-            [src]="user.profilePic || 'assets/default-pic.jpg'"
-            alt="{{ user.nickName }}"
-          />
-        </a>
+        <img
+          [src]="user.profilePic || 'assets/default-pic.jpg'"
+          alt="{{ user.nickName || 'Usuário' }}"
+        />
       </div>
 
       <div class="profile-info">
-        <a [routerLink]="['/profile', user._id]">
-          <h3>{{ user.nickName }}</h3>
-        </a>
-        <p>{{ user.age }} anos</p>
+        <div *ngIf="mutualLikes[user._id]; else restrictedInfo">
+          <a [routerLink]="['/profile', user._id]">
+            <h3>{{ user.nickName }}</h3>
+          </a>
+          <p>{{ user.age }} anos</p>
+        </div>
+
+        <ng-template #restrictedInfo>
+          <h3>Nome restrito</h3>
+          <p>Você só pode ver mais detalhes após um match!</p>
+        </ng-template>
+
         <button
           class="message-btn"
           *ngIf="mutualLikes[user._id]"
