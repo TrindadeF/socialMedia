@@ -45,7 +45,7 @@ export class ModalComponent {
     this.loading = true;
     const formData = new FormData();
 
-    if (!this.postContent.trim() && this.selectedMedia.length === 0) {
+    if (!this.postContent.trim() || this.selectedMedia.length === 0) {
       this.alertMessage = 'O conteúdo do post ou mídia são obrigatórios!';
       this.alertType = 'error';
       this.loading = false;

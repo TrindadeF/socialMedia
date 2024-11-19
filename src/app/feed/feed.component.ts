@@ -181,6 +181,13 @@ export class FeedComponent implements OnInit {
     const fileInput = event.target as HTMLInputElement;
     if (fileInput.files && fileInput.files.length > 0) {
       this.selectedMedia = Array.from(fileInput.files);
+      const file = fileInput.files[0];
+    const MAX_FILE_SIZE = 60 * 1024 * 1024; 
+    if (file.size > MAX_FILE_SIZE) {
+      alert('O arquivo é muito grande. O tamanho máximo permitido é 60MB.');
+      return;
+    }
+
 
       const previewImage = document.getElementById(
         'preview-image'
@@ -237,7 +244,7 @@ export class FeedComponent implements OnInit {
   }
 
   isImage(mediaUrl: string): boolean {
-    return /\.(jpg|jpeg|png|gif)$/i.test(mediaUrl);
+    return /\.(jpg|jpeg|png|gif|webp|bmp|ico|svg|heif|heic|tiff)$/i.test(mediaUrl);
   }
 
   deletePost(postId: string): void {

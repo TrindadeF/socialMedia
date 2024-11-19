@@ -92,7 +92,7 @@ export class ModalProfileComponent {
     this.apiService.addCommentInSecondFeed(postId, content).subscribe({
       next: (response) => {
         console.log('Comentário adicionado com sucesso:', response);
-        this.loadPostDetails(); 
+        this.loadComments(); 
       },
       error: (error) => {
         console.error('Erro ao adicionar o comentário:', error);
@@ -131,7 +131,7 @@ export class ModalProfileComponent {
       (response) => {
         console.log('Comentário deletado com sucesso', response);
         this.comments = this.comments.filter(comment => comment._id !== commentId);
-        this.loadPostDetails();
+        this.loadComments();
 
       },
       (error) => {

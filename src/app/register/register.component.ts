@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
   gender: string = '';
   age: number | undefined;
   errorMessage: string = '';
+  termsAccepted: boolean = false;
 
   constructor(
     private renderer: Renderer2,
@@ -94,6 +95,16 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser(): void {
+    if (!this.termsAccepted) {
+      this.errorMessage = 'Você deve aceitar os termos para se registrar.';
+      this.snackBar.open(this.errorMessage, 'Fechar', {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+      });
+      return;
+    }
+
     if (this.password !== this.confirmPassword) {
       this.errorMessage = 'As senhas não coincidem!';
       this.snackBar.open(this.errorMessage, 'Fechar', {
@@ -103,7 +114,7 @@ export class RegisterComponent implements OnInit {
       });
       return;
     }
-  
+
     if (!this.name || !this.email || !this.password || !this.gender || !this.age) {
       this.errorMessage = 'Todos os campos são obrigatórios.';
       this.snackBar.open(this.errorMessage, 'Fechar', {
@@ -113,7 +124,7 @@ export class RegisterComponent implements OnInit {
       });
       return;
     }
-  
+
     const userData = {
       name: this.name,
       email: this.email,
@@ -121,8 +132,15 @@ export class RegisterComponent implements OnInit {
       gender: this.gender,
       age: this.age,
     };
-  
-    this.apiService.register(userData.email, userData.password, userData.name, userData.gender, userData.age)
+
+    this.apiService
+      .register(
+        userData.email,
+        userData.password,
+        userData.name,
+        userData.gender,
+        userData.age
+      )
       .subscribe({
         next: (response) => {
           console.log('Usuário registrado com sucesso!', response);
