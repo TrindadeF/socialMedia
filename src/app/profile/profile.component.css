@@ -1,19 +1,19 @@
 body {
   margin: 0;
   background-color: #070707;
-  color: #fff; 
+  color: #fff;
   font-family: Arial, sans-serif;
-  height: auto; 
-  display: flex; 
-  flex-direction: column; 
+  height: auto;
+  display: flex;
+  flex-direction: column;
   background-size: cover;
 }
 
 .container {
   display: flex;
-  flex-direction: column; 
-  min-height: 100vh; 
-  background-color: #000; 
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #000;
   background-size: cover;
 }
 
@@ -27,7 +27,7 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  flex-grow: 1; 
+  flex-grow: 1;
   background-size: cover;
 }
 
@@ -43,10 +43,10 @@ body {
 
 .profile-image img {
   border-radius: 50%;
-  width: 150px; 
-  height: 150px; 
-  object-fit: cover; 
-  border: 2px solid #ff030383; 
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 2px solid #ff030383;
 }
 
 .profile-info {
@@ -88,7 +88,6 @@ body {
   background-color: #0d8bec;
 }
 
-
 .profile-tabs {
   display: flex;
   justify-content: space-around;
@@ -114,7 +113,6 @@ body {
   color: white;
 }
 
-
 .profile-content {
   background-color: #1c1c1c;
   padding: 15px;
@@ -128,7 +126,6 @@ body {
   margin-top: 10px;
 }
 
-
 .post {
   background-color: #222;
   padding: 10px;
@@ -136,9 +133,8 @@ body {
   margin-bottom: 15px;
 }
 
-
 .modal {
-  display: none; 
+  display: none;
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -146,7 +142,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.7); 
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .modal-content {
@@ -159,7 +155,6 @@ body {
   color: #000;
 }
 
-
 .close {
   position: absolute;
   top: 10px;
@@ -167,7 +162,6 @@ body {
   font-size: 28px;
   cursor: pointer;
 }
-
 
 .form-group {
   margin-bottom: 15px;
@@ -212,15 +206,15 @@ body {
 
 .gallery {
   margin-top: 20px;
-  flex-grow: 1; 
+  flex-grow: 1;
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(3, 1fr);
   gap: 40px;
   width: 100%;
-  max-width: 900px; 
+  max-width: 900px;
 }
 
 .gallery-item {
@@ -229,36 +223,36 @@ body {
 }
 
 .gallery-item img {
-  width: 100%; 
-  height: 300px; 
+  width: 100%;
+  height: 300px;
   border-radius: 20px;
-  object-fit: cover; 
-  transition: transform 0.3s, box-shadow 0.3s; 
+  object-fit: cover;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .gallery-item img:hover {
-  transform: scale(1.1); 
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); 
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
 .follow-btn {
-  background-color: red; 
-  color: white; 
-  padding: 8px 15px; 
-  border: none; 
-  border-radius: 20px; 
+  background-color: red;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 20px;
   cursor: pointer;
-  font-size: 14px; 
-  transition: transform 0.2s ease, background-color 0.2s ease; 
+  font-size: 14px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .follow-btn:hover {
-  background-color: darkred; 
-  transform: scale(1.1); 
+  background-color: darkred;
+  transform: scale(1.1);
 }
 
 .follow-btn:active {
-  transform: scale(0.95); 
+  transform: scale(0.95);
 }
 
 .profile-images {
@@ -267,8 +261,58 @@ body {
 }
 
 .profile-images img {
-  width: 100px; 
+  width: 100px;
   margin: 5px;
-  cursor: pointer; 
-  border-radius: 5px; 
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 10px;
+  }
+
+  .profile-image img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .profile-info h2 {
+    font-size: 20px;
+  }
+
+  .profile-tabs button {
+    font-size: 14px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-item img {
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-image img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-info h2 {
+    font-size: 18px;
+  }
+
+  .profile-tabs button {
+    font-size: 12px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-item img {
+    height: 200px;
+  }
 }

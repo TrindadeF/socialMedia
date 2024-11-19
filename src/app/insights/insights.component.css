@@ -11,8 +11,8 @@ body {
 }
 
 .admin-container {
-  max-width: 1000px;
-  margin: 50px auto;
+  max-width: 90%;
+  margin: 20px auto;
   padding: 20px;
   background-color: rgba(255, 0, 0, 0.1);
   border: 2px solid red;
@@ -21,15 +21,17 @@ body {
 
 h1 {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  font-size: 1.8rem;
 }
 
 .section {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 h2 {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
 }
 
 .user-list table {
@@ -41,19 +43,42 @@ h2 {
 .user-list th,
 .user-list td {
   border: 1px solid red;
-  padding: 10px;
+  padding: 8px;
   text-align: center;
+  font-size: 0.9rem;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 8px 16px;
   background-color: red;
   border: none;
   color: white;
   cursor: pointer;
   border-radius: 4px;
+  font-size: 0.9rem;
 }
 
 button:hover {
   background-color: darkred;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  button {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+
+  .user-list th,
+  .user-list td {
+    font-size: 0.8rem;
+    padding: 6px;
+  }
 }

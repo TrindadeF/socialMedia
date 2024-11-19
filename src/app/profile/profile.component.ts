@@ -186,8 +186,8 @@ export class ProfileComponent implements OnInit {
 
     const url =
       feedType === 'primaryFeed'
-        ? 'http://145.223.31.88:3000/primaryFeed/'
-        : 'http://145.223.31.88:3000/secondFeed/';
+        ? 'https://nakedlove.eu/api/primaryFeed/'
+        : 'https://nakedlove.eu/api/secondFeed/';
 
     this.http.post<Post>(url, formData).subscribe({
       next: (response: Post) => {

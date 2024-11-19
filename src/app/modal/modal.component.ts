@@ -57,8 +57,8 @@ export class ModalComponent {
 
     const url =
       this.feedType === 'primaryFeed'
-        ? 'http://localhost:3000/primaryFeed/'
-        : 'http://localhost:3000/secondFeed/';
+        ? 'https://nakedlove.eu/api/primaryFeed/'
+        : 'https://nakedlove.eu/secondFeed/';
 
     this.http.post<Post>(url, formData).subscribe({
       next: (response: Post) => {
@@ -67,6 +67,8 @@ export class ModalComponent {
         this.resetForm();
         this.alertMessage = 'Post publicado com sucesso!';
         this.alertType = 'success';
+        window.location.reload();
+      
       },
       error: (error) => {
         console.error('Erro ao publicar o post:', error);

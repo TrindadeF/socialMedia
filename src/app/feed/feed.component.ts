@@ -151,8 +151,8 @@ export class FeedComponent implements OnInit {
 
     const url =
       feedType === 'primaryFeed'
-        ? 'http://145.223.31.88:3000/primaryFeed/'
-        : 'http://145.223.31.88:3000/secondFeed/';
+        ? 'https://nakedlove.eu/api/primaryFeed/'
+        : 'https:/nakedlove.eu/api/secondFeed/';
 
     this.loading = true;
 
@@ -164,6 +164,7 @@ export class FeedComponent implements OnInit {
         });
         this.alertMessage = 'Post publicado com sucesso!';
         this.alertType = 'success';
+        window.location.reload();
       },
       error: () => {
         this.alertMessage = 'Erro ao publicar o post.';

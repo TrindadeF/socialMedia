@@ -1,5 +1,4 @@
-html,
-body {
+html, body {
   margin: 0;
   padding: 0;
   background-color: #060606;
@@ -61,17 +60,14 @@ body {
   background-color: #1c1c1c;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: #ccc;
-  filter: blur(0px);
 }
 
 .profile-info h4 {
   margin: 0;
-  filter: blur(5px);
 }
 
 .profile-info h3 {
   margin: 0;
-  filter: blur(5px);
 }
 
 .message-btn,
@@ -84,7 +80,6 @@ body {
   background-color: #ff6347;
   color: #fff;
   cursor: pointer;
-  filter: blur(0.5px);
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 

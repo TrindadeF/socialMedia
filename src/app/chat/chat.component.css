@@ -12,17 +12,18 @@ body {
 }
 
 .chat-container {
-  width: 130%; 
+  width: 90%;
+  max-width: 400px;
   background-color: rgba(20, 20, 20, 0.9);
   padding: 20px;
   overflow-y: auto;
   border-right: 1px solid #ccc;
-  height: 95vh; 
+  height: 95vh;
 }
 
 .chat-title {
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
   color: white;
   margin-bottom: 15px;
 }
@@ -50,51 +51,53 @@ body {
 }
 
 .messages-container {
-  width: 800%; 
+  width: 100%;
+  max-width: 800px;
   background: rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
-  height: 100vh; 
-  margin: 0 auto; 
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
-  overflow-y: auto; 
-  border-radius: 8px; 
+  height: 100vh;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  border-radius: 8px;
 }
 
 .messages-list {
-  flex-grow: 1; 
-  overflow-y: auto; 
-  margin-right: -10px; 
-  margin-bottom: 10px; 
-  padding-right: 10px; 
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-right: -10px;
+  margin-bottom: 10px;
+  padding-right: 10px;
 }
 
 .message {
   margin: 10px 0;
   padding: 10px;
   border-radius: 15px;
-  max-width: 10%;
+  max-width: 90%;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .sent {
   background-color: #af564c;
   color: #fff;
-  align-self: flex; 
+  align-self: flex-end;
   text-align: left;
   border-radius: 15px 0 15px 15px;
-  margin-left: 80%; 
-  max-width: 10%; 
-  padding: 10px; 
+  margin-left: auto;
+  max-width: 90%;
+  padding: 10px;
 }
 
 .received {
   background-color: #b1b0b081;
   color: #faf8f8;
-  align-self: flex-start; 
+  align-self: flex-start;
   text-align: left;
   border-radius: 0 15px 15px 15px;
-  margin-left: 155px; 
+  margin-right: auto;
+  max-width: 90%;
 }
 
 .message-sender {
@@ -103,7 +106,7 @@ body {
 
 .input-container-wrapper {
   display: flex;
-  width: 90%;
+  width: 100%;
   padding: 10px;
   border-top: 1px solid #616060;
 }
@@ -144,6 +147,7 @@ body {
   object-fit: cover;
   margin-right: 8px;
 }
+
 .delete-chat-button {
   margin-left: 10px;
   padding: 5px 10px;
@@ -156,4 +160,31 @@ body {
 
 .delete-chat-button:hover {
   background-color: #ff3333;
+}
+
+@media (max-width: 768px) {
+  .chat-container {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .messages-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .message {
+    max-width: 80%;
+  }
+
+  .sent {
+    margin-left: auto;
+    max-width: 80%;
+  }
+
+  .received {
+    margin-right: auto;
+    max-width: 80%;
+  }
 }

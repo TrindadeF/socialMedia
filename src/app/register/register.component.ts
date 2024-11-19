@@ -2,6 +2,7 @@ import { Component, Renderer2, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-form',
@@ -21,7 +22,8 @@ export class RegisterComponent implements OnInit {
     private renderer: Renderer2,
     private http: HttpClient,
     private router: Router,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -94,9 +96,24 @@ export class RegisterComponent implements OnInit {
   registerUser(): void {
     if (this.password !== this.confirmPassword) {
       this.errorMessage = 'As senhas não coincidem!';
+      this.snackBar.open(this.errorMessage, 'Fechar', {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+      });
       return;
     }
-
+  
+    if (!this.name || !this.email || !this.password || !this.gender || !this.age) {
+      this.errorMessage = 'Todos os campos são obrigatórios.';
+      this.snackBar.open(this.errorMessage, 'Fechar', {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+      });
+      return;
+    }
+  
     const userData = {
       name: this.name,
       email: this.email,
@@ -104,28 +121,26 @@ export class RegisterComponent implements OnInit {
       gender: this.gender,
       age: this.age,
     };
-
-    if (
-      !this.name ||
-      !this.email ||
-      !this.password ||
-      !this.gender ||
-      !this.age
-    ) {
-      this.errorMessage = 'Todos os campos são obrigatórios.';
-      return;
-    }
-
-    this.apiService
-      .register(this.name, this.email, this.password, this.gender, this.age)
+  
+    this.apiService.register(userData.email, userData.password, userData.name, userData.gender, userData.age)
       .subscribe({
         next: (response) => {
           console.log('Usuário registrado com sucesso!', response);
+          this.snackBar.open('Usuário registrado com sucesso!', 'Fechar', {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+          });
           this.router.navigate(['/login']);
         },
         error: (error) => {
           console.error('Erro ao registrar o usuário:', error);
           this.errorMessage = 'Erro ao registrar. Tente novamente.';
+          this.snackBar.open(this.errorMessage, 'Fechar', {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+          });
         },
       });
   }

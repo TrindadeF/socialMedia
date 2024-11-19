@@ -10,9 +10,10 @@ body {
 }
 
 #form-container {
-  background-color: rgb(39, 38, 38) !important;
+ 
+  background-color: rgb(23, 23, 23) !important;
   padding: 2rem;
-  border-radius: 15px;
+  border-radius:55px;
   max-width: 400px;
   width: 100%;
 }
@@ -25,7 +26,7 @@ h1 {
 input[type="email"],
 input[type="password"] {
   background-color: #fdfbfb;
-  color: #000; /* Altere para preto */
+  color: #000; 
   border: none;
   padding: 0.75rem;
   border-radius: 4px;
@@ -57,4 +58,28 @@ input[type="submit"]:hover {
 
 .text-center a:hover {
   text-decoration: underline;
+}
+
+.img-fluid {
+  width: 110px;
+  height: 110px;
+  background-color: #ff000043;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  border-radius: 50%;
+  border: 1px solid #ff0000;
+  padding: 5px;
+  box-shadow: 0 0 20px 5px rgba(255, 0, 0, 0.75);
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.img-fluid:hover {
+  box-shadow: 0 0 30px 10px rgba(255, 0, 0, 1);
+  transform: scale(1.1); 
 }

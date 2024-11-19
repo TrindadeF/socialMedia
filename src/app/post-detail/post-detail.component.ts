@@ -67,6 +67,7 @@ export class PostDetailComponent implements OnInit {
         console.log('Comentário deletado com sucesso', response);
         this.comments = this.comments.filter(comment => comment._id !== commentId);
         this.loadPostDetails();
+        window.location.reload();
 
       },
       (error) => {

@@ -43,8 +43,8 @@ export class CommentModalComponent {
 
     const url =
       this.feedType === 'primaryFeed'
-        ? `http://145.223.31.88/primaryFeed/posts/${this.postId}/comments`
-        : `http://145.223.31.88/secondFeed//posts/${this.postId}/comments`;
+        ? `https://nakedlove.eu/api/primaryFeed/posts/${this.postId}/comments`
+        : `https://nakedlove.eu/api/secondFeed//posts/${this.postId}/comments`;
 
     this.http.post(url, { content: this.commentText }).subscribe({
       next: () => {

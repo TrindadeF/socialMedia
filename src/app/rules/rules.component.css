@@ -20,11 +20,11 @@ body {
   padding: 20px;
   text-align: center;
   position: relative;
-  transition: transform 0.3s ease; 
+  transition: transform 0.3s ease;
 }
 
 .carousel-container:hover {
-  transform: translateY(-5px); 
+  transform: translateY(-5px);
 }
 
 .carousel-item {
@@ -49,7 +49,7 @@ body {
   color: #fff;
   cursor: pointer;
   margin: 0 10px;
-  transition: background-color 0.3s ease, transform 0.2s ease; 
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .carousel-controls button:hover {
@@ -58,7 +58,7 @@ body {
 }
 
 .carousel-controls button:active {
-  transform: scale(0.95); 
+  transform: scale(0.95);
 }
 
 .carousel-controls button:focus {
@@ -73,7 +73,6 @@ body {
     opacity: 1;
   }
 }
-
 
 @media (max-width: 480px) {
   .carousel-container {

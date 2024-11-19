@@ -1,7 +1,6 @@
-
 .modal-content {
-  background-color: #1c1c1e; 
-  color: #ffffff; 
+  background-color: #1c1c1e;
+  color: #ffffff;
   width: 500px;
   max-width: 90%;
   border-radius: 8px;
@@ -18,21 +17,18 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.192); 
+  background-color: rgba(0, 0, 0, 0.192);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000; 
+  z-index: 1000;
 }
-
 
 .post-content {
   margin-bottom: 20px;
   padding: 10px;
-  
   border-radius: 8px;
 }
-
 
 .comment-input {
   display: flex;
@@ -40,7 +36,7 @@
 }
 
 .comment-input textarea {
-  background-color: #2c2c2e; 
+  background-color: #2c2c2e;
   color: #ffffff;
   border: 1px solid #444;
   border-radius: 5px;
@@ -52,12 +48,11 @@
 }
 
 .comment-input textarea::placeholder {
-  color: #888; 
+  color: #888;
 }
 
-
 .comment-input button {
-  background-color: #ff3b30; 
+  background-color: #ff3b30;
   color: #ffffff;
   border: none;
   border-radius: 5px;
@@ -68,9 +63,8 @@
 }
 
 .comment-input button:hover {
-  background-color: #d32f2f; 
+  background-color: #d32f2f;
 }
-
 
 @media (max-width: 500px) {
   .modal-content {

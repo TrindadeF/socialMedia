@@ -13,6 +13,7 @@ export type Post = {
   ownerProfileImageUrl: string;
   
   
+  
 };
 
 export type User = {
