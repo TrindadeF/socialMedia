@@ -31,7 +31,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommentModalComponent } from './comment-modal/comment-modal.component';
 import { ModalProfileComponent } from './modal-profile/modal-profile.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
-import { ModalAlertComponent } from './modal-alert/modal-alert.component';
+
 
 @NgModule({
   declarations: [
@@ -57,7 +57,7 @@ import { ModalAlertComponent } from './modal-alert/modal-alert.component';
     CommentModalComponent,
     ModalProfileComponent,
     PostDetailComponent,
-    ModalAlertComponent,
+    
   ],
   imports: [
     BrowserModule,
