@@ -9,6 +9,16 @@
     />
 
     <h1>+18</h1>
+    <div>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="cancelSubscription()"
+        *ngIf="userId"
+      >
+        Cancelar Assinatura
+      </button>
+    </div>
 
     <div class="payment-options">
       <div class="option">
@@ -26,7 +36,11 @@
       </div>
       <div class="option">
         <h2>€ 143,88 Anual ( A Cada 12 Meses )</h2>
-        <p><strong>Desconto de € 6,00 por mês (economia de € 72,00 no total).</strong></p>
+        <p>
+          <strong
+            >Desconto de € 6,00 por mês (economia de € 72,00 no total).</strong
+          >
+        </p>
 
         <div class="actions">
           <button class="btn" (click)="plan3()">Realizar Pagamento</button>
