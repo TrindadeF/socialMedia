@@ -20,6 +20,27 @@
         </button>
       </div>
     </header>
+<html lang="en">
+<body>
+<header>
+  <img src="assets/images/nova logo.jpg" alt="Logo" class="logo" />
+  <div class="header-content">
+    <h1 class="typewriter">Seja Bem-vindo ao NakedLove<span class="cursor"></span></h1>
+    <p>
+      Descubra várias conexões emocionantes e explore seus desejos em um
+      ambiente seguro e discreto.<br />
+      Faça parte de uma comunidade vibrante de pessoas que buscam
+      relacionamentos quentes e intensos.
+    </p>
+    <button [routerLink]="['/register']" class="btn btn-primary cta">
+      Cadastre-se Agora
+    </button>
+    <button [routerLink]="['/login']" class="btn btn-secondary login-btn">
+      Login
+    </button>
+  </div>
+</header>
+
 
     <div *ngIf="showAgeVerification" class="age-verification-container">
       <div class="age-verification-content">
