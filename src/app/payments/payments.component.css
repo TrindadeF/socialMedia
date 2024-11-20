@@ -1,4 +1,4 @@
-body {
+body { 
     background-color: #121212;
     font-family: Arial, sans-serif;
     color: #fff;
@@ -118,44 +118,75 @@ body {
     z-index: 0;
 }
 
+/* Responsividade para telas menores */
 @media (max-width: 768px) {
     .payment {
         max-width: 100%;
         padding: 20px;
+        margin-top: 15px;
     }
 
     .payment-image {
         width: 80%;
     }
 
+    .payment h1 {
+        font-size: 14px;
+    }
+
     .option {
         font-size: 15px;
+        padding: 12px;
     }
 
     .btn {
         font-size: 14px;
+        padding: 8px 15px;
     }
-    cancel-subscription {
+
+    .cancel-subscription {
         text-align: center;
         margin-top: 20px;
-      }
-      
-      .cancel-btn {
+    }
+
+    .cancel-btn {
         background-color: red;
         color: white;
         padding: 10px 20px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 16px;
-      }
-      
-      .cancel-btn:hover {
+        font-size: 14px;
+    }
+
+    .cancel-btn:hover {
         background-color: darkred;
-      }
+    }
 
+    /* Ajustes adicionais para telas muito pequenas */
+    @media (max-width: 480px) {
+        .payment {
+            padding: 15px;
+        }
 
+        .payment-image {
+            width: 70%;
+            max-width: 200px;
+        }
 
+        .option {
+            font-size: 14px;
+            padding: 10px;
+        }
 
+        .btn {
+            font-size: 12px;
+            padding: 6px 12px;
+        }
+
+        .cancel-btn {
+            font-size: 12px;
+            padding: 8px 15px;
+        }
+    }
 }
-

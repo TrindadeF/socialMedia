@@ -5,6 +5,8 @@
     <div class="image-container" *ngIf="post?.media?.length">
       <img [src]="post.media[0]" alt="Imagem do Post" class="post-image" />
     </div>
+    <button *ngIf="isOwner(post.owner)" (click)="deletePost(post._id)">
+      Deletar Post</button>
 
     <div class="gray-container">
       <div class="content-container">

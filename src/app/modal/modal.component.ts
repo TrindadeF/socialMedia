@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Post } from 'database';
 import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-modal',
@@ -30,10 +31,15 @@ export class ModalComponent {
   selectedMedia: File[] = [];
   alertMessage: string = '';
   alertType: string = '';
+  
 
-  constructor(private apiService: ApiService, private http: HttpClient) {}
+  constructor(private apiService: ApiService,private snackBar: MatSnackBar, private http: HttpClient) {}
 
   onPublishPost() {
+    this.snackBar.open('Por favor, insira um texto junto com a imagem'), 'Fechar', {
+      duration: 3000,
+    };
+
     this.publish.emit({
       content: this.postContent,
       media: this.selectedMedia,
@@ -45,8 +51,11 @@ export class ModalComponent {
     this.loading = true;
     const formData = new FormData();
 
-    if (!this.postContent.trim() || this.selectedMedia.length === 0) {
-      this.alertMessage = 'O conteúdo do post ou mídia são obrigatórios!';
+    if (!this.postContent.trim() && this.selectedMedia.length === 0) {
+      this.snackBar.open('Por favor, insira um texto junto com a imagem'), 'Fechar', {
+        duration: 3000,
+      };
+
       this.alertType = 'error';
       this.loading = false;
       return;
@@ -72,7 +81,9 @@ export class ModalComponent {
       },
       error: (error) => {
         console.error('Erro ao publicar o post:', error);
-        this.alertMessage = 'Erro ao publicar o post.';
+        this.snackBar.open('O conteúdo do post ou mídia são obrigatórios!', 'Fechar', {
+          duration: 3000,
+        });
         this.alertType = 'error';
       },
       complete: () => {

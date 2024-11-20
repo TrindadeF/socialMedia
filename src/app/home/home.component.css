@@ -196,6 +196,7 @@ footer p {
   background-color: black;
   animation: blink 0.7s step-end infinite;
 }
+
 .age-verification-container {
   position: fixed;
   top: 0;
@@ -208,6 +209,7 @@ footer p {
   align-items: center;
   z-index: 9999;
 }
+
 .age-verification-content {
   background: #000; 
   color: #fff; 
@@ -218,16 +220,19 @@ footer p {
   width: 100%;
   box-sizing: border-box; 
 }
+
 .age-verification-content img {
   width: 100px; 
   height: 100px; 
   border-radius: 50%; 
   margin-bottom: 20px; 
 }
+
 .age-verification-content p {
   font-size: 18px; 
   margin-bottom: 20px;
 }
+
 .age-verification-content button {
   margin: 10px;
   padding: 10px 20px;
@@ -239,13 +244,54 @@ footer p {
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
 }
+
 .age-verification-content button:hover {
   background-color: #ff4b4b; 
   transform: scale(1.1);
 }
+
 @keyframes blink {
   50% {
     opacity: 0;
   }
-  
+}
+
+/* Media Queries para telas menores */
+@media (max-width: 768px) {
+  .logo {
+    max-width: 100px; /* Logo menor */
+  }
+
+  .header-content h1 {
+    font-size: 28px; /* Tamanho menor para o título */
+  }
+
+  .header-content p {
+    font-size: 16px; /* Tamanho menor para o parágrafo */
+  }
+
+  .cta, .login-btn {
+    padding: 12px;
+    font-size: 14px; /* Fontes menores nos botões */
+  }
+}
+
+/* Media Queries para telas muito pequenas (exemplo: celulares) */
+@media (max-width: 480px) {
+  .header-content h1 {
+    font-size: 24px;
+  }
+
+  .header-content p {
+    font-size: 14px;
+  }
+
+  .cta, .login-btn {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  footer p {
+    font-size: 12px; /* Tamanho menor para o rodapé */
+  }
 }

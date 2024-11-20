@@ -1,3 +1,4 @@
+
 .modal-content::-webkit-scrollbar,
 .comments-container::-webkit-scrollbar {
   width: 8px;
@@ -21,6 +22,7 @@
   background-color: #757575;
 }
 
+
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -34,6 +36,7 @@
   z-index: 1000;
 }
 
+/* Modal content */
 .modal-content {
   background-color: rgb(34, 34, 34);
   padding: 20px;
@@ -63,8 +66,8 @@
 
 .post-media img,
 .post-media video {
-  width: 103%;
-  height: 200%;
+  width: 100%;
+  height: auto;
   max-height: 500px;
   border-radius: 5px;
   margin-top: 10px;
@@ -73,6 +76,7 @@
 
 .post-and-comments {
   display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
@@ -204,17 +208,16 @@
   transform: scale(0.9);
 }
 
+
 @media (max-width: 768px) {
   .modal-content {
     width: 95%;
-    max-width: 90%;
     padding: 15px;
+    max-width: 90%;
   }
 
   .post-media img,
   .post-media video {
-    width: 100%;
-    height: auto;
     max-height: 400px;
   }
 
@@ -223,10 +226,11 @@
     margin-left: 0;
   }
 
-  .comment-input input {
-    font-size: 14px;
+  .post-and-comments {
+    flex-direction: column;
   }
 
+  .comment-input input,
   .comment-input button {
     font-size: 14px;
   }
@@ -234,5 +238,24 @@
   .delete-button {
     width: 28px;
     height: 28px;
+  }
+
+  
+  .post-detail-header h1 {
+    font-size: 1.2em;
+  }
+
+  .post-date,
+  .post-caption {
+    font-size: 0.9em;
+  }
+
+  .comments-container h3 {
+    font-size: 1.1em;
+  }
+
+  .comment-content strong,
+  .comment-content small {
+    font-size: 0.9em;
   }
 }

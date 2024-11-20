@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ApiService } from '../api.service';
-import { Post, User } from 'database'; // Verifique o caminho correto
+import { Post, User } from 'database'; 
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -35,7 +36,7 @@ export class ModalProfileComponent {
   
   
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private snackBar: MatSnackBar) {}
 
   public getuserid() {
     this.userId = localStorage.getItem('userId') || '';
@@ -142,7 +143,53 @@ export class ModalProfileComponent {
     );
   }
   
+  deletePost(postId: string): void {
+    if (!postId) {
+      console.error('ID do post não fornecido');
+      return;
+    }
+    this.apiService.deletePostFromSecondFeed(postId).subscribe({
+      next: (response) => {
+      
+        this.snackBar.open('Post deletado com sucesso', 'Fechar', {
+          duration: 3000,
+        });
+        this.getPostDetails(postId);
+        this.publish.emit();
+        this.close();
+      
+      
+      },
+      error: (error) => {
+        console.error('Erro ao deletar post:', error);
+        this.snackBar.open('Erro ao deletar post', 'Fechar', {
+          duration: 3000,
+        });
+      },
+    });
+  }
+
+  getUserIdFromAuthService(): string {
+    return localStorage.getItem('userId') || '';
+  }
+
+  isOwner(postOwnerId: any): boolean {
+    if (
+      typeof postOwnerId === 'object' &&
+      postOwnerId !== null &&
+      '_id' in postOwnerId
+    ) {
+      postOwnerId = postOwnerId._id;
+    }
+
+   
+    const currentUserId = this.getUserIdFromAuthService();
+    const isOwner = currentUserId === String(postOwnerId);
+
+    return isOwner;
+  }
   
+ 
   
 
   

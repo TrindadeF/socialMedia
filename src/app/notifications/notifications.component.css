@@ -63,14 +63,13 @@ img {
   border-radius: 50%;
   margin-right: 10px;
   border: 1px solid red;
-  filter: blur(5px);
   transition: filter 0.3s;
 }
 
 li span {
   color: white;
   font-weight: bold;
-  filter: blur(5px);
+  
 }
 
 mat-icon {

@@ -183,9 +183,9 @@ export class ProfileComponent implements OnInit {
       formData.append('content', content);
     }
 
-    // Redimensionando imagens antes de enviá-las
+    
     const resizedImagesPromises = media.map((file) =>
-      this.resizeImage(file, 800, 800) // Defina a largura e altura máxima aqui
+      this.resizeImage(file, 800, 800) 
     );
 
     Promise.all(resizedImagesPromises)
@@ -223,6 +223,74 @@ export class ProfileComponent implements OnInit {
         this.alertType = 'error';
       });
   }
+
+  deletePost(postId: string): void {
+    this.apiService.deletePostFromSecondFeed(postId).subscribe({
+      next: (response) => {
+        this.snackBar.open('Post deletado com sucesso', 'Fechar', {
+          duration: 3000,
+        });
+        this.getPosts();
+      },
+      error: (error) => {
+        console.error('Erro ao deletar post:', error);
+        this.snackBar.open('Erro ao deletar post', 'Fechar', {
+          duration: 3000,
+        });
+      },
+    });
+  }
+  getPosts() {
+    this.apiService.getPostsFromSecondFeed().subscribe({
+      next: (posts: Post[]) => {
+        if (posts) {
+          this.posts = posts
+            .map((post) => {
+              return {
+                ...post,
+                likes: post.likes || [],
+              };
+            })
+            .sort((a, b) => {
+              return (
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+              );
+            });
+        }
+      },
+      error: (error) => {
+        this.errorMessage = 'Erro ao carregar os posts';
+        console.error(error);
+      },
+    });
+  }
+
+  isOwner(postOwnerId: any): boolean {
+    if (
+      typeof postOwnerId === 'object' &&
+      postOwnerId !== null &&
+      '_id' in postOwnerId
+    ) {
+      postOwnerId = postOwnerId._id;
+    }
+
+    if (typeof postOwnerId !== 'string') {
+      console.error('postOwnerId deve ser uma string', postOwnerId);
+      return false;
+    }
+    const currentUserId = this.getUserIdFromAuthService();
+    const isOwner = currentUserId === String(postOwnerId);
+
+    return isOwner;
+  }
+
+  getUserIdFromAuthService(): string {
+    return localStorage.getItem('userId') || '';
+  }
+
+
+
 
   resetForm() {
     this.alertMessage = '';

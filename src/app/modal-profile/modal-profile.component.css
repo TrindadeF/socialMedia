@@ -204,10 +204,6 @@
 
   .comment-input input,
   .icon-container input[type="text"] {
-    width: 100%;
-  }
-
-  .delete-btn {
-    width: 100%;
+    flex: 1;
   }
 }

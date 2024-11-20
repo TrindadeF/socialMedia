@@ -24,6 +24,7 @@
   text-align: center;
   color: #888;
   transition: color 0.3s;
+  border-bottom: 1px solid white; 
 }
 
 .menu-item:hover {
@@ -37,37 +38,5 @@
 
 .menu-item.bottom {
   margin-top: auto;
-}
-
-/* Estilos para telas menores */
-@media (max-width: 768px) {
-  .sidenav {
-    width: 50px;
-    padding-top: 5px;
-  }
-
-  .menu-item {
-    padding: 10px 0;
-  }
-
-  .menu-item img.icon {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .sidenav {
-    width: 40px;
-    padding-top: 5px;
-  }
-
-  .menu-item {
-    padding: 8px 0;
-  }
-
-  .menu-item img.icon {
-    width: 15px;
-    height: 15px;
-  }
+  border-bottom: none; 
 }
