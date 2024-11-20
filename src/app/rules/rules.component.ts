@@ -33,7 +33,12 @@ export class RulesComponent {
     },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    if (!sessionStorage.getItem('rulesReloaded')) {
+      sessionStorage.setItem('rulesReloaded', 'true');
+      window.location.reload();
+    }
+  }
 
   prev() {
     if (this.currentIndex > 0) {
