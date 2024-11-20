@@ -132,4 +132,24 @@ export class ModalProfileComponent {
       }
     );
   }
+
+  canDeletePost(): boolean {
+    return this.post?.owner === this.userId;
+  }
+
+  deletePost(): void {
+    if (this.canDeletePost()) {
+      this.apiService.deletePostFromSecondFeed(this.postId).subscribe({
+        next: () => {
+          console.log('Post deletado com sucesso!');
+          this.close();
+        },
+        error: (error) => {
+          console.error('Erro ao deletar o post:', error);
+        },
+      });
+    } else {
+      console.error('Ação não permitida: apenas o dono pode deletar o post.');
+    }
+  }
 }

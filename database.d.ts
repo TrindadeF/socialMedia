@@ -3,7 +3,7 @@ export type Post = {
   _id: string;
   media: any;
   content: string;
-  owner: User 
+  owner: User | string;
   createdAt: Date;
   likes: string[];
   ownerName: User;
@@ -11,9 +11,6 @@ export type Post = {
   videoUrl: string;
   comments: string;
   ownerProfileImageUrl: string;
-  
-  
-  
 };
 
 export type User = {

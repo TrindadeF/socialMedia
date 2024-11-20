@@ -5,30 +5,40 @@
     <div class="image-container" *ngIf="post?.media?.length">
       <img [src]="post.media[0]" alt="Imagem do Post" class="post-image" />
     </div>
-    <button *ngIf="isOwner(post.owner)" (click)="deletePost(post._id)">
-      Deletar Post</button>
 
     <div class="gray-container">
       <div class="content-container">
         <ng-container *ngIf="post">
           <p>{{ post.ownerName }} : {{ post.content }}</p>
           <p><mat-icon>favorite</mat-icon> {{ post.likes }}</p>
-          <p>Data de criação: {{ post.createdAt | date: 'short' }}</p>
+          <p>Data de criação: {{ post.createdAt | date : "short" }}</p>
+          <button
+            *ngIf="canDeletePost()"
+            (click)="deletePost()"
+            class="delete-btn"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
           <div class="icon-container">
             <button (click)="likePost(postId)">
               <mat-icon>favorite</mat-icon>
             </button>
-            <input #commentInput type="text" placeholder="Adicionar comentário" />
+            <input
+              #commentInput
+              type="text"
+              placeholder="Adicionar comentário"
+            />
             <button (click)="addComment(postId, commentInput.value)">
               Enviar
             </button>
           </div>
         </ng-container>
 
-       
         <div *ngFor="let comment of comments" class="comment">
           <img
-            [src]="comment.owner?.profilePic || 'assets/images/default-avatar.jpg'"
+            [src]="
+              comment.owner?.profilePic || 'assets/images/default-avatar.jpg'
+            "
             alt="Avatar do comentário"
             class="avatar"
           />
@@ -39,13 +49,15 @@
               {{ comment.content }}
             </p>
 
-            <button *ngIf="canDeleteComment(comment.owner._id)" 
-                    (click)="deleteComment(comment.id)" 
-                    class="delete-btn">
+            <button
+              *ngIf="canDeleteComment(comment.owner._id)"
+              (click)="deleteComment(comment.id)"
+              class="delete-btn"
+            >
               Deletar
             </button>
 
-            <small>{{ comment.createdAt | date: 'short' }}</small>
+            <small>{{ comment.createdAt | date : "short" }}</small>
           </div>
         </div>
       </div>
