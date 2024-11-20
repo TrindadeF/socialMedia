@@ -1,10 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ApiService } from '../api.service';
-import { Post, User } from 'database'; 
-import { MatIconModule } from '@angular/material/icon';
+import { Post, User } from 'database';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-
 
 @Component({
   selector: 'app-modal-profile',
@@ -23,18 +20,16 @@ export class ModalProfileComponent {
     media: File[];
     feedType: 'primaryFeed' | 'secondFeed';
   }>();
-  
+
   userId: string = '';
   users: User[] = [];
   currentUser!: User;
   mutualLikes: { [key: string]: boolean } = {};
-  comments: any[] = []; 
+  comments: any[] = [];
   newComment: string = '';
   post!: Post;
   detailedComments: any;
   authService: any;
-  
-  
 
   constructor(private apiService: ApiService, private snackBar: MatSnackBar) {}
 
@@ -49,10 +44,8 @@ export class ModalProfileComponent {
     } else {
       console.error('Post ID is not provided');
     }
-    console.log("valor user id",this.userId)
-    
+    console.log('valor user id', this.userId);
   }
-  
 
   close() {
     this.show = false;
@@ -65,7 +58,6 @@ export class ModalProfileComponent {
         next: () => console.log(`Post ${postId} curtido com sucesso!`),
         error: (error: any) => console.error(`Erro ao curtir o post:`, error),
       });
-      
   }
 
   loadPostDetails() {
@@ -94,7 +86,7 @@ export class ModalProfileComponent {
     this.apiService.addCommentInSecondFeed(postId, content).subscribe({
       next: (response) => {
         console.log('Comentário adicionado com sucesso:', response);
-        this.loadComments(); 
+        this.loadComments();
       },
       error: (error) => {
         console.error('Erro ao adicionar o comentário:', error);
@@ -118,31 +110,29 @@ export class ModalProfileComponent {
 
   canDeleteComment(commentOwnerId: string): boolean {
     return this.userId === commentOwnerId;
-  
-  
   }
-  
+
   deleteComment(commentId: string): void {
-    console.log('Comentário ID:', commentId); 
+    console.log('Comentário ID:', commentId);
     if (!commentId) {
       console.error('ID do comentário não fornecido');
-      return; 
-      this.loadPostDetails();
+      return;
     }
-  
+
     this.apiService.deleteCommentSecondFeed(commentId).subscribe(
       (response) => {
         console.log('Comentário deletado com sucesso', response);
-        this.comments = this.comments.filter(comment => comment._id !== commentId);
+        this.comments = this.comments.filter(
+          (comment) => comment._id !== commentId
+        );
         this.loadComments();
-
       },
       (error) => {
         console.error('Erro ao deletar comentário', error);
       }
     );
   }
-  
+
   deletePost(postId: string): void {
     if (!postId) {
       console.error('ID do post não fornecido');
@@ -150,15 +140,12 @@ export class ModalProfileComponent {
     }
     this.apiService.deletePostFromSecondFeed(postId).subscribe({
       next: (response) => {
-      
         this.snackBar.open('Post deletado com sucesso', 'Fechar', {
           duration: 3000,
         });
         this.getPostDetails(postId);
         this.publish.emit();
         this.close();
-      
-      
       },
       error: (error) => {
         console.error('Erro ao deletar post:', error);
@@ -168,7 +155,6 @@ export class ModalProfileComponent {
       },
     });
   }
-
   getUserIdFromAuthService(): string {
     return localStorage.getItem('userId') || '';
   }
@@ -182,19 +168,13 @@ export class ModalProfileComponent {
       postOwnerId = postOwnerId._id;
     }
 
-   
+    if (typeof postOwnerId !== 'string') {
+      console.error('postOwnerId deve ser uma string', postOwnerId);
+      return false;
+    }
     const currentUserId = this.getUserIdFromAuthService();
     const isOwner = currentUserId === String(postOwnerId);
 
     return isOwner;
   }
-  
- 
-  
-
-  
-  
-  }
-  
-  
-
+}

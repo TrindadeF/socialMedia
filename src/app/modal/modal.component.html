@@ -3,6 +3,8 @@
   <div class="modal-content">
     <div class="box">
       <h2>{{ title }}</h2>
+
+      <!-- Área de texto -->
       <textarea
         class="form-control mb-2"
         placeholder="O que você vai nos mostrar hoje?"
@@ -10,6 +12,7 @@
         (input)="checkFormValidity()"
       ></textarea>
 
+      <!-- Seção de upload de mídia -->
       <div class="d-flex align-items-center mb-2">
         <label class="mr-2" for="upload-image" style="cursor: pointer">
           <mat-icon>add_a_photo</mat-icon>
@@ -48,8 +51,7 @@
         ></video>
       </div>
 
-      <p *ngIf="alertMessage" [class]="alertType">{{ alertMessage }}</p>
-
+      <!-- Botões -->
       <div class="buttons">
         <button
           id="publish-button"
