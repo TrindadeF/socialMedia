@@ -63,6 +63,7 @@ export class ModalProfileComponent {
     this.apiService.getPostDetails(this.post._id).subscribe({
       next: (response) => {
         this.post = response.post;
+        console.log('Post carregado:', this.post);
         this.comments = response.comments;
       },
       error: (error) => {
@@ -132,7 +133,12 @@ export class ModalProfileComponent {
     );
   }
 
+  getUserIdFromAuthService(): string {
+    return localStorage.getItem('userId') || '';
+  }
+
   deletePost(postId: string): void {
+    console.log('Post ID:', postId);
     if (!postId) {
       console.error('ID do post não fornecido');
       return;
@@ -154,15 +160,9 @@ export class ModalProfileComponent {
       },
     });
   }
-  getUserIdFromAuthService(): string {
-    return localStorage.getItem('userId') || '';
-  }
 
-  isOwner(postOwnerId: string | { _id: string } | undefined): boolean {
-    if (!postOwnerId) {
-      return false;
-    }
-
+  isOwner(postOwnerId: any): boolean {
+    console.log('Post Owner:', postOwnerId);
     if (
       typeof postOwnerId === 'object' &&
       postOwnerId !== null &&
@@ -171,13 +171,10 @@ export class ModalProfileComponent {
       postOwnerId = postOwnerId._id;
     }
 
-    if (typeof postOwnerId !== 'string' || !postOwnerId) {
-      console.error('postOwnerId deve ser uma string válida', postOwnerId);
-      return false;
-    }
-
     const currentUserId = this.getUserIdFromAuthService();
+    const isOwner = currentUserId === String(postOwnerId);
+    console.log('Is owner:', isOwner);
 
-    return currentUserId === String(postOwnerId);
+    return isOwner;
   }
 }
