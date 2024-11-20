@@ -133,6 +133,33 @@
   background-color: #b30000;
 }
 
+.delete-btw {
+  background-color: #ff4040; 
+  color: #fff; 
+  border: none;
+  border-radius: 8px; 
+  padding: 10px 20px; 
+  font-size: 1em; 
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+.delete-btw:hover {
+  background-color: #e60000; 
+  transform: scale(1.1); 
+}
+
+.delete-btw:focus {
+  outline: 2px solid #ffcc00; 
+  box-shadow: 0 0 8px 2px rgba(255, 204, 0, 0.5); 
+}
+
+.delete-btw:active {
+  transform: scale(0.95); 
+  background-color: #b30000;
+}
+
 .comment-divider {
   margin: 5px 0;
   border: none;
@@ -206,4 +233,6 @@
   .icon-container input[type="text"] {
     flex: 1;
   }
+
+
 }
