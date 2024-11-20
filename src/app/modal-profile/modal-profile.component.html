@@ -13,7 +13,7 @@
           <p><mat-icon>favorite</mat-icon> {{ post.likes }}</p>
           <p>Data de criação: {{ post.createdAt | date : "short" }}</p>
           <button
-            *ngIf="isOwner(postId)"
+            *ngIf="isOwner(userId)"
             (click)="deletePost(postId)"
             class="delete-btn"
           >

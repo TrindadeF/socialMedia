@@ -44,7 +44,6 @@ export class ModalProfileComponent {
     } else {
       console.error('Post ID is not provided');
     }
-    console.log('valor user id', this.userId);
   }
 
   close() {

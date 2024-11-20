@@ -41,4 +41,12 @@ export type Message = {
   content: string;
   timestamp: Date;
 };
+
+export type Comment = {
+  _id: string;
+  content: string;
+  owner: User;
+  createdAt: string;
+};
+
 type Gender = 'M' | 'F' | 'NB' | 'BI' | 'TR' | 'HOM';
