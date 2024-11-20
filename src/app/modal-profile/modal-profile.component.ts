@@ -158,7 +158,11 @@ export class ModalProfileComponent {
     return localStorage.getItem('userId') || '';
   }
 
-  isOwner(postOwnerId: any): boolean {
+  isOwner(postOwnerId: string | { _id: string } | undefined): boolean {
+    if (!postOwnerId) {
+      return false;
+    }
+
     if (
       typeof postOwnerId === 'object' &&
       postOwnerId !== null &&
@@ -167,13 +171,13 @@ export class ModalProfileComponent {
       postOwnerId = postOwnerId._id;
     }
 
-    if (typeof postOwnerId !== 'string') {
-      console.error('postOwnerId deve ser uma string', postOwnerId);
+    if (typeof postOwnerId !== 'string' || !postOwnerId) {
+      console.error('postOwnerId deve ser uma string válida', postOwnerId);
       return false;
     }
-    const currentUserId = this.getUserIdFromAuthService();
-    const isOwner = currentUserId === String(postOwnerId);
 
-    return isOwner;
+    const currentUserId = this.getUserIdFromAuthService();
+
+    return currentUserId === String(postOwnerId);
   }
 }
