@@ -39,12 +39,15 @@ export class ModalProfileComponent {
 
   ngOnInit(): void {
     this.getuserid();
+  
     if (this.postId) {
       this.getPostDetails(this.postId);
+      console.log('User ID:', this.userId);
     } else {
       console.error('Post ID is not provided');
     }
   }
+  
 
   close() {
     this.show = false;
@@ -160,21 +163,25 @@ export class ModalProfileComponent {
       },
     });
   }
-
-  isOwner(postOwnerId: any): boolean {
-    console.log('Post Owner:', postOwnerId);
-    if (
-      typeof postOwnerId === 'object' &&
-      postOwnerId !== null &&
-      '_id' in postOwnerId
-    ) {
+  isOwner(postOwnerId: User | string | null): boolean {
+    if (!postOwnerId) {
+      console.error('Post Owner ID é nulo ou indefinido');
+      return false;
+    }
+  
+    if (typeof postOwnerId === 'object' && postOwnerId !== null && '_id' in postOwnerId) {
       postOwnerId = postOwnerId._id;
     }
-
+  
     const currentUserId = this.getUserIdFromAuthService();
     const isOwner = currentUserId === String(postOwnerId);
+  
+    console.log('Post Owner ID:', postOwnerId);
     console.log('Is owner:', isOwner);
-
+  
     return isOwner;
   }
+  
+  
+  
 }

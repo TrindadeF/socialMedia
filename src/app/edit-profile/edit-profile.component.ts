@@ -20,7 +20,7 @@ export class EditProfileComponent implements OnInit {
     _id: '',
   };
 
-  originalUser: User | null = null;
+  originalUser: User | null = null;  
   alertMessage: string = '';
   alertType: string = '';
   previewImage: string | ArrayBuffer | null = null;
@@ -38,7 +38,7 @@ export class EditProfileComponent implements OnInit {
     this.apiService.getUserById(userId).subscribe({
       next: (response) => {
         this.user = response;
-        this.originalUser = { ...response };
+        this.originalUser = { ...response }; 
         if (response.profilePic) {
           this.previewImage = response.profilePic;
         }
@@ -48,7 +48,7 @@ export class EditProfileComponent implements OnInit {
       },
     });
   }
-
+  
   onSubmit() {
     const formData = new FormData();
 
@@ -61,6 +61,7 @@ export class EditProfileComponent implements OnInit {
     formData.append('email', this.user.email);
     formData.append('nickName', this.user.nickName);
     formData.append('description', this.user.description);
+    formData.append('isAnonymous', this.user.isAnonymous?.toString() ?? 'false'); // Verificação de isAnonymous
 
     const userId = this.getLoggedInUserId();
     this.apiService.updateUserProfile(userId, formData).subscribe({
@@ -105,7 +106,6 @@ export class EditProfileComponent implements OnInit {
       next: () => {
         this.alertMessage = 'Perfil deletado com sucesso!';
         this.alertType = 'success';
-        
       },
       error: (error) => {
         console.error('Erro ao deletar perfil:', error);

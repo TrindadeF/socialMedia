@@ -24,6 +24,8 @@ export type User = {
   description: string;
   nickName: string;
   followerCount?: number;
+  isAnonymous?: boolean;
+  
 };
 
 export type Chat = {
