@@ -134,4 +134,36 @@ textarea {
     padding: 10px;
     font-size: 14px;
   }
+
+  .toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .checkbox-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+  
+  .checkbox-group label {
+    font-size: 1rem;
+    font-weight: normal;
+    cursor: pointer;
+  }
+  
+ 
+  .form-group .toggle-container {
+    margin-top: 0.5rem;
+  }
+  
+
+  
 }

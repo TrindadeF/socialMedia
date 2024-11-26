@@ -2,6 +2,7 @@
   <div class="container">
     <h2>Editar Perfil</h2>
 
+   
     <div class="profile-picture-preview">
       <img
         [src]="previewImage ? previewImage : 'assets/images/user.jpg'"
@@ -18,23 +19,31 @@
         class="form-control"
         (change)="onImageSelected($event)"
         name="image"
+        [disabled]="user.isAnonymous"
       />
     </div>
 
+    
+    <div *ngIf="user.isAnonymous" class="alert alert-warning">
+      Este perfil está configurado como anônimo. Algumas informações estão ocultas ou não podem ser alteradas.
+    </div>
+
     <form (ngSubmit)="onSubmit()" #editProfileForm="ngForm">
+      
       <div class="form-group">
         <label for="name">Nome</label>
         <input
-          *ngIf="!user.isAnonymous"
           type="text"
           id="name"
           class="form-control"
           [(ngModel)]="user.name"
           name="name"
           required
+          [readonly]="user.isAnonymous"
         />
       </div>
 
+   
       <div class="form-group">
         <label for="nickName">Nome de Usuário</label>
         <input
@@ -51,17 +60,18 @@
         <label for="description">Descrição</label>
         <div class="description-wrapper">
           <textarea
-            *ngIf="!user.isAnonymous"
             id="description"
             class="form-control"
             [(ngModel)]="user.description"
             name="description"
             rows="3"
+            [readonly]="user.isAnonymous"
           ></textarea>
           <div class="linear-box"></div>
         </div>
       </div>
 
+      
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -74,19 +84,21 @@
         />
       </div>
 
+     
       <div class="form-group">
         <label for="age">Idade</label>
         <input
-          *ngIf="!user.isAnonymous"
           type="number"
           id="age"
           class="form-control"
           [(ngModel)]="user.age"
           name="age"
           required
+          [readonly]="user.isAnonymous"
         />
       </div>
 
+      
       <div class="form-group">
         <label for="gender">Gênero</label>
         <select
@@ -94,6 +106,8 @@
           class="form-control"
           [(ngModel)]="user.gender"
           name="gender"
+          [disabled]="!!user.isAnonymous"
+
         >
           <option value="">Selecione</option>
           <option value="M">Masculino</option>
@@ -105,6 +119,7 @@
         </select>
       </div>
 
+      
       <div class="form-group">
         <label for="isAnonymous">Perfil Anônimo</label>
         <div class="toggle-container">
@@ -113,11 +128,21 @@
             id="isAnonymous"
             [(ngModel)]="user.isAnonymous"
             name="isAnonymous"
+            (change)="toggleAnonymous(user.isAnonymous ?? false)"
           />
           <label for="isAnonymous">Ativar</label>
         </div>
       </div>
-
+      <div class="checkbox-group">
+        <input
+          type="checkbox"
+          id="deactivateAnonymous"
+          [checked]="!user.isAnonymous"
+          (change)="toggleAnonymous(false)"
+        />
+        <label for="deactivateAnonymous">Desativar</label>
+      </div>
+      
       <div class="button-container">
         <button
           type="submit"
@@ -133,6 +158,7 @@
       </div>
     </form>
 
+    
     <div
       *ngIf="alertMessage"
       class="alert"

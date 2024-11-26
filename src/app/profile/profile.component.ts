@@ -224,7 +224,10 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  deletePost(postId: string): void {
+  deletePost(postId: string, mediaUrl: string): void {
+    // Implemente a lógica de exclusão aqui, considerando o mediaUrl, se necessário
+    console.log('Post ID:', postId, 'Media URL:', mediaUrl);
+  
     this.apiService.deletePostFromSecondFeed(postId).subscribe({
       next: (response) => {
         this.snackBar.open('Post deletado com sucesso', 'Fechar', {
@@ -240,6 +243,7 @@ export class ProfileComponent implements OnInit {
       },
     });
   }
+  
   getPosts() {
     this.apiService.getPostsFromSecondFeed().subscribe({
       next: (posts: Post[]) => {

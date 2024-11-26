@@ -14,13 +14,16 @@
           />
         </ng-template>
       </div>
-      <div class="profile-info">
+
+    
+      <div *ngIf="!user.isAnonymous || user._id === getUserId()" class="profile-info">
         <h2>{{ user.name }}</h2>
         <h3>{{ user.age }}</h3>
         <h4>{{ user.description }}</h4>
         <p>Seguidores: {{ user.followerCount }}</p>
         <p class="username">{{ user?.username }}</p>
 
+      
         <button
           *ngIf="user._id !== getUserId()"
           (click)="toggleFollow()"
@@ -29,12 +32,20 @@
           {{ isFollowing ? "Deixar de Seguir" : "Seguir" }}
         </button>
 
+       
         <div *ngIf="alertMessage" class="alert" [ngClass]="alertType">
           {{ alertMessage }}
         </div>
       </div>
+
+     
+      <div *ngIf="user.isAnonymous && user._id !== getUserId()" class="profile-info">
+        <h2>Perfil Anônimo</h2>
+        <p>Este usuário está no modo anônimo.</p>
+      </div>
     </div>
 
+    
     <app-modal
       [title]="title"
       [content]="modalContent"
@@ -48,6 +59,7 @@
       <mat-icon>library_add</mat-icon>
     </button>
 
+  
     <div class="gallery">
       <h3>Feed</h3>
       <div class="gallery-grid">
@@ -67,8 +79,12 @@
               class="post-video"
               (click)="openImageViewer(post._id)"
             ></video>
-            
-            
+             
+          <button 
+          class="delete-btn" 
+          (click)="deletePost(post._id, mediaUrl)">
+          Deletar
+        </button>
           </div>
         </div>
       </div>
@@ -76,10 +92,10 @@
   </div>
 </div>
 
+
 <app-modal-profile
   *ngIf="showImageViewer"
   [show]="showImageViewer"
   [postId]="selectedPost"
   (closeEvent)="closeImageViewer()"
->
-</app-modal-profile>
+></app-modal-profile>

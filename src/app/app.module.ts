@@ -31,7 +31,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommentModalComponent } from './comment-modal/comment-modal.component';
 import { ModalProfileComponent } from './modal-profile/modal-profile.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
