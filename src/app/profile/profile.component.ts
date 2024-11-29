@@ -276,9 +276,9 @@ export class ProfileComponent implements OnInit {
     ) {
       postOwnerId = postOwnerId._id;
     }
+
     const postOwnerIdString = String(postOwnerId);
     const currentUserId = this.getUserIdFromAuthService();
-
     return currentUserId === postOwnerIdString;
   }
 
