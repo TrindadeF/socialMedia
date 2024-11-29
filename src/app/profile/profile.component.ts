@@ -276,10 +276,9 @@ export class ProfileComponent implements OnInit {
       postOwnerId = postOwnerId._id;
     }
   
-    // Forçar a conversão para string
     postOwnerId = String(postOwnerId);
   
-    // Agora verifique se é uma string
+    
     if (typeof postOwnerId !== 'string') {
       console.error('postOwnerId deve ser uma string', postOwnerId);
       return false;
