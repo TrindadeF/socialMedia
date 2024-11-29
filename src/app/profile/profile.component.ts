@@ -269,16 +269,19 @@ export class ProfileComponent implements OnInit {
   }
 
   isOwner(postOwnerId: any): boolean {
+    const currentUserId = this.getUserIdFromAuthService();
+
+    let postOwnerIdString: string;
     if (
+      postOwnerId &&
       typeof postOwnerId === 'object' &&
-      postOwnerId !== null &&
       '_id' in postOwnerId
     ) {
-      postOwnerId = postOwnerId._id;
+      postOwnerIdString = String(postOwnerId._id);
+    } else {
+      postOwnerIdString = String(postOwnerId);
     }
 
-    const postOwnerIdString = String(postOwnerId);
-    const currentUserId = this.getUserIdFromAuthService();
     return currentUserId === postOwnerIdString;
   }
 

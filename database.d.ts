@@ -4,7 +4,7 @@ export type Post = {
   media: any;
   content: string;
   owner: User;
-  ownerId: string,
+  ownerId: string;
   createdAt: Date;
   likes: string[];
   ownerName: User;
@@ -12,8 +12,6 @@ export type Post = {
   videoUrl: string;
   comments: string;
   ownerProfileImageUrl: string;
-  
-
 };
 
 export type User = {
@@ -28,8 +26,6 @@ export type User = {
   nickName: string;
   followerCount?: number;
   isAnonymous?: boolean;
-  
-  
 };
 
 export type Chat = {
