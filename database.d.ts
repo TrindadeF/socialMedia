@@ -4,6 +4,7 @@ export type Post = {
   media: any;
   content: string;
   owner: User;
+  ownerId: '',
   createdAt: Date;
   likes: string[];
   ownerName: User;
@@ -27,6 +28,7 @@ export type User = {
   nickName: string;
   followerCount?: number;
   isAnonymous?: boolean;
+  
   
 };
 

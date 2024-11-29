@@ -13,9 +13,9 @@
           <p><mat-icon>favorite</mat-icon> {{ post.likes }}</p>
           <p>Data de criação: {{ post.createdAt | date : "short" }}</p>
           <button
-            *ngIf="isOwner(post.owner)"
-            (click)="deletePost(post._id)"
-            class="delete-btw"
+          *ngIf="post?._id && isOwner(post.owner)"
+          (click)="deletePost(post._id)"
+          class="delete-btw"
           >
             <mat-icon>delete</mat-icon>
           </button>

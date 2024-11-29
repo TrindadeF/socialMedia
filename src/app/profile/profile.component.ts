@@ -224,10 +224,10 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  deletePost(postId: string, mediaUrl: string): void {
-    // Implemente a lógica de exclusão aqui, considerando o mediaUrl, se necessário
-    console.log('Post ID:', postId, 'Media URL:', mediaUrl);
-  
+  deletePost(postId: string): void {
+    // Implemente a lógica de exclusão aqui, considerando apenas o postId
+    console.log('Post ID:', postId);
+    
     this.apiService.deletePostFromSecondFeed(postId).subscribe({
       next: (response) => {
         this.snackBar.open('Post deletado com sucesso', 'Fechar', {
@@ -243,6 +243,7 @@ export class ProfileComponent implements OnInit {
       },
     });
   }
+  
   
   getPosts() {
     this.apiService.getPostsFromSecondFeed().subscribe({
@@ -271,24 +272,23 @@ export class ProfileComponent implements OnInit {
   }
 
   isOwner(postOwnerId: any): boolean {
-    if (
-      typeof postOwnerId === 'object' &&
-      postOwnerId !== null &&
-      '_id' in postOwnerId
-    ) {
+    if (typeof postOwnerId === 'object' && postOwnerId !== null && '_id' in postOwnerId) {
       postOwnerId = postOwnerId._id;
     }
-
+  
+    // Forçar a conversão para string
+    postOwnerId = String(postOwnerId);
+  
+    // Agora verifique se é uma string
     if (typeof postOwnerId !== 'string') {
       console.error('postOwnerId deve ser uma string', postOwnerId);
       return false;
     }
+  
     const currentUserId = this.getUserIdFromAuthService();
-    const isOwner = currentUserId === String(postOwnerId);
-
-    return isOwner;
+    return currentUserId === postOwnerId;
   }
-
+  
   getUserIdFromAuthService(): string {
     return localStorage.getItem('userId') || '';
   }
