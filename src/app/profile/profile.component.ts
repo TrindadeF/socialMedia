@@ -269,12 +269,6 @@ export class ProfileComponent implements OnInit {
   }
 
   isOwner(postOwnerId: any): boolean {
-    
-    if (postOwnerId && typeof postOwnerId === 'object' && '_id' in postOwnerId) {
-    const currentUserId = this.getUserIdFromAuthService();
-    console.log('currentUserId:', currentUserId);
-    console.log('postOwnerId:', postOwnerId);
-
     if (
       typeof postOwnerId === 'object' &&
       postOwnerId !== null &&
@@ -282,13 +276,11 @@ export class ProfileComponent implements OnInit {
     ) {
       postOwnerId = postOwnerId._id;
     }
-  
-    const postOwnerIdString = String(postOwnerId);
-    console.log('Comparando:', currentUserId, 'com', postOwnerIdString);
 
+    const postOwnerIdString = String(postOwnerId);
+    const currentUserId = this.getUserIdFromAuthService();
     return currentUserId === postOwnerIdString;
   }
-  
 
   getUserIdFromAuthService(): string {
     return localStorage.getItem('userId') || '';
