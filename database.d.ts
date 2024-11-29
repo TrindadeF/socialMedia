@@ -4,7 +4,7 @@ export type Post = {
   media: any;
   content: string;
   owner: User;
-  ownerId: string;
+  postOwnerId: string;
   createdAt: Date;
   likes: string[];
   ownerName: User;

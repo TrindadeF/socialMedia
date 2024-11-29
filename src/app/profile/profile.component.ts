@@ -268,37 +268,14 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  isOwner(postOwnerId: any): boolean {
+  isOwner(postOwnerId: string): boolean {
     const currentUserId = this.getUserIdFromAuthService();
 
     console.log('ID do usuário logado:', currentUserId);
 
-    let postOwnerIdString: string;
+    console.log('Comparando com ID do dono do post:', postOwnerId);
 
-    if (
-      postOwnerId &&
-      typeof postOwnerId === 'object' &&
-      '_id' in postOwnerId
-    ) {
-      postOwnerIdString = String(postOwnerId._id);
-      console.log('ID do dono do post extraído do objeto:', postOwnerIdString);
-    } else {
-      postOwnerIdString = String(postOwnerId);
-      console.log(
-        'ID do dono do post convertido diretamente para string:',
-        postOwnerIdString
-      );
-    }
-
-    console.log('Comparando IDs:', currentUserId, postOwnerIdString);
-
-    const isOwner = currentUserId === postOwnerIdString;
-    console.log(
-      'Resultado da comparação de IDs (true se são iguais):',
-      isOwner
-    );
-
-    return isOwner;
+    return currentUserId === postOwnerId;
   }
 
   getUserIdFromAuthService(): string {

@@ -114,19 +114,23 @@ export class ModalProfileComponent {
       console.error('Post ID não fornecido ou inválido');
       return;
     }
-  
+
     this.apiService.getPostDetails(postId).subscribe(
       (response: { post: Post; comments: any[] }) => {
         if (response?.post) {
           this.post = response.post;
-  
+
           // Verificação explícita do ownerId
-          if (!this.post.ownerId) {
+          if (!this.post.postOwnerId) {
             console.warn('Post carregado sem ownerId:', this.post);
           }
-  
+
           this.comments = response.comments || [];
-          console.log('Post e comentários carregados:', this.post, this.comments);
+          console.log(
+            'Post e comentários carregados:',
+            this.post,
+            this.comments
+          );
         } else {
           console.warn('Resposta não contém informações do post:', response);
         }
@@ -136,10 +140,12 @@ export class ModalProfileComponent {
       }
     );
   }
-  
+
   canDeleteComment(commentOwnerId: string): boolean {
     // Permite deletar se o usuário for o autor do comentário ou o dono do post
-    return this.userId === commentOwnerId || this.isOwner(this.post.ownerId);
+    return (
+      this.userId === commentOwnerId || this.isOwner(this.post.postOwnerId)
+    );
   }
 
   deleteComment(commentId: string): void {
@@ -147,7 +153,7 @@ export class ModalProfileComponent {
       console.error('ID do comentário não fornecido');
       return;
     }
-  
+
     this.apiService.deleteCommentSecondFeed(commentId).subscribe({
       next: () => {
         console.log('Comentário deletado com sucesso');
@@ -195,17 +201,17 @@ export class ModalProfileComponent {
       console.error('Post Owner ID é nulo ou indefinido');
       return false;
     }
-  
+
     if (typeof postOwnerId === 'object' && postOwnerId._id) {
       postOwnerId = postOwnerId._id; // Converte para string se for um objeto
     } else if (typeof postOwnerId === 'object') {
       console.error('Objeto Post Owner não possui a propriedade _id');
       return false;
     }
-  
+
     const currentUserId = this.getUserIdFromAuthService();
     const isOwner = currentUserId === String(postOwnerId);
-  
+
     console.log('Post Owner ID:', postOwnerId);
     console.log('Current User ID:', currentUserId);
     console.log('É dono do post?', isOwner);

@@ -80,7 +80,7 @@
               (click)="openImageViewer(post._id)"
             ></video>
             <button
-              *ngIf="isOwner(post.owner)"
+              *ngIf="isOwner(post.postOwnerId)"
               (click)="deletePost(post._id)"
               class="delete-btn"
             >
