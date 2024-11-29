@@ -15,7 +15,10 @@
         </ng-template>
       </div>
 
-      <div *ngIf="!user.isAnonymous || user._id === getUserId()" class="profile-info">
+      <div
+        *ngIf="!user.isAnonymous || user._id === getUserId()"
+        class="profile-info"
+      >
         <h2>{{ user.name }}</h2>
         <h3>{{ user.age }}</h3>
         <h4>{{ user.description }}</h4>
@@ -35,7 +38,10 @@
         </div>
       </div>
 
-      <div *ngIf="user.isAnonymous && user._id !== getUserId()" class="profile-info">
+      <div
+        *ngIf="user.isAnonymous && user._id !== getUserId()"
+        class="profile-info"
+      >
         <h2>Perfil Anônimo</h2>
         <p>Este usuário está no modo anônimo.</p>
       </div>
@@ -73,10 +79,8 @@
               class="post-video"
               (click)="openImageViewer(post._id)"
             ></video>
-
-            <!-- Botão para deletar a postagem -->
             <button
-              *ngIf="post.owner=== user._id"  
+              *ngIf="isOwner(post.owner)"
               (click)="deletePost(post._id)"
               class="delete-btn"
             >

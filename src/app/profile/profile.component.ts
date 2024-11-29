@@ -183,9 +183,8 @@ export class ProfileComponent implements OnInit {
       formData.append('content', content);
     }
 
-    
     const resizedImagesPromises = media.map((file) =>
-      this.resizeImage(file, 800, 800) 
+      this.resizeImage(file, 800, 800)
     );
 
     Promise.all(resizedImagesPromises)
@@ -225,9 +224,8 @@ export class ProfileComponent implements OnInit {
   }
 
   deletePost(postId: string): void {
-    // Implemente a lógica de exclusão aqui, considerando apenas o postId
     console.log('Post ID:', postId);
-    
+
     this.apiService.deletePostFromSecondFeed(postId).subscribe({
       next: (response) => {
         this.snackBar.open('Post deletado com sucesso', 'Fechar', {
@@ -243,8 +241,7 @@ export class ProfileComponent implements OnInit {
       },
     });
   }
-  
-  
+
   getPosts() {
     this.apiService.getPostsFromSecondFeed().subscribe({
       next: (posts: Post[]) => {
@@ -272,29 +269,22 @@ export class ProfileComponent implements OnInit {
   }
 
   isOwner(postOwnerId: any): boolean {
-    if (typeof postOwnerId === 'object' && postOwnerId !== null && '_id' in postOwnerId) {
+    if (
+      typeof postOwnerId === 'object' &&
+      postOwnerId !== null &&
+      '_id' in postOwnerId
+    ) {
       postOwnerId = postOwnerId._id;
     }
-  
-    // Forçar a conversão para string
-    postOwnerId = String(postOwnerId);
-  
-    // Agora verifique se é uma string
-    if (typeof postOwnerId !== 'string') {
-      console.error('postOwnerId deve ser uma string', postOwnerId);
-      return false;
-    }
-  
+    const postOwnerIdString = String(postOwnerId);
     const currentUserId = this.getUserIdFromAuthService();
-    return currentUserId === postOwnerId;
+
+    return currentUserId === postOwnerIdString;
   }
-  
+
   getUserIdFromAuthService(): string {
     return localStorage.getItem('userId') || '';
   }
-
-
-
 
   resetForm() {
     this.alertMessage = '';
@@ -303,7 +293,17 @@ export class ProfileComponent implements OnInit {
 
   isImage(url: string): boolean {
     return (
-      url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.png') || url.endsWith('.gif') || url.endsWith('.webp') || url.endsWith('.bmp') || url.endsWith('.ico') || url.endsWith('.svg') || url.endsWith('.heif') || url.endsWith('.heic') || url.endsWith('.tiff')
+      url.endsWith('.jpg') ||
+      url.endsWith('.jpeg') ||
+      url.endsWith('.png') ||
+      url.endsWith('.gif') ||
+      url.endsWith('.webp') ||
+      url.endsWith('.bmp') ||
+      url.endsWith('.ico') ||
+      url.endsWith('.svg') ||
+      url.endsWith('.heif') ||
+      url.endsWith('.heic') ||
+      url.endsWith('.tiff')
     );
   }
 
