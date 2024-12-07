@@ -210,6 +210,7 @@ export class ProfileComponent implements OnInit {
             this.alertType = 'success';
             this.closeModal();
             this.fetchUserProfile();
+            window.location.reload();
           },
           error: (err) => {
             console.error('Erro ao publicar o post:', err);
@@ -234,7 +235,8 @@ export class ProfileComponent implements OnInit {
         this.snackBar.open('Post deletado com sucesso', 'Fechar', {
           duration: 3000,
         });
-        this.getPosts();
+        this.fetchUserPosts();
+        
       },
       error: (error) => {
         console.error('Erro ao deletar post:', error);

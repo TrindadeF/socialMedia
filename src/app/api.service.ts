@@ -145,7 +145,7 @@ export class ApiService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    return this.http.delete(`${this.apiSecondFeed}/post/${postId}`, {
+    return this.http.delete(`${this.apiSecondFeed}/${postId}`, {
       headers,
     });
   }
