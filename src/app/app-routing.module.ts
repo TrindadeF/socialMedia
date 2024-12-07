@@ -34,8 +34,7 @@ const routes: Routes = [
   { path: 'presentation', component: PresentationComponent },
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'notifications', component: NotificationsComponent },
-  {
-    path: 'primaryFeed/posts/:postId/comments',
+  { path: 'primaryFeed/posts/:postId/comments',
     component: PostDetailComponent,
   },
 ];

@@ -80,12 +80,15 @@
               (click)="openImageViewer(post._id)"
             ></video>
             <button
-              *ngIf="isOwner(post.postOwnerId)"
+              *ngIf="isOwner(post)"
               (click)="deletePost(post._id)"
               class="delete-btn"
             >
               Deletar
             </button>
+           
+           
+
           </div>
         </div>
       </div>
@@ -96,6 +99,6 @@
 <app-modal-profile
   *ngIf="showImageViewer"
   [show]="showImageViewer"
-  [postId]="selectedPost"
+  [postId]="selectedPostId"
   (closeEvent)="closeImageViewer()"
 ></app-modal-profile>

@@ -32,6 +32,8 @@ import { CommentModalComponent } from './comment-modal/comment-modal.component';
 import { ModalProfileComponent } from './modal-profile/modal-profile.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ConfigComponent } from './config/config.component';
+
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     CommentModalComponent,
     ModalProfileComponent,
     PostDetailComponent,
+    ConfigComponent,
     
   ],
   imports: [

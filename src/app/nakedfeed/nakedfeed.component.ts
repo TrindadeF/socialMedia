@@ -3,6 +3,9 @@ import { ApiService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'database';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import Swiper from 'swiper';
+
+
 
 @Component({
   selector: 'app-nakedfeed',
@@ -27,6 +30,20 @@ export class NakedFeedComponent implements OnInit {
     this.loadUsers();
     this.getCurrentUser();
     this.checkUserSubscriptionStatus();
+  }
+  initializeSwiper(): void {
+    new Swiper('.swiper-container', {
+      loop: true,
+      autoplay: {
+        delay: 2500,
+      },
+      slidesPerView: 1,
+      spaceBetween: 10,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
   }
 
   loadUsers(): void {

@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ProfileComponent implements OnInit {
   user: any = {};
+  userId: string = '';
   posts: Post[] = [];
   profileForm: FormGroup;
   profilePicUrl: string = '';
@@ -30,7 +31,8 @@ export class ProfileComponent implements OnInit {
   selectedImageUrl: string = '';
   selectedImage: string = '';
   showImageViewer: boolean = false;
-  selectedPost: string = '';
+  selectedPostId: string = '';
+  
 
   constructor(
     private apiService: ApiService,
@@ -62,6 +64,7 @@ export class ProfileComponent implements OnInit {
   public getUserId(): string {
     return localStorage.getItem('userId') || '';
   }
+  
 
   openModal() {
     this.showModal = true;
@@ -268,16 +271,47 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  isOwner(postOwnerId: string): boolean {
+  isOwner(postOwnerId: any): boolean {
+    if (
+      typeof postOwnerId === 'object' &&
+      postOwnerId !== null &&
+      '_id' in postOwnerId
+    ) {
+      console.log(postOwnerId)
+      postOwnerId = postOwnerId._id;
+      console.log(postOwnerId)
+      
+    }
+    if (typeof postOwnerId !== 'string') {
+      console.error('postOwnerId deve ser uma string', postOwnerId);
+      console.log("chegou a segunda condição")
+      console.log(postOwnerId)
+      return false;
+    }
+
     const currentUserId = this.getUserIdFromAuthService();
-
-    console.log('ID do usuário logado:', currentUserId);
-
-    console.log('Comparando com ID do dono do post:', postOwnerId);
-
-    return currentUserId === postOwnerId;
+    console.log("O id do usuário atual é :")
+    console.log(currentUserId)
+    
+    return currentUserId === String(postOwnerId);
   }
+  /*
 
+  isOwner(postOwnerId: any): boolean {
+    if (!postOwnerId) {
+      console.warn('postOwnerId está ausente ou inválido:', postOwnerId);
+      return false;
+    }
+  
+    if (typeof postOwnerId === 'object' && postOwnerId._id) {
+      postOwnerId = postOwnerId._id;
+    }
+  
+    const currentUserId = this.getUserIdFromAuthService();
+    return currentUserId === String(postOwnerId);
+  }*/
+ 
+  
   getUserIdFromAuthService(): string {
     return localStorage.getItem('userId') || '';
   }
@@ -304,7 +338,7 @@ export class ProfileComponent implements OnInit {
   }
 
   openImageViewer(postId: string) {
-    this.selectedPost = postId;
+    this.selectedPostId= postId;
     this.showImageViewer = true;
   }
 

@@ -335,6 +335,33 @@ body {
   button:hover {
     background-color: darkred;
   }
+  .delete-btn {
+    background-color: #ff4d4d; /* Cor vermelho para indicar ação de exclusão */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    margin-top: 10px;
+  }
+  
+  .delete-btn:hover {
+    background-color: #cc0000; /* Cor vermelho escuro para destaque ao passar o mouse */
+    transform: scale(1.05); /* Leve aumento ao passar o mouse */
+  }
+  
+  .delete-btn:active {
+    transform: scale(0.95); /* Reduz ligeiramente ao clicar */
+  }
+  
+  .delete-btn:disabled {
+    background-color: #555; /* Cor cinza para botões desativados */
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
   
 
 }

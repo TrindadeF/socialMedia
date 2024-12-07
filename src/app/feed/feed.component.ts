@@ -59,6 +59,7 @@ export class FeedComponent implements OnInit {
       postOwnerId !== null &&
       '_id' in postOwnerId
     ) {
+      console.log(postOwnerId);
       postOwnerId = postOwnerId._id;
     }
 
@@ -67,6 +68,8 @@ export class FeedComponent implements OnInit {
       return false;
     }
     const currentUserId = this.getUserIdFromAuthService();
+    console.log(currentUserId)
+    console.log(postOwnerId)
     const isOwner = currentUserId === String(postOwnerId);
 
     return isOwner;
