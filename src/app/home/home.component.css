@@ -7,8 +7,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+  justify-content: flex-start; /* Alterado para começar do topo */
+  min-height: 120vh; /* Aumentando a altura mínima para mais espaço */
   overflow: hidden;
 }
 
@@ -25,6 +25,22 @@ header {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgb(0, 0, 0);
   overflow: hidden;
+}
+
+.feedback-images {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Espaço entre as imagens */
+  margin-bottom: 20px; /* Espaçamento acima do rodapé */
+}
+
+.feedback-img {
+  width: 320px; /* Ajuste o tamanho das imagens conforme necessário */
+  height: 500px;
+}
+.feedback-img:hover {
+  transform: scale(1.1);
+  filter: brightness(1.5);
 }
 
 .logo {
@@ -115,7 +131,7 @@ header::before {
   text-decoration: none;
   margin: 20px 15px 0 0;
   transition: background-color 0.3s, transform 0.3s, border 0.3s;
-  background-color: #ff6b6b;
+  background-color: #fe0505;
   border: 2px solid white;
 }
 
@@ -294,4 +310,5 @@ footer p {
   footer p {
     font-size: 12px; /* Tamanho menor para o rodapé */
   }
+  /* Estilos para as imagens de feedback */
 }

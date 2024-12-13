@@ -42,7 +42,7 @@ body {
 }
 
 .carousel-controls button {
-  background-color: #ff6b6b;
+  background-color: #fd0000;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -53,7 +53,7 @@ body {
 }
 
 .carousel-controls button:hover {
-  background-color: #ff4b4b;
+  background-color: #fa5e5e;
   transform: scale(1.1);
 }
 

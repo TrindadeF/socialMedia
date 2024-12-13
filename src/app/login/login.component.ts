@@ -17,6 +17,7 @@ export class LoginComponent {
   onSubmit() {
     this.apiService.login(this.email, this.password).subscribe({
       next: (response) => {
+        console.log(response +'test');
         localStorage.setItem('userId', response.userId);
         localStorage.setItem('token', response.token);
         console.log('Login bem-sucedido', response);

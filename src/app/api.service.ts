@@ -152,6 +152,7 @@ export class ApiService {
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.api}/users`);
   }
+  
   likeUser(userId: string, likedUserId: string): Observable<any> {
     const token = this.getAuthToken();
     const headers = new HttpHeaders({
@@ -290,4 +291,45 @@ export class ApiService {
       `${this.api}/stripe/cancel-subscription/${userId}`
     );
   }
+  getUserSecondPosts(userId: string): Observable<any> {
+    return this.http.get(`${this.apiSecondFeed}/posts?userId=${userId}`);
+  }
+  getUserPrimaryPosts(userId: string): Observable<any> {
+    return this.http.get(`${this.apiFirstFeed}/posts?userId=${userId}`);
+  }
+
+
+  blockUser(blockUserId: string): Observable<any> {
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+  
+    return this.http.post(`${this.apiUrl}/block/${blockUserId}`, null, { headers }).pipe(
+      catchError((error) => {
+        console.error('Erro ao bloquear usuário:', error);
+        return throwError(() => new Error('Erro ao bloquear o usuário.'));
+      })
+    );
+  }
+  
+  
+  reportUser(reportUserId: string, reason: string): Observable<any> {
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+  
+    return this.http.post(
+      `${this.apiUrl}/report`,
+      { reportUserId, reason },
+      { headers }
+    ).pipe(
+      catchError((error) => {
+        console.error('Erro ao reportar usuário:', error);
+        return throwError(() => new Error('Erro ao reportar o usuário.'));
+      })
+    );
+  }
+  
 }

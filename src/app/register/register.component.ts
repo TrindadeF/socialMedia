@@ -149,7 +149,7 @@ export class RegisterComponent implements OnInit {
             verticalPosition: 'top',
             horizontalPosition: 'center',
           });
-          this.router.navigate(['/login']);
+          this.router.navigate(['/presentation']);
         },
         error: (error) => {
           console.error('Erro ao registrar o usuário:', error);

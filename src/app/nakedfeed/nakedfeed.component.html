@@ -2,6 +2,7 @@
 
 <div class="page-content" [class.disabled]="showOverlay">
   <div class="profile-container">
+    <!-- Exibição da mensagem de assinatura expirada -->
     <div *ngIf="hasActiveSubscription === false">
       <p>
         Sua assinatura expirou ou é inválida.
@@ -12,10 +13,8 @@
     <div class="profile-card" *ngFor="let user of users">
       <div class="profile-pic">
         <img
-          [src]="user.profilePic || 'assets/default-pic.jpg'"
+          
           alt="{{ user.nickName || 'Usuário' }}"
-          alt="{{ user.age }}"
-          alt="{{ user.gender }}"
         />
       </div>
 
@@ -43,6 +42,21 @@
         <button class="like-btn" (click)="likeUser(user._id)">
           <mat-icon>favorite</mat-icon>
         </button>
+
+        <!-- Exibição dos posts de cada usuário -->
+        <div *ngIf="user.secondPosts" class="user-posts">
+          <mat-tab-group>
+            <mat-tab *ngFor="let post of user.secondPosts | slice:0:2; let i = index">
+              <ng-template mat-tab-label>
+                <mat-icon>visibility</mat-icon> 
+              </ng-template>
+              <div class="post">
+                <!-- Se o post tiver uma imagem, com a nova classe "post-image" -->
+                <img *ngIf="post.media?.length" [src]="post.media[0]" alt="Post image" class="post-image" />
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
       </div>
     </div>
   </div>

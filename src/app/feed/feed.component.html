@@ -67,42 +67,40 @@
           </div>
 
           <div class="post-actions">
-            
             <button
               (click)="likePost(post._id)"
               [class.liked]="post.likes && post.likes.includes(userId)"
             >
-            <mat-icon>thumb_up_alt</mat-icon>
-            {{ post.likes ? post.likes.length : 0 }}
-              
+              <mat-icon>thumb_up_alt</mat-icon>
+              {{ post.likes ? post.likes.length : 0 }}
             </button>
 
-           
-            
             <button (click)="viewPostDetails(post._id)">
-              <mat-icon>chat_bubble_outline</mat-icon> 
+              <mat-icon>chat_bubble_outline</mat-icon>
               {{ post.comments ? post.comments.length : 0 }}
-              
             </button>
 
-            
+            <!-- Botão para bloquear o usuário -->
+            <button *ngIf="!isOwner(post.owner)" (click)="blockUser(post.owner._id)">
+              Bloquear
+            </button>
+
             <button *ngIf="isOwner(post.owner)" (click)="deletePost(post._id)">
               Deletar
             </button>
           </div>
         </div>
       </div>
-
-      <app-modal
-        [title]="'Seja Bem Vindo!'"
-        [content]="modalContent"
-        [showModal]="showModal"
-        [postContent]="postContent"
-        [feedType]="currentFeedType"
-        (close)="closeModal()"
-        (publish)="onPublish($event)"
-      >
-      </app-modal>
     </div>
+
+    <app-modal
+      [title]="'Seja Bem Vindo!'"
+      [content]="modalContent"
+      [showModal]="showModal"
+      [postContent]="postContent"
+      [feedType]="currentFeedType"
+      (close)="closeModal()"
+      (publish)="onPublish($event)"
+    ></app-modal>
   </div>
 </div>

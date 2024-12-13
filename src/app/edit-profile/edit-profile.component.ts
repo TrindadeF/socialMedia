@@ -19,6 +19,8 @@ export class EditProfileComponent implements OnInit {
     description: '',
     _id: '',
     isAnonymous: false,
+    media: [],
+    blockedUsers: [],
   };
  
 
@@ -82,6 +84,7 @@ export class EditProfileComponent implements OnInit {
       next: () => {
         this.alertMessage = 'Perfil atualizado com sucesso!';
         this.alertType = 'success';
+        window.location.reload();
       },
       error: (error) => {
         console.error('Erro ao atualizar o perfil:', error);
@@ -120,6 +123,7 @@ export class EditProfileComponent implements OnInit {
       next: () => {
         this.alertMessage = 'Perfil deletado com sucesso!';
         this.alertType = 'success';
+        window.location.reload();
       },
       error: (error) => {
         console.error('Erro ao deletar perfil:', error);

@@ -39,6 +39,7 @@
       Login
     </button>
   </div>
+  
 </header>
 
 
@@ -57,27 +58,18 @@
         </button>
       </div>
     </div>
-
-    <div *ngIf="showAgeVerification" class="age-verification-container">
-      <div class="age-verification-content">
-        <p>
-          Este site é destinado exclusivamente a maiores de 18 anos. Ao
-          continuar, confirmas que tens idade legal para explorar conteúdos
-          voltados para um público adulto.
-        </p>
-        <button (click)="acceptAgeVerification()" class="btn btn-primary">
-          Tenho 18 Anos ou Mais - Entrar
-        </button>
-        <button (click)="declineAgeVerification()" class="btn btn-secondary">
-          Tenho Menos de 18 Anos - Sair
-        </button>
-      </div>
+    <div class="feedback-images">
+      <img src="/assets/images/feedback 1.png" alt="Feedback 1" class="feedback-img">
+      <img src="/assets/images/feedback 2.png" alt="Feedback 2" class="feedback-img">
+      <img src="/assets/images/feedback 3.png" alt="Feedback 3" class="feedback-img">
     </div>
+    
+    
 
     <div class="image-container">
-      <img src="assets/images/home.jpg" alt="Home" />
+      <img src="/assets/images/home.jpg" alt="Home" />
     </div>
-
+    
     <footer>
       © 2024 Site de Relacionamento Adulto. Todos os direitos reservados.
     </footer>

@@ -33,6 +33,11 @@ import { ModalProfileComponent } from './modal-profile/modal-profile.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ConfigComponent } from './config/config.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTabsModule } from '@angular/material/tabs';
+
+
+
 
 
 @NgModule({
@@ -48,11 +53,10 @@ import { ConfigComponent } from './config/config.component';
     NakedFeedComponent,
     EditProfileComponent,
     ForgotPasswordComponent,
-    AppComponent,
+   
     PaymentsComponent,
     PresentationComponent,
     ChatComponent,
-    NakedFeedComponent,
     ModalComponent,
     CheckboxComponent,
     NotificationsComponent,
@@ -60,6 +64,9 @@ import { ConfigComponent } from './config/config.component';
     ModalProfileComponent,
     PostDetailComponent,
     ConfigComponent,
+
+   
+    
     
   ],
   imports: [
@@ -74,6 +81,12 @@ import { ConfigComponent } from './config/config.component';
     MatIconModule,
     ReactiveFormsModule,
     MatSnackBarModule,
+    MatSlideToggleModule,
+    MatToolbarModule,
+    MatTabsModule,
+    
+   
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

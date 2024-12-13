@@ -1,4 +1,6 @@
 export type Post = {
+age: any;
+nickName: any;
   id: string;
   _id: string;
   media: any;
@@ -20,6 +22,7 @@ export type User = {
   _id: string;
   name: string;
   age: number;
+  media: any;
   profilePic: string;
   email: string;
   gender: Gender;
@@ -28,6 +31,13 @@ export type User = {
   nickName: string;
   followerCount?: number;
   isAnonymous?: boolean;
+  secondPosts?: Post[];
+  primaryPosts?: Post[];
+  blockedUsers: string[];
+ 
+ 
+
+
 };
 
 export type Chat = {

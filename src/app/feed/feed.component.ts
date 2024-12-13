@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
-import { Post } from 'database';
+import { Post, User } from 'database';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./feed.component.css'],
 })
 export class FeedComponent implements OnInit {
+  users: User[] = [];
+  user: any = {};
   posts: Post[] = [];
   postContent: string = '';
   selectedMedia: File[] = [];
@@ -26,6 +28,14 @@ export class FeedComponent implements OnInit {
   currentFeedType: 'primaryFeed' | 'secondFeed' = 'primaryFeed';
   showCommentModal = false;
   selectedPostId: string = '';
+  primaryPosts?: Post[] = [];
+  showReportModal: boolean = false;
+  reportReason: string = '';
+  selectedUserId: string = '';
+  blockedUsers: string[] = []; 
+  
+
+
 
   constructor(
     private apiService: ApiService,
@@ -35,8 +45,13 @@ export class FeedComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const blockedUsers = localStorage.getItem('blockedUsers');
+  if (blockedUsers) {
+    this.blockedUsers = JSON.parse(blockedUsers);
+  }
     this.getPosts();
     this.userId = this.getUserIdFromAuthService();
+    
   }
 
   closeModal() {
@@ -48,32 +63,27 @@ export class FeedComponent implements OnInit {
     this.showCommentModal = false;
     this.resetForm();
   }
-
+ 
   getUserIdFromAuthService(): string {
     return localStorage.getItem('userId') || '';
   }
 
   isOwner(postOwnerId: any): boolean {
-    if (
-      typeof postOwnerId === 'object' &&
-      postOwnerId !== null &&
-      '_id' in postOwnerId
-    ) {
-      console.log(postOwnerId);
+    // Verifica se postOwnerId é um objeto e extrai o _id
+    if (typeof postOwnerId === 'object' && postOwnerId !== null && '_id' in postOwnerId) {
       postOwnerId = postOwnerId._id;
     }
-
+  
+    // Verifica se postOwnerId é uma string
     if (typeof postOwnerId !== 'string') {
       console.error('postOwnerId deve ser uma string', postOwnerId);
       return false;
     }
+  
     const currentUserId = this.getUserIdFromAuthService();
-    console.log(currentUserId)
-    console.log(postOwnerId)
-    const isOwner = currentUserId === String(postOwnerId);
-
-    return isOwner;
+    return currentUserId === postOwnerId; // Comparação direta de strings
   }
+  
   viewPostDetails(postId: string): void {
     this.router.navigate([`primaryFeed/posts/${postId}/comments`]);
   }
@@ -88,31 +98,33 @@ export class FeedComponent implements OnInit {
   }
 
   getPosts() {
-    this.apiService.getPostsFromFirstFeed().subscribe({
-      next: (posts: Post[]) => {
-        if (posts) {
-          this.posts = posts
-            .map((post) => {
-              return {
-                ...post,
-                likes: post.likes || [],
-              };
-            })
-            .sort((a, b) => {
-              return (
-                new Date(b.createdAt).getTime() -
-                new Date(a.createdAt).getTime()
-              );
-            });
-        }
-      },
-      error: (error) => {
-        this.errorMessage = 'Erro ao carregar os posts';
-        console.error(error);
-      },
-    });
-  }
+  this.apiService.getPostsFromFirstFeed().subscribe({
+    next: (posts: Post[]) => {
+      if (posts) {
+        const loggedUserId = this.getLoggedUserId();
+        this.blockedUsers = this.blockedUsers || [];
 
+        // Filtra posts, excluindo apenas os de usuários bloqueados, mas mantendo os do usuário logado
+        this.posts = posts
+          .filter((post) => {
+            const postOwnerId = typeof post.owner === 'object' ? post.owner._id : post.owner;
+            return postOwnerId === loggedUserId || !this.blockedUsers.includes(post.owner._id);
+          })
+          .map((post) => ({
+            ...post,
+            likes: post.likes || [], // Garante que a propriedade likes exista
+          }))
+          .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()); // Ordenação
+      }
+    },
+    error: (error) => {
+      this.errorMessage = 'Erro ao carregar os posts';
+      console.error(error);
+    },
+  });
+}
+
+  
   likePost(postId: string) {
     this.apiService.likePostInFirstFeed(postId).subscribe(
       (updatedPost: Post) => {
@@ -266,4 +278,58 @@ export class FeedComponent implements OnInit {
       },
     });
   }
+  
+  
+  blockUser(userId: string): void {
+    if (this.blockedUsers.includes(userId)) {
+      this.snackBar.open('Usuário já está bloqueado', 'Fechar', { duration: 3000 });
+      return;
+    }
+  
+    this.apiService.blockUser(userId).subscribe({
+      next: () => {
+        this.snackBar.open('Usuário bloqueado com sucesso', 'Fechar', { duration: 3000 });
+        this.blockedUsers.push(userId);
+  
+        // Salva a lista de bloqueados no localStorage
+        localStorage.setItem('blockedUsers', JSON.stringify(this.blockedUsers));
+  
+        // Recarrega os posts após o bloqueio, mas apenas para o feed do usuário que bloqueou
+        this.getPosts(); // Isso vai garantir que os posts sejam recarregados e os bloqueados sejam removidos do feed do usuário que fez o bloqueio
+      },
+      error: (error) => {
+        console.error('Erro ao bloquear usuário:', error);
+        this.snackBar.open('Erro ao bloquear usuário', 'Fechar', { duration: 3000 });
+      },
+    });
+  }
+  
+  
+  
+  
+  
+  
+  reportUser(userId: string, reason: string): void {
+    this.apiService.reportUser(userId, reason).subscribe({
+      next: (response) => {
+        this.snackBar.open('Usuário denunciado com sucesso', 'Fechar', {
+          duration: 3000,
+        });
+      },
+      error: (error) => {
+        console.error('Erro ao denunciar usuário:', error);
+        this.snackBar.open('Erro ao denunciar usuário', 'Fechar', {
+          duration: 3000,
+        });
+      },
+    });
+  }
+
+  
+  getLoggedUserId(): string {
+    return localStorage.getItem('userId') || '';
+  }
+  
+  
+  
 }

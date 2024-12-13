@@ -23,7 +23,7 @@ export class RulesComponent {
       description: 'Não tenha muita pressa em dar os seus dados pessoais.',
     },
     {
-      title: 'Tenha encontros seguros',
+      title: 'Tenha Conversas virtuais seguras',
       description:
         'Seja simpático. Respeite os outros e trate-os como gostaria de ser tratado.',
     },
@@ -50,7 +50,7 @@ export class RulesComponent {
     if (this.currentIndex < this.items.length - 1) {
       this.currentIndex++;
     } else {
-      this.router.navigate(['/presentation']);
+      this.router.navigate(['/edit-profile']);
     }
   }
 
