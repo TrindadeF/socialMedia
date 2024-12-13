@@ -88,6 +88,7 @@ export class FeedComponent implements OnInit {
     this.router.navigate([`primaryFeed/posts/${postId}/comments`]);
   }
 
+
   openCommentModal(postId: string, feedType: 'primaryFeed' | 'secondFeed') {
     this.selectedPostId = postId;
     this.currentFeedType = feedType;
