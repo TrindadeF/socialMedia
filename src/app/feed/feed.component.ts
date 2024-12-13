@@ -45,14 +45,19 @@ export class FeedComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const blockedUsers = localStorage.getItem('blockedUsers');
-  if (blockedUsers) {
-    this.blockedUsers = JSON.parse(blockedUsers);
-  }
+    const loggedUserId = this.getLoggedUserId(); // Obtém o ID do usuário logado
+  
+    // Tenta obter a lista de bloqueados com a chave específica para o usuário logado
+    const blockedUsers = localStorage.getItem(`blockedUsers_${loggedUserId}`);
+  
+    if (blockedUsers) {
+      this.blockedUsers = JSON.parse(blockedUsers);
+    }
+  
     this.getPosts();
-    this.userId = this.getUserIdFromAuthService();
-    
+    this.userId = loggedUserId;
   }
+  
 
   closeModal() {
     this.showModal = false;
@@ -292,8 +297,11 @@ export class FeedComponent implements OnInit {
         this.snackBar.open('Usuário bloqueado com sucesso', 'Fechar', { duration: 3000 });
         this.blockedUsers.push(userId);
   
-        // Salva a lista de bloqueados no localStorage
-        localStorage.setItem('blockedUsers', JSON.stringify(this.blockedUsers));
+        // Obtenha o ID do usuário logado para garantir que a lista de bloqueados seja única para cada usuário
+        const loggedUserId = this.getLoggedUserId();
+        
+        // Salva a lista de bloqueados no localStorage com um prefixo único para o usuário
+        localStorage.setItem(`blockedUsers_${loggedUserId}`, JSON.stringify(this.blockedUsers));
   
         // Recarrega os posts após o bloqueio, mas apenas para o feed do usuário que bloqueou
         this.getPosts(); // Isso vai garantir que os posts sejam recarregados e os bloqueados sejam removidos do feed do usuário que fez o bloqueio
@@ -304,6 +312,7 @@ export class FeedComponent implements OnInit {
       },
     });
   }
+  
   
   
   
