@@ -33,6 +33,10 @@ export class FeedComponent implements OnInit {
   reportReason: string = '';
   selectedUserId: string = '';
   blockedUsers: string[] = []; 
+  unblockedUsers: string[] = [];
+  blockedUsersData: any[] = [];  // Array para armazenar os dados completos dos usuários bloqueados
+
+
   
 
 
@@ -47,15 +51,24 @@ export class FeedComponent implements OnInit {
   ngOnInit() {
     const loggedUserId = this.getLoggedUserId(); // Obtém o ID do usuário logado
   
-    // Tenta obter a lista de bloqueados com a chave específica para o usuário logado
     const blockedUsers = localStorage.getItem(`blockedUsers_${loggedUserId}`);
+    const unblockedUsers = localStorage.getItem(`unblockedUsers_${loggedUserId}`);
   
     if (blockedUsers) {
       this.blockedUsers = JSON.parse(blockedUsers);
+    } else {
+      this.blockedUsers = [];
+    }
+  
+    if (unblockedUsers) {
+      this.unblockedUsers = JSON.parse(unblockedUsers);
+    } else {
+      this.unblockedUsers = [];
     }
   
     this.getPosts();
     this.userId = loggedUserId;
+    this.loadBlockedUsers();
   }
   
 
@@ -92,6 +105,11 @@ export class FeedComponent implements OnInit {
   viewPostDetails(postId: string): void {
     this.router.navigate([`primaryFeed/posts/${postId}/comments`]);
   }
+  loadBlockedUsers() {
+    this.blockedUsers.forEach(userId => {
+      this.getUserById(userId); // Faz a requisição para obter os dados de cada usuário bloqueado
+    });
+  }
 
 
   openCommentModal(postId: string, feedType: 'primaryFeed' | 'secondFeed') {
@@ -115,6 +133,7 @@ export class FeedComponent implements OnInit {
           .filter((post) => {
             const postOwnerId = typeof post.owner === 'object' ? post.owner._id : post.owner;
             return postOwnerId === loggedUserId || !this.blockedUsers.includes(post.owner._id);
+           
           })
           .map((post) => ({
             ...post,
@@ -126,6 +145,18 @@ export class FeedComponent implements OnInit {
     error: (error) => {
       this.errorMessage = 'Erro ao carregar os posts';
       console.error(error);
+    },
+  });
+}
+getUserById(userId: string): void {
+  this.apiService.getUserById(userId).subscribe({
+    next: (user) => {
+      this.blockedUsersData.push(user); // Armazena os dados completos do usuário bloqueado
+      console.log('Dados do usuário:', user); // Exibe os dados no console (opcional)
+    },
+    error: (error) => {
+      console.error('Erro ao carregar os dados do usuário:', error);
+      this.errorMessage = 'Erro ao carregar os dados do usuário';
     },
   });
 }
@@ -297,14 +328,18 @@ export class FeedComponent implements OnInit {
         this.snackBar.open('Usuário bloqueado com sucesso', 'Fechar', { duration: 3000 });
         this.blockedUsers.push(userId);
   
-        // Obtenha o ID do usuário logado para garantir que a lista de bloqueados seja única para cada usuário
-        const loggedUserId = this.getLoggedUserId();
-        
-        // Salva a lista de bloqueados no localStorage com um prefixo único para o usuário
-        localStorage.setItem(`blockedUsers_${loggedUserId}`, JSON.stringify(this.blockedUsers));
+        // Remove o usuário da lista de desbloqueados caso ele esteja lá
+        this.unblockedUsers = this.unblockedUsers.filter((id) => id !== userId);
   
-        // Recarrega os posts após o bloqueio, mas apenas para o feed do usuário que bloqueou
-        this.getPosts(); // Isso vai garantir que os posts sejam recarregados e os bloqueados sejam removidos do feed do usuário que fez o bloqueio
+        // Salva as atualizações no localStorage
+        const loggedUserId = this.getLoggedUserId();
+        localStorage.setItem(`blockedUsers_${loggedUserId}`, JSON.stringify(this.blockedUsers));
+        localStorage.setItem(`unblockedUsers_${loggedUserId}`, JSON.stringify(this.unblockedUsers));
+  
+        // Atualiza os posts
+        window.location.reload();
+
+        this.getPosts();
       },
       error: (error) => {
         console.error('Erro ao bloquear usuário:', error);
@@ -314,8 +349,32 @@ export class FeedComponent implements OnInit {
   }
   
   
+  unblockUser(userId: string): void {
+    // Verifique se o usuário está realmente bloqueado
+    if (!this.blockedUsers.includes(userId)) {
+      this.snackBar.open('Usuário não está bloqueado', 'Fechar', { duration: 3000 });
+      return;
+    }
   
+    // Remove o usuário da lista de bloqueados
+    this.blockedUsers = this.blockedUsers.filter((id) => id !== userId);
   
+    // Adiciona à lista de desbloqueados
+    this.unblockedUsers.push(userId);
+  
+    // Atualiza o localStorage
+    const loggedUserId = this.getLoggedUserId();
+    localStorage.setItem(`blockedUsers_${loggedUserId}`, JSON.stringify(this.blockedUsers));
+    localStorage.setItem(`unblockedUsers_${loggedUserId}`, JSON.stringify(this.unblockedUsers));
+  
+    // Exibe a mensagem de sucesso
+    this.snackBar.open('Usuário desbloqueado com sucesso', 'Fechar', { duration: 3000 });
+  
+    // Atualiza os posts para refletir a mudança
+    window.location.reload();
+
+    this.getPosts(); // Certifique-se de que os posts estão sendo atualizados após o desbloqueio
+  }
   
   
   

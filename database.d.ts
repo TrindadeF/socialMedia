@@ -15,6 +15,7 @@ nickName: any;
   comments: string;
   ownerProfileImageUrl: string;
   ownerId: string;
+  
  
 };
 
@@ -34,6 +35,7 @@ export type User = {
   secondPosts?: Post[];
   primaryPosts?: Post[];
   blockedUsers: string[];
+  unblockedUsers: string[];
  
  
 

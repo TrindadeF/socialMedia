@@ -197,7 +197,7 @@ export class ProfileComponent implements OnInit {
         });
 
         const url =
-          feedType === 'primaryFeed'
+          feedType === 'secondFeed'
             ? 'https://nakedlove.eu/api/primaryFeed/'
             : 'https://nakedlove.eu/api/secondFeed/';
 
@@ -297,22 +297,6 @@ export class ProfileComponent implements OnInit {
     
     return currentUserId === String(postOwnerId);
   }
-  /*
-
-  isOwner(postOwnerId: any): boolean {
-    if (!postOwnerId) {
-      console.warn('postOwnerId está ausente ou inválido:', postOwnerId);
-      return false;
-    }
-  
-    if (typeof postOwnerId === 'object' && postOwnerId._id) {
-      postOwnerId = postOwnerId._id;
-    }
-  
-    const currentUserId = this.getUserIdFromAuthService();
-    return currentUserId === String(postOwnerId);
-  }*/
- 
   
   getUserIdFromAuthService(): string {
     return localStorage.getItem('userId') || '';
@@ -408,22 +392,6 @@ export class ProfileComponent implements OnInit {
       reader.readAsDataURL(file);
     });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   
 }

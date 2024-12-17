@@ -2,6 +2,16 @@
 
 <div class="page-content" [class.disabled]="showOverlay">
   <div class="profile-container">
+    <!-- Filtro de gênero -->
+    <label for="genderSelect">Filtrar por Gênero:</label>
+    <select id="genderSelect" [(ngModel)]="gender" (change)="onGenderChange(gender)">
+      <option value="all">Todos</option>
+      <option value="M">Masculino</option>
+      <option value="F">Feminino</option>
+      
+    </select>
+
+
     <!-- Exibição da mensagem de assinatura expirada -->
     <div *ngIf="hasActiveSubscription === false">
       <p>
@@ -11,10 +21,11 @@
     </div>
 
     <div class="profile-card" *ngFor="let user of users">
+      <div *ngIf="user.secondPosts && user.secondPosts.length > 0">
       <div class="profile-pic">
         <img
-          
-          alt="{{ user.nickName || 'Usuário' }}"
+         
+          alt="{{ user.nickName || 'Usuário' }} "
         />
       </div>
 
@@ -25,7 +36,7 @@
           </a>
           <p>{{ user.age }} anos</p>
         </div>
-
+        
         <ng-template #restrictedInfo>
           <h3>Nome restrito</h3>
           <p>Você só pode ver mais detalhes após um match!</p>
@@ -51,7 +62,6 @@
                 <mat-icon>visibility</mat-icon> 
               </ng-template>
               <div class="post">
-                <!-- Se o post tiver uma imagem, com a nova classe "post-image" -->
                 <img *ngIf="post.media?.length" [src]="post.media[0]" alt="Post image" class="post-image" />
               </div>
             </mat-tab>

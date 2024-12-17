@@ -110,7 +110,62 @@ textarea::placeholder {
   display: flex;
   align-items: center;
   gap: 10px;
+  color: #f84444e9;
 }
+.blocked-users-section li {
+  color: #fa0303; /* Vermelho para o nome dos usuários bloqueados */
+}
+
+.blocked-users-section {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  border: 2px solid #fa0303; /* Borda vermelha para destacar */
+  color: #fa0303; /* Texto em vermelho */
+}
+
+.blocked-users-section h3 {
+  font-size: 18px;
+  color: #fa0303; /* Título em vermelho */
+  margin-bottom: 15px;
+}
+
+.blocked-users-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.blocked-users-section li {
+  padding: 8px;
+  background-color: #efefef;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.unblock-btn {
+  background-color: #fa0303;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.unblock-btn:hover {
+  background-color: #d90000;
+  transform: scale(1.05);
+}
+
+.unblock-btn:active {
+  transform: scale(0.95);
+}
+
 
 .avatar {
   width: 50px;
@@ -168,6 +223,29 @@ textarea::placeholder {
   transform: scale(0.95);
 }
 
+/* Estilos para bloquear e desbloquear */
+.post-actions button.blocked {
+  background-color: #f44336;
+  color: #fff;
+  border: 1px solid #d32f2f;
+  transition: background-color 0.3s ease;
+}
+
+.post-actions button.blocked:hover {
+  background-color: #e53935;
+}
+
+.post-actions button.unblocked {
+  background-color: #4caf50;
+  color: #fff;
+  border: 1px solid #388e3c;
+  transition: background-color 0.3s ease;
+}
+
+.post-actions button.unblocked:hover {
+  background-color: #43a047;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .feed {
@@ -201,10 +279,14 @@ textarea::placeholder {
   .feed-header h4 {
     font-size: 1.3rem;
   }
-
+  .post-header h1 {
+    color: #fa0303; /* Vermelho para o nome do usuário */
+  }
+  
   .post-header {
     flex-direction: column;
     align-items: flex-start;
+    color: #fa0303;
   }
 
   .post-content p {
@@ -217,4 +299,58 @@ textarea::placeholder {
     padding: 6px 12px;
     font-size: 12px;
   }
+  .blocked-users-section li {
+    color: #fa0303; /* Vermelho para o nome dos usuários bloqueados */
+  }
+
+  .blocked-users-section {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border: 2px solid #fa0303; /* Borda vermelha para destacar */
+    color: #fa0303; /* Texto em vermelho */
+  }
+  
+  .blocked-users-section h3 {
+    font-size: 18px;
+    color: #fa0303; /* Título em vermelho */
+    margin-bottom: 15px;
+  }
+  
+  .blocked-users-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .blocked-users-section li {
+    padding: 8px;
+    background-color: #efefef;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .unblock-btn {
+    background-color: #fa0303;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .unblock-btn:hover {
+    background-color: #d90000;
+    transform: scale(1.05);
+  }
+  
+  .unblock-btn:active {
+    transform: scale(0.95);
+  }
+  
 }

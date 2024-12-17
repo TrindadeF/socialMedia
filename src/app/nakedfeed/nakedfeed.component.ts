@@ -29,9 +29,13 @@ export class NakedFeedComponent implements OnInit {
   showImageViewer: boolean = false;
   profilePicUrl: string = '';
   secondPosts?: Post[] = [];
+  gender: string =  'all';
+  filteredUsers: any[] = [];  // Lista de usuários filtrados
+
   
   
-  
+
+
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
@@ -40,11 +44,19 @@ export class NakedFeedComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+  
     this.loadUsers();
-    this.getCurrentUser();
-    this.checkUserSubscriptionStatus();
-    this.fetchUserPosts();
     this.loadUserSecondPosts();
+    this.checkUserSubscriptionStatus();
+    this.getCurrentUser();
+    this.fetchUserPosts();
+    this.checkMutualLikes();
+   
+    
+   
+    
+   
+   
   }
 
   openImageViewer(postId: string) {
@@ -65,6 +77,8 @@ export class NakedFeedComponent implements OnInit {
         console.error('Erro ao carregar os posts secundários:', error);
         this.errorMessage = 'Erro ao carregar os posts secundários.';
       }
+      
+
     });
   }
 
@@ -72,13 +86,29 @@ export class NakedFeedComponent implements OnInit {
     const currentUserId = this.getLoggedUserId();
     this.apiService.getAllUsers().subscribe({
       next: (data: User[]) => {
-        this.users = data.filter((user) => user._id !== currentUserId);
-        this.getPosts();
+        // Filtra os usuários com base no gênero selecionado
+        if (this.gender === 'all') {
+          this.users = data.filter((user) => user._id !== currentUserId);
+        } else if (this.gender === 'M' || this.gender === 'F') {
+          this.users = data.filter((user) =>
+            user._id !== currentUserId && user.gender === this.gender
+          );
+        } else {
+          this.users = data.filter((user) => user._id !== currentUserId);
+        }
       },
       error: (error) => {
         console.error('Erro ao carregar os usuários:', error);
       },
     });
+  }
+  
+  
+
+  // Método para mudar o filtro de gênero
+  onGenderChange(gender: string): void {
+    this.gender = gender;  // Altera o filtro de gênero
+    this.loadUsers();       // Recarrega os usuários filtrados
   }
 
   getCurrentUser(): void {
@@ -95,6 +125,7 @@ export class NakedFeedComponent implements OnInit {
   }
 
   checkUserSubscriptionStatus(): void {
+    console.log('Iniciando verificação de status de assinatura...')
     const currentUserId = this.getLoggedUserId();
     if (!currentUserId) {
       console.error('ID do usuário atual não encontrado.');
@@ -103,6 +134,7 @@ export class NakedFeedComponent implements OnInit {
 
     this.apiService.checkSubscriptionStatus(currentUserId).subscribe(
       (response) => {
+        console.log('Resposta de status de assunatura:', response);
         this.hasActiveSubscription = response.hasActiveSubscription;
         if (!this.hasActiveSubscription) {
           this.showOverlay = true;
@@ -126,7 +158,8 @@ export class NakedFeedComponent implements OnInit {
         this.snackBar.open(errorMessage, 'Assinar Agora', {
           duration: 5000,
           verticalPosition: 'top',
-        }).onAction().subscribe(() => {
+        }).onAction()
+        .subscribe(() => {
           this.showOverlay = false;
           this.router.navigate(['/payments']);
         });
@@ -181,7 +214,7 @@ export class NakedFeedComponent implements OnInit {
       error: (error) => {
         console.error('Erro ao iniciar ou obter conversa:', error);
       },
-    });
+    });  
   }
 
   getLoggedUserId(): string {
@@ -192,50 +225,29 @@ export class NakedFeedComponent implements OnInit {
     return localStorage.getItem('userId') || '';
   }
 
-  fetchUserPosts() {
-    const userId = this.route.snapshot.paramMap.get('id');
-    const loggedUserId = this.getUserId();
-  
+  fetchUserPosts(): void {
+    const userId = this.route.snapshot.paramMap.get('id') || this.getUserId();
     this.loading = true;
   
-    if (userId && userId !== loggedUserId) {
-      this.apiService.getPostsByUserId(userId).subscribe({
-        next: (response: Post[]) => {
-          this.posts = response
-            .filter((post) => post.media.length > 0)
-            .map((post) => ({
-              ...post,
-              ownerId: post.ownerId || userId, 
-            }));
-        },
-        error: (err) => {
-          console.error('Erro ao buscar posts do usuário selecionado:', err);
-          this.errorMessage = 'Erro ao carregar os posts do usuário selecionado';
-        },
-        complete: () => {
-          this.loading = false;
-        },
-      });
-    } else {
-      this.apiService.getPostsByLoggedUser().subscribe({
-        next: (response: Post[]) => {
-          this.posts = response
-            .filter((post) => post.media.length > 0)
-            .map((post) => ({
-              ...post,
-              ownerId: post.ownerId || loggedUserId, 
-            }));
-        },
-        error: (err) => {
-          console.error('Erro ao buscar posts do usuário logado:', err);
-          this.errorMessage = 'Erro ao carregar os posts do usuário logado';
-        },
-        complete: () => {
-          this.loading = false;
-        },
-      });
-    }
+    this.apiService.getPostsByUserId(userId).subscribe({
+      next: (response: Post[]) => {
+        this.posts = response
+          .filter((post) => post.media.length > 0)
+          .map((post) => ({
+            ...post,
+            ownerId: post.ownerId || userId,
+          }));
+      },
+      error: (err) => {
+        console.error('Erro ao buscar posts:', err);
+        this.errorMessage = `Erro ao carregar os posts.`;
+      },
+      complete: () => {
+        this.loading = false;
+      },
+    });
   }
+  
 
   getPosts() {
     this.apiService.getPostsFromSecondFeed().subscribe({

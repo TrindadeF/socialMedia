@@ -312,6 +312,20 @@ export class ApiService {
       })
     );
   }
+  unblockUser(unblockUserId: string): Observable<any> {
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+  
+    return this.http.post(`${this.apiUrl}/unblock/${unblockUserId}`, null, { headers }).pipe(
+      catchError((error) => {
+        console.error('Erro ao desbloquear usuário:', error);
+        return throwError(() => new Error('Erro ao desbloquear o usuário.'));
+      })
+    );
+  }
+  
   
   
   reportUser(reportUserId: string, reason: string): Observable<any> {

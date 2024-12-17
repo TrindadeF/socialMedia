@@ -34,7 +34,7 @@ html, body {
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.723);
   background-color: #222;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Removida a borda */
   color: #fff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
@@ -45,6 +45,11 @@ html, body {
 .profile-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
+}
+
+.page-content.disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 /* Imagem do perfil */

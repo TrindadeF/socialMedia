@@ -21,6 +21,10 @@ export class EditProfileComponent implements OnInit {
     isAnonymous: false,
     media: [],
     blockedUsers: [],
+    unblockedUsers: [],
+    followerCount: 0,
+    primaryPosts: [],
+    secondPosts: [],
   };
  
 

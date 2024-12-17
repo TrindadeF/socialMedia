@@ -310,5 +310,20 @@ footer p {
   footer p {
     font-size: 12px; /* Tamanho menor para o rodapé */
   }
+  .feedback-images {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espaço entre as imagens */
+    margin-bottom: 20px; /* Espaçamento acima do rodapé */
+  }
+  
+  .feedback-img {
+    width: 120px;/* Ajuste o tamanho das imagens conforme necessário */
+    height: 300px;
+  }
+  .feedback-img:hover {
+    transform: scale(1.1);
+    filter: brightness(1.5);
+  }
   /* Estilos para as imagens de feedback */
 }
