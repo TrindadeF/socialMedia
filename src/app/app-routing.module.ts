@@ -16,6 +16,8 @@ import { ChatComponent } from './chat/chat.component';
 import { PresentationComponent } from './presentation/presentation.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
+import { ConfigComponent } from './config/config.component';
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -35,8 +37,9 @@ const routes: Routes = [
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'notifications', component: NotificationsComponent },
   { path: 'primaryFeed/posts/:postId/comments',
-    component: PostDetailComponent,
-  },
+    component: PostDetailComponent},
+  { path: 'config', component: ConfigComponent},
+  
 ];
 
 @NgModule({

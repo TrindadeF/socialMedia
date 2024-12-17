@@ -41,6 +41,7 @@ import { ConfigurationPageComponent } from './configuration-page/configuration-p
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +55,7 @@ import { ConfigurationPageComponent } from './configuration-page/configuration-p
     NakedFeedComponent,
     EditProfileComponent,
     ForgotPasswordComponent,
+  
    
     PaymentsComponent,
     PresentationComponent,
@@ -86,6 +88,7 @@ import { ConfigurationPageComponent } from './configuration-page/configuration-p
     MatSlideToggleModule,
     MatToolbarModule,
     MatTabsModule,
+
     
    
     
