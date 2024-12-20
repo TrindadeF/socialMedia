@@ -3,6 +3,7 @@
     <div class="feed-header">
       <h4>ⓃakedLove</h4>
     </div>
+    
    
 
     <div class="post-form">
@@ -93,16 +94,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="blockedUsersData.length > 0" class="blocked-users-section">
-      <h3>Usuários Bloqueados:</h3>
-      <ul>
-        <li *ngFor="let blockeduser of blockedUsersData">
-          {{ blockeduser.name }}  <!-- Exibe o nome do usuário bloqueado -->
-          <button class="unblock-btn" (click)="unblockUser(blockeduser._id)">Desbloquear</button>
-        </li>
-      </ul>
-    </div>
-    
+   
        
       
     </div>

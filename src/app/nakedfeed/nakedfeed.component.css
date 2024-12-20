@@ -24,6 +24,47 @@ html, body {
   background-color: #060606;
   box-sizing: border-box;
 }
+.notifications {
+  background-color: #f8f8f8;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.notification {
+  padding: 5px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.notification:last-child {
+  border-bottom: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.page-content.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.message-btn, .like-btn {
+  margin-top: 10px;
+}
+.notification {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* Espaçamento vertical entre os elementos */
+  color: white; /* Garante que o texto continue branco */
+}
+
 
 /* Cartão de perfil */
 .profile-card {

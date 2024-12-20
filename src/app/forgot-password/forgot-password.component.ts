@@ -11,6 +11,8 @@ export class ForgotPasswordComponent {
   email: string = '';
   errorMessage: string = '';
   successMessage: string = '';
+  token: string = '';
+
 
   constructor(private apiService: ApiService, private router: Router) {}
 
@@ -22,7 +24,7 @@ export class ForgotPasswordComponent {
       return;
     }
 
-    this.apiService.resetPassword(this.email).subscribe({
+    this.apiService.forgotPassword( this.email).subscribe({
       next: () => {
         this.successMessage = 'Verifique seu e-mail para redefinir sua senha.';
         this.errorMessage = '';

@@ -15,7 +15,9 @@ export class ChatComponent implements OnInit, OnDestroy {
   messages: Message[] = [];
   newMessage: string = '';
   socket: Socket;
-  participants: { id: string; nickname: string }[] = [];
+  participants: {
+    isAnonymous: any; id: string; nickname: string 
+}[] = [];
   selectedChat: Chat | null = null;
   chats: Chat[] = [];
 
@@ -51,11 +53,21 @@ export class ChatComponent implements OnInit, OnDestroy {
       }
     );
   }
-
   getParticipantNickname(senderId: string): string {
     const participant = this.participants.find((p) => p.id === senderId);
-    return participant ? participant.nickname : 'Desconhecido';
+    if (participant) {
+      const isCurrentUser = senderId === this.currentUser._id;
+      const isAnonymous = isCurrentUser ? this.currentUser.isAnonymous : participant.isAnonymous;
+      // Exibe "Anônimo" caso o usuário ou o participante seja anônimo
+      if (isAnonymous && !isCurrentUser) {
+        return 'Anônimo';  // Exibe 'Anônimo' para o outro participante
+      }
+      return isAnonymous ? 'Anônimo' : participant.nickname;  // Para o atual, apenas 'Anônimo' se for anônimo
+    }
+    return 'Desconhecido';
   }
+  
+  
 
   selectChat(chat: Chat): void {
     this.selectedChat = chat;
@@ -79,6 +91,7 @@ export class ChatComponent implements OnInit, OnDestroy {
             id: user._id,
             nickname: user.nickName,
             profilePic: user.profilePic,
+            isAnonymous: user.isAnonymous,
           }));
         } else {
           this.messages = [];
@@ -143,10 +156,36 @@ export class ChatComponent implements OnInit, OnDestroy {
         },
       });
   }
-
   getParticipantNames(chat: Chat): string {
-    return chat.participants.map((p) => p.nickName).join(', ');
+    return chat.participants
+      .map((p) => {
+        const isCurrentUser = p._id === this.currentUser._id;
+  
+        if (isCurrentUser) {
+          // Para o próprio usuário logado
+          if (this.currentUser.isAnonymous) {
+            return 'Você (Anônimo)';
+          } else {
+            return `Você (${this.currentUser.nickName})`;
+          }
+        } else {
+          // Para o outro participante
+          if (this.currentUser.isAnonymous) {
+            // Se o usuário logado é anônimo, vê o outro normalmente
+            return p.nickName;
+          } else if (p.isAnonymous) {
+            // Se o outro participante é anônimo
+            return 'Anônimo';
+          } else {
+            // Se nenhum é anônimo, exibe o nome
+            return p.nickName;
+          }
+        }
+      })
+      .join(', ');
   }
+  
+  
 
   ngOnDestroy(): void {
     this.socket.disconnect();

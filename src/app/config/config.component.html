@@ -1,1 +1,49 @@
+<div class="container">
+  <!-- Divisão 1 -->
+  <div class="section" (click)="openHelpDocument()">
+    <h3>Central de Ajuda</h3>
+    <p>Todas as informações do Site está aqui.</p>
+  </div>
+  <div class="section" (click)="openTermsUse()">
+    <h3>Termos de Uso</h3>
+    <p>Veja aqui os Termos de Uso do Site.</p>
+  </div>
+  <div class="section" (click)="openPoliticUse()">
+    <h3>Política de Privacidade</h3>
+    <p>Veja aqui a Política de Privacidade do Site.</p>
+  </div>
+
+
+
+
+
+
+  <!-- Divisão 2 -->
+  <div class="section" (click)="togglePreferences()">
+    <h3>Preferências do Usuário</h3>
+    <p>Gerencie suas preferências de usuário, como Notificações e Desbloqueios.</p>
+  </div>
+
+  <!-- Seção de Preferências do Usuário Expandida -->
+  <div *ngIf="preferencesVisible" class="preferences">
+    <div class="section" (click)="goToNotifications()">
+      <h3>Notificações</h3>
+      <p>Gerencie suas notificações aqui.</p>
+    </div>
+    </div>
+    
+    <div *ngIf="blockedUsersData.length > 0" class="blocked-users-section">
+      <h3>Usuários Bloqueados:</h3>
+      <ul>
+        <li *ngFor="let blockeduser of blockedUsersData">
+          {{ blockeduser.name }}  <!-- Exibe o nome do usuário bloqueado -->
+          <button class="unblock-btn" (click)="unblockUser(blockeduser._id)">Desbloquear</button>
+        </li>
+      </ul>
+    </div>
+</div>
+
+ 
+  
+  
 

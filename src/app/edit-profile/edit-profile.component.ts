@@ -25,6 +25,11 @@ export class EditProfileComponent implements OnInit {
     followerCount: 0,
     primaryPosts: [],
     secondPosts: [],
+    resetPasswordToken: '',
+    resetPasswordExpires:0,
+   
+
+    
   };
  
 
@@ -140,18 +145,23 @@ export class EditProfileComponent implements OnInit {
   toggleAnonymous(isAnonymous: boolean | undefined): void {
     this.user.isAnonymous = isAnonymous ?? false;
   
-    if (!this.user.isAnonymous && this.originalUser) {
-      // Restaura apenas os campos editáveis do usuário
+    if (this.user.isAnonymous) {
+      // Configura o perfil para o estado anônimo
+      this.user.nickName = 'Anônimo';
+      this.user.name = 'Anônimo';
+      this.previewImage = 'default-anonymous.png'; // Usa uma imagem padrão de anônimo, se necessário
+    } else if (this.originalUser) {
+      // Restaura os dados do usuário original ao sair do modo anônimo
       this.user.name = this.originalUser.name;
       this.user.description = this.originalUser.description;
       this.user.nickName = this.originalUser.nickName;
       this.user.age = this.originalUser.age;
       this.user.gender = this.originalUser.gender;
       this.user.email = this.originalUser.email;
-      this.previewImage = this.originalUser.profilePic; // Atualiza a imagem de pré-visualização
+      this.previewImage = this.originalUser.profilePic; // Restaura a imagem original
     }
   }
   
-  }
+}
   
 

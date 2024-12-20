@@ -39,9 +39,21 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/register`, userData, { headers });
   }
 
-  resetPassword(email: string): Observable<any> {
+
+ forgotPassword(email: string): Observable<any> {
     return this.http.post(`${this.api}/reset-password`, { email });
   }
+  
+  resetPassword(token: string, password: string): Observable<any> {
+    
+    return this.http.post(`${this.api}/reset-password/ ${token}`, {token,password }).pipe(
+      catchError((error) => {
+        console.error('Erro ao redefinir a senha:', error);
+        return throwError(() => new Error('Erro ao redefinir a senha.'));
+      })
+    );
+  }
+  
 
   getPostsFromFirstFeed(userId?: string): Observable<any> {
     return this.http.get(`${this.apiFirstFeed}/`);

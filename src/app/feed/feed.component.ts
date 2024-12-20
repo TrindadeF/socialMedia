@@ -35,6 +35,7 @@ export class FeedComponent implements OnInit {
   blockedUsers: string[] = []; 
   unblockedUsers: string[] = [];
   blockedUsersData: any[] = [];  // Array para armazenar os dados completos dos usuários bloqueados
+  notifications: string[] = [];
 
 
   
@@ -69,6 +70,7 @@ export class FeedComponent implements OnInit {
     this.getPosts();
     this.userId = loggedUserId;
     this.loadBlockedUsers();
+    this.loadNotifications(loggedUserId);
   }
   
 
@@ -162,26 +164,74 @@ getUserById(userId: string): void {
 }
 
   
-  likePost(postId: string) {
-    this.apiService.likePostInFirstFeed(postId).subscribe(
-      (updatedPost: Post) => {
-        if (updatedPost) {
-          this.posts = this.posts.map((post) => {
-            if (post._id === updatedPost._id) {
-              return {
-                ...post,
-                likes: updatedPost.likes,
-              };
-            }
-            return post;
-          });
+likePost(postId: string) {
+  this.apiService.likePostInFirstFeed(postId).subscribe(
+    (updatedPost: Post) => {
+      if (updatedPost) {
+        this.posts = this.posts.map((post) => {
+          if (post._id === updatedPost._id) {
+            // Atualiza os likes no post
+            return {
+              ...post,
+              likes: updatedPost.likes,
+            };
+          }
+          return post;
+        });
+
+        // Identifica o dono da postagem e envia uma notificação
+        const postOwnerId = typeof updatedPost.owner === 'object' ? updatedPost.owner._id : updatedPost.owner;
+        const currentUserId = this.getUserIdFromAuthService(); // Usuário que curtiu
+
+        if (postOwnerId !== currentUserId) {
+          this.notifyUser(postOwnerId, currentUserId);
         }
-      },
-      (error) => {
-        console.error('Erro ao curtir o post:', error);
       }
-    );
+    },
+    (error) => {
+      console.error('Erro ao curtir o post:', error);
+    }
+  );
+}
+
+notifyUser(postOwnerId: string, likerId: string) {
+  // Obtem informações do usuário que curtiu
+  this.apiService.getUserById(likerId).subscribe({
+    next: (liker: User) => {
+      const notificationMessage = `${liker.name} curtiu seu Post!`;
+
+      // Recupera notificações existentes
+      const notificationsKey = `notifications_${postOwnerId}`;
+      const notifications = JSON.parse(localStorage.getItem(notificationsKey) || '[]');
+
+      // Adiciona nova notificação
+      notifications.push(notificationMessage);
+      localStorage.setItem(notificationsKey, JSON.stringify(notifications));
+
+      console.log(`Notificação enviada para o usuário ${postOwnerId}: ${notificationMessage}`);
+    },
+    error: (error) => {
+      console.error('Erro ao obter informações do usuário que curtiu:', error);
+    },
+  });
+}
+loadNotifications(userId: string) {
+  const notificationsKey = `notifications_${userId}`;
+  const notifications = JSON.parse(localStorage.getItem(notificationsKey) || '[]');
+
+  if (notifications.length > 0) {
+    // Exibir as notificações de forma apropriada, talvez usando uma variável de estado
+    this.notifications = notifications;
+    // Exibir as notificações de alguma forma, como com um `snackBar` ou em um componente dedicado
+    notifications.forEach((notification: string) => {
+      this.snackBar.open(notification, 'Fechar', { duration: 3000 });
+    });
   }
+}
+
+
+
+
 
   openModal(feedType: 'primaryFeed' | 'secondFeed') {
     this.currentFeedType = feedType;

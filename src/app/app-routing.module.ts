@@ -17,6 +17,11 @@ import { PresentationComponent } from './presentation/presentation.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { ConfigComponent } from './config/config.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+
+
+
+	
 
 
 const routes: Routes = [
@@ -39,6 +44,9 @@ const routes: Routes = [
   { path: 'primaryFeed/posts/:postId/comments',
     component: PostDetailComponent},
   { path: 'config', component: ConfigComponent},
+  { path: 'reset-password', component: ResetPasswordComponent }
+
+  
   
 ];
 

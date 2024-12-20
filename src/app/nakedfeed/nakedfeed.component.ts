@@ -187,18 +187,77 @@ export class NakedFeedComponent implements OnInit {
       console.error('Usuário atual não encontrado.');
       return;
     }
-
+  
     const userId = this.currentUser._id;
+  
     this.apiService.likeUser(userId, likedUserId).subscribe(
       (response) => {
         console.log('Like registrado com sucesso!', response);
-        this.checkMutualLikes();
+  
+        // Adiciona notificação para o usuário curtido
+        this.addNotification(likedUserId);
+  
+        this.checkMutualLikes(); // Verifica se há um match
       },
       (error) => {
         console.error('Erro ao registrar o like:', error);
       }
     );
   }
+  
+  // Método para adicionar uma notificação ao localStorage
+  addNotification(likedUserId: string): void {
+    const notificationsKey = `notifications_${likedUserId}`;
+    const notifications = JSON.parse(localStorage.getItem(notificationsKey) || '[]');
+  
+    // Verifica se a notificação já existe
+    const notificationExists = notifications.some(
+      (n: any) => n.userId === this.currentUser._id
+    );
+  
+    if (!notificationExists) {
+      // Cria a notificação
+      const newNotification = {
+        userId: this.currentUser._id,
+        message: `${this.currentUser.name} curtiu seu perfil.`,
+        timestamp: new Date().toISOString(),
+      };
+  
+      // Adiciona a notificação à lista existente
+      notifications.push(newNotification);
+  
+      // Salva no localStorage
+      localStorage.setItem(notificationsKey, JSON.stringify(notifications));
+  
+      console.log('Notificação adicionada:', newNotification);
+    } else {
+      console.log('Notificação já existente, nenhuma ação realizada.');
+    }
+  }
+  
+  // Método para obter notificações do usuário logado
+  getNotifications(): any[] {
+    if (!this.currentUser || !this.currentUser._id) {
+      console.error('Usuário atual não encontrado.');
+      return [];
+    }
+  
+    const notificationsKey = `notifications_${this.currentUser._id}`;
+    return JSON.parse(localStorage.getItem(notificationsKey) || '[]');
+  }
+  
+  // Método para limpar notificações do usuário logado
+  clearNotifications(): void {
+    if (!this.currentUser || !this.currentUser._id) {
+      console.error('Usuário atual não encontrado.');
+      return;
+    }
+  
+    const notificationsKey = `notifications_${this.currentUser._id}`;
+    localStorage.removeItem(notificationsKey);
+    console.log('Notificações limpas para o usuário logado.');
+  }
+  
 
   goToChat(otherUserId: string): void {
     if (!this.currentUser || !this.currentUser._id) {

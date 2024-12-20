@@ -36,6 +36,8 @@ export type User = {
   primaryPosts?: Post[];
   blockedUsers: string[];
   unblockedUsers: string[];
+  resetPasswordToken?: string;
+  resetPasswordExpires?: number;
  
  
 
@@ -48,7 +50,8 @@ export type Chat = {
   participants: User[];
   lastMessage: Message;
   messages: Message[];
-  userName: string;
+  userName: string; 
+  isAnonymous?: boolean;
 };
 
 export type Message = {

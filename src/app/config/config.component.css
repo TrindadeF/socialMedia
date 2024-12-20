@@ -1,0 +1,135 @@
+/* Define altura e fundo do body e html */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Altura total da tela */
+  background-color: #000; /* Fundo preto */
+  color: #fff; /* Texto branco */
+  font-family: Arial, sans-serif;
+}
+
+/* Estilo do contêiner */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  width: 100%; /* Largura total */
+  height: 100vh; /* Altura total da janela */
+  background-color: #111; /* Preto suave para contraste */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+  box-sizing: border-box; /* Inclui padding no cálculo da altura/largura */
+}
+
+/* Estilo das divisórias */
+.section {
+  padding: 20px;
+  background-color: #222; /* Divisão com preto mais claro */
+  border: 1px solid #444;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  cursor: pointer; /* Animação de ponteiro de clique */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Transições suaves */
+}
+
+/* Estilo dos títulos */
+.section h3 {
+  margin: 0 0 10px;
+  color: #f65151dc; /* Azul claro para os títulos */
+}
+
+/* Estilo do texto */
+.section p {
+  margin: 0;
+  color: #ccc; /* Cinza claro para o texto */
+}
+
+/* Animação de brilho e zoom ao passar o mouse */
+.section:hover {
+  transform: scale(1.01); /* Aumenta levemente o tamanho */
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4); /* Brilho suave */
+  border-color: #888; /* Torna a borda mais clara */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Transições suaves */
+}
+
+/* Estilo das preferências expandidas */
+.preferences {
+  background-color: #222;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.notifications {
+  margin-bottom: 20px;
+}
+
+.notifications label {
+  color: #ccc;
+}
+
+.blocked-users ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.blocked-users li {
+  color: #ccc;
+  margin-bottom: 10px;
+}
+.blocked-users-section {
+  background-color: #f8f8f8; /* Cor de fundo leve */
+  padding: 20px;
+  border-radius: 8px; /* Bordas arredondadas */
+  margin-top: 20px;
+}
+
+.blocked-users-section h3 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.blocked-users-section ul {
+  list-style-type: none; /* Remove o estilo de lista padrão */
+  padding-left: 0;
+}
+
+.blocked-users-section li {
+  display: flex;
+  justify-content: space-between; /* Alinha nome e botão */
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff; /* Fundo branco para cada item */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.blocked-users-section li:hover {
+  background-color: #f1f1f1; /* Efeito de hover para cada item */
+}
+
+.blocked-users-section li span {
+  border: 2px solid #ddd; /* Contorno leve ao redor do nome */
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 10px; /* Espaçamento entre nome e botão */
+}
+
+.unblock-btn {
+  background-color: red; /* Cor de fundo vermelha */
+  color: white; /* Cor do texto branca */
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px; /* Bordas arredondadas */
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.unblock-btn:hover {
+  background-color: darkred; /* Escurece o botão no hover */
+}
+

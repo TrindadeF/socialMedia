@@ -1,5 +1,5 @@
 body {
-  background-image: url("/src/assets/images/sensual 2.avif");
+  background-image: url("/src/assets/images/Scene 4.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -10,10 +10,9 @@ body {
 }
 
 #form-container {
- 
-  background-color: rgb(23, 23, 23) !important;
+  background-color: rgba(23, 23, 23, 0.8) !important; /* Cor de fundo com opacidade */
   padding: 2rem;
-  border-radius:55px;
+  border-radius: 55px;
   max-width: 400px;
   width: 100%;
 }

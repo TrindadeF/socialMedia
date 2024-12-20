@@ -21,6 +21,49 @@ body {
   flex-direction: column;
 }
 
+/* Notificações à esquerda */
+.notifications-container {
+  position: fixed;
+  top: 75px;
+  left: 90px;
+  z-index: 999;
+  max-width: 300px;
+  padding: 10px;
+}
+.notification-toggle-container {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  height: 100vh; /* Ocupa toda a altura da janela para garantir centralização */
+}
+
+.notification-toggle-button {
+  background-color: red; /* Fundo vermelho */
+  color: white; /* Letra branca */
+  border: none; /* Remove borda padrão */
+  padding: 5px 15px; /* Menor espaçamento interno */
+  font-size: 14px; /* Tamanho de fonte menor */
+  cursor: pointer; /* Muda o cursor para a mão */
+  border-radius: 5px; /* Bordas arredondadas */
+  transition: background-color 0.3s ease; /* Transição suave ao passar o mouse */
+}
+
+.notification-toggle-button:hover {
+  background-color: darkred; /* Cor mais escura de vermelho quando o mouse passa sobre o botão */
+}
+
+
+
+
+.notification {
+  background-color: #333;
+  color: white;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -69,7 +112,6 @@ img {
 li span {
   color: white;
   font-weight: bold;
-  
 }
 
 mat-icon {
@@ -85,6 +127,19 @@ mat-icon {
   white-space: nowrap;
   overflow: hidden;
   animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+}
+
+/* Segunda notificação à direita */
+.second-notifications-container {
+  position: fixed;
+  top: 75px;
+  right: 90px; /* Alinhado à direita */
+  z-index: 999;
+  max-width: 300px;
+  padding: 10px;
+  color: white;         /* Cor do texto */
+  font-size: 16px;      /* Tamanho da fonte */
+  margin: 5px 0;     
 }
 
 @media (max-width: 768px) {
@@ -105,6 +160,7 @@ mat-icon {
     margin-right: 0;
     margin-bottom: 10px;
   }
+
   .container {
     max-width: 600px;
     margin: 0 auto;
@@ -113,21 +169,21 @@ mat-icon {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
+
   .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
   }
-  
+
   .typing-animation {
     font-size: 24px;
     font-weight: bold;
     color: #333;
     animation: typing 2s steps(22) infinite, blink 0.5s step-end infinite alternate;
   }
-  
+
   .notification-count {
     background-color: red;
     color: white;
@@ -139,12 +195,12 @@ mat-icon {
     align-items: center;
     justify-content: center;
   }
-  
+
   ul {
     list-style: none;
     padding: 0;
   }
-  
+
   li {
     display: flex;
     align-items: center;
@@ -152,19 +208,18 @@ mat-icon {
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
   }
-  
+
   li:last-child {
     border-bottom: none;
   }
-  
+
   img {
     border-radius: 50%;
     border: 2px solid #ccc;
   }
-  
+
   mat-icon {
     font-size: 20px;
     margin-left: auto;
   }
-  
 }

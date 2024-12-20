@@ -36,6 +36,7 @@ import { ConfigComponent } from './config/config.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ConfigurationPageComponent } from './configuration-page/configuration-page.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 
@@ -68,6 +69,7 @@ import { ConfigurationPageComponent } from './configuration-page/configuration-p
     PostDetailComponent,
     ConfigComponent,
     ConfigurationPageComponent,
+    ResetPasswordComponent,
 
    
     
