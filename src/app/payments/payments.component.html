@@ -1,53 +1,58 @@
-<div class="payment-container">
-  <div class="payment">
-    <link rel="stylesheet" href="payments.component.css" />
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento</title>
+  <link rel="stylesheet" href="payments.component.css">
+</head>
+<body>
+  <div class="payment-container">
+    <div class="payment">
+      <video class="payment-image" controls autoplay loop muted>
+        <source src="assets/videos/payments video.mp4" type="video/mp4" />
+        Seu navegador não suporta a tag de vídeo.
+      </video>
 
-    <img
-      src="/assets/images/mamaco 3.jpg"
-      alt="Pagamento"
-      class="payment-image"
-    />
+      <h1>Conteúdo +18</h1>
 
-    <h1> Conteúdo +18</h1>
+      <div class="cancel-subscription">
+        <button class="btn cancel-btn" (click)="cancelSubscription()">Cancelar Assinatura</button>
+      </div>
 
-    <div class="cancel-subscription">
-      <button class="btn cancel-btn" (click)="cancelSubscription()">
-        Cancelar Assinatura
-      </button>
+      <div class="payment-options">
+        <div class="option">
+          <h2>Mensal 17,99€ / Mês</h2>
+          <div class="actions">
+            <button class="btn" (click)="plan1()">Realizar Pagamento</button>
+          </div>
+        </div>
+        <div class="option">
+          <h2>Semestral 14,99€ / Mês</h2>
+          <h3>Poupe até 17% total 89,94€.</h3>
+          <div class="actions">
+            <button class="btn" (click)="plan2()">Realizar Pagamento</button>
+          </div>
+        </div>
+        <div class="option">
+          <h2>Anual 11,99€ / Mês</h2>
+          <p>
+            <strong>Poupe até 33% (mais popular) total 143,88€.</strong>
+          </p>
+          <div class="actions">
+            <button class="btn" (click)="plan3()">Realizar Pagamento</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="payment-options">
-      <div class="option">
-        <h2>Mensal 17,99€ / Mês</h2>
-        <div class="actions">
-          <button class="btn" (click)="plan1()">Realizar Pagamento</button>
-        </div>
-      </div>
-      <div class="option">
-        <h2>Semestral 14,99€ / Mês</h2>
-        <h3> Poupe até 17% total 89,94€.</h3>
-        <div class="actions">
-          <button class="btn" (click)="plan2()">Realizar Pagamento</button>
-        </div>
-      </div>
-      <div class="option">
-        <h2>Anual 11,99€ / Mês</h2>
-        <p>
-          <strong
-            >Poupe até 33% (mais popular) total 143,88€.</strong
-          >
-        </p>
-
-        <div class="actions">
-          <button class="btn" (click)="plan3()">Realizar Pagamento</button>
-        </div>
-      </div>
+    <div class="image-carousel">
+      <img src="assets/images/payments 1.jpg" alt="Pagamento 1" />
+      <img src="assets/images/payments 2.jpg" alt="Pagamento 2" />
+      <img src="assets/images/payments 3.jpg" alt="Pagamento 3" />
+      <img src="assets/images/payments 4.jpg" alt="Pagamento 4" />
+      <img src="assets/images/payments 5.jpg" alt="Pagamento 5" />
     </div>
   </div>
-
-  <img
-    src="assets/images/mamaco 1.jpg"
-    alt="Sensual 3"
-    class="center-image"
-  />
-</div>
+</body>
+</html>

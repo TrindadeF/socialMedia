@@ -34,9 +34,12 @@ export class RulesComponent {
   ];
 
   constructor(private router: Router) {
-    if (!sessionStorage.getItem('rulesReloaded')) {
-      sessionStorage.setItem('rulesReloaded', 'true');
-      window.location.reload();
+    // Verifica se o item 'rulesViewed' já foi armazenado no localStorage
+    if (!localStorage.getItem('rulesViewed')) {
+      localStorage.setItem('rulesViewed', 'true');
+    } else {
+      // Se já foi visualizado, redireciona o usuário
+      this.router.navigate(['/edit-profile']);
     }
   }
 
@@ -50,6 +53,7 @@ export class RulesComponent {
     if (this.currentIndex < this.items.length - 1) {
       this.currentIndex++;
     } else {
+      // Ao terminar as regras, redireciona para o perfil
       this.router.navigate(['/edit-profile']);
     }
   }

@@ -2,7 +2,7 @@
   <!-- Divisão 1 -->
   <div class="section" (click)="openHelpDocument()">
     <h3>Central de Ajuda</h3>
-    <p>Todas as informações do Site está aqui.</p>
+    <p>Todas as informações do Site estão aqui.</p>
   </div>
   <div class="section" (click)="openTermsUse()">
     <h3>Termos de Uso</h3>
@@ -12,11 +12,6 @@
     <h3>Política de Privacidade</h3>
     <p>Veja aqui a Política de Privacidade do Site.</p>
   </div>
-
-
-
-
-
 
   <!-- Divisão 2 -->
   <div class="section" (click)="togglePreferences()">
@@ -30,20 +25,31 @@
       <h3>Notificações</h3>
       <p>Gerencie suas notificações aqui.</p>
     </div>
-    </div>
+  </div>
     
-    <div *ngIf="blockedUsersData.length > 0" class="blocked-users-section">
-      <h3>Usuários Bloqueados:</h3>
-      <ul>
-        <li *ngFor="let blockeduser of blockedUsersData">
-          {{ blockeduser.name }}  <!-- Exibe o nome do usuário bloqueado -->
-          <button class="unblock-btn" (click)="unblockUser(blockeduser._id)">Desbloquear</button>
-        </li>
-      </ul>
-    </div>
+  <div *ngIf="blockedUsersData.length > 0" class="blocked-users-section">
+    <h3>Usuários Bloqueados:</h3>
+    <ul>
+      <li *ngFor="let blockeduser of blockedUsersData">
+        {{ blockeduser.name }}
+        <button class="unblock-btn" (click)="unblockUser(blockeduser._id)">Desbloquear</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Contato com Suporte -->
+  <div class="support-section">
+    <h3>Contato com o Suporte</h3>
+    <p>Para relatar problemas ou abusos, entre em contato pelo email: 
+      <a href="mailto:support@nakedlove.eu">Suporte</a>
+    </p>
+  </div>
+
+  <!-- Contato de Publicidade -->
+  <div class="marketing-section">
+    <h3>Contato de Publicidade</h3>
+    <p>Para questões relacionadas à publicidade, envie um email para: 
+      <a href="mailto:marketing@nakedlove.eu">Publicidade</a>
+    </p>
+  </div>
 </div>
-
- 
-  
-  
-

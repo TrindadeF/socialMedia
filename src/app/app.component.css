@@ -71,3 +71,54 @@
   border: 2px solid white;
   object-fit: cover;
 }
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .sidenav {
+    width: 60px; /* Reduz a largura no celular */
+  }
+
+  .menu-item img.icon {
+    width: 25px; /* Ajusta os ícones */
+    height: 25px;
+  }
+
+  .menu-item {
+    padding: 15px 0; /* Ajusta o espaçamento entre os itens */
+  }
+  
+  .menu-item::after {
+    left: 20%; /* Ajusta o posicionamento da linha */
+    width: 60%; /* Reduz a largura da linha */
+  }
+
+  .icon {
+    width: 50px; /* Ajusta o tamanho do avatar */
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidenav {
+    width: 50px; /* Ainda menor para smartphones */
+  }
+
+  .menu-item img.icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .menu-item {
+    padding: 10px 0;
+  }
+  
+  .menu-item::after {
+    left: 25%; /* Ajusta para telas muito pequenas */
+    width: 50%; 
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+  }
+}

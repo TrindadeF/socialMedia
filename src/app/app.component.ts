@@ -31,8 +31,16 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('userId');
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
+    const confirmLogout = confirm('Deseja mesmo sair?');
+    
+    if (confirmLogout) {
+      // Se o usuário confirmar o logout
+      localStorage.removeItem('userId');
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+    } else {
+      // Se o usuário cancelar o logout, nada acontece
+      console.log('Logout cancelado');
+    }
   }
 }
