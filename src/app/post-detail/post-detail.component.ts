@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
 import { Post, User } from 'database';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-post-details',
@@ -22,8 +23,11 @@ export class PostDetailComponent implements OnInit {
   detailedComments: any;
   authService: any;
 
-
-  constructor(private route: ActivatedRoute, private apiService: ApiService) {
+  constructor(
+    private route: ActivatedRoute,
+    private apiService: ApiService,
+    private translate: TranslateService
+  ) {
     this.postId = this.route.snapshot.paramMap.get('postId') || '';
     console.log('ID do post:', this.postId);
   }
@@ -49,34 +53,32 @@ export class PostDetailComponent implements OnInit {
     return localStorage.getItem('userId') || '';
   }
 
- 
   isCommentOwner(commentOwnerId: string): boolean {
     const isOwner = commentOwnerId === this.userId;
     return isOwner;
   }
 
   deleteComment(commentId: string): void {
-    console.log('Comentário ID:', commentId); 
+    console.log('Comentário ID:', commentId);
     if (!commentId) {
       console.error('ID do comentário não fornecido');
-      return; 
+      return;
     }
-  
+
     this.apiService.deleteComment(commentId).subscribe(
       (response) => {
         console.log('Comentário deletado com sucesso', response);
-        this.comments = this.comments.filter(comment => comment._id !== commentId);
+        this.comments = this.comments.filter(
+          (comment) => comment._id !== commentId
+        );
         this.loadPostDetails();
         window.location.reload();
-
       },
       (error) => {
         console.error('Erro ao deletar comentário', error);
       }
     );
   }
-  
-
 
   loadPostDetails(): void {
     this.apiService.getPostWithComments(this.postId).subscribe(
@@ -125,13 +127,4 @@ export class PostDetailComponent implements OnInit {
   isImage(url: string): boolean {
     return /\.(jpg|jpeg|png|gif)$/.test(url);
   }
-
-
-
-
-
-
-
-
-  
 }

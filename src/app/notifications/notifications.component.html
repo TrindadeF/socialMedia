@@ -1,12 +1,15 @@
 <!-- Botão para ativar/desativar notificações -->
-<button class="notification-toggle-button" (click)="toggleNotifications()"> 
-  {{ getNotificationsStatus() ? 'Desativar Notificações' : 'Ativar Notificações' }}
+<button class="notification-toggle-button" (click)="toggleNotifications()">
+  {{
+    getNotificationsStatus()
+      ? ("NOTIFICATIONS1.DISABLE" | translate)
+      : ("NOTIFICATIONS1.ENABLE" | translate)
+  }}
 </button>
 
-
 <div class="container">
-  <h1 class="typing-animation">Notificações</h1>
-  
+  <h1 class="typing-animation">{{ "NOTIFICATIONS1.TITLE" | translate }}</h1>
+
   <!-- Verificar se as notificações estão ativadas antes de mostrar -->
   <ul *ngIf="getNotificationsStatus()">
     <div *ngIf="notifications.length > 0" class="notifications-container">
@@ -21,6 +24,6 @@
 <!-- Segunda notificação com uma classe diferente, exibida apenas quando as notificações estiverem ativadas -->
 <div class="second-notifications-container" *ngIf="getNotificationsStatus()">
   <div *ngFor="let notification of getNotifications()">
-    <p>{{ notification.message }}</p>
+    <p>{{ notification.message | translate }}</p>
   </div>
 </div>

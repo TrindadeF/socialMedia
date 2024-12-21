@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-rules',
@@ -8,32 +9,33 @@ import { Router } from '@angular/router';
 })
 export class RulesComponent {
   currentIndex = 0;
+
   items = [
     {
-      title: 'Bem-vindo(a) ao NakedLove',
-      description: 'Siga estas Regras da casa:',
+      title: this.translate.instant('RULES.WELCOME.TITLE'),
+      description: this.translate.instant('RULES.WELCOME.DESCRIPTION'),
     },
     {
-      title: 'Seja você mesmo',
-      description:
-        'Certifique-se de que as suas fotos, idade e biografia são fiéis à sua pessoa.',
+      title: this.translate.instant('RULES.BE_YOURSELF.TITLE'),
+      description: this.translate.instant('RULES.BE_YOURSELF.DESCRIPTION'),
     },
     {
-      title: 'Seja prudente',
-      description: 'Não tenha muita pressa em dar os seus dados pessoais.',
+      title: this.translate.instant('RULES.BE_CAUTIOUS.TITLE'),
+      description: this.translate.instant('RULES.BE_CAUTIOUS.DESCRIPTION'),
     },
     {
-      title: 'Tenha Conversas virtuais seguras',
-      description:
-        'Seja simpático. Respeite os outros e trate-os como gostaria de ser tratado.',
+      title: this.translate.instant('RULES.SECURE_CONVERSATIONS.TITLE'),
+      description: this.translate.instant(
+        'RULES.SECURE_CONVERSATIONS.DESCRIPTION'
+      ),
     },
     {
-      title: 'Seja proativo',
-      description: 'Denuncie sempre os comportamentos incorretos.',
+      title: this.translate.instant('RULES.BE_PROACTIVE.TITLE'),
+      description: this.translate.instant('RULES.BE_PROACTIVE.DESCRIPTION'),
     },
   ];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private translate: TranslateService) {
     if (!sessionStorage.getItem('rulesReloaded')) {
       sessionStorage.setItem('rulesReloaded', 'true');
       window.location.reload();

@@ -1,19 +1,20 @@
 <div *ngIf="isModalOpen" class="modal-overlay" (click)="closeModal()">
-  <div class="modal-content" >
+  <div class="modal-content">
     <div class="post-content">
-      
       {{ selectedPost?.content }}
     </div>
     <div class="comment-input">
       <textarea
         [(ngModel)]="commentText"
         (input)="checkFormValidity()"
-        placeholder="Adicione um comentário..."
-        aria-label="Campo para adicionar comentário"
-        
+        placeholder="{{ 'COMMENTS.ADD_PLACEHOLDER' | translate }}"
+        [attr.aria-label]="'COMMENTS.ADD_ARIA_LABEL' | translate"
       ></textarea>
-      <button (click)="postComment()" aria-label="Botão para enviar comentário">
-        Comentar
+      <button
+        (click)="postComment()"
+        [attr.aria-label]="'COMMENTS.POST_BUTTON_ARIA_LABEL' | translate"
+      >
+        {{ "COMMENTS.POST_BUTTON_TEXT" | translate }}
       </button>
     </div>
   </div>

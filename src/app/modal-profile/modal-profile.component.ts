@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Post, User } from 'database';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-modal-profile',
@@ -31,7 +32,11 @@ export class ModalProfileComponent {
   detailedComments: any;
   authService: any;
 
-  constructor(private apiService: ApiService, private snackBar: MatSnackBar) {}
+  constructor(
+    private apiService: ApiService,
+    private snackBar: MatSnackBar,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {
     this.getuserid();

@@ -28,7 +28,7 @@
 }
 
 .menu-item::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0; /* Posiciona na borda inferior */
   left: 10%; /* Deixa um pequeno espaço nas laterais */
@@ -36,9 +36,8 @@
   height: 2px; /* Linha mais fina */
   background: white; /* Cor da linha */
   border-radius: 10px; /* Arredonda as pontas */
-  box-shadow: 
-    -3px 3px 6px rgba(255, 255, 255, 0.3), /* Efeito 3D à esquerda */
-    3px -3px 6px rgba(0, 0, 0, 0.5); /* Efeito 3D à direita */
+  box-shadow: -3px 3px 6px rgba(255, 255, 255, 0.3),
+    /* Efeito 3D à esquerda */ 3px -3px 6px rgba(0, 0, 0, 0.5); /* Efeito 3D à direita */
   transition: all 0.3s ease; /* Suaviza os efeitos */
 }
 
@@ -49,9 +48,8 @@
 .menu-item:hover::after {
   width: 90%; /* Zoom na linha no hover */
   height: 3px; /* Linha mais grossa no hover */
-  box-shadow: 
-    -5px 5px 10px rgba(255, 255, 255, 0.5), /* Sombra mais forte à esquerda */
-    5px -5px 10px rgba(0, 0, 0, 0.7); /* Sombra mais forte à direita */
+  box-shadow: -5px 5px 10px rgba(255, 255, 255, 0.5),
+    /* Sombra mais forte à esquerda */ 5px -5px 10px rgba(0, 0, 0, 0.7); /* Sombra mais forte à direita */
 }
 
 .menu-item img.icon {
@@ -70,4 +68,18 @@
   border-radius: 50%;
   border: 2px solid white;
   object-fit: cover;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  background-color: #1976d2;
+  color: white;
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: bold;
 }

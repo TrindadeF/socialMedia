@@ -1,11 +1,14 @@
 <label>
-    <input type="checkbox" [(ngModel)]="isChecked" />
-    {{ label }}
-  </label>
-  
-  
-  
-    <div *ngIf="isChecked">
-      <p>Você aceitou os termos e condições. Clique no link abaixo para baixar:</p>
-      <a href="assets/docs/TERMOS DE USO – NAKED LOVE ( LEIA COM ATENÇÃO!!! ).pdf" download>Baixar Termos e Condições</a>
-    </div>
+  <input type="checkbox" [(ngModel)]="isChecked" />
+  {{ "TERMS.CHECKBOX_LABEL" | translate }}
+</label>
+
+<div *ngIf="isChecked">
+  <p>{{ "TERMS.ACCEPTED_TEXT" | translate }}</p>
+  <a
+    href="assets/docs/TERMOS DE USO – NAKED LOVE ( LEIA COM ATENÇÃO!!! ).pdf"
+    download
+  >
+    {{ "TERMS.DOWNLOAD_LINK" | translate }}
+  </a>
+</div>

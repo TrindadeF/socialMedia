@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Post } from 'database';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -32,7 +33,6 @@ export class ProfileComponent implements OnInit {
   selectedImage: string = '';
   showImageViewer: boolean = false;
   selectedPostId: string = '';
-  
 
   constructor(
     private apiService: ApiService,
@@ -40,7 +40,8 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private http: HttpClient,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private translate: TranslateService
   ) {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
@@ -64,7 +65,6 @@ export class ProfileComponent implements OnInit {
   public getUserId(): string {
     return localStorage.getItem('userId') || '';
   }
-  
 
   openModal() {
     this.showModal = true;
@@ -236,7 +236,6 @@ export class ProfileComponent implements OnInit {
           duration: 3000,
         });
         this.fetchUserPosts();
-        
       },
       error: (error) => {
         console.error('Erro ao deletar post:', error);
@@ -279,25 +278,20 @@ export class ProfileComponent implements OnInit {
       postOwnerId !== null &&
       '_id' in postOwnerId
     ) {
-      console.log(postOwnerId)
+      console.log(postOwnerId);
       postOwnerId = postOwnerId._id;
-      console.log(postOwnerId)
-      
+      console.log(postOwnerId);
     }
     if (typeof postOwnerId !== 'string') {
       console.error('postOwnerId deve ser uma string', postOwnerId);
-      console.log("chegou a segunda condição")
-      console.log(postOwnerId)
+      console.log('chegou a segunda condição');
+      console.log(postOwnerId);
       return false;
     }
-
     const currentUserId = this.getUserIdFromAuthService();
-    console.log("O id do usuário atual é :")
-    console.log(currentUserId)
-    
     return currentUserId === String(postOwnerId);
   }
-  
+
   getUserIdFromAuthService(): string {
     return localStorage.getItem('userId') || '';
   }
@@ -324,7 +318,7 @@ export class ProfileComponent implements OnInit {
   }
 
   openImageViewer(postId: string) {
-    this.selectedPostId= postId;
+    this.selectedPostId = postId;
     this.showImageViewer = true;
   }
 
@@ -392,6 +386,4 @@ export class ProfileComponent implements OnInit {
       reader.readAsDataURL(file);
     });
   }
-
-  
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-forgot-password',
@@ -13,8 +14,11 @@ export class ForgotPasswordComponent {
   successMessage: string = '';
   token: string = '';
 
-
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private translate: TranslateService
+  ) {}
 
   onSubmit() {
     this.email = this.email.trim();
@@ -24,7 +28,7 @@ export class ForgotPasswordComponent {
       return;
     }
 
-    this.apiService.forgotPassword( this.email).subscribe({
+    this.apiService.forgotPassword(this.email).subscribe({
       next: () => {
         this.successMessage = 'Verifique seu e-mail para redefinir sua senha.';
         this.errorMessage = '';

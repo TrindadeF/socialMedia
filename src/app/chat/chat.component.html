@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat</title>
+    <title>{{ "CHAT.TITLE" | translate }}</title>
     <link rel="stylesheet" href="chat.component.css" />
   </head>
   <body>
     <div class="chat-container">
-      <h2 class="chat-title">Chats</h2>
+      <h2 class="chat-title">{{ "CHAT.CHATS" | translate }}</h2>
       <ul class="chat-list">
         <li
           *ngFor="let chat of chats"
@@ -17,16 +17,17 @@
           [class.selected]="selectedChat === chat"
           class="chat-item"
         >
-          Chat com {{ getParticipantNames(chat) }}
+          {{ "CHAT.WITH" | translate }} {{ getParticipantNames(chat) }}
         </li>
       </ul>
     </div>
 
     <div *ngIf="selectedChat" class="messages-container">
       <h3 class="messages-title">
-        Mensagens com {{ getParticipantNames(selectedChat) }}
+        {{ "CHAT.MESSAGES_WITH" | translate }}
+        {{ getParticipantNames(selectedChat) }}
         <button (click)="deleteSelectedChat()" class="delete-chat-button">
-          Apagar Chat
+          {{ "CHAT.DELETE_CHAT" | translate }}
         </button>
       </h3>
       <div class="messages-list">
@@ -49,12 +50,12 @@
         <div class="input-container">
           <input
             [(ngModel)]="newMessage"
-            placeholder="Digite uma mensagem..."
+            [placeholder]="'CHAT.PLACEHOLDER' | translate"
             class="message-input"
           />
           <button (click)="sendMessage()" class="send-button">
-          <mat-icon>send</mat-icon>
-        </button>
+            <mat-icon>send</mat-icon>
+          </button>
         </div>
       </div>
     </div>

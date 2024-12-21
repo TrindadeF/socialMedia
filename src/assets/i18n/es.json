@@ -1,0 +1,258 @@
+{
+  "MENU": {
+    "HOME": "Inicio",
+    "FEED": "Feed",
+    "EDIT_PROFILE": "Editar Perfil",
+    "PROFILE": "Perfil",
+    "CHAT": "Chat",
+    "NOTIFICATIONS": "Notificaciones",
+    "PAYMENTS": "Pagos",
+    "SETTINGS": "Configuraciones",
+    "LOGOUT": "Cerrar Sesión",
+    "LANGUAGE": "Idioma"
+  },
+  "ACTIONS": {
+    "LIKE": "Me gusta",
+    "IGNORE": "Ignorar",
+    "SEND": "Enviar",
+    "CANCEL": "Cancelar",
+    "SAVE": "Guardar",
+    "DELETE": "Eliminar"
+  },
+  "MESSAGES": {
+    "LOADING": "Cargando...",
+    "ERROR": "Ocurrió un error.",
+    "NO_DATA": "No se encontraron datos."
+  },
+
+  "EDIT_PROFILE": {
+    "TITLE": "Editar Perfil",
+    "PICTURE_ALT": "Vista previa de la Foto de Perfil",
+    "PICTURE_LABEL": "Foto de Perfil",
+    "ANONYMOUS_WARNING": "Este perfil está configurado como anónimo. Parte de la información está oculta o no se puede cambiar.",
+    "NAME_LABEL": "Nombre",
+    "USERNAME_LABEL": "Nombre de Usuario",
+    "DESCRIPTION_LABEL": "Descripción",
+    "EMAIL_LABEL": "Correo Electrónico",
+    "AGE_LABEL": "Edad",
+    "GENDER_LABEL": "Género",
+    "GENDER_SELECT": "Seleccionar",
+    "GENDER_MALE": "Masculino",
+    "GENDER_FEMALE": "Femenino",
+    "GENDER_NON_BINARY": "No Binario",
+    "GENDER_BISEXUAL": "Bisexual",
+    "GENDER_TRANSGENDER": "Transgénero",
+    "GENDER_HOMOSEXUAL": "Homosexual",
+    "ANONYMOUS_LABEL": "Perfil Anónimo",
+    "ANONYMOUS_ENABLE": "Activar",
+    "ANONYMOUS_DISABLE": "Desactivar",
+    "SAVE_BUTTON": "Guardar",
+    "DELETE_BUTTON": "Eliminar Perfil"
+  },
+  "CHAT": {
+    "TITLE": "Chat",
+    "CHATS": "Conversaciones",
+    "WITH": "Conversación con",
+    "MESSAGES_WITH": "Mensajes con",
+    "DELETE_CHAT": "Eliminar Chat",
+    "PLACEHOLDER": "Escribe un mensaje..."
+  },
+  "TERMS": {
+    "CHECKBOX_LABEL": "Acepto los términos y condiciones",
+    "ACCEPTED_TEXT": "Has aceptado los términos y condiciones. Haz clic en el enlace de abajo para descargar:",
+    "DOWNLOAD_LINK": "Descargar Términos y Condiciones"
+  },
+  "COMMENTS": {
+    "ADD_PLACEHOLDER": "Añade un comentario...",
+    "ADD_ARIA_LABEL": "Campo para añadir un comentario",
+    "POST_BUTTON_TEXT": "Comentar",
+    "POST_BUTTON_ARIA_LABEL": "Botón para enviar un comentario"
+  },
+  "HELP_CENTER": {
+    "TITLE": "Centro de Ayuda",
+    "DESCRIPTION": "Toda la información del sitio está aquí."
+  },
+  "TERMS_OF_USE": {
+    "TITLE": "Términos de Uso",
+    "DESCRIPTION": "Consulta aquí los Términos de Uso del sitio."
+  },
+  "PRIVACY_POLICY": {
+    "TITLE": "Política de Privacidad",
+    "DESCRIPTION": "Consulta aquí la Política de Privacidad del sitio."
+  },
+  "USER_PREFERENCES": {
+    "TITLE": "Preferencias de Usuario",
+    "DESCRIPTION": "Gestiona tus preferencias de usuario, como notificaciones y desbloqueos."
+  },
+  "NOTIFICATIONS": {
+    "TITLE": "Notificaciones",
+    "DESCRIPTION": "Gestiona tus notificaciones aquí."
+  },
+  "BLOCKED_USERS": {
+    "TITLE": "Usuarios Bloqueados",
+    "UNBLOCK_BUTTON": "Desbloquear"
+  },
+  "FEED": {
+    "HEADER": "ⓃakedLove",
+    "PLACEHOLDER": "¿Qué nos vas a mostrar hoy?",
+    "ALERT": {
+      "SUCCESS": "¡Publicado con éxito!",
+      "ERROR": "Ocurrió un error. Inténtalo de nuevo más tarde."
+    },
+    "POST": {
+      "AVATAR_ALT": "Avatar del usuario",
+      "IMAGE_ALT": "Imagen del post",
+      "VIDEO_ALT": "Vídeo del post",
+      "ACTIONS": {
+        "LIKE": "Me gusta",
+        "COMMENT": "Comentar",
+        "BLOCK_USER": "Bloquear",
+        "DELETE": "Eliminar"
+      }
+    },
+    "MODAL": {
+      "WELCOME_TITLE": "¡Bienvenido!",
+      "PUBLISH": "Publicar"
+    }
+  },
+  "FORGOT_PASSWORD": {
+    "TITLE": "Olvidé mi Contraseña",
+    "HEADER": "Olvidé mi Contraseña",
+    "EMAIL_PLACEHOLDER": "Introduce tu correo electrónico",
+    "EMAIL_ERROR": "El campo de correo electrónico es obligatorio y debe ser un correo válido.",
+    "SUBMIT_BUTTON": "Enviar",
+    "BACK_TO_LOGIN": "Volver al Inicio de Sesión"
+  },
+  "HOME_PAGE": {
+    "TITLE": "Página Principal",
+    "WELCOME_MESSAGE": "Bienvenido a NakedLove",
+    "DESCRIPTION": "Descubre varias conexiones emocionantes y explora tus deseos en un entorno seguro y discreto. Únete a una vibrante comunidad de personas que buscan relaciones apasionadas e intensas.",
+    "REGISTER_BUTTON": "Regístrate Ahora",
+    "LOGIN_BUTTON": "Iniciar Sesión",
+    "AGE_VERIFICATION_MESSAGE": "Este sitio está destinado exclusivamente a mayores de 18 años. Al continuar, confirmas que tienes la edad legal para explorar contenido dirigido a una audiencia adulta.",
+    "AGE_VERIFICATION_ACCEPT": "Tengo 18 Años o Más - Entrar",
+    "AGE_VERIFICATION_DECLINE": "Tengo Menos de 18 Años - Salir",
+    "FEEDBACK_ALT1": "Feedback 1",
+    "FEEDBACK_ALT2": "Feedback 2",
+    "FEEDBACK_ALT3": "Feedback 3",
+    "HOME_IMAGE_ALT": "Imagen de la Página Principal",
+    "FOOTER_MESSAGE": "© 2024 Sitio de Citas para Adultos. Todos los derechos reservados."
+  },
+  "MODAL": {
+    "TITLE": "Publicar Nuevo Contenido",
+    "PLACEHOLDER": "¿Qué nos vas a mostrar hoy?",
+    "UPLOAD_IMAGE": "Agregar Imagen",
+    "UPLOAD_MEDIA": "Agregar Multimedia",
+    "PREVIEW_IMAGE_ALT": "Vista previa de la imagen",
+    "PUBLISH": "Publicar",
+    "PUBLISHING": "Publicando...",
+    "CLOSE": "Cerrar",
+    "CLOSE_ARIA_LABEL": "Cerrar modal"
+  },
+  "POST": {
+    "IMAGE_ALT": "Imagen de la publicación",
+    "CREATED_AT": "Fecha de creación",
+    "DELETE": "Eliminar",
+    "LIKE": "Me gusta",
+    "ADD_COMMENT_PLACEHOLDER": "Agregar un comentario",
+    "SEND_COMMENT": "Enviar",
+    "COMMENT_AVATAR_ALT": "Avatar del comentario",
+    "DELETE_COMMENT": "Eliminar comentario"
+  },
+  "FILTER_BY_GENDER": {
+    "LABEL": "Filtrar por Género:",
+    "ALL": "Todos",
+    "MALE": "Masculino",
+    "FEMALE": "Femenino"
+  },
+  "SUBSCRIPTION": {
+    "WARNING": "Tu suscripción ha expirado o es inválida.",
+    "RENEW": "Renovar suscripción"
+  },
+  "PROFILE": {
+    "DEFAULT_NAME": "Usuario",
+    "YEARS_OLD": "años"
+  },
+  "NO_MORE_CARDS": {
+    "MESSAGE": "¡Has visto todos los usuarios!",
+    "RESET": "Ver de nuevo",
+    "VIEW_GALLERY": "Ver galería"
+  },
+  "NOTIFICATIONS1": {
+    "TITLE": "Notificaciones",
+    "ENABLE": "Activar Notificaciones",
+    "DISABLE": "Desactivar Notificaciones"
+  },
+  "PAYMENTS": {
+    "PAYMENT_IMAGE_ALT": "Pago",
+    "TITLE": "Contenido +18",
+    "CANCEL_SUBSCRIPTION": "Cancelar Suscripción",
+    "MONTHLY_PLAN": "Mensual 17,99€ / Mes",
+    "SEMESTRAL_PLAN": "Semestral 14,99€ / Mes",
+    "SEMESTRAL_DISCOUNT": "Ahorre hasta un 17% total 89,94€.",
+    "ANNUAL_PLAN": "Anual 11,99€ / Mes",
+    "ANNUAL_DISCOUNT": "Ahorre hasta un 33% (el más popular) total 143,88€.",
+    "MAKE_PAYMENT": "Realizar Pago",
+    "CENTER_IMAGE_ALT": "Imagen Sensual"
+  },
+  "POST_DETAIL": {
+    "BACK_LINK": "Volver",
+    "OWNER_AVATAR_ALT": "Avatar del propietario de la publicación",
+    "POST_IMAGE_ALT": "Imagen de la publicación",
+    "COMMENTS_TITLE": "Comentarios:",
+    "COMMENT_AVATAR_ALT": "Avatar del comentario",
+    "DELETE_COMMENT_BUTTON": "Eliminar comentario",
+    "ADD_COMMENT_PLACEHOLDER": "Agregar un comentario",
+    "ADD_COMMENT_BUTTON": "Comentar"
+  },
+  "CAROUSEL": {
+    "IMAGE_1_ALT": "Imagen 1",
+    "IMAGE_1_TEXT": "Encontrar a nuestra alma gemela siempre es complicado.",
+    "IMAGE_2_ALT": "Imagen 2",
+    "IMAGE_2_TEXT": "Existen muchas aplicaciones, redes sociales, sitios de citas, y aun así seguimos buscando el amor verdadero.",
+    "IMAGE_3_ALT": "Imagen 3",
+    "IMAGE_3_TEXT": "Cuando se trata de amor y de la persona adecuada, ¿para qué perder tiempo? En Naked Love, nos deshacemos de todos los filtros y ropa para ver si hay una manera más instintiva de encontrarlo.",
+    "IMAGE_4_ALT": "Imagen 4",
+    "IMAGE_4_TEXT": "¿Cómo encontramos a la persona adecuada? Sería bueno evitar errores, sorpresas desagradables y, sobre todo, pérdida de tiempo. En Naked Love, tenemos la forma ideal para encontrar a tu alma gemela.",
+    "IMAGE_5_ALT": "Imagen 5",
+    "IMAGE_5_TEXT": "¿Qué se necesita para enamorarnos, qué desencadena la chispa y qué nos influye al elegir a una pareja? En Naked Love, tenemos la oportunidad de descubrir a un compañero y empezar como terminamos, desnudos.",
+    "IMAGE_6_ALT": "Imagen 6",
+    "IMAGE_6_TEXT": "¿Cuánto tiempo tardamos en enamorarnos? Para la ciencia, segundos; para los poetas, una vida entera no es suficiente.",
+    "GO_TO_HOME": "Ir a la página principal"
+  },
+  "PROFILE1": {
+    "ALT_IMAGE": "Foto de perfil de {{ name }}",
+    "DEFAULT_IMAGE_ALT": "Foto de perfil predeterminada",
+    "FOLLOWERS": "Seguidores: {{ count }}",
+    "FOLLOW": "Seguir",
+    "UNFOLLOW": "Dejar de seguir",
+    "ANONYMOUS_TITLE": "Perfil Anónimo",
+    "ANONYMOUS_MESSAGE": "Este usuario está en modo anónimo.",
+    "ADD_POST": "Agregar Publicación",
+    "FEED_TITLE": "Feed",
+    "POST_IMAGE": "Imagen de la Publicación",
+    "DELETE_POST": "Eliminar Publicación"
+  },
+  "RULES": {
+    "WELCOME": {
+      "TITLE": "Bienvenido a NakedLove",
+      "DESCRIPTION": "Sigue estas reglas de la casa:"
+    },
+    "BE_YOURSELF": {
+      "TITLE": "Sé tú mismo",
+      "DESCRIPTION": "Asegúrate de que tus fotos, edad y biografía sean fieles a ti mismo."
+    },
+    "BE_CAUTIOUS": {
+      "TITLE": "Sé prudente",
+      "DESCRIPTION": "No te apresures a dar tu información personal."
+    },
+    "SECURE_CONVERSATIONS": {
+      "TITLE": "Ten conversaciones virtuales seguras",
+      "DESCRIPTION": "Sé amable. Respeta a los demás y trátalos como te gustaría ser tratado."
+    },
+    "BE_PROACTIVE": {
+      "TITLE": "Sé proactivo",
+      "DESCRIPTION": "Reporta siempre los comportamientos inapropiados."
+    }
+  }
+}
