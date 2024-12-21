@@ -62,23 +62,7 @@ html, body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.notifications {
-  margin-bottom: 20px;
-}
-
-.notifications label {
-  color: #ccc;
-}
-
-.blocked-users ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.blocked-users li {
-  color: #ccc;
-  margin-bottom: 10px;
-}
+/* Estilo da seção de usuários bloqueados */
 .blocked-users-section {
   background-color: #f8f8f8; /* Cor de fundo leve */
   padding: 20px;
@@ -112,13 +96,6 @@ html, body {
   background-color: #f1f1f1; /* Efeito de hover para cada item */
 }
 
-.blocked-users-section li span {
-  border: 2px solid #ddd; /* Contorno leve ao redor do nome */
-  padding: 5px 10px;
-  border-radius: 5px;
-  margin-right: 10px; /* Espaçamento entre nome e botão */
-}
-
 .unblock-btn {
   background-color: red; /* Cor de fundo vermelha */
   color: white; /* Cor do texto branca */
@@ -133,3 +110,29 @@ html, body {
   background-color: darkred; /* Escurece o botão no hover */
 }
 
+/* Estilo das seções de contato */
+.support-section, .marketing-section {
+  padding: 20px;
+  background-color: #222; /* Fundo para seções de suporte e marketing */
+  border: 1px solid #444; /* Borda semelhante às outras seções */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.support-section h3, .marketing-section h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #f65151dc; /* Azul claro para os títulos */
+}
+
+.support-section a, .marketing-section a {
+  color: #4ea1f3; /* Azul para os links */
+  text-decoration: none; /* Remove sublinhado */
+}
+
+.support-section a:hover, .marketing-section a:hover {
+  text-decoration: underline; /* Adiciona sublinhado no hover */
+}
+.support-section p, .marketing-section p {
+  color: #fff; /* Cor branca para o texto */
+}

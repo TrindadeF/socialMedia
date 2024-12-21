@@ -30,30 +30,28 @@ body {
   max-width: 300px;
   padding: 10px;
 }
+
 .notification-toggle-container {
   display: flex;
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
-  height: 100vh; /* Ocupa toda a altura da janela para garantir centralização */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .notification-toggle-button {
-  background-color: red; /* Fundo vermelho */
-  color: white; /* Letra branca */
-  border: none; /* Remove borda padrão */
-  padding: 5px 15px; /* Menor espaçamento interno */
-  font-size: 14px; /* Tamanho de fonte menor */
-  cursor: pointer; /* Muda o cursor para a mão */
-  border-radius: 5px; /* Bordas arredondadas */
-  transition: background-color 0.3s ease; /* Transição suave ao passar o mouse */
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .notification-toggle-button:hover {
-  background-color: darkred; /* Cor mais escura de vermelho quando o mouse passa sobre o botão */
+  background-color: darkred;
 }
-
-
-
 
 .notification {
   background-color: #333;
@@ -133,22 +131,24 @@ mat-icon {
 .second-notifications-container {
   position: fixed;
   top: 75px;
-  right: 90px; /* Alinhado à direita */
+  right: 90px;
   z-index: 999;
   max-width: 300px;
   padding: 10px;
-  color: white;         /* Cor do texto */
-  font-size: 16px;      /* Tamanho da fonte */
-  margin: 5px 0;     
+  color: white;
+  font-size: 16px;
+  margin: 5px 0;
 }
 
 @media (max-width: 768px) {
   .container {
     padding: 10px;
+    display: block;
   }
 
   ul {
     padding: 10px;
+    max-height: 70vh;
   }
 
   li {
@@ -161,65 +161,47 @@ mat-icon {
     margin-bottom: 10px;
   }
 
-  .container {
-    max-width: 600px;
+  .notifications-container, .second-notifications-container {
+    position: static;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
+  .notification-toggle-button {
+    font-size: 12px;
+    padding: 5px 10px;
   }
 
   .typing-animation {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    animation: typing 2s steps(22) infinite, blink 0.5s step-end infinite alternate;
+    font-size: 18px;
   }
+}
 
-  .notification-count {
-    background-color: red;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@media (max-width: 480px) {
+  .container {
+    padding: 5px;
   }
 
   ul {
-    list-style: none;
-    padding: 0;
+    padding: 5px;
+    max-height: 60vh;
   }
 
   li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-  }
-
-  li:last-child {
-    border-bottom: none;
+    padding: 8px;
+    font-size: 14px;
   }
 
   img {
-    border-radius: 50%;
-    border: 2px solid #ccc;
+    width: 40px;
+    height: 40px;
   }
 
-  mat-icon {
-    font-size: 20px;
-    margin-left: auto;
+  .notification-toggle-button {
+    padding: 4px 8px;
+  }
+
+  .typing-animation {
+    font-size: 16px;
   }
 }

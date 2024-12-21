@@ -52,6 +52,7 @@ export class RulesComponent {
     if (this.currentIndex < this.items.length - 1) {
       this.currentIndex++;
     } else {
+      // Ao terminar as regras, redireciona para o perfil
       this.router.navigate(['/edit-profile']);
     }
   }

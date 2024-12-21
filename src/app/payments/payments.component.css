@@ -1,7 +1,7 @@
-body { 
-    background-color: #121212;
+body {
+    background-color: #0c0c0c;
     font-family: Arial, sans-serif;
-    color: #fff;
+    color: #171717;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -18,13 +18,61 @@ body {
     overflow: hidden;
 }
 
+.image-carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: auto;
+    z-index: 0;
+}
+
+.image-carousel img {
+    position: absolute;
+    width: 70%;
+    height: auto;
+    object-fit: cover;
+    opacity: 0;
+    animation: fade 25s infinite;
+    border-radius: 10px;
+}
+
+.image-carousel img:nth-child(1) {
+    animation-delay: 0s;
+}
+.image-carousel img:nth-child(2) {
+    animation-delay: 5s;
+}
+.image-carousel img:nth-child(3) {
+    animation-delay: 10s;
+}
+.image-carousel img:nth-child(4) {
+    animation-delay: 15s;
+}
+.image-carousel img:nth-child(5) {
+    animation-delay: 20s;
+}
+
+@keyframes fade {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    40% { opacity: 1; }
+    60% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
 .payment {
     padding: 30px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.7);
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     max-width: 90%;
     text-align: center;
+    position: relative;
     z-index: 1;
 }
 

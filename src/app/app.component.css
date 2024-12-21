@@ -70,16 +70,53 @@
   object-fit: cover;
 }
 
-.toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 16px;
-  background-color: #1976d2;
-  color: white;
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .sidenav {
+    width: 60px; /* Reduz a largura no celular */
+  }
+
+  .menu-item img.icon {
+    width: 25px; /* Ajusta os ícones */
+    height: 25px;
+  }
+
+  .menu-item {
+    padding: 15px 0; /* Ajusta o espaçamento entre os itens */
+  }
+
+  .menu-item::after {
+    left: 20%; /* Ajusta o posicionamento da linha */
+    width: 60%; /* Reduz a largura da linha */
+  }
+
+  .icon {
+    width: 50px; /* Ajusta o tamanho do avatar */
+    height: 50px;
+  }
 }
 
-.app-title {
-  font-size: 20px;
-  font-weight: bold;
+@media (max-width: 480px) {
+  .sidenav {
+    width: 50px; /* Ainda menor para smartphones */
+  }
+
+  .menu-item img.icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .menu-item {
+    padding: 10px 0;
+  }
+
+  .menu-item::after {
+    left: 25%; /* Ajusta para telas muito pequenas */
+    width: 50%;
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+  }
 }

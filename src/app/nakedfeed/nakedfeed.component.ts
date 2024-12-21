@@ -252,8 +252,8 @@ export class NakedFeedComponent implements OnInit {
 
     if (!notificationExists) {
       const newNotification = {
-        userId: this.currentUser!._id,
-        message: `${this.currentUser!.name} curtiu seu perfil.`,
+        userId: this.currentUser._id,
+        message: `${this.currentUser.name} Está de olho em você!.`,
         timestamp: new Date().toISOString(),
       };
       notifications.push(newNotification);
