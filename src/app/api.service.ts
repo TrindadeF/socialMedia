@@ -3,16 +3,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Chat, Message, Post, User } from 'database';
 import { LikesResponse } from 'response.types';
-
+import { environment } from 'src/environments/environments';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = 'https://nakedlove.eu/api/auth';
-  private apiFirstFeed = 'https://nakedlove.eu/api/primaryFeed';
-  private apiSecondFeed = 'https://nakedlove.eu/api/secondFeed';
-  private api = 'https://nakedlove.eu/api';
+  private apiDev = environment.apiUrl;
+  private apiUrl = `${this.apiDev}/auth`;
+  private apiFirstFeed = `${this.apiDev}/primaryFeed`;
+  private apiSecondFeed = `${this.apiDev}/secondFeed`;
+  private api = `${this.apiDev}`;
 
   constructor(private http: HttpClient) {}
 
@@ -39,21 +40,20 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/register`, userData, { headers });
   }
 
-
- forgotPassword(email: string): Observable<any> {
+  forgotPassword(email: string): Observable<any> {
     return this.http.post(`${this.api}/reset-password`, { email });
   }
-  
+
   resetPassword(token: string, password: string): Observable<any> {
-    
-    return this.http.post(`${this.api}/reset-password/ ${token}`, {token,password }).pipe(
-      catchError((error) => {
-        console.error('Erro ao redefinir a senha:', error);
-        return throwError(() => new Error('Erro ao redefinir a senha.'));
-      })
-    );
+    return this.http
+      .post(`${this.api}/reset-password/ ${token}`, { token, password })
+      .pipe(
+        catchError((error) => {
+          console.error('Erro ao redefinir a senha:', error);
+          return throwError(() => new Error('Erro ao redefinir a senha.'));
+        })
+      );
   }
-  
 
   getPostsFromFirstFeed(userId?: string): Observable<any> {
     return this.http.get(`${this.apiFirstFeed}/`);
@@ -164,7 +164,7 @@ export class ApiService {
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.api}/users`);
   }
-  
+
   likeUser(userId: string, likedUserId: string): Observable<any> {
     const token = this.getAuthToken();
     const headers = new HttpHeaders({
@@ -310,52 +310,50 @@ export class ApiService {
     return this.http.get(`${this.apiFirstFeed}/posts?userId=${userId}`);
   }
 
-
   blockUser(blockUserId: string): Observable<any> {
     const token = this.getAuthToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-  
-    return this.http.post(`${this.apiUrl}/block/${blockUserId}`, null, { headers }).pipe(
-      catchError((error) => {
-        console.error('Erro ao bloquear usuário:', error);
-        return throwError(() => new Error('Erro ao bloquear o usuário.'));
-      })
-    );
+
+    return this.http
+      .post(`${this.apiUrl}/block/${blockUserId}`, null, { headers })
+      .pipe(
+        catchError((error) => {
+          console.error('Erro ao bloquear usuário:', error);
+          return throwError(() => new Error('Erro ao bloquear o usuário.'));
+        })
+      );
   }
   unblockUser(unblockUserId: string): Observable<any> {
     const token = this.getAuthToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-  
-    return this.http.post(`${this.apiUrl}/unblock/${unblockUserId}`, null, { headers }).pipe(
-      catchError((error) => {
-        console.error('Erro ao desbloquear usuário:', error);
-        return throwError(() => new Error('Erro ao desbloquear o usuário.'));
-      })
-    );
+
+    return this.http
+      .post(`${this.apiUrl}/unblock/${unblockUserId}`, null, { headers })
+      .pipe(
+        catchError((error) => {
+          console.error('Erro ao desbloquear usuário:', error);
+          return throwError(() => new Error('Erro ao desbloquear o usuário.'));
+        })
+      );
   }
-  
-  
-  
+
   reportUser(reportUserId: string, reason: string): Observable<any> {
     const token = this.getAuthToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-  
-    return this.http.post(
-      `${this.apiUrl}/report`,
-      { reportUserId, reason },
-      { headers }
-    ).pipe(
-      catchError((error) => {
-        console.error('Erro ao reportar usuário:', error);
-        return throwError(() => new Error('Erro ao reportar o usuário.'));
-      })
-    );
+
+    return this.http
+      .post(`${this.apiUrl}/report`, { reportUserId, reason }, { headers })
+      .pipe(
+        catchError((error) => {
+          console.error('Erro ao reportar usuário:', error);
+          return throwError(() => new Error('Erro ao reportar o usuário.'));
+        })
+      );
   }
-  
 }

@@ -1,11 +1,13 @@
 <div *ngIf="post" class="modal-backdrop">
   <div class="modal-content">
-    <a href="/feed" class="back-link">Voltar</a>
+    <a href="/feed" class="back-link">{{
+      "POST_DETAIL.BACK_LINK" | translate
+    }}</a>
 
     <div class="post-detail-header">
       <img
         [src]="post.owner.profilePic || 'assets/images/default-avatar.jpg'"
-        alt="Avatar do dono do post"
+        alt="{{ 'POST_DETAIL.OWNER_AVATAR_ALT' | translate }}"
         class="avatar"
       />
       <h1 class="post-title">{{ post.owner.nickName }}</h1>
@@ -19,7 +21,7 @@
         <img
           *ngIf="isImage(post.media[0])"
           [src]="post.media[0]"
-          alt="Imagem do post"
+          alt="{{ 'POST_DETAIL.POST_IMAGE_ALT' | translate }}"
         />
         <video
           *ngIf="!isImage(post.media[0])"
@@ -29,14 +31,14 @@
       </div>
 
       <div class="comments-container">
-        <h3>Comentários:</h3>
+        <h3>{{ "POST_DETAIL.COMMENTS_TITLE" | translate }}</h3>
 
         <div *ngFor="let comment of comments" class="comment">
           <img
             [src]="
               comment.owner?.profilePic || 'assets/images/default-avatar.jpg'
             "
-            alt="Avatar do comentário"
+            alt="{{ 'POST_DETAIL.COMMENT_AVATAR_ALT' | translate }}"
             class="avatar"
           />
           <div class="comment-content">
@@ -50,7 +52,7 @@
               *ngIf="isCommentOwner(comment.owner._id)"
               (click)="deleteComment(comment.id)"
               class="delete-button"
-              title="Excluir comentário"
+              title="{{ 'POST_DETAIL.DELETE_COMMENT_BUTTON' | translate }}"
             >
               <mat-icon>delete</mat-icon>
             </button>
@@ -60,9 +62,13 @@
         <div class="comment-input">
           <input
             [(ngModel)]="newComment"
-            placeholder="Adicionar um comentário"
+            placeholder="{{
+              'POST_DETAIL.ADD_COMMENT_PLACEHOLDER' | translate
+            }}"
           />
-          <button (click)="addComment()">Comentar</button>
+          <button (click)="addComment()">
+            {{ "POST_DETAIL.ADD_COMMENT_BUTTON" | translate }}
+          </button>
         </div>
       </div>
     </div>

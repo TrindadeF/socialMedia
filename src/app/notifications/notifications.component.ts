@@ -4,7 +4,7 @@ import { User, Post } from 'database';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-
+import { TranslateService } from '@ngx-translate/core';
 
 interface LikesResponse {
   content: string;
@@ -27,32 +27,26 @@ export class NotificationsComponent implements OnInit {
   currentUser!: User;
   mutualLikes: { [key: string]: boolean } = {};
 
-  
-
-
   constructor(
     private apiService: ApiService,
     private http: HttpClient,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
     const notificationsEnabled = this.getNotificationsStatus();
 
-      if (notificationsEnabled) {
-    const userId = this.getUserIdFromAuthService();
-    if (userId) {
-      this.loadNotifications(userId); // Carrega as notificações apenas se estiverem ativadas
+    if (notificationsEnabled) {
+      const userId = this.getUserIdFromAuthService();
+      if (userId) {
+        this.loadNotifications(userId); // Carrega as notificações apenas se estiverem ativadas
+      }
     }
-  }
 
-  this.getCurrentUser();
-    
-   
+    this.getCurrentUser();
   }
-
-  
 
   loadLikesForPost(postId: string): void {
     this.apiService
@@ -64,8 +58,6 @@ export class NotificationsComponent implements OnInit {
         });
       });
   }
-  
-  
 
   likePost(postId: string) {
     this.apiService.likePostInFirstFeed(postId).subscribe(
@@ -81,11 +73,14 @@ export class NotificationsComponent implements OnInit {
             }
             return post;
           });
-  
+
           // Identifica o dono da postagem e envia uma notificação
-          const postOwnerId = typeof updatedPost.owner === 'object' ? updatedPost.owner._id : updatedPost.owner;
+          const postOwnerId =
+            typeof updatedPost.owner === 'object'
+              ? updatedPost.owner._id
+              : updatedPost.owner;
           const currentUserId = this.getUserIdFromAuthService(); // Usuário que curtiu
-  
+
           if (postOwnerId !== currentUserId) {
             this.notifyUser(postOwnerId, currentUserId);
           }
@@ -96,63 +91,70 @@ export class NotificationsComponent implements OnInit {
       }
     );
   }
-  
+
   notifyUser(postOwnerId: string, likerId: string) {
     // Obtem informações do usuário que curtiu
     this.apiService.getUserById(likerId).subscribe({
       next: (liker: User) => {
         const notificationMessage = `${liker.name} curtiu seu Post!`;
-  
+
         // Recupera notificações existentes
         const notificationsKey = `notifications_${postOwnerId}`;
-        const notifications = JSON.parse(localStorage.getItem(notificationsKey) || '[]');
-  
+        const notifications = JSON.parse(
+          localStorage.getItem(notificationsKey) || '[]'
+        );
+
         // Adiciona nova notificação
         notifications.push(notificationMessage);
         localStorage.setItem(notificationsKey, JSON.stringify(notifications));
-  
-        console.log(`Notificação enviada para o usuário ${postOwnerId}: ${notificationMessage}`);
+
+        console.log(
+          `Notificação enviada para o usuário ${postOwnerId}: ${notificationMessage}`
+        );
       },
       error: (error) => {
-        console.error('Erro ao obter informações do usuário que curtiu:', error);
+        console.error(
+          'Erro ao obter informações do usuário que curtiu:',
+          error
+        );
       },
     });
   }
   loadNotifications(userId: string) {
     const notificationsEnabled = this.getNotificationsStatus();
     const notificationsKey = `notifications_${userId}`;
-    const notifications = JSON.parse(localStorage.getItem(notificationsKey) || '[]');
-   
+    const notifications = JSON.parse(
+      localStorage.getItem(notificationsKey) || '[]'
+    );
+
     if (notifications.length > 0) {
       // Exibir as notificações de forma apropriada, talvez usando uma variável de estado
       this.notifications = notifications;
       // Exibir as notificações de alguma forma, como com um `snackBar` ou em um componente dedicado
       notifications.forEach((notification: string) => {
         this.snackBar.open(notification, 'Fechar', { duration: 3000 });
-
-
       });
     }
   }
   getUserIdFromAuthService(): string {
     return localStorage.getItem('userId') || '';
   }
-  
+
   likeUser(likedUserId: string): void {
     if (!this.currentUser || !this.currentUser._id) {
       console.error('Usuário atual não encontrado.');
       return;
     }
-  
+
     const userId = this.currentUser._id;
-  
+
     this.apiService.likeUser(userId, likedUserId).subscribe(
       (response) => {
         console.log('Like registrado com sucesso!', response);
-  
+
         // Adiciona notificação para o usuário curtido
         this.addNotification(likedUserId);
-  
+
         this.checkMutualLikes(); // Verifica se há um match
       },
       (error) => {
@@ -179,18 +181,22 @@ export class NotificationsComponent implements OnInit {
     // Verifica se as notificações estão ativadas antes de proceder
     const notificationsEnabled = this.getNotificationsStatus();
     if (!notificationsEnabled) {
-      console.log('Notificações desativadas. Nenhuma notificação será adicionada.');
+      console.log(
+        'Notificações desativadas. Nenhuma notificação será adicionada.'
+      );
       return; // Se as notificações estiverem desativadas, não adiciona a notificação
     }
-  
+
     const notificationsKey = `notifications_${likedUserId}`;
-    const notifications = JSON.parse(localStorage.getItem(notificationsKey) || '[]');
-  
+    const notifications = JSON.parse(
+      localStorage.getItem(notificationsKey) || '[]'
+    );
+
     // Verifica se a notificação já existe
     const notificationExists = notifications.some(
       (n: any) => n.userId === this.currentUser._id
     );
-  
+
     if (!notificationExists) {
       // Cria a notificação
       const newNotification = {
@@ -198,42 +204,42 @@ export class NotificationsComponent implements OnInit {
         message: `${this.currentUser.name} curtiu seu perfil.`,
         timestamp: new Date().toISOString(),
       };
-  
+
       // Adiciona a notificação à lista existente
       notifications.push(newNotification);
-  
+
       // Salva no localStorage
       localStorage.setItem(notificationsKey, JSON.stringify(notifications));
-  
+
       console.log('Notificação adicionada:', newNotification);
     } else {
       console.log('Notificação já existente, nenhuma ação realizada.');
     }
   }
-  
+
   // Método para obter notificações do usuário logado
   getNotifications(): any[] {
     if (!this.currentUser || !this.currentUser._id) {
       console.error('Usuário atual não encontrado.');
       return [];
     }
-  
+
     const notificationsKey = `notifications_${this.currentUser._id}`;
     return JSON.parse(localStorage.getItem(notificationsKey) || '[]');
   }
-  
+
   // Método para limpar notificações do usuário logado
   clearNotifications(): void {
     if (!this.currentUser || !this.currentUser._id) {
       console.error('Usuário atual não encontrado.');
       return;
     }
-  
+
     const notificationsKey = `notifications_${this.currentUser._id}`;
     localStorage.removeItem(notificationsKey);
     console.log('Notificações limpas para o usuário logado.');
   }
-  
+
   getCurrentUser(): void {
     const currentUserId = this.getLoggedUserId();
     this.apiService.getUserById(currentUserId).subscribe(
@@ -247,43 +253,29 @@ export class NotificationsComponent implements OnInit {
     );
   }
   // Método para ativar ou desativar notificações
-toggleNotifications(): void {
-  const notificationsEnabled = this.getNotificationsStatus();
-  const newStatus = !notificationsEnabled; // Se estiver ativado, desativa, e vice-versa
-  
-  // Salva a nova configuração no localStorage
-  localStorage.setItem('notificationsEnabled', JSON.stringify(newStatus));
-  
-  // Mostra um feedback visual sobre a mudança
-  this.snackBar.open(newStatus ? 'Notificações ativadas' : 'Notificações desativadas', 'Fechar', { duration: 3000 });
-  window.location.reload();
-}
+  toggleNotifications(): void {
+    const notificationsEnabled = this.getNotificationsStatus();
+    const newStatus = !notificationsEnabled; // Se estiver ativado, desativa, e vice-versa
 
-// Método para verificar se as notificações estão ativadas ou desativadas
-getNotificationsStatus(): boolean {
-  const status = localStorage.getItem('notificationsEnabled');
-  return status ? JSON.parse(status) : true; // Por padrão, as notificações estão ativadas
-}
+    // Salva a nova configuração no localStorage
+    localStorage.setItem('notificationsEnabled', JSON.stringify(newStatus));
 
+    // Mostra um feedback visual sobre a mudança
+    this.snackBar.open(
+      newStatus ? 'Notificações ativadas' : 'Notificações desativadas',
+      'Fechar',
+      { duration: 3000 }
+    );
+    window.location.reload();
+  }
 
+  // Método para verificar se as notificações estão ativadas ou desativadas
+  getNotificationsStatus(): boolean {
+    const status = localStorage.getItem('notificationsEnabled');
+    return status ? JSON.parse(status) : true; // Por padrão, as notificações estão ativadas
+  }
 
   getLoggedUserId(): string {
     return localStorage.getItem('userId') || '';
   }
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
 }

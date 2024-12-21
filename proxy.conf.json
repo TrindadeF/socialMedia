@@ -1,11 +1,7 @@
 {
-    "/api": {
-      "target": "http://145.223.31.88:3000",
-      "secure": false,
-      "changeOrigin": true,
-      "pathRewrite": {
-        "^/api": ""
-      }
-    }
+  "/api": {
+    "target": "https://nakedlove.eu",
+    "secure": true,
+    "changeOrigin": true
   }
-  
+}

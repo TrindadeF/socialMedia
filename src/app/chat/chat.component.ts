@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Message, User, Chat } from 'database';
 import { io, Socket } from 'socket.io-client';
 import { HttpClient } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-chat',
@@ -16,15 +17,18 @@ export class ChatComponent implements OnInit, OnDestroy {
   newMessage: string = '';
   socket: Socket;
   participants: {
-    isAnonymous: any; id: string; nickname: string 
-}[] = [];
+    isAnonymous: any;
+    id: string;
+    nickname: string;
+  }[] = [];
   selectedChat: Chat | null = null;
   chats: Chat[] = [];
 
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private translate: TranslateService
   ) {
     this.socket = io('https://nakedlove.eu/api');
   }
@@ -57,17 +61,16 @@ export class ChatComponent implements OnInit, OnDestroy {
     const participant = this.participants.find((p) => p.id === senderId);
     if (participant) {
       const isCurrentUser = senderId === this.currentUser._id;
-      const isAnonymous = isCurrentUser ? this.currentUser.isAnonymous : participant.isAnonymous;
-      // Exibe "Anônimo" caso o usuário ou o participante seja anônimo
+      const isAnonymous = isCurrentUser
+        ? this.currentUser.isAnonymous
+        : participant.isAnonymous;
       if (isAnonymous && !isCurrentUser) {
-        return 'Anônimo';  // Exibe 'Anônimo' para o outro participante
+        return 'Anônimo';
       }
-      return isAnonymous ? 'Anônimo' : participant.nickname;  // Para o atual, apenas 'Anônimo' se for anônimo
+      return isAnonymous ? 'Anônimo' : participant.nickname;
     }
     return 'Desconhecido';
   }
-  
-  
 
   selectChat(chat: Chat): void {
     this.selectedChat = chat;
@@ -160,7 +163,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     return chat.participants
       .map((p) => {
         const isCurrentUser = p._id === this.currentUser._id;
-  
+
         if (isCurrentUser) {
           // Para o próprio usuário logado
           if (this.currentUser.isAnonymous) {
@@ -184,8 +187,6 @@ export class ChatComponent implements OnInit, OnDestroy {
       })
       .join(', ');
   }
-  
-  
 
   ngOnDestroy(): void {
     this.socket.disconnect();

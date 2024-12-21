@@ -3,7 +3,11 @@
     <span class="close" (click)="close()">&times;</span>
 
     <div class="image-container" *ngIf="post?.media?.length">
-      <img [src]="post.media[0]" alt="Imagem do Post" class="post-image" />
+      <img
+        [src]="post.media[0]"
+        alt="{{ 'POST.IMAGE_ALT' | translate }}"
+        class="post-image"
+      />
     </div>
 
     <div class="gray-container">
@@ -11,26 +15,29 @@
         <ng-container *ngIf="post">
           <p>{{ post.ownerName }} : {{ post.content }}</p>
           <p><mat-icon>favorite</mat-icon> {{ post.likes }}</p>
-          <p>Data de criação: {{ post.createdAt | date : "short" }}</p>
+          <p>
+            {{ "POST.CREATED_AT" | translate }}:
+            {{ post.createdAt | date : "short" }}
+          </p>
           <button
-          *ngIf="post?._id && isOwner(post.owner)"
-          (click)="deletePost(post._id)"
-          class="delete-btw"
+            *ngIf="post?._id && isOwner(post.owner)"
+            (click)="deletePost(post._id)"
+            class="delete-btw"
           >
-            <mat-icon>delete</mat-icon>
+            <mat-icon>delete</mat-icon> {{ "POST.DELETE" | translate }}
           </button>
 
           <div class="icon-container">
             <button (click)="likePost(postId)">
-              <mat-icon>favorite</mat-icon>
+              <mat-icon>favorite</mat-icon> {{ "POST.LIKE" | translate }}
             </button>
             <input
               #commentInput
               type="text"
-              placeholder="Adicionar comentário"
+              placeholder="{{ 'POST.ADD_COMMENT_PLACEHOLDER' | translate }}"
             />
             <button (click)="addComment(postId, commentInput.value)">
-              Enviar
+              {{ "POST.SEND_COMMENT" | translate }}
             </button>
           </div>
         </ng-container>
@@ -40,7 +47,7 @@
             [src]="
               comment.owner?.profilePic || 'assets/images/default-avatar.jpg'
             "
-            alt="Avatar do comentário"
+            alt="{{ 'POST.COMMENT_AVATAR_ALT' | translate }}"
             class="avatar"
           />
           <div class="comment-content">
@@ -55,7 +62,7 @@
               (click)="deleteComment(comment.id)"
               class="delete-btn"
             >
-              Deletar
+              {{ "POST.DELETE_COMMENT" | translate }}
             </button>
 
             <small>{{ comment.createdAt | date : "short" }}</small>

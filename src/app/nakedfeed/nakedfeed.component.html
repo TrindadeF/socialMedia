@@ -2,6 +2,7 @@
 
 <div class="page-content" [class.disabled]="showOverlay">
   <div class="profile-container">
+<<<<<<< HEAD
     
     <!-- Filtro de gênero -->
     <label for="genderSelect">Filtrar por Gênero:</label>
@@ -15,69 +16,66 @@
       <option value="HOM">Homossexual</option>
       
     </select>
+=======
+    <div class="filter-container">
+      <label for="genderSelect">{{
+        "FILTER_BY_GENDER.LABEL" | translate
+      }}</label>
+      <select
+        id="genderSelect"
+        [(ngModel)]="gender"
+        (change)="onGenderChange(gender)"
+      >
+        <option value="all">{{ "FILTER_BY_GENDER.ALL" | translate }}</option>
+        <option value="M">{{ "FILTER_BY_GENDER.MALE" | translate }}</option>
+        <option value="F">{{ "FILTER_BY_GENDER.FEMALE" | translate }}</option>
+      </select>
+    </div>
+>>>>>>> c70b5144c2ed18ef0fcfa272d8ec5ba7e3cf8260
 
-
-    <!-- Exibição da mensagem de assinatura expirada -->
-    <div *ngIf="hasActiveSubscription === false">
+    <div *ngIf="hasActiveSubscription === false" class="subscription-warning">
       <p>
-        Sua assinatura expirou ou é inválida.
-        <a routerLink="/subscribe">Renovar assinatura</a>
+        {{ "SUBSCRIPTION.WARNING" | translate }}
+        <a routerLink="/subscribe">{{ "SUBSCRIPTION.RENEW" | translate }}</a>
       </p>
     </div>
-   
-    
-    
-    
 
-
-    <div class="profile-card" *ngFor="let user of users">
-      <div *ngIf="user.secondPosts && user.secondPosts.length > 0">
-      <div class="profile-pic">
-        <img
-         
-          alt="{{ user.nickName || 'Usuário' }} "
-        />
-      </div>
-
-      <div class="profile-info">
-        <div *ngIf="mutualLikes[user._id]; else restrictedInfo">
-          <a [routerLink]="['/profile', user._id]">
-            <h3>{{ user.nickName }}</h3>
-          </a>
-          <p>{{ user.age }} anos</p>
+    <div *ngIf="currentUser" class="card-container">
+      <div
+        class="profile-card"
+        [class.swipe-right]="swipeDirection === 'right'"
+        [class.swipe-left]="swipeDirection === 'left'"
+        (animationend)="handleAnimationEnd()"
+      >
+        <div class="profile-pic">
+          <img
+            [src]="currentUser.profilePic || 'assets/images/default-avatar.png'"
+            alt="{{
+              currentUser.nickName || ('PROFILE.DEFAULT_NAME' | translate)
+            }}"
+          />
         </div>
-        
-        <ng-template #restrictedInfo>
-          <h3>Nome restrito</h3>
-          <p>Você só pode ver mais detalhes após um match!</p>
-        </ng-template>
 
-        <button
-          class="message-btn"
-          *ngIf="mutualLikes[user._id]"
-          (click)="goToChat(user._id)"
-        >
-          Iniciar Conversa
-        </button>
+        <div class="profile-info">
+          <h3>{{ currentUser.name }}</h3>
+          <p>{{ currentUser.age }} {{ "PROFILE.YEARS_OLD" | translate }}</p>
+        </div>
 
-        <button class="like-btn" (click)="likeUser(user._id)">
-          <mat-icon>favorite</mat-icon>
-        </button>
-
-        <!-- Exibição dos posts de cada usuário -->
-        <div *ngIf="user.secondPosts" class="user-posts">
-          <mat-tab-group>
-            <mat-tab *ngFor="let post of user.secondPosts | slice:0:2; let i = index">
-              <ng-template mat-tab-label>
-                <mat-icon>visibility</mat-icon> 
-              </ng-template>
-              <div class="post">
-                <img *ngIf="post.media?.length" [src]="post.media[0]" alt="Post image" class="post-image" />
-              </div>
-            </mat-tab>
-          </mat-tab-group>
+        <div class="action-buttons">
+          <button class="ignore-btn" (click)="swipe('left')">❌</button>
+          <button class="like-btn" (click)="swipe('right')">❤️</button>
         </div>
       </div>
+    </div>
+
+    <div *ngIf="!currentUser" class="no-more-cards">
+      <p>{{ "NO_MORE_CARDS.MESSAGE" | translate }}</p>
+      <button (click)="resetGallery()">
+        {{ "NO_MORE_CARDS.RESET" | translate }}
+      </button>
+      <button (click)="viewGallery()">
+        {{ "NO_MORE_CARDS.VIEW_GALLERY" | translate }}
+      </button>
     </div>
   </div>
 </div>

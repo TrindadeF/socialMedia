@@ -1,55 +1,42 @@
 <div class="container">
   <!-- Divisão 1 -->
   <div class="section" (click)="openHelpDocument()">
-    <h3>Central de Ajuda</h3>
-    <p>Todas as informações do Site estão aqui.</p>
+    <h3>{{ "HELP_CENTER.TITLE" | translate }}</h3>
+    <p>{{ "HELP_CENTER.DESCRIPTION" | translate }}</p>
   </div>
   <div class="section" (click)="openTermsUse()">
-    <h3>Termos de Uso</h3>
-    <p>Veja aqui os Termos de Uso do Site.</p>
+    <h3>{{ "TERMS_OF_USE.TITLE" | translate }}</h3>
+    <p>{{ "TERMS_OF_USE.DESCRIPTION" | translate }}</p>
   </div>
   <div class="section" (click)="openPoliticUse()">
-    <h3>Política de Privacidade</h3>
-    <p>Veja aqui a Política de Privacidade do Site.</p>
+    <h3>{{ "PRIVACY_POLICY.TITLE" | translate }}</h3>
+    <p>{{ "PRIVACY_POLICY.DESCRIPTION" | translate }}</p>
   </div>
 
   <!-- Divisão 2 -->
   <div class="section" (click)="togglePreferences()">
-    <h3>Preferências do Usuário</h3>
-    <p>Gerencie suas preferências de usuário, como Notificações e Desbloqueios.</p>
+    <h3>{{ "USER_PREFERENCES.TITLE" | translate }}</h3>
+    <p>{{ "USER_PREFERENCES.DESCRIPTION" | translate }}</p>
   </div>
 
   <!-- Seção de Preferências do Usuário Expandida -->
   <div *ngIf="preferencesVisible" class="preferences">
     <div class="section" (click)="goToNotifications()">
-      <h3>Notificações</h3>
-      <p>Gerencie suas notificações aqui.</p>
+      <h3>{{ "NOTIFICATIONS.TITLE" | translate }}</h3>
+      <p>{{ "NOTIFICATIONS.DESCRIPTION" | translate }}</p>
     </div>
   </div>
-    
+
+  <!-- Usuários Bloqueados -->
   <div *ngIf="blockedUsersData.length > 0" class="blocked-users-section">
-    <h3>Usuários Bloqueados:</h3>
+    <h3>{{ "BLOCKED_USERS.TITLE" | translate }}</h3>
     <ul>
       <li *ngFor="let blockeduser of blockedUsersData">
         {{ blockeduser.name }}
-        <button class="unblock-btn" (click)="unblockUser(blockeduser._id)">Desbloquear</button>
+        <button class="unblock-btn" (click)="unblockUser(blockeduser._id)">
+          {{ "BLOCKED_USERS.UNBLOCK_BUTTON" | translate }}
+        </button>
       </li>
     </ul>
-  </div>
-
-  <!-- Contato com Suporte -->
-  <div class="support-section">
-    <h3>Contato com o Suporte</h3>
-    <p>Para relatar problemas ou abusos, entre em contato pelo email: 
-      <a href="mailto:support@nakedlove.eu">Suporte</a>
-    </p>
-  </div>
-
-  <!-- Contato de Publicidade -->
-  <div class="marketing-section">
-    <h3>Contato de Publicidade</h3>
-    <p>Para questões relacionadas à publicidade, envie um email para: 
-      <a href="mailto:marketing@nakedlove.eu">Publicidade</a>
-    </p>
   </div>
 </div>

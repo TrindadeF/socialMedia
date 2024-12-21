@@ -4,11 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { Post, User } from 'database';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-config',
   templateUrl: './config.component.html',
-  styleUrls: ['./config.component.css']
+  styleUrls: ['./config.component.css'],
 })
 export class ConfigComponent implements OnInit {
   users: User[] = [];
@@ -33,32 +34,30 @@ export class ConfigComponent implements OnInit {
   reportReason: string = '';
   selectedUserId: string = '';
   unblockedUsers: string[] = [];
-  blockedUsersData: any[] = [];  // Array para armazenar os dados completos dos usuários bloqueados
-
-
-
+  blockedUsersData: any[] = []; // Array para armazenar os dados completos dos usuários bloqueados
 
   constructor(
     private apiService: ApiService,
     private http: HttpClient,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
-   
     this.loadBlockedUsers();
   }
-
 
   loadBlockedUsers() {
     // Obtém os IDs dos usuários bloqueados do localStorage
     const loggedUserId = this.getLoggedUserId();
-    const storedBlockedUsers = localStorage.getItem(`blockedUsers_${loggedUserId}`);
-    
+    const storedBlockedUsers = localStorage.getItem(
+      `blockedUsers_${loggedUserId}`
+    );
+
     if (storedBlockedUsers) {
       this.blockedUsers = JSON.parse(storedBlockedUsers);
-      this.blockedUsers.forEach(userId => {
+      this.blockedUsers.forEach((userId) => {
         this.getUserById(userId); // Faz a requisição para obter os dados de cada usuário bloqueado
       });
     }
@@ -76,29 +75,43 @@ export class ConfigComponent implements OnInit {
       },
     });
   }
-  
+
   unblockUser(userId: string): void {
     if (!this.blockedUsers.includes(userId)) {
-      this.snackBar.open('Usuário não está bloqueado', 'Fechar', { duration: 3000 });
+      this.snackBar.open('Usuário não está bloqueado', 'Fechar', {
+        duration: 3000,
+      });
       return;
     }
 
     // Remove o usuário da lista de bloqueados
     this.blockedUsers = this.blockedUsers.filter((id) => id !== userId);
-    
+
     // Adiciona à lista de desbloqueados
     const loggedUserId = this.getLoggedUserId();
-    const unblockedUsers = JSON.parse(localStorage.getItem(`unblockedUsers_${loggedUserId}`) || '[]');
+    const unblockedUsers = JSON.parse(
+      localStorage.getItem(`unblockedUsers_${loggedUserId}`) || '[]'
+    );
     unblockedUsers.push(userId);
-    
+
     // Atualiza o localStorage
-    localStorage.setItem(`blockedUsers_${loggedUserId}`, JSON.stringify(this.blockedUsers));
-    localStorage.setItem(`unblockedUsers_${loggedUserId}`, JSON.stringify(unblockedUsers));
-    
-    this.snackBar.open('Usuário desbloqueado com sucesso', 'Fechar', { duration: 3000 });
-    
+    localStorage.setItem(
+      `blockedUsers_${loggedUserId}`,
+      JSON.stringify(this.blockedUsers)
+    );
+    localStorage.setItem(
+      `unblockedUsers_${loggedUserId}`,
+      JSON.stringify(unblockedUsers)
+    );
+
+    this.snackBar.open('Usuário desbloqueado com sucesso', 'Fechar', {
+      duration: 3000,
+    });
+
     // Atualiza a lista de usuários bloqueados
-    this.blockedUsersData = this.blockedUsersData.filter(user => user._id !== userId);
+    this.blockedUsersData = this.blockedUsersData.filter(
+      (user) => user._id !== userId
+    );
   }
 
   getLoggedUserId(): string {
@@ -111,19 +124,26 @@ export class ConfigComponent implements OnInit {
         if (posts) {
           const loggedUserId = this.getLoggedUserId();
           this.blockedUsers = this.blockedUsers || [];
-  
+
           // Filtra posts, excluindo apenas os de usuários bloqueados, mas mantendo os do usuário logado
           this.posts = posts
             .filter((post) => {
-              const postOwnerId = typeof post.owner === 'object' ? post.owner._id : post.owner;
-              return postOwnerId === loggedUserId || !this.blockedUsers.includes(post.owner._id);
-             
+              const postOwnerId =
+                typeof post.owner === 'object' ? post.owner._id : post.owner;
+              return (
+                postOwnerId === loggedUserId ||
+                !this.blockedUsers.includes(post.owner._id)
+              );
             })
             .map((post) => ({
               ...post,
               likes: post.likes || [], // Garante que a propriedade likes exista
             }))
-            .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()); // Ordenação
+            .sort(
+              (a, b) =>
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+            ); // Ordenação
         }
       },
       error: (error) => {
@@ -136,7 +156,7 @@ export class ConfigComponent implements OnInit {
   openHelpDocument(): void {
     // Caminho para o arquivo
     const fileUrl = 'assets/docs/Central de Ajuda.pdf';
-    
+
     // Criar um link temporário para disparar o download
     const link = document.createElement('a');
     link.href = fileUrl;
@@ -147,7 +167,7 @@ export class ConfigComponent implements OnInit {
   openPoliticUse(): void {
     // Caminho para o arquivo
     const fileUrl = 'assets/docs/Politica de Privacidade.pdf';
-    
+
     // Criar um link temporário para disparar o download
     const link = document.createElement('a');
     link.href = fileUrl;
@@ -158,14 +178,13 @@ export class ConfigComponent implements OnInit {
   openTermsUse(): void {
     // Caminho para o arquivo
     const fileUrl = 'assets/docs/TERMOS DE USO.pdf';
-    
+
     // Criar um link temporário para disparar o download
     const link = document.createElement('a');
     link.href = fileUrl;
     link.download = 'TERMOS_DE_USO.pdf'; // Nome do arquivo a ser baixado
     link.click(); // Simula o clique para iniciar o download
   }
-
 
   preferencesVisible: boolean = false;
 
@@ -182,11 +201,4 @@ export class ConfigComponent implements OnInit {
   goToNotifications(): void {
     this.router.navigate(['/notifications']); // Substitua '/notifications' pela rota correta do seu componente
   }
-  
 }
-
-
-
-
-
-

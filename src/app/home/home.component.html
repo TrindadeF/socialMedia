@@ -1,82 +1,73 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ "HOME_PAGE.TITLE" | translate }}</title>
+    <link rel="stylesheet" href="home.component.css" />
+  </head>
   <body>
     <header>
       <img src="assets/images/nova logo.jpg" alt="Logo" class="logo" />
       <div class="header-content">
         <h1 class="typewriter">
-          Seja Bem-vindo ao NakedLove<span class="cursor"></span>
+          {{ "HOME_PAGE.WELCOME_MESSAGE" | translate
+          }}<span class="cursor"></span>
         </h1>
         <p>
-          Descubra várias conexões emocionantes e explore seus desejos em um
-          ambiente seguro e discreto.<br />
-          Faça parte de uma comunidade vibrante de pessoas que buscam
-          relacionamentos quentes e intensos.
+          {{ "HOME_PAGE.DESCRIPTION" | translate }}
         </p>
         <button [routerLink]="['/register']" class="btn btn-primary cta">
-          Cadastre-se Agora
+          {{ "HOME_PAGE.REGISTER_BUTTON" | translate }}
         </button>
         <button [routerLink]="['/login']" class="btn btn-secondary login-btn">
-          Login
+          {{ "HOME_PAGE.LOGIN_BUTTON" | translate }}
         </button>
       </div>
     </header>
-<html lang="en">
-<body>
-<header>
-  <img src="assets/images/nova logo.jpg" alt="Logo" class="logo" />
-  <div class="header-content">
-    <h1 class="typewriter">Seja Bem-vindo ao NakedLove<span class="cursor"></span></h1>
-    <p>
-      Descubra várias conexões emocionantes e explore seus desejos em um
-      ambiente seguro e discreto.<br />
-      Faça parte de uma comunidade vibrante de pessoas que buscam
-      relacionamentos quentes e intensos.
-    </p>
-    <button [routerLink]="['/register']" class="btn btn-primary cta">
-      Cadastre-se Agora
-    </button>
-    <button [routerLink]="['/login']" class="btn btn-secondary login-btn">
-      Login
-    </button>
-  </div>
-  
-</header>
-
 
     <div *ngIf="showAgeVerification" class="age-verification-container">
       <div class="age-verification-content">
         <p>
-          Este site é destinado exclusivamente a maiores de 18 anos. Ao
-          continuar, confirmas que tens idade legal para explorar conteúdos
-          voltados para um público adulto.
+          {{ "HOME_PAGE.AGE_VERIFICATION_MESSAGE" | translate }}
         </p>
         <button (click)="acceptAgeVerification()" class="btn btn-primary">
-          Tenho 18 Anos ou Mais - Entrar
+          {{ "HOME_PAGE.AGE_VERIFICATION_ACCEPT" | translate }}
         </button>
         <button (click)="declineAgeVerification()" class="btn btn-secondary">
-          Tenho Menos de 18 Anos - Sair
+          {{ "HOME_PAGE.AGE_VERIFICATION_DECLINE" | translate }}
         </button>
       </div>
     </div>
+
     <div class="feedback-images">
-      <img src="/assets/images/feedback 1.png" alt="Feedback 1" class="feedback-img">
-      <img src="/assets/images/feedback 2.png" alt="Feedback 2" class="feedback-img">
-      <img src="/assets/images/feedback 3.png" alt="Feedback 3" class="feedback-img">
+      <img
+        src="/assets/images/feedback 1.png"
+        alt="{{ 'HOME_PAGE.FEEDBACK_ALT1' | translate }}"
+        class="feedback-img"
+      />
+      <img
+        src="/assets/images/feedback 2.png"
+        alt="{{ 'HOME_PAGE.FEEDBACK_ALT2' | translate }}"
+        class="feedback-img"
+      />
+      <img
+        src="/assets/images/feedback 3.png"
+        alt="{{ 'HOME_PAGE.FEEDBACK_ALT3' | translate }}"
+        class="feedback-img"
+      />
     </div>
-    
-    
 
     <div class="image-container">
-      <img src="/assets/images/home.jpg" alt="Home" />
+      <img
+        src="/assets/images/home.jpg"
+        alt="{{ 'HOME_PAGE.HOME_IMAGE_ALT' | translate }}"
+      />
     </div>
-    
-    <footer>
-      © 2024 Site de Relacionamento Adulto. Todos os direitos reservados.
-    </footer>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <footer>
+      {{ "HOME_PAGE.FOOTER_MESSAGE" | translate }}
+    </footer>
 
     <script>
       const textElement = document.querySelector(".typewriter");

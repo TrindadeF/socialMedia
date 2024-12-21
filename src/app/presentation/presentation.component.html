@@ -1,53 +1,75 @@
-<div class="carousel-wrapper" [ngClass]="{ 'visible': !isLoading }">
-  <button class="arrow-btn left" (click)="prevImage()">&#10094;</button> <!-- Botão de voltar -->
+<div class="carousel-wrapper" [ngClass]="{ visible: !isLoading }">
+  <button class="arrow-btn left" (click)="prevImage()">&#10094;</button>
 
   <div class="container">
     <div class="image-container" *ngIf="currentIndex === 0">
-      <img src="assets/images/mamaco 1.jpg" alt="Imagem 1" />
+      <img
+        src="assets/images/mamaco 1.jpg"
+        alt="{{ 'CAROUSEL.IMAGE_1_ALT' | translate }}"
+      />
       <div class="overlay">
-        <p>Encontrar a nossa alma gémea é sempre complicado.</p>
+        <p>{{ "CAROUSEL.IMAGE_1_TEXT" | translate }}</p>
       </div>
     </div>
     <div class="image-container" *ngIf="currentIndex === 1">
-      <img src="assets/images/mamaco 2.jpg" alt="Imagem 2" />
+      <img
+        src="assets/images/mamaco 2.jpg"
+        alt="{{ 'CAROUSEL.IMAGE_2_ALT' | translate }}"
+      />
       <div class="overlay">
-        <p>Existem várias aplicações, redes sociais, sites de encontro e mesmo assim, continuámos à procura do verdadeiro amor.</p>
+        <p>{{ "CAROUSEL.IMAGE_2_TEXT" | translate }}</p>
       </div>
     </div>
     <div class="image-container" *ngIf="currentIndex === 2">
-      <img src="assets/images/mamaco 3.jpg" alt="Imagem 3" />
+      <img
+        src="assets/images/mamaco 3.jpg"
+        alt="{{ 'CAROUSEL.IMAGE_3_ALT' | translate }}"
+      />
       <div class="overlay">
-        <p>Quando se fala de amor e da pessoa certa, perder tempo para quê? No Naked Love, livrámo-nos de todos os filtros e roupas para ver se existe uma forma mais instintiva de o encontrar.</p>
+        <p>{{ "CAROUSEL.IMAGE_3_TEXT" | translate }}</p>
       </div>
     </div>
     <div class="image-container" *ngIf="currentIndex === 3">
-      <img src="assets/images/mamaco 4.jpg" alt="Imagem 4" />
+      <img
+        src="assets/images/mamaco 4.jpg"
+        alt="{{ 'CAROUSEL.IMAGE_4_ALT' | translate }}"
+      />
       <div class="overlay">
-        <p>Como encontramos a pessoa certa? Seria bom poder evitar erros, surpresas desagradáveis e sobretudo perda de tempo. No Naked Love, temos a forma ideal para encontrar a sua alma gémea.</p>
+        <p>{{ "CAROUSEL.IMAGE_4_TEXT" | translate }}</p>
       </div>
     </div>
     <div class="image-container" *ngIf="currentIndex === 4">
-      <img src="assets/images/mamaco 5.jpg" alt="Imagem 5" />
+      <img
+        src="assets/images/mamaco 5.jpg"
+        alt="{{ 'CAROUSEL.IMAGE_5_ALT' | translate }}"
+      />
       <div class="overlay">
-        <p>O que é preciso para nos apaixonarmos, o que desencadeia a faísca e o que nos influencia na escolha de um parceiro? No Naked Love, temos a oportunidade de descobrir um parceiro e começar como terminamos, nus.</p>
+        <p>{{ "CAROUSEL.IMAGE_5_TEXT" | translate }}</p>
       </div>
     </div>
     <div class="image-container" *ngIf="currentIndex === 5">
-      <img src="assets/images/ERO 6.jpg" alt="Imagem 6" />
+      <img
+        src="assets/images/ERO 6.jpg"
+        alt="{{ 'CAROUSEL.IMAGE_6_ALT' | translate }}"
+      />
       <div class="overlay">
-        <p>Quanto tempo demoramos para nos apaixonarmos? Para a ciência, segundos; para os poetas, uma vida inteira não é suficiente.</p>
+        <p>{{ "CAROUSEL.IMAGE_6_TEXT" | translate }}</p>
       </div>
     </div>
   </div>
 
-  <button class="arrow-btn right" (click)="nextImage()">&#10095;</button> <!-- Botão de avançar -->
+  <button class="arrow-btn right" (click)="nextImage()">&#10095;</button>
 
   <div class="dots">
-    <span *ngFor="let image of images; let i = index" 
-          class="dot" 
-          [class.active]="i === currentIndex" 
-          (click)="goToImage(i)"></span>
+    <span
+      *ngFor="let image of images; let i = index"
+      class="dot"
+      [class.active]="i === currentIndex"
+      (click)="goToImage(i)"
+    ></span>
   </div>
 
-  <button class="special-button" (click)="goToHomePage()">Ir para a Home</button>
+  <button class="special-button" (click)="goToHomePage()">
+    {{ "CAROUSEL.GO_TO_HOME" | translate }}
+  </button>
 </div>

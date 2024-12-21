@@ -18,12 +18,9 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
-    "types": ["swiper"],  // Se você estiver usando Swiper
-    "esModuleInterop": true  // Adicionei essa linha para maior compatibilidade com CommonJS
+    "lib": ["ES2022", "dom"],
+    "types": ["swiper"], // Se você estiver usando Swiper
+    "esModuleInterop": true // Adicionei essa linha para maior compatibilidade com CommonJS
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

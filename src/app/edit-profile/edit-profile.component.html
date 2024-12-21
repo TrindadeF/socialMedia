@@ -1,18 +1,19 @@
 <body>
   <div class="container">
-    <h2>Editar Perfil</h2>
+    <h2>{{ "EDIT_PROFILE.TITLE" | translate }}</h2>
 
-   
     <div class="profile-picture-preview">
       <img
         [src]="previewImage ? previewImage : 'assets/images/user.jpg'"
-        alt="Foto de Perfil Preview"
+        alt="{{ 'EDIT_PROFILE.PICTURE_ALT' | translate }}"
         class="profile-pic"
       />
     </div>
 
     <div class="form-group">
-      <label for="profile-picture">Foto de Perfil</label>
+      <label for="profile-picture">{{
+        "EDIT_PROFILE.PICTURE_LABEL" | translate
+      }}</label>
       <input
         type="file"
         id="profile-picture"
@@ -23,15 +24,13 @@
       />
     </div>
 
-    
     <div *ngIf="user.isAnonymous" class="alert alert-warning">
-      Este perfil está configurado como anônimo. Algumas informações estão ocultas ou não podem ser alteradas.
+      {{ "EDIT_PROFILE.ANONYMOUS_WARNING" | translate }}
     </div>
 
     <form (ngSubmit)="onSubmit()" #editProfileForm="ngForm">
-      
       <div class="form-group">
-        <label for="name">Nome</label>
+        <label for="name">{{ "EDIT_PROFILE.NAME_LABEL" | translate }}</label>
         <input
           type="text"
           id="name"
@@ -43,9 +42,10 @@
         />
       </div>
 
-   
       <div class="form-group">
-        <label for="nickName">Nome de Usuário</label>
+        <label for="nickName">{{
+          "EDIT_PROFILE.USERNAME_LABEL" | translate
+        }}</label>
         <input
           type="text"
           id="nickName"
@@ -57,7 +57,9 @@
       </div>
 
       <div class="form-group">
-        <label for="description">Descrição</label>
+        <label for="description">{{
+          "EDIT_PROFILE.DESCRIPTION_LABEL" | translate
+        }}</label>
         <div class="description-wrapper">
           <textarea
             id="description"
@@ -71,9 +73,8 @@
         </div>
       </div>
 
-      
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email">{{ "EDIT_PROFILE.EMAIL_LABEL" | translate }}</label>
         <input
           type="email"
           id="email"
@@ -84,9 +85,8 @@
         />
       </div>
 
-     
       <div class="form-group">
-        <label for="age">Idade</label>
+        <label for="age">{{ "EDIT_PROFILE.AGE_LABEL" | translate }}</label>
         <input
           type="number"
           id="age"
@@ -98,30 +98,45 @@
         />
       </div>
 
-      
       <div class="form-group">
-        <label for="gender">Gênero</label>
+        <label for="gender">{{
+          "EDIT_PROFILE.GENDER_LABEL" | translate
+        }}</label>
         <select
           id="gender"
           class="form-control"
           [(ngModel)]="user.gender"
           name="gender"
           [disabled]="!!user.isAnonymous"
-
         >
-          <option value="">Selecione</option>
-          <option value="M">Masculino</option>
-          <option value="F">Feminino</option>
-          <option value="NB">Não Binário</option>
-          <option value="BI">Bissexual</option>
-          <option value="TR">Transgênero</option>
-          <option value="HOM">Homossexual</option>
+          <option value="">
+            {{ "EDIT_PROFILE.GENDER_SELECT" | translate }}
+          </option>
+          <option value="M">
+            {{ "EDIT_PROFILE.GENDER_MALE" | translate }}
+          </option>
+          <option value="F">
+            {{ "EDIT_PROFILE.GENDER_FEMALE" | translate }}
+          </option>
+          <option value="NB">
+            {{ "EDIT_PROFILE.GENDER_NON_BINARY" | translate }}
+          </option>
+          <option value="BI">
+            {{ "EDIT_PROFILE.GENDER_BISEXUAL" | translate }}
+          </option>
+          <option value="TR">
+            {{ "EDIT_PROFILE.GENDER_TRANSGENDER" | translate }}
+          </option>
+          <option value="HOM">
+            {{ "EDIT_PROFILE.GENDER_HOMOSEXUAL" | translate }}
+          </option>
         </select>
       </div>
 
-      
       <div class="form-group">
-        <label for="isAnonymous">Perfil Anônimo</label>
+        <label for="isAnonymous">{{
+          "EDIT_PROFILE.ANONYMOUS_LABEL" | translate
+        }}</label>
         <div class="toggle-container">
           <input
             type="checkbox"
@@ -130,9 +145,12 @@
             name="isAnonymous"
             (change)="toggleAnonymous(user.isAnonymous ?? false)"
           />
-          <label for="isAnonymous">Ativar</label>
+          <label for="isAnonymous">{{
+            "EDIT_PROFILE.ANONYMOUS_ENABLE" | translate
+          }}</label>
         </div>
       </div>
+
       <div class="checkbox-group">
         <input
           type="checkbox"
@@ -140,25 +158,26 @@
           [checked]="!user.isAnonymous"
           (change)="toggleAnonymous(false)"
         />
-        <label for="deactivateAnonymous">Desativar</label>
+        <label for="deactivateAnonymous">{{
+          "EDIT_PROFILE.ANONYMOUS_DISABLE" | translate
+        }}</label>
       </div>
-      
+
       <div class="button-container">
         <button
           type="submit"
           class="btn-primary"
           [disabled]="editProfileForm.invalid"
         >
-          Salvar
+          {{ "EDIT_PROFILE.SAVE_BUTTON" | translate }}
         </button>
 
         <button class="btn-danger" (click)="confirmDelete()">
-          Deletar Perfil
+          {{ "EDIT_PROFILE.DELETE_BUTTON" | translate }}
         </button>
       </div>
     </form>
 
-    
     <div
       *ngIf="alertMessage"
       class="alert"
