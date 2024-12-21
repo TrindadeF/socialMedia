@@ -89,7 +89,9 @@ export class NakedFeedComponent implements OnInit {
         // Filtra os usuários com base no gênero selecionado
         if (this.gender === 'all') {
           this.users = data.filter((user) => user._id !== currentUserId);
-        } else if (this.gender === 'M' || this.gender === 'F') {
+        } else if (this.gender === 'M' || this.gender === 'F' || this.gender === 'NB' || this.gender === 'BI' || this.gender === 'TR' || this.gender === 'HOM'
+
+        ) {
           this.users = data.filter((user) =>
             user._id !== currentUserId && user.gender === this.gender
           );
