@@ -180,7 +180,11 @@
   "NOTIFICATIONS1": {
     "TITLE": "Notifications",
     "ENABLE": "Enable Notifications",
-    "DISABLE": "Disable Notifications"
+    "DISABLE": "Disable Notifications",
+    "LEFT_TITLE": "Received Notifications",
+    "RIGHT_TITLE": "Recent Activities",
+    "NO_FOLLOWERS": "You don't have any new followers yet.",
+    "TOGGLE_DESCRIPTION": "Enable or disable notifications for new followers."
   },
   "PAYMENTS": {
     "PAYMENT_IMAGE_ALT": "Payment",

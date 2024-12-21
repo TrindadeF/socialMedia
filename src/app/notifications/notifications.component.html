@@ -1,29 +1,38 @@
-<!-- Botão para ativar/desativar notificações -->
-<button class="notification-toggle-button" (click)="toggleNotifications()">
-  {{
-    getNotificationsStatus()
-      ? ("NOTIFICATIONS1.DISABLE" | translate)
-      : ("NOTIFICATIONS1.ENABLE" | translate)
-  }}
-</button>
+<div class="page-wrapper">
+  <div class="notification-toggle">
+    <p class="toggle-description">
+      {{ "NOTIFICATIONS1.TOGGLE_DESCRIPTION" | translate }}
+    </p>
+    <mat-slide-toggle
+      [checked]="getNotificationsStatus()"
+      (change)="toggleNotifications($event.checked)"
+    >
+      {{
+        getNotificationsStatus()
+          ? ("NOTIFICATIONS1.DISABLE" | translate)
+          : ("NOTIFICATIONS1.ENABLE" | translate)
+      }}
+    </mat-slide-toggle>
+  </div>
 
-<div class="container">
   <h1 class="typing-animation">{{ "NOTIFICATIONS1.TITLE" | translate }}</h1>
 
-  <!-- Verificar se as notificações estão ativadas antes de mostrar -->
-  <ul *ngIf="getNotificationsStatus()">
-    <div *ngIf="notifications.length > 0" class="notifications-container">
-      <li *ngFor="let notification of notifications" class="notification">
-        {{ notification }}
-        <mat-icon style="color: rgba(253, 2, 2, 0.625)">favorite</mat-icon>
+  <div class="notifications-container" *ngIf="followers.length > 0">
+    <h3>{{ "NOTIFICATIONS1.LEFT_TITLE" | translate }}</h3>
+    <ul>
+      <li *ngFor="let follower of followers" class="notification">
+        <img
+          [src]="follower.profilePic || 'assets/images/default-avatar.jpg'"
+          alt="Avatar do seguidor"
+          class="avatar"
+        />
+        <span>{{ follower.name }} começou a seguir você!</span>
+        <mat-icon>favorite</mat-icon>
       </li>
-    </div>
-  </ul>
-</div>
+    </ul>
+  </div>
 
-<!-- Segunda notificação com uma classe diferente, exibida apenas quando as notificações estiverem ativadas -->
-<div class="second-notifications-container" *ngIf="getNotificationsStatus()">
-  <div *ngFor="let notification of getNotifications()">
-    <p>{{ notification.message | translate }}</p>
+  <div *ngIf="followers.length === 0" class="no-notifications">
+    <p>{{ "NOTIFICATIONS1.NO_FOLLOWERS" | translate }}</p>
   </div>
 </div>

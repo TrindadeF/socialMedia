@@ -180,7 +180,11 @@
   "NOTIFICATIONS1": {
     "TITLE": "Notifiche",
     "ENABLE": "Attiva Notifiche",
-    "DISABLE": "Disattiva Notifiche"
+    "DISABLE": "Disattiva Notifiche",
+    "LEFT_TITLE": "Notifiche Ricevute",
+    "RIGHT_TITLE": "Attività Recenti",
+    "NO_FOLLOWERS": "Non hai ancora nuovi follower.",
+    "TOGGLE_DESCRIPTION": "Attiva o disattiva le notifiche per i nuovi follower."
   },
   "PAYMENTS": {
     "PAYMENT_IMAGE_ALT": "Pagamento",

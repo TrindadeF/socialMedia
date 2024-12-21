@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ApiService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post, User } from 'database';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ChangeDetectorRef } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { NgIfContext } from '@angular/common';
 
 @Component({
   selector: 'app-nakedfeed',
-  templateUrl: './nakedfeed.component.html',
-  styleUrls: ['./nakedfeed.component.css'],
+  templateUrl: './gallery.component.html',
+  styleUrls: ['./gallery.component.css'],
 })
-export class NakedFeedComponent implements OnInit {
+export class GalleryComponent implements OnInit {
   users: User[] = [];
   user: any = {};
   userId: string = '';
@@ -33,6 +34,7 @@ export class NakedFeedComponent implements OnInit {
   filteredUsers: any[] = [];
   currentIndex: number = 0;
   swipeDirection: string | null = null;
+  restrictedInfo!: TemplateRef<NgIfContext<boolean>> | null;
 
   constructor(
     private apiService: ApiService,
@@ -103,25 +105,6 @@ export class NakedFeedComponent implements OnInit {
     });
   }
 
-  swipe(direction: 'left' | 'right'): void {
-    this.swipeDirection = direction;
-
-    if (direction === 'right' && this.currentUser) {
-      this.likeUser(this.currentUser._id);
-    } else if (direction === 'left') {
-      this.ignoreUser();
-    }
-
-    setTimeout(() => {
-      this.nextUser();
-      this.swipeDirection = null;
-    }, 500);
-  }
-
-  handleAnimationEnd(): void {
-    this.swipeDirection = null;
-  }
-
   onGenderChange(gender: string): void {
     this.gender = gender;
     this.loadUsers();
@@ -138,10 +121,6 @@ export class NakedFeedComponent implements OnInit {
         console.error('Erro ao carregar o perfil do usuário atual:', error);
       }
     );
-  }
-
-  viewGallery(): void {
-    this.router.navigate(['/gallery']);
   }
 
   checkUserSubscriptionStatus(): void {
@@ -228,28 +207,6 @@ export class NakedFeedComponent implements OnInit {
         console.error('Erro ao registrar o like:', error);
       }
     );
-  }
-
-  ignoreUser(): void {
-    console.log('Usuário ignorado:', this.currentUser!._id);
-  }
-
-  nextUser(): void {
-    this.currentIndex++;
-    if (this.currentIndex < this.users.length) {
-      this.currentUser = this.users[this.currentIndex];
-      console.log('Próximo usuário:', this.currentUser);
-    } else {
-      console.log('Todos os usuários foram exibidos.');
-      this.currentUser = null;
-    }
-
-    this.cdr.detectChanges();
-  }
-
-  resetGallery(): void {
-    this.currentIndex = 0;
-    this.currentUser = this.users[this.currentIndex] || null;
   }
 
   addNotification(likedUserId: string): void {

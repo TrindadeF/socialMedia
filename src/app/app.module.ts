@@ -42,6 +42,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
+import { GalleryComponent } from './gallery/gallery.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -70,6 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PostDetailComponent,
     ConfigComponent,
     ResetPasswordComponent,
+    GalleryComponent,
   ],
   imports: [
     BrowserModule,

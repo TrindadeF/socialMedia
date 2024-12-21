@@ -17,6 +17,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { ConfigComponent } from './config/config.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -40,6 +41,7 @@ const routes: Routes = [
   },
   { path: 'config', component: ConfigComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'gallery', component: GalleryComponent },
 ];
 
 @NgModule({

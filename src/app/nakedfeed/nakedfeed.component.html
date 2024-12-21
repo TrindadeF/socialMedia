@@ -2,21 +2,6 @@
 
 <div class="page-content" [class.disabled]="showOverlay">
   <div class="profile-container">
-<<<<<<< HEAD
-    
-    <!-- Filtro de gênero -->
-    <label for="genderSelect">Filtrar por Gênero:</label>
-    <select id="genderSelect" [(ngModel)]="gender" (change)="onGenderChange(gender)">
-      <option value="all">Todos</option>
-      <option value="M">Masculino</option>
-      <option value="F">Feminino</option>
-      <option value="NB">Não-Binário</option>
-      <option value="BI">Bissexual</option>
-      <option value="TR">Transgênero</option>
-      <option value="HOM">Homossexual</option>
-      
-    </select>
-=======
     <div class="filter-container">
       <label for="genderSelect">{{
         "FILTER_BY_GENDER.LABEL" | translate
@@ -31,7 +16,6 @@
         <option value="F">{{ "FILTER_BY_GENDER.FEMALE" | translate }}</option>
       </select>
     </div>
->>>>>>> c70b5144c2ed18ef0fcfa272d8ec5ba7e3cf8260
 
     <div *ngIf="hasActiveSubscription === false" class="subscription-warning">
       <p>
@@ -59,6 +43,8 @@
         <div class="profile-info">
           <h3>{{ currentUser.name }}</h3>
           <p>{{ currentUser.age }} {{ "PROFILE.YEARS_OLD" | translate }}</p>
+          <p>{{ currentUser.description }}</p>
+          <p></p>
         </div>
 
         <div class="action-buttons">

@@ -180,7 +180,11 @@
   "NOTIFICATIONS1": {
     "TITLE": "通知",
     "ENABLE": "启用通知",
-    "DISABLE": "禁用通知"
+    "DISABLE": "禁用通知",
+    "LEFT_TITLE": "收到的通知",
+    "RIGHT_TITLE": "最近的活动",
+    "NO_FOLLOWERS": "您还没有新的关注者。",
+    "TOGGLE_DESCRIPTION": "启用或禁用新关注者的通知。"
   },
   "PAYMENTS": {
     "PAYMENT_IMAGE_ALT": "付款",

@@ -182,7 +182,11 @@
   "NOTIFICATIONS1": {
     "TITLE": "Notifications",
     "ENABLE": "Activer les notifications",
-    "DISABLE": "Désactiver les notifications"
+    "DISABLE": "Désactiver les notifications",
+    "LEFT_TITLE": "Notifications Reçues",
+    "RIGHT_TITLE": "Activités Récentes",
+    "NO_FOLLOWERS": "Vous n'avez pas encore de nouveaux abonnés.",
+    "TOGGLE_DESCRIPTION": "Activez ou désactivez les notifications pour les nouveaux abonnés."
   },
   "PAYMENTS": {
     "PAYMENT_IMAGE_ALT": "Paiement",

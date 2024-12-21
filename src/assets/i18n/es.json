@@ -181,7 +181,11 @@
   "NOTIFICATIONS1": {
     "TITLE": "Notificaciones",
     "ENABLE": "Activar Notificaciones",
-    "DISABLE": "Desactivar Notificaciones"
+    "DISABLE": "Desactivar Notificaciones",
+    "LEFT_TITLE": "Notificaciones Recibidas",
+    "RIGHT_TITLE": "Actividades Recientes",
+    "NO_FOLLOWERS": "Aún no tienes nuevos seguidores.",
+    "TOGGLE_DESCRIPTION": "Activa o desactiva las notificaciones de nuevos seguidores."
   },
   "PAYMENTS": {
     "PAYMENT_IMAGE_ALT": "Pago",

@@ -181,7 +181,11 @@
   "NOTIFICATIONS1": {
     "TITLE": "Benachrichtigungen",
     "ENABLE": "Benachrichtigungen aktivieren",
-    "DISABLE": "Benachrichtigungen deaktivieren"
+    "DISABLE": "Benachrichtigungen deaktivieren",
+    "LEFT_TITLE": "Empfangene Benachrichtigungen",
+    "RIGHT_TITLE": "Neueste Aktivitäten",
+    "NO_FOLLOWERS": "Sie haben noch keine neuen Follower.",
+    "TOGGLE_DESCRIPTION": "Aktivieren oder deaktivieren Sie Benachrichtigungen für neue Follower."
   },
   "PAYMENTS": {
     "PAYMENT_IMAGE_ALT": "Zahlung",

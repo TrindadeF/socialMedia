@@ -111,6 +111,10 @@ export class ApiService {
     localStorage.removeItem('authToken');
   }
 
+  getFollowers(userId: string) {
+    return this.http.get<any[]>(`${this.apiUrl}/new-followers/${userId}`);
+  }
+
   getUserProfile(userId: string): Observable<any> {
     const token = this.getAuthToken();
     const headers = new HttpHeaders({

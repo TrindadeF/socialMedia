@@ -120,3 +120,28 @@
     height: 40px;
   }
 }
+/* Ícones dentro de .menu-item */
+.menu-item mat-icon {
+  font-size: 24px;
+  color: #888; /* Cor padrão dos ícones */
+  transition: color 0.3s, transform 0.3s ease;
+}
+
+/* Hover para todos os ícones */
+.menu-item:hover mat-icon {
+  color: white; /* Cor no hover */
+  transform: scale(1.1); /* Aumenta o ícone no hover */
+}
+
+/* Respeita estilos responsivos */
+@media (max-width: 768px) {
+  .menu-item mat-icon {
+    font-size: 20px; /* Ajusta o tamanho do ícone no celular */
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-item mat-icon {
+    font-size: 18px; /* Tamanho menor para telas muito pequenas */
+  }
+}
