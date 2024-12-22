@@ -1,0 +1,261 @@
+{
+  "MENU": {
+    "HOME": "Home",
+    "FEED": "Feed",
+    "EDIT_PROFILE": "Edit Profile",
+    "PROFILE": "Profile",
+    "CHAT": "Chat",
+    "NOTIFICATIONS": "Notifications",
+    "PAYMENTS": "Payments",
+    "SETTINGS": "Settings",
+    "LOGOUT": "Logout",
+    "LANGUAGE": "Language"
+  },
+  "ACTIONS": {
+    "LIKE": "Like",
+    "IGNORE": "Ignore",
+    "SEND": "Send",
+    "CANCEL": "Cancel",
+    "SAVE": "Save",
+    "DELETE": "Delete"
+  },
+  "MESSAGES": {
+    "LOADING": "Loading...",
+    "ERROR": "An error occurred.",
+    "NO_DATA": "No data found."
+  },
+  "EDIT_PROFILE": {
+    "TITLE": "Edit Profile",
+    "PICTURE_ALT": "Profile Picture Preview",
+    "PICTURE_LABEL": "Profile Picture",
+    "ANONYMOUS_WARNING": "This profile is set to anonymous. Some information is hidden or cannot be changed.",
+    "NAME_LABEL": "Name",
+    "USERNAME_LABEL": "Username",
+    "DESCRIPTION_LABEL": "Description",
+    "EMAIL_LABEL": "Email",
+    "AGE_LABEL": "Age",
+    "GENDER_LABEL": "Gender",
+    "GENDER_SELECT": "Select",
+    "GENDER_MALE": "Male",
+    "GENDER_FEMALE": "Female",
+    "GENDER_NON_BINARY": "Non-Binary",
+    "GENDER_BISEXUAL": "Bisexual",
+    "GENDER_TRANSGENDER": "Transgender",
+    "GENDER_HOMOSEXUAL": "Homosexual",
+    "ANONYMOUS_LABEL": "Anonymous Profile",
+    "ANONYMOUS_ENABLE": "Enable",
+    "ANONYMOUS_DISABLE": "Disable",
+    "SAVE_BUTTON": "Save",
+    "DELETE_BUTTON": "Delete Profile"
+  },
+  "CHAT": {
+    "TITLE": "Chat",
+    "CHATS": "Chats",
+    "WITH": "Chat with",
+    "MESSAGES_WITH": "Messages with",
+    "DELETE_CHAT": "Delete Chat",
+    "PLACEHOLDER": "Type a message..."
+  },
+  "TERMS": {
+    "CHECKBOX_LABEL": "I accept the terms and conditions",
+    "ACCEPTED_TEXT": "You have accepted the terms and conditions. Click the link below to download:",
+    "DOWNLOAD_LINK": "Download Terms and Conditions"
+  },
+  "COMMENTS": {
+    "ADD_PLACEHOLDER": "Add a comment...",
+    "ADD_ARIA_LABEL": "Field to add a comment",
+    "POST_BUTTON_TEXT": "Comment",
+    "POST_BUTTON_ARIA_LABEL": "Button to post a comment"
+  },
+  "HELP_CENTER": {
+    "TITLE": "Help Center",
+    "DESCRIPTION": "All the site information is here."
+  },
+  "TERMS_OF_USE": {
+    "TITLE": "Terms of Use",
+    "DESCRIPTION": "View the site's Terms of Use here."
+  },
+  "PRIVACY_POLICY": {
+    "TITLE": "Privacy Policy",
+    "DESCRIPTION": "View the site's Privacy Policy here."
+  },
+  "USER_PREFERENCES": {
+    "TITLE": "User Preferences",
+    "DESCRIPTION": "Manage your user preferences, such as notifications and unblocks."
+  },
+  "NOTIFICATIONS": {
+    "TITLE": "Notifications",
+    "DESCRIPTION": "Manage your notifications here."
+  },
+  "BLOCKED_USERS": {
+    "TITLE": "Blocked Users",
+    "UNBLOCK_BUTTON": "Unblock"
+  },
+  "FEED": {
+    "HEADER": "ⓃakedLove",
+    "PLACEHOLDER": "What will you show us today?",
+    "ALERT": {
+      "SUCCESS": "Successfully published!",
+      "ERROR": "An error occurred. Please try again later."
+    },
+    "POST": {
+      "AVATAR_ALT": "User avatar",
+      "IMAGE_ALT": "Post image",
+      "VIDEO_ALT": "Post video",
+      "ACTIONS": {
+        "LIKE": "Like",
+        "COMMENT": "Comment",
+        "BLOCK_USER": "Block",
+        "DELETE": "Delete"
+      }
+    },
+    "MODAL": {
+      "WELCOME_TITLE": "Welcome!",
+      "PUBLISH": "Publish"
+    }
+  },
+  "FORGOT_PASSWORD": {
+    "TITLE": "Forgot My Password",
+    "HEADER": "Forgot My Password",
+    "EMAIL_PLACEHOLDER": "Enter your email",
+    "EMAIL_ERROR": "The email field is required and must be a valid email.",
+    "SUBMIT_BUTTON": "Send",
+    "BACK_TO_LOGIN": "Back to Login"
+  },
+  "HOME_PAGE": {
+    "TITLE": "Home Page",
+    "WELCOME_MESSAGE": "Welcome to NakedLove",
+    "DESCRIPTION": "Discover various exciting connections and explore your desires in a safe and discreet environment. Join a vibrant community of people seeking passionate and intense relationships.",
+    "REGISTER_BUTTON": "Sign Up Now",
+    "LOGIN_BUTTON": "Login",
+    "AGE_VERIFICATION_MESSAGE": "This site is intended for people aged 18 and over. By continuing, you confirm that you are of legal age to explore content aimed at an adult audience.",
+    "AGE_VERIFICATION_ACCEPT": "I Am 18 or Older - Enter",
+    "AGE_VERIFICATION_DECLINE": "I Am Under 18 - Leave",
+    "FEEDBACK_ALT1": "Feedback 1",
+    "FEEDBACK_ALT2": "Feedback 2",
+    "FEEDBACK_ALT3": "Feedback 3",
+    "HOME_IMAGE_ALT": "Homepage Image",
+    "FOOTER_MESSAGE": "© 2024 Adult Dating Site. All rights reserved."
+  },
+  "MODAL": {
+    "TITLE": "Post New Content",
+    "PLACEHOLDER": "What are you going to show us today?",
+    "UPLOAD_IMAGE": "Add Image",
+    "UPLOAD_MEDIA": "Add Media",
+    "PREVIEW_IMAGE_ALT": "Image preview",
+    "PUBLISH": "Publish",
+    "PUBLISHING": "Publishing...",
+    "CLOSE": "Close",
+    "CLOSE_ARIA_LABEL": "Close modal"
+  },
+  "POST": {
+    "IMAGE_ALT": "Post Image",
+    "CREATED_AT": "Created at",
+    "DELETE": "Delete",
+    "LIKE": "Like",
+    "ADD_COMMENT_PLACEHOLDER": "Add a comment",
+    "SEND_COMMENT": "Send",
+    "COMMENT_AVATAR_ALT": "Comment Avatar",
+    "DELETE_COMMENT": "Delete comment"
+  },
+  "FILTER_BY_GENDER": {
+    "LABEL": "Filter by Gender:",
+    "ALL": "All",
+    "MALE": "Male",
+    "FEMALE": "Female"
+  },
+  "SUBSCRIPTION": {
+    "WARNING": "Your subscription has expired or is invalid.",
+    "RENEW": "Renew subscription"
+  },
+  "PROFILE": {
+    "DEFAULT_NAME": "User",
+    "YEARS_OLD": "years old"
+  },
+  "NO_MORE_CARDS": {
+    "MESSAGE": "You have seen all users!",
+    "RESET": "See again",
+    "VIEW_GALLERY": "View gallery"
+  },
+  "NOTIFICATIONS1": {
+    "TITLE": "Notifications",
+    "ENABLE": "Enable Notifications",
+    "DISABLE": "Disable Notifications",
+    "LEFT_TITLE": "Received Notifications",
+    "RIGHT_TITLE": "Recent Activities",
+    "NO_FOLLOWERS": "You don't have any new followers yet.",
+    "TOGGLE_DESCRIPTION": "Enable or disable notifications for new followers."
+  },
+  "PAYMENTS": {
+    "PAYMENT_IMAGE_ALT": "Payment",
+    "TITLE": "+18 Content",
+    "CANCEL_SUBSCRIPTION": "Cancel Subscription",
+    "MONTHLY_PLAN": "Monthly €17.99 / Month",
+    "SEMESTRAL_PLAN": "Semiannual €14.99 / Month",
+    "SEMESTRAL_DISCOUNT": "Save up to 17% total €89.94.",
+    "ANNUAL_PLAN": "Annual €11.99 / Month",
+    "ANNUAL_DISCOUNT": "Save up to 33% (most popular) total €143.88.",
+    "MAKE_PAYMENT": "Make Payment",
+    "CENTER_IMAGE_ALT": "Sensual Image"
+  },
+  "POST_DETAIL": {
+    "BACK_LINK": "Back",
+    "OWNER_AVATAR_ALT": "Post owner's avatar",
+    "POST_IMAGE_ALT": "Post image",
+    "COMMENTS_TITLE": "Comments:",
+    "COMMENT_AVATAR_ALT": "Comment avatar",
+    "DELETE_COMMENT_BUTTON": "Delete comment",
+    "ADD_COMMENT_PLACEHOLDER": "Add a comment",
+    "ADD_COMMENT_BUTTON": "Comment"
+  },
+  "CAROUSEL": {
+    "IMAGE_1_ALT": "Image 1",
+    "IMAGE_1_TEXT": "Finding our soulmate is always complicated.",
+    "IMAGE_2_ALT": "Image 2",
+    "IMAGE_2_TEXT": "There are many apps, social networks, dating sites, and yet we are still looking for true love.",
+    "IMAGE_3_ALT": "Image 3",
+    "IMAGE_3_TEXT": "When it comes to love and the right person, why waste time? At Naked Love, we got rid of all filters and clothes to see if there is a more instinctive way to find it.",
+    "IMAGE_4_ALT": "Image 4",
+    "IMAGE_4_TEXT": "How do we find the right person? It would be good to avoid mistakes, unpleasant surprises, and especially wasted time. At Naked Love, we have the perfect way to find your soulmate.",
+    "IMAGE_5_ALT": "Image 5",
+    "IMAGE_5_TEXT": "What does it take to fall in love, what sparks the spark, and what influences us in choosing a partner? At Naked Love, we have the opportunity to discover a partner and start as we end, naked.",
+    "IMAGE_6_ALT": "Image 6",
+    "IMAGE_6_TEXT": "How long does it take to fall in love? For science, seconds; for poets, a lifetime is not enough.",
+    "GO_TO_HOME": "Go to Home"
+  },
+  "PROFILE1": {
+    "ALT_IMAGE": "{{ name }}'s profile picture",
+    "DEFAULT_IMAGE_ALT": "Default profile picture",
+    "FOLLOWERS": "Followers: {{ count }}",
+    "FOLLOW": "Follow",
+    "UNFOLLOW": "Unfollow",
+    "ANONYMOUS_TITLE": "Anonymous Profile",
+    "ANONYMOUS_MESSAGE": "This user is in anonymous mode.",
+    "ADD_POST": "Add Post",
+    "FEED_TITLE": "Feed",
+    "POST_IMAGE": "Post Image",
+    "DELETE_POST": "Delete Post"
+  },
+  "RULES": {
+    "WELCOME": {
+      "TITLE": "Welcome to NakedLove",
+      "DESCRIPTION": "Follow these house rules:"
+    },
+    "BE_YOURSELF": {
+      "TITLE": "Be yourself",
+      "DESCRIPTION": "Make sure your photos, age, and bio are true to who you are."
+    },
+    "BE_CAUTIOUS": {
+      "TITLE": "Be cautious",
+      "DESCRIPTION": "Don’t rush to give out your personal information."
+    },
+    "SECURE_CONVERSATIONS": {
+      "TITLE": "Have secure virtual conversations",
+      "DESCRIPTION": "Be kind. Respect others and treat them as you would like to be treated."
+    },
+    "BE_PROACTIVE": {
+      "TITLE": "Be proactive",
+      "DESCRIPTION": "Always report inappropriate behaviors."
+    }
+  }
+}

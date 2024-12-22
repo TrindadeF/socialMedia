@@ -2,12 +2,12 @@
   <div class="modal-background" (click)="closeModal()"></div>
   <div class="modal-content">
     <div class="box">
-      <h2>{{ title }}</h2>
+      <h2>{{ "MODAL.TITLE" | translate }}</h2>
 
       <!-- Área de texto -->
       <textarea
         class="form-control mb-2"
-        placeholder="O que você vai nos mostrar hoje?"
+        placeholder="{{ 'MODAL.PLACEHOLDER' | translate }}"
         [(ngModel)]="postContent"
         (input)="checkFormValidity()"
       ></textarea>
@@ -15,7 +15,7 @@
       <!-- Seção de upload de mídia -->
       <div class="d-flex align-items-center mb-2">
         <label class="mr-2" for="upload-image" style="cursor: pointer">
-          <mat-icon>add_a_photo</mat-icon>
+          <mat-icon>{{ "MODAL.UPLOAD_IMAGE" | translate }}</mat-icon>
           <input
             type="file"
             id="upload-image"
@@ -26,7 +26,7 @@
         </label>
 
         <label class="mr-2" for="upload-media" style="cursor: pointer">
-          <mat-icon>subscriptions</mat-icon>
+          <mat-icon>{{ "MODAL.UPLOAD_MEDIA" | translate }}</mat-icon>
           <input
             type="file"
             id="upload-media"
@@ -41,7 +41,7 @@
           id="preview-image"
           class="preview-image mt-2"
           style="display: none; max-width: 25%"
-          alt="Prévia da imagem"
+          alt="{{ 'MODAL.PREVIEW_IMAGE_ALT' | translate }}"
         />
         <video
           id="preview-video"
@@ -60,15 +60,21 @@
           [disabled]="!canPublish || loading"
           type="button"
         >
-          {{ loading ? "Publicando..." : "Publicar" }}
+          {{
+            loading
+              ? ("MODAL.PUBLISHING" | translate)
+              : ("MODAL.PUBLISH" | translate)
+          }}
         </button>
-        <button class="button" (click)="closeModal()">Fechar</button>
+        <button class="button" (click)="closeModal()">
+          {{ "MODAL.CLOSE" | translate }}
+        </button>
       </div>
     </div>
   </div>
   <button
     class="modal-close is-large"
-    aria-label="close"
+    [attr.aria-label]="'MODAL.CLOSE_ARIA_LABEL' | translate"
     (click)="closeModal()"
   ></button>
 </div>

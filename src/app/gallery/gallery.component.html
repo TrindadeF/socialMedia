@@ -1,0 +1,67 @@
+<div *ngIf="showOverlay" class="overlay"></div>
+
+<div class="page-content" [class.disabled]="showOverlay">
+  <div class="profile-container">
+    <div *ngIf="hasActiveSubscription === false">
+      <p>
+        Sua assinatura expirou ou é inválida.
+        <a routerLink="/subscribe">Renovar assinatura</a>
+      </p>
+    </div>
+
+    <div class="profile-card" *ngFor="let user of users">
+      <div class="profile-pic">
+        <img alt="{{ user.nickName || 'Usuário' }}" />
+      </div>
+
+      <div class="profile-info">
+        <div *ngIf="mutualLikes[user._id]; else restrictedInfo">
+          <a [routerLink]="['/profile', user._id]">
+            <h3>{{ user.nickName }}</h3>
+          </a>
+          <p>{{ user.age }} anos</p>
+        </div>
+
+        <ng-template #restrictedInfo>
+          <h3>Nome restrito</h3>
+          <p>Você só pode ver mais detalhes após um match!</p>
+        </ng-template>
+
+        <button
+          class="message-btn"
+          *ngIf="mutualLikes[user._id]"
+          (click)="goToChat(user._id)"
+        >
+          Iniciar Conversa
+        </button>
+
+        <button class="like-btn" (click)="likeUser(user._id)">
+          <mat-icon>favorite</mat-icon>
+        </button>
+
+        <div *ngIf="user.secondPosts" class="user-posts">
+          <mat-tab-group>
+            <mat-tab
+              *ngFor="
+                let post of user.secondPosts | slice : 0 : 2;
+                let i = index
+              "
+            >
+              <ng-template mat-tab-label>
+                <mat-icon>visibility</mat-icon>
+              </ng-template>
+              <div class="post">
+                <img
+                  *ngIf="post.media?.length"
+                  [src]="post.media[0]"
+                  alt="Post image"
+                  class="post-image"
+                />
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

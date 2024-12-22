@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-comment-modal',
@@ -23,7 +24,11 @@ export class CommentModalComponent {
   commentText: string = '';
   selectedMedia: any;
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
+  constructor(
+    private http: HttpClient,
+    private snackBar: MatSnackBar,
+    private translate: TranslateService
+  ) {}
 
   closeModal() {
     this.closeEvent.emit();

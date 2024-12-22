@@ -3,6 +3,7 @@ import { Post } from 'database';
 import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-modal',
@@ -31,14 +32,20 @@ export class ModalComponent {
   selectedMedia: File[] = [];
   alertMessage: string = '';
   alertType: string = '';
-  
 
-  constructor(private apiService: ApiService,private snackBar: MatSnackBar, private http: HttpClient) {}
+  constructor(
+    private apiService: ApiService,
+    private snackBar: MatSnackBar,
+    private http: HttpClient,
+    private translate: TranslateService
+  ) {}
 
   onPublishPost() {
-    this.snackBar.open('Por favor, insira um texto junto com a imagem'), 'Fechar', {
-      duration: 3000,
-    };
+    this.snackBar.open('Por favor, insira um texto junto com a imagem'),
+      'Fechar',
+      {
+        duration: 3000,
+      };
 
     this.publish.emit({
       content: this.postContent,
@@ -52,9 +59,11 @@ export class ModalComponent {
     const formData = new FormData();
 
     if (!this.postContent.trim() && this.selectedMedia.length === 0) {
-      this.snackBar.open('Por favor, insira um texto junto com a imagem'), 'Fechar', {
-        duration: 3000,
-      };
+      this.snackBar.open('Por favor, insira um texto junto com a imagem'),
+        'Fechar',
+        {
+          duration: 3000,
+        };
 
       this.alertType = 'error';
       this.loading = false;
@@ -77,13 +86,16 @@ export class ModalComponent {
         this.alertMessage = 'Post publicado com sucesso!';
         this.alertType = 'success';
         window.location.reload();
-      
       },
       error: (error) => {
         console.error('Erro ao publicar o post:', error);
-        this.snackBar.open('O conteúdo do post ou mídia são obrigatórios!', 'Fechar', {
-          duration: 3000,
-        });
+        this.snackBar.open(
+          'O conteúdo do post ou mídia são obrigatórios!',
+          'Fechar',
+          {
+            duration: 3000,
+          }
+        );
         this.alertType = 'error';
       },
       complete: () => {

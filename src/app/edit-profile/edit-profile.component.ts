@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { User } from 'database';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-profile',
@@ -26,21 +27,20 @@ export class EditProfileComponent implements OnInit {
     primaryPosts: [],
     secondPosts: [],
     resetPasswordToken: '',
-    resetPasswordExpires:0,
-   
-
-    
+    resetPasswordExpires: 0,
   };
- 
 
-  originalUser: User | null = null;  
+  originalUser: User | null = null;
   alertMessage: string = '';
   alertType: string = '';
   previewImage: string | ArrayBuffer | null = null;
 
   fileToUpload: File | null = null;
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {
     this.fetchUserProfile();
@@ -51,14 +51,15 @@ export class EditProfileComponent implements OnInit {
     this.apiService.getUserById(userId).subscribe({
       next: (response) => {
         this.originalUser = { ...response }; // Sempre armazena os dados originais do perfil
-  
+
         if (response.isAnonymous) {
-          this.alertMessage = 'Este perfil é anônimo e não pode ser visualizado.';
+          this.alertMessage =
+            'Este perfil é anônimo e não pode ser visualizado.';
           this.alertType = 'warning';
           this.user = { ...response }; // Mantém os dados do usuário
           return;
         }
-  
+
         this.user = response; // Carrega os dados do usuário se não for anônimo
         if (response.profilePic) {
           this.previewImage = response.profilePic; // Mostra a imagem de perfil, se houver
@@ -71,9 +72,7 @@ export class EditProfileComponent implements OnInit {
       },
     });
   }
-  
 
-  
   onSubmit() {
     const formData = new FormData();
 
@@ -86,7 +85,10 @@ export class EditProfileComponent implements OnInit {
     formData.append('email', this.user.email);
     formData.append('nickName', this.user.nickName);
     formData.append('description', this.user.description);
-    formData.append('isAnonymous', this.user.isAnonymous?.toString() ?? 'false');
+    formData.append(
+      'isAnonymous',
+      this.user.isAnonymous?.toString() ?? 'false'
+    );
 
     const userId = this.getLoggedInUserId();
     this.apiService.updateUserProfile(userId, formData).subscribe({
@@ -121,7 +123,11 @@ export class EditProfileComponent implements OnInit {
   }
 
   confirmDelete() {
-    if (confirm('Tem certeza de que deseja deletar seu perfil? Esta ação não pode ser desfeita.')) {
+    if (
+      confirm(
+        'Tem certeza de que deseja deletar seu perfil? Esta ação não pode ser desfeita.'
+      )
+    ) {
       const userId = this.getLoggedInUserId();
       this.deleteProfile(userId);
     }
@@ -144,24 +150,19 @@ export class EditProfileComponent implements OnInit {
 
   toggleAnonymous(isAnonymous: boolean | undefined): void {
     this.user.isAnonymous = isAnonymous ?? false;
-  
+
     if (this.user.isAnonymous) {
-      // Configura o perfil para o estado anônimo
       this.user.nickName = 'Anônimo';
       this.user.name = 'Anônimo';
-      this.previewImage = 'default-anonymous.png'; // Usa uma imagem padrão de anônimo, se necessário
+      this.previewImage = 'default-anonymous.png';
     } else if (this.originalUser) {
-      // Restaura os dados do usuário original ao sair do modo anônimo
       this.user.name = this.originalUser.name;
       this.user.description = this.originalUser.description;
       this.user.nickName = this.originalUser.nickName;
       this.user.age = this.originalUser.age;
       this.user.gender = this.originalUser.gender;
       this.user.email = this.originalUser.email;
-      this.previewImage = this.originalUser.profilePic; // Restaura a imagem original
+      this.previewImage = this.originalUser.profilePic;
     }
   }
-  
 }
-  
-

@@ -28,7 +28,7 @@
 }
 
 .menu-item::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0; /* Posiciona na borda inferior */
   left: 10%; /* Deixa um pequeno espaço nas laterais */
@@ -36,9 +36,8 @@
   height: 2px; /* Linha mais fina */
   background: white; /* Cor da linha */
   border-radius: 10px; /* Arredonda as pontas */
-  box-shadow: 
-    -3px 3px 6px rgba(255, 255, 255, 0.3), /* Efeito 3D à esquerda */
-    3px -3px 6px rgba(0, 0, 0, 0.5); /* Efeito 3D à direita */
+  box-shadow: -3px 3px 6px rgba(255, 255, 255, 0.3),
+    /* Efeito 3D à esquerda */ 3px -3px 6px rgba(0, 0, 0, 0.5); /* Efeito 3D à direita */
   transition: all 0.3s ease; /* Suaviza os efeitos */
 }
 
@@ -49,9 +48,8 @@
 .menu-item:hover::after {
   width: 90%; /* Zoom na linha no hover */
   height: 3px; /* Linha mais grossa no hover */
-  box-shadow: 
-    -5px 5px 10px rgba(255, 255, 255, 0.5), /* Sombra mais forte à esquerda */
-    5px -5px 10px rgba(0, 0, 0, 0.7); /* Sombra mais forte à direita */
+  box-shadow: -5px 5px 10px rgba(255, 255, 255, 0.5),
+    /* Sombra mais forte à esquerda */ 5px -5px 10px rgba(0, 0, 0, 0.7); /* Sombra mais forte à direita */
 }
 
 .menu-item img.icon {
@@ -86,7 +84,7 @@
   .menu-item {
     padding: 15px 0; /* Ajusta o espaçamento entre os itens */
   }
-  
+
   .menu-item::after {
     left: 20%; /* Ajusta o posicionamento da linha */
     width: 60%; /* Reduz a largura da linha */
@@ -111,14 +109,39 @@
   .menu-item {
     padding: 10px 0;
   }
-  
+
   .menu-item::after {
     left: 25%; /* Ajusta para telas muito pequenas */
-    width: 50%; 
+    width: 50%;
   }
 
   .icon {
     width: 40px;
     height: 40px;
+  }
+}
+/* Ícones dentro de .menu-item */
+.menu-item mat-icon {
+  font-size: 24px;
+  color: #888; /* Cor padrão dos ícones */
+  transition: color 0.3s, transform 0.3s ease;
+}
+
+/* Hover para todos os ícones */
+.menu-item:hover mat-icon {
+  color: white; /* Cor no hover */
+  transform: scale(1.1); /* Aumenta o ícone no hover */
+}
+
+/* Respeita estilos responsivos */
+@media (max-width: 768px) {
+  .menu-item mat-icon {
+    font-size: 20px; /* Ajusta o tamanho do ícone no celular */
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-item mat-icon {
+    font-size: 18px; /* Tamanho menor para telas muito pequenas */
   }
 }

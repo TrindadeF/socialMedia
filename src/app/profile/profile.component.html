@@ -5,12 +5,12 @@
         <img
           *ngIf="user?.profilePic; else noProfilePic"
           [src]="user.profilePic"
-          alt="{{ user?.name }}"
+          [alt]="'PROFILE1.ALT_IMAGE' | translate : { name: user?.name }"
         />
         <ng-template #noProfilePic>
           <img
             src="../../assets/images/default-avatar.jpg"
-            alt="Imagem de perfil padrão"
+            [alt]="'PROFILE1.DEFAULT_IMAGE_ALT' | translate"
           />
         </ng-template>
       </div>
@@ -22,7 +22,9 @@
         <h2>{{ user.name }}</h2>
         <h3>{{ user.age }}</h3>
         <h4>{{ user.description }}</h4>
-        <p>Seguidores: {{ user.followerCount }}</p>
+        <p>
+          {{ "PROFILE1.FOLLOWERS" | translate : { count: user.followerCount } }}
+        </p>
         <p class="username">{{ user?.username }}</p>
 
         <button
@@ -30,7 +32,11 @@
           (click)="toggleFollow()"
           class="follow-btn"
         >
-          {{ isFollowing ? "Deixar de Seguir" : "Seguir" }}
+          {{
+            isFollowing
+              ? ("PROFILE1.UNFOLLOW" | translate)
+              : ("PROFILE1.FOLLOW" | translate)
+          }}
         </button>
 
         <div *ngIf="alertMessage" class="alert" [ngClass]="alertType">
@@ -42,8 +48,8 @@
         *ngIf="user.isAnonymous && user._id !== getUserId()"
         class="profile-info"
       >
-        <h2>Perfil Anônimo</h2>
-        <p>Este usuário está no modo anônimo.</p>
+        <h2>{{ "PROFILE1.ANONYMOUS_TITLE" | translate }}</h2>
+        <p>{{ "PROFILE1.ANONYMOUS_MESSAGE" | translate }}</p>
       </div>
     </div>
 
@@ -56,19 +62,23 @@
       (publish)="onPublish($event)"
     ></app-modal>
 
-    <button mat-icon-button (click)="openModal()" aria-label="Adicionar Post">
+    <button
+      mat-icon-button
+      (click)="openModal()"
+      [attr.aria-label]="'PROFILE1.ADD_POST' | translate"
+    >
       <mat-icon>library_add</mat-icon>
     </button>
 
     <div class="gallery">
-      <h3>Feed</h3>
+      <h3>{{ "PROFILE1.FEED_TITLE" | translate }}</h3>
       <div class="gallery-grid">
         <div *ngFor="let post of posts" class="gallery-item">
           <div *ngFor="let mediaUrl of post.media">
             <img
               *ngIf="isImage(mediaUrl)"
               [src]="mediaUrl"
-              alt="Imagem do Post"
+              [alt]="'PROFILE1.POST_IMAGE' | translate"
               class="post-image"
               (click)="openImageViewer(post._id)"
             />
@@ -80,13 +90,13 @@
               (click)="openImageViewer(post._id)"
             ></video>
             <button
-            *ngIf="isOwner(post.owner._id)"
-            (click)="deletePost(post._id)"
-            class="delete-btn"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-
+              *ngIf="isOwner(post.owner._id)"
+              (click)="deletePost(post._id)"
+              class="delete-btn"
+              [title]="'PROFILE1.DELETE_POST' | translate"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
         </div>
       </div>

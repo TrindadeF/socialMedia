@@ -6,9 +6,7 @@
     *ngIf="isLoggedIn() && !isLoginRoute()"
   >
     <div class="menu-icons">
-    
-        <img src="assets/images/nova logo.jpg" alt="Logo" class="icon" />
-      
+      <img src="assets/images/nova logo.jpg" alt="Logo" class="icon" />
       <a routerLink="/feed" class="menu-item">
         <mat-icon>home</mat-icon>
       </a>
@@ -22,7 +20,7 @@
         <mat-icon>person</mat-icon>
       </a>
       <a routerLink="/chat/userId" class="menu-item">
-        <mat-icon> chat</mat-icon>
+        <mat-icon>chat</mat-icon>
       </a>
       <a routerLink="/notifications" class="menu-item">
         <mat-icon>notifications</mat-icon>
@@ -31,15 +29,39 @@
         <mat-icon>payment</mat-icon>
       </a>
       <a routerLink="/config" class="menu-item">
-        <mat-icon>settings</mat-icon></a>
+        <mat-icon>settings</mat-icon>
+      </a>
+      <a routerLink="/gallery" class="menu-item">
+        <mat-icon>collections</mat-icon>
+      </a>
+
+      <button
+        mat-icon-button
+        class="menu-item"
+        [matMenuTriggerFor]="languageMenu"
+        aria-label="Change language"
+      >
+        <mat-icon>language</mat-icon>
+      </button>
+
       <a (click)="logout()" class="menu-item bottom">
         <mat-icon>logout</mat-icon>
-
-
       </a>
     </div>
   </mat-sidenav>
+
   <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
+
+  <mat-menu #languageMenu="matMenu">
+    <button mat-menu-item (click)="changeLanguage('en')">Inglês</button>
+    <button mat-menu-item (click)="changeLanguage('pt')">Português</button>
+    <button mat-menu-item (click)="changeLanguage('fr')">Francês</button>
+    <button mat-menu-item (click)="changeLanguage('es')">Espanhol</button>
+    <button mat-menu-item (click)="changeLanguage('de')">Alemão</button>
+    <button mat-menu-item (click)="changeLanguage('it')">Italiano</button>
+    <button mat-menu-item (click)="changeLanguage('zh')">Chinês</button>
+    <button mat-menu-item (click)="changeLanguage('ru')">Russo</button>
+  </mat-menu>
 </mat-sidenav-container>

@@ -1,23 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ApiService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post, User } from 'database';
 import { MatSnackBar } from '@angular/material/snack-bar';
-<<<<<<< HEAD
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-=======
-import { ChangeDetectorRef } from '@angular/core';
->>>>>>> 218009165dc92ab3cad7856645a8fd072fac9916
 import { TranslateService } from '@ngx-translate/core';
+import { NgIfContext } from '@angular/common';
 
 @Component({
   selector: 'app-nakedfeed',
-  templateUrl: './nakedfeed.component.html',
-  styleUrls: ['./nakedfeed.component.css'],
+  templateUrl: './gallery.component.html',
+  styleUrls: ['./gallery.component.css'],
 })
-export class NakedFeedComponent implements OnInit {
+export class GalleryComponent implements OnInit {
   users: User[] = [];
   user: any = {};
   userId: string = '';
@@ -39,6 +34,7 @@ export class NakedFeedComponent implements OnInit {
   filteredUsers: any[] = [];
   currentIndex: number = 0;
   swipeDirection: string | null = null;
+  restrictedInfo!: TemplateRef<NgIfContext<boolean>> | null;
 
   constructor(
     private apiService: ApiService,
@@ -84,13 +80,6 @@ export class NakedFeedComponent implements OnInit {
       next: (data: User[]) => {
         if (this.gender === 'all') {
           this.users = data.filter((user) => user._id !== currentUserId);
-<<<<<<< HEAD
-        } else if (this.gender === 'M' || this.gender === 'F' || this.gender === 'NB' || this.gender === 'BI' || this.gender === 'TR' || this.gender === 'HOM'
-
-        ) {
-          this.users = data.filter((user) =>
-            user._id !== currentUserId && user.gender === this.gender
-=======
         } else if (
           this.gender === 'M' ||
           this.gender === 'F' ||
@@ -101,7 +90,6 @@ export class NakedFeedComponent implements OnInit {
         ) {
           this.users = data.filter(
             (user) => user._id !== currentUserId && user.gender === this.gender
->>>>>>> 218009165dc92ab3cad7856645a8fd072fac9916
           );
         } else {
           this.users = data.filter((user) => user._id !== currentUserId);
@@ -115,38 +103,6 @@ export class NakedFeedComponent implements OnInit {
         console.error('Erro ao carregar usuários:', error);
       },
     });
-  }
-
-  swipe(direction: 'left' | 'right'): void {
-    this.swipeDirection = direction;
-
-    if (direction === 'right' && this.currentUser) {
-<<<<<<< HEAD
-      this.likeUser(this.currentUser._id); // Apenas registra o like
-    } else if (direction === 'left') {
-      this.ignoreUser(); // Apenas registra o ignorar
-    }
-
-    // Aguarda a animação antes de passar para o próximo usuário
-    setTimeout(() => {
-      this.nextUser();
-      this.swipeDirection = null;
-    }, 500); // Tempo alinhado com a duração da animação CSS
-=======
-      this.likeUser(this.currentUser._id);
-    } else if (direction === 'left') {
-      this.ignoreUser();
-    }
-
-    setTimeout(() => {
-      this.nextUser();
-      this.swipeDirection = null;
-    }, 500);
->>>>>>> 218009165dc92ab3cad7856645a8fd072fac9916
-  }
-
-  handleAnimationEnd(): void {
-    this.swipeDirection = null;
   }
 
   onGenderChange(gender: string): void {
@@ -165,10 +121,6 @@ export class NakedFeedComponent implements OnInit {
         console.error('Erro ao carregar o perfil do usuário atual:', error);
       }
     );
-  }
-
-  viewGallery(): void {
-    this.router.navigate(['/gallery']);
   }
 
   checkUserSubscriptionStatus(): void {
@@ -257,28 +209,6 @@ export class NakedFeedComponent implements OnInit {
     );
   }
 
-  ignoreUser(): void {
-    console.log('Usuário ignorado:', this.currentUser!._id);
-  }
-
-  nextUser(): void {
-    this.currentIndex++;
-    if (this.currentIndex < this.users.length) {
-      this.currentUser = this.users[this.currentIndex];
-      console.log('Próximo usuário:', this.currentUser);
-    } else {
-      console.log('Todos os usuários foram exibidos.');
-      this.currentUser = null;
-    }
-
-    this.cdr.detectChanges();
-  }
-
-  resetGallery(): void {
-    this.currentIndex = 0;
-    this.currentUser = this.users[this.currentIndex] || null;
-  }
-
   addNotification(likedUserId: string): void {
     const notificationsKey = `notifications_${likedUserId}`;
     const notifications = JSON.parse(
@@ -291,16 +221,6 @@ export class NakedFeedComponent implements OnInit {
 
     if (!notificationExists) {
       const newNotification = {
-<<<<<<< HEAD
-        userId: this.currentUser?._id ?? 'Usuário desconhecido',
-        message: `${this.currentUser?.name ?? 'Alguém'} está de olho em você!`,
-        timestamp: new Date().toISOString(),
-      };
-      notifications.push(newNotification);
-    
-      localStorage.setItem(notificationsKey, JSON.stringify(notifications));
-    
-=======
         userId: this.currentUser!._id,
         message: `${this.currentUser!.name} Está de olho em você!.`,
         timestamp: new Date().toISOString(),
@@ -309,16 +229,11 @@ export class NakedFeedComponent implements OnInit {
 
       localStorage.setItem(notificationsKey, JSON.stringify(notifications));
 
->>>>>>> 218009165dc92ab3cad7856645a8fd072fac9916
       console.log('Notificação adicionada:', newNotification);
     } else {
       console.log('Notificação já existente, nenhuma ação realizada.');
     }
-<<<<<<< HEAD
-  }    
-=======
   }
->>>>>>> 218009165dc92ab3cad7856645a8fd072fac9916
 
   getNotifications(): any[] {
     if (!this.currentUser || !this.currentUser._id) {

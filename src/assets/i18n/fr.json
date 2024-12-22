@@ -1,0 +1,263 @@
+{
+  "MENU": {
+    "HOME": "Accueil",
+    "FEED": "Fil",
+    "EDIT_PROFILE": "Modifier le profil",
+    "PROFILE": "Profil",
+    "CHAT": "Discussion",
+    "NOTIFICATIONS": "Notifications",
+    "PAYMENTS": "Paiements",
+    "SETTINGS": "Paramètres",
+    "LOGOUT": "Déconnexion",
+    "LANGUAGE": "Langue"
+  },
+  "ACTIONS": {
+    "LIKE": "Aimer",
+    "IGNORE": "Ignorer",
+    "SEND": "Envoyer",
+    "CANCEL": "Annuler",
+    "SAVE": "Sauvegarder",
+    "DELETE": "Supprimer"
+  },
+  "MESSAGES": {
+    "LOADING": "Chargement...",
+    "ERROR": "Une erreur s'est produite.",
+    "NO_DATA": "Aucune donnée trouvée."
+  },
+
+  "EDIT_PROFILE": {
+    "TITLE": "Modifier le Profil",
+    "PICTURE_ALT": "Aperçu de la Photo de Profil",
+    "PICTURE_LABEL": "Photo de Profil",
+    "ANONYMOUS_WARNING": "Ce profil est configuré comme anonyme. Certaines informations sont masquées ou ne peuvent pas être modifiées.",
+    "NAME_LABEL": "Nom",
+    "USERNAME_LABEL": "Nom d'utilisateur",
+    "DESCRIPTION_LABEL": "Description",
+    "EMAIL_LABEL": "Email",
+    "AGE_LABEL": "Âge",
+    "GENDER_LABEL": "Genre",
+    "GENDER_SELECT": "Sélectionnez",
+    "GENDER_MALE": "Masculin",
+    "GENDER_FEMALE": "Féminin",
+    "GENDER_NON_BINARY": "Non Binaire",
+    "GENDER_BISEXUAL": "Bisexuel",
+    "GENDER_TRANSGENDER": "Transgenre",
+    "GENDER_HOMOSEXUAL": "Homosexuel",
+    "ANONYMOUS_LABEL": "Profil Anonyme",
+    "ANONYMOUS_ENABLE": "Activer",
+    "ANONYMOUS_DISABLE": "Désactiver",
+    "SAVE_BUTTON": "Enregistrer",
+    "DELETE_BUTTON": "Supprimer le Profil"
+  },
+
+  "CHAT": {
+    "TITLE": "Chat",
+    "CHATS": "Conversations",
+    "WITH": "Discussion avec",
+    "MESSAGES_WITH": "Messages avec",
+    "DELETE_CHAT": "Supprimer le chat",
+    "PLACEHOLDER": "Tapez un message..."
+  },
+  "TERMS": {
+    "CHECKBOX_LABEL": "J'accepte les termes et conditions",
+    "ACCEPTED_TEXT": "Vous avez accepté les termes et conditions. Cliquez sur le lien ci-dessous pour télécharger :",
+    "DOWNLOAD_LINK": "Télécharger les termes et conditions"
+  },
+  "COMMENTS": {
+    "ADD_PLACEHOLDER": "Ajoutez un commentaire...",
+    "ADD_ARIA_LABEL": "Champ pour ajouter un commentaire",
+    "POST_BUTTON_TEXT": "Commenter",
+    "POST_BUTTON_ARIA_LABEL": "Bouton pour publier un commentaire"
+  },
+  "HELP_CENTER": {
+    "TITLE": "Centre d'Aide",
+    "DESCRIPTION": "Toutes les informations du site se trouvent ici."
+  },
+  "TERMS_OF_USE": {
+    "TITLE": "Conditions d'Utilisation",
+    "DESCRIPTION": "Consultez ici les Conditions d'Utilisation du site."
+  },
+  "PRIVACY_POLICY": {
+    "TITLE": "Politique de Confidentialité",
+    "DESCRIPTION": "Consultez ici la Politique de Confidentialité du site."
+  },
+  "USER_PREFERENCES": {
+    "TITLE": "Préférences Utilisateur",
+    "DESCRIPTION": "Gérez vos préférences utilisateur, comme les notifications et les déblocages."
+  },
+  "NOTIFICATIONS": {
+    "TITLE": "Notifications",
+    "DESCRIPTION": "Gérez vos notifications ici."
+  },
+  "BLOCKED_USERS": {
+    "TITLE": "Utilisateurs Bloqués",
+    "UNBLOCK_BUTTON": "Débloquer"
+  },
+  "FEED": {
+    "HEADER": "ⓃakedLove",
+    "PLACEHOLDER": "Qu'allez-vous nous montrer aujourd'hui ?",
+    "ALERT": {
+      "SUCCESS": "Publié avec succès!",
+      "ERROR": "Une erreur s'est produite. Veuillez réessayer plus tard."
+    },
+    "POST": {
+      "AVATAR_ALT": "Avatar de l'utilisateur",
+      "IMAGE_ALT": "Image de la publication",
+      "VIDEO_ALT": "Vidéo de la publication",
+      "ACTIONS": {
+        "LIKE": "Aimer",
+        "COMMENT": "Commenter",
+        "BLOCK_USER": "Bloquer",
+        "DELETE": "Supprimer"
+      }
+    },
+    "MODAL": {
+      "WELCOME_TITLE": "Bienvenue !",
+      "PUBLISH": "Publier"
+    }
+  },
+  "FORGOT_PASSWORD": {
+    "TITLE": "Mot de Passe Oublié",
+    "HEADER": "Mot de Passe Oublié",
+    "EMAIL_PLACEHOLDER": "Entrez votre email",
+    "EMAIL_ERROR": "Le champ email est obligatoire et doit être un email valide.",
+    "SUBMIT_BUTTON": "Envoyer",
+    "BACK_TO_LOGIN": "Retour à la Connexion"
+  },
+  "HOME_PAGE": {
+    "TITLE": "Page d'Accueil",
+    "WELCOME_MESSAGE": "Bienvenue sur NakedLove",
+    "DESCRIPTION": "Découvrez diverses connexions passionnantes et explorez vos désirs dans un environnement sûr et discret. Rejoignez une communauté vibrante de personnes recherchant des relations passionnées et intenses.",
+    "REGISTER_BUTTON": "Inscrivez-vous Maintenant",
+    "LOGIN_BUTTON": "Connexion",
+    "AGE_VERIFICATION_MESSAGE": "Ce site est destiné aux personnes âgées de 18 ans et plus. En continuant, vous confirmez que vous avez l'âge légal pour explorer du contenu destiné à un public adulte.",
+    "AGE_VERIFICATION_ACCEPT": "J'ai 18 Ans ou Plus - Entrer",
+    "AGE_VERIFICATION_DECLINE": "J'ai Moins de 18 Ans - Quitter",
+    "FEEDBACK_ALT1": "Feedback 1",
+    "FEEDBACK_ALT2": "Feedback 2",
+    "FEEDBACK_ALT3": "Feedback 3",
+    "HOME_IMAGE_ALT": "Image de la Page d'Accueil",
+    "FOOTER_MESSAGE": "© 2024 Site de Rencontre pour Adultes. Tous droits réservés."
+  },
+  "MODAL": {
+    "TITLE": "Publier un Nouveau Contenu",
+    "PLACEHOLDER": "Que vas-tu nous montrer aujourd'hui ?",
+    "UPLOAD_IMAGE": "Ajouter une Image",
+    "UPLOAD_MEDIA": "Ajouter un Média",
+    "PREVIEW_IMAGE_ALT": "Aperçu de l'image",
+    "PUBLISH": "Publier",
+    "PUBLISHING": "Publication...",
+    "CLOSE": "Fermer",
+    "CLOSE_ARIA_LABEL": "Fermer la modal"
+  },
+  "POST": {
+    "IMAGE_ALT": "Image de publication",
+    "CREATED_AT": "Créé le",
+    "DELETE": "Supprimer",
+    "LIKE": "J'aime",
+    "ADD_COMMENT_PLACEHOLDER": "Ajouter un commentaire",
+    "SEND_COMMENT": "Envoyer",
+    "COMMENT_AVATAR_ALT": "Avatar du commentaire",
+    "DELETE_COMMENT": "Supprimer le commentaire"
+  },
+  "FILTER_BY_GENDER": {
+    "LABEL": "Filtrer par genre :",
+    "ALL": "Tous",
+    "MALE": "Homme",
+    "FEMALE": "Femme"
+  },
+  "SUBSCRIPTION": {
+    "WARNING": "Votre abonnement a expiré ou est invalide.",
+    "RENEW": "Renouveler l'abonnement"
+  },
+  "PROFILE": {
+    "DEFAULT_NAME": "Utilisateur",
+    "YEARS_OLD": "ans"
+  },
+  "NO_MORE_CARDS": {
+    "MESSAGE": "Vous avez vu tous les utilisateurs !",
+    "RESET": "Voir à nouveau",
+    "VIEW_GALLERY": "Voir la galerie"
+  },
+  "NOTIFICATIONS1": {
+    "TITLE": "Notifications",
+    "ENABLE": "Activer les notifications",
+    "DISABLE": "Désactiver les notifications",
+    "LEFT_TITLE": "Notifications Reçues",
+    "RIGHT_TITLE": "Activités Récentes",
+    "NO_FOLLOWERS": "Vous n'avez pas encore de nouveaux abonnés.",
+    "TOGGLE_DESCRIPTION": "Activez ou désactivez les notifications pour les nouveaux abonnés."
+  },
+  "PAYMENTS": {
+    "PAYMENT_IMAGE_ALT": "Paiement",
+    "TITLE": "Contenu +18",
+    "CANCEL_SUBSCRIPTION": "Annuler l'abonnement",
+    "MONTHLY_PLAN": "Mensuel 17,99€ / Mois",
+    "SEMESTRAL_PLAN": "Semestriel 14,99€ / Mois",
+    "SEMESTRAL_DISCOUNT": "Économisez jusqu'à 17% total 89,94€.",
+    "ANNUAL_PLAN": "Annuel 11,99€ / Mois",
+    "ANNUAL_DISCOUNT": "Économisez jusqu'à 33% (le plus populaire) total 143,88€.",
+    "MAKE_PAYMENT": "Effectuer le paiement",
+    "CENTER_IMAGE_ALT": "Image Sensuelle"
+  },
+  "POST_DETAIL": {
+    "BACK_LINK": "Retour",
+    "OWNER_AVATAR_ALT": "Avatar du propriétaire du post",
+    "POST_IMAGE_ALT": "Image du post",
+    "COMMENTS_TITLE": "Commentaires :",
+    "COMMENT_AVATAR_ALT": "Avatar du commentaire",
+    "DELETE_COMMENT_BUTTON": "Supprimer le commentaire",
+    "ADD_COMMENT_PLACEHOLDER": "Ajouter un commentaire",
+    "ADD_COMMENT_BUTTON": "Commenter"
+  },
+  "CAROUSEL": {
+    "IMAGE_1_ALT": "Image 1",
+    "IMAGE_1_TEXT": "Trouver notre âme sœur est toujours compliqué.",
+    "IMAGE_2_ALT": "Image 2",
+    "IMAGE_2_TEXT": "Il existe de nombreuses applications, réseaux sociaux, sites de rencontres, et pourtant nous cherchons toujours le véritable amour.",
+    "IMAGE_3_ALT": "Image 3",
+    "IMAGE_3_TEXT": "Quand il s'agit d'amour et de la bonne personne, pourquoi perdre du temps ? Chez Naked Love, nous nous débarrassons de tous les filtres et vêtements pour voir s'il existe une manière plus instinctive de le trouver.",
+    "IMAGE_4_ALT": "Image 4",
+    "IMAGE_4_TEXT": "Comment trouver la bonne personne ? Ce serait bien d'éviter les erreurs, les mauvaises surprises, et surtout le temps perdu. Chez Naked Love, nous avons la manière idéale de trouver votre âme sœur.",
+    "IMAGE_5_ALT": "Image 5",
+    "IMAGE_5_TEXT": "Qu'est-ce qui déclenche la flamme et nous influence dans le choix d'un partenaire ? Chez Naked Love, nous avons l'opportunité de découvrir un partenaire et de commencer comme nous finissons, nus.",
+    "IMAGE_6_ALT": "Image 6",
+    "IMAGE_6_TEXT": "Combien de temps faut-il pour tomber amoureux ? Pour la science, quelques secondes ; pour les poètes, une vie entière ne suffit pas.",
+    "GO_TO_HOME": "Aller à l'accueil"
+  },
+  "PROFILE1": {
+    "ALT_IMAGE": "Photo de profil de {{ name }}",
+    "DEFAULT_IMAGE_ALT": "Photo de profil par défaut",
+    "FOLLOWERS": "Abonnés : {{ count }}",
+    "FOLLOW": "Suivre",
+    "UNFOLLOW": "Se désabonner",
+    "ANONYMOUS_TITLE": "Profil Anonyme",
+    "ANONYMOUS_MESSAGE": "Cet utilisateur est en mode anonyme.",
+    "ADD_POST": "Ajouter une publication",
+    "FEED_TITLE": "Flux",
+    "POST_IMAGE": "Image de publication",
+    "DELETE_POST": "Supprimer la publication"
+  },
+  "RULES": {
+    "WELCOME": {
+      "TITLE": "Bienvenue sur NakedLove",
+      "DESCRIPTION": "Suivez ces règles de la maison:"
+    },
+    "BE_YOURSELF": {
+      "TITLE": "Soyez vous-même",
+      "DESCRIPTION": "Assurez-vous que vos photos, âge et biographie reflètent qui vous êtes."
+    },
+    "BE_CAUTIOUS": {
+      "TITLE": "Soyez prudent",
+      "DESCRIPTION": "Ne vous précipitez pas pour donner vos informations personnelles."
+    },
+    "SECURE_CONVERSATIONS": {
+      "TITLE": "Ayez des conversations virtuelles sécurisées",
+      "DESCRIPTION": "Soyez gentil. Respectez les autres et traitez-les comme vous aimeriez être traité."
+    },
+    "BE_PROACTIVE": {
+      "TITLE": "Soyez proactif",
+      "DESCRIPTION": "Signalez toujours les comportements inappropriés."
+    }
+  }
+}

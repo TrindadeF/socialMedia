@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,18 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   userId: string | null = null;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private translate: TranslateService) {
+    this.translate.addLangs(['en', 'pt', 'fr', 'es', 'de', 'it', 'zh', 'ru']);
+    this.translate.setDefaultLang('en');
 
-  title(title: any) {
-    throw new Error('Method not implemented.');
+    const browserLang = this.translate.getBrowserLang();
+    this.translate.use(
+      browserLang && this.translate.getLangs().includes(browserLang)
+        ? browserLang
+        : 'en'
+    );
   }
+
   ngOnInit() {
     this.loadUserId();
   }
@@ -28,6 +36,10 @@ export class AppComponent implements OnInit {
 
   isLoginRoute(): boolean {
     return this.router.url === '/login';
+  }
+
+  changeLanguage(lang: string) {
+    this.translate.use(lang);
   }
 
   logout() {

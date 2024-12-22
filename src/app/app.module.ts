@@ -4,14 +4,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { InsightsComponent } from './insights/insights.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RulesComponent } from './rules/rules.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule,
+} from '@angular/common/http';
 import { FeedComponent } from './feed/feed.component';
 import { NakedFeedComponent } from './nakedfeed/nakedfeed.component';
 import { FormsModule } from '@angular/forms';
@@ -35,20 +38,21 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ConfigComponent } from './config/config.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
-import { ConfigurationPageComponent } from './configuration-page/configuration-page.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { RouterModule } from '@angular/router';
+import { GalleryComponent } from './gallery/gallery.component';
 
-
-
-
-
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ProfileComponent,
-    InsightsComponent,
     LoginComponent,
     RegisterComponent,
     RulesComponent,
@@ -56,8 +60,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     NakedFeedComponent,
     EditProfileComponent,
     ForgotPasswordComponent,
-  
-   
     PaymentsComponent,
     PresentationComponent,
     ChatComponent,
@@ -68,12 +70,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     ModalProfileComponent,
     PostDetailComponent,
     ConfigComponent,
-    ConfigurationPageComponent,
     ResetPasswordComponent,
-
-   
-    
-    
+    GalleryComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,10 +88,13 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     MatSlideToggleModule,
     MatToolbarModule,
     MatTabsModule,
-
-    
-   
-    
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

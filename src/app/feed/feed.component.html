@@ -1,16 +1,14 @@
 <div class="container">
   <div class="feed">
     <div class="feed-header">
-      <h4>ⓃakedLove</h4>
+      <h4>{{ "FEED.HEADER" | translate }}</h4>
     </div>
-    
-   
 
     <div class="post-form">
       <textarea
         class="form-control mb-2"
         id="post-text"
-        placeholder="O que você vai nos mostrar hoje?"
+        placeholder="{{ 'FEED.PLACEHOLDER' | translate }}"
         [(ngModel)]="postContent"
         (focus)="openModal('primaryFeed')"
       ></textarea>
@@ -35,7 +33,7 @@
                 post.ownerProfileImageUrl ||
                 '/src/assets/images/default-avatar.jpg'
               "
-              alt="Avatar do usuário"
+              alt="{{ 'FEED.POST.AVATAR_ALT' | translate }}"
               class="avatar"
             />
             <div class="post-info ml-2">
@@ -53,7 +51,7 @@
                   *ngIf="isImage(mediaUrl)"
                   [src]="mediaUrl"
                   class="post-image"
-                  alt="Imagem do post"
+                  alt="{{ 'FEED.POST.IMAGE_ALT' | translate }}"
                   style="max-width: 25%; margin-top: 10px"
                 />
 
@@ -63,7 +61,13 @@
                   class="post-video"
                   controls
                   style="max-width: 25%; margin-top: 10px"
-                ></video>
+                >
+                  <track
+                    kind="captions"
+                    src=""
+                    label="{{ 'FEED.POST.VIDEO_ALT' | translate }}"
+                  />
+                </video>
               </div>
             </div>
           </div>
@@ -75,38 +79,38 @@
             >
               <mat-icon>thumb_up_alt</mat-icon>
               {{ post.likes ? post.likes.length : 0 }}
+              {{ "FEED.POST.ACTIONS.LIKE" | translate }}
             </button>
 
             <button (click)="viewPostDetails(post._id)">
               <mat-icon>chat_bubble_outline</mat-icon>
               {{ post.comments ? post.comments.length : 0 }}
+              {{ "FEED.POST.ACTIONS.COMMENT" | translate }}
             </button>
 
-            <!-- Botão para bloquear o usuário -->
-            <button *ngIf="!isOwner(post.owner)" (click)="blockUser(post.owner._id)">
-              Bloquear
+            <button
+              *ngIf="!isOwner(post.owner)"
+              (click)="blockUser(post.owner._id)"
+            >
+              {{ "FEED.POST.ACTIONS.BLOCK_USER" | translate }}
             </button>
-         
+
             <button *ngIf="isOwner(post.owner)" (click)="deletePost(post._id)">
-              Deletar
+              {{ "FEED.POST.ACTIONS.DELETE" | translate }}
             </button>
           </div>
         </div>
       </div>
     </div>
-   
-       
-      
-    </div>
-
-    <app-modal
-      [title]="'Seja Bem Vindo!'"
-      [content]="modalContent"
-      [showModal]="showModal"
-      [postContent]="postContent"
-      [feedType]="currentFeedType"
-      (close)="closeModal()"
-      (publish)="onPublish($event)"
-    ></app-modal>
   </div>
 
+  <app-modal
+    [title]="'FEED.MODAL.WELCOME_TITLE' | translate"
+    [content]="modalContent"
+    [showModal]="showModal"
+    [postContent]="postContent"
+    [feedType]="currentFeedType"
+    (close)="closeModal()"
+    (publish)="onPublish($event)"
+  ></app-modal>
+</div>
