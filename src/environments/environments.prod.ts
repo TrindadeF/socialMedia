@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://nakedlove.eu/api', // Endpoint de produção
+  apiUrl: 'https://nakedlove.eu/api',
 };
