@@ -4,7 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Post, User } from 'database';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-nakedfeed',
@@ -16,7 +18,7 @@ export class NakedFeedComponent implements OnInit {
   user: any = {};
   userId: string = '';
   posts: Post[] = [];
-  currentUser!: User;
+  currentUser: User | null = null;
   mutualLikes: { [key: string]: boolean } = {};
   hasActiveSubscription: boolean | undefined;
   showOverlay: boolean = false;
@@ -29,67 +31,59 @@ export class NakedFeedComponent implements OnInit {
   showImageViewer: boolean = false;
   profilePicUrl: string = '';
   secondPosts?: Post[] = [];
-  gender: string =  'all';
-  filteredUsers: any[] = [];  // Lista de usuários filtrados
-
-  
-  
-
+  gender: string = 'all';
+  filteredUsers: any[] = [];
+  currentIndex: number = 0;
+  swipeDirection: string | null = null;
 
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private cdr: ChangeDetectorRef,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
-  
     this.loadUsers();
     this.loadUserSecondPosts();
     this.checkUserSubscriptionStatus();
     this.getCurrentUser();
     this.fetchUserPosts();
     this.checkMutualLikes();
-   
-    
-   
-    
-   
-   
   }
 
   openImageViewer(postId: string) {
     this.selectedPostId = postId;
     this.showImageViewer = true;
-    
   }
-  
 
   loadUserSecondPosts(): void {
     const userId = this.getLoggedUserId();
     this.apiService.getUserSecondPosts(userId).subscribe({
       next: (data: Post[]) => {
         this.secondPosts = data;
-        console.log('Posts secundários recebidos: ', this.secondPosts);
       },
       error: (error) => {
         console.error('Erro ao carregar os posts secundários:', error);
         this.errorMessage = 'Erro ao carregar os posts secundários.';
-      }
-      
-
+      },
     });
   }
 
   loadUsers(): void {
     const currentUserId = this.getLoggedUserId();
+    console.log('ID do usuário logado:', currentUserId);
+
     this.apiService.getAllUsers().subscribe({
       next: (data: User[]) => {
         // Filtra os usuários com base no gênero selecionado
         if (this.gender === 'all') {
           this.users = data.filter((user) => user._id !== currentUserId);
-        } else if (this.gender === 'M' || this.gender === 'F') {
+        } else if (this.gender === 'M' || this.gender === 'F' || this.gender === 'NB' || this.gender === 'BI' || this.gender === 'TR' || this.gender === 'HOM'
+
+        ) {
           this.users = data.filter((user) =>
             user._id !== currentUserId && user.gender === this.gender
           );
@@ -98,17 +92,34 @@ export class NakedFeedComponent implements OnInit {
         }
       },
       error: (error) => {
-        console.error('Erro ao carregar os usuários:', error);
+        console.error('Erro ao carregar usuários:', error);
       },
     });
   }
-  
-  
 
-  // Método para mudar o filtro de gênero
+  swipe(direction: 'left' | 'right'): void {
+    this.swipeDirection = direction;
+
+    if (direction === 'right' && this.currentUser) {
+      this.likeUser(this.currentUser._id); // Apenas registra o like
+    } else if (direction === 'left') {
+      this.ignoreUser(); // Apenas registra o ignorar
+    }
+
+    // Aguarda a animação antes de passar para o próximo usuário
+    setTimeout(() => {
+      this.nextUser();
+      this.swipeDirection = null;
+    }, 500); // Tempo alinhado com a duração da animação CSS
+  }
+
+  handleAnimationEnd(): void {
+    this.swipeDirection = null;
+  }
+
   onGenderChange(gender: string): void {
-    this.gender = gender;  // Altera o filtro de gênero
-    this.loadUsers();       // Recarrega os usuários filtrados
+    this.gender = gender;
+    this.loadUsers();
   }
 
   getCurrentUser(): void {
@@ -124,8 +135,12 @@ export class NakedFeedComponent implements OnInit {
     );
   }
 
+  viewGallery(): void {
+    this.router.navigate(['/gallery']);
+  }
+
   checkUserSubscriptionStatus(): void {
-    console.log('Iniciando verificação de status de assinatura...')
+    console.log('Iniciando verificação de status de assinatura...');
     const currentUserId = this.getLoggedUserId();
     if (!currentUserId) {
       console.error('ID do usuário atual não encontrado.');
@@ -138,31 +153,37 @@ export class NakedFeedComponent implements OnInit {
         this.hasActiveSubscription = response.hasActiveSubscription;
         if (!this.hasActiveSubscription) {
           this.showOverlay = true;
-          this.snackBar.open(
-            'É preciso assinar um plano para usar esta página.',
-            'Assinar Agora',
-            {
-              duration: 5000,
-              verticalPosition: 'top',
-            }
-          ).onAction().subscribe(() => {
-            this.showOverlay = false;
-            this.router.navigate(['/payments']);
-          });
+          this.snackBar
+            .open(
+              'É preciso assinar um plano para usar esta página.',
+              'Assinar Agora',
+              {
+                duration: 5000,
+                verticalPosition: 'top',
+              }
+            )
+            .onAction()
+            .subscribe(() => {
+              this.showOverlay = false;
+              this.router.navigate(['/payments']);
+            });
         }
       },
       (error) => {
         console.error('Erro ao verificar status da assinatura:', error);
-        const errorMessage = error.error?.message || 'Erro ao verificar status da assinatura.';
+        const errorMessage =
+          error.error?.message || 'Erro ao verificar status da assinatura.';
         this.showOverlay = true;
-        this.snackBar.open(errorMessage, 'Assinar Agora', {
-          duration: 5000,
-          verticalPosition: 'top',
-        }).onAction()
-        .subscribe(() => {
-          this.showOverlay = false;
-          this.router.navigate(['/payments']);
-        });
+        this.snackBar
+          .open(errorMessage, 'Assinar Agora', {
+            duration: 5000,
+            verticalPosition: 'top',
+          })
+          .onAction()
+          .subscribe(() => {
+            this.showOverlay = false;
+            this.router.navigate(['/payments']);
+          });
       }
     );
   }
@@ -171,14 +192,16 @@ export class NakedFeedComponent implements OnInit {
     if (!this.currentUser) return;
 
     this.users.forEach((user) => {
-      this.apiService.checkMutualLike(this.currentUser._id, user._id).subscribe(
-        (response) => {
-          this.mutualLikes[user._id] = response.mutualLike;
-        },
-        (error) => {
-          console.error('Erro ao verificar reciprocidade de likes:', error);
-        }
-      );
+      this.apiService
+        .checkMutualLike(this.currentUser!._id, user._id)
+        .subscribe(
+          (response) => {
+            this.mutualLikes[user._id] = response.mutualLike;
+          },
+          (error) => {
+            console.error('Erro ao verificar reciprocidade de likes:', error);
+          }
+        );
     });
   }
 
@@ -187,77 +210,89 @@ export class NakedFeedComponent implements OnInit {
       console.error('Usuário atual não encontrado.');
       return;
     }
-  
+
     const userId = this.currentUser._id;
-  
+
     this.apiService.likeUser(userId, likedUserId).subscribe(
       (response) => {
         console.log('Like registrado com sucesso!', response);
-  
-        // Adiciona notificação para o usuário curtido
         this.addNotification(likedUserId);
-  
-        this.checkMutualLikes(); // Verifica se há um match
+        this.checkMutualLikes();
       },
       (error) => {
         console.error('Erro ao registrar o like:', error);
       }
     );
   }
-  
-  // Método para adicionar uma notificação ao localStorage
+
+  ignoreUser(): void {
+    console.log('Usuário ignorado:', this.currentUser!._id);
+  }
+
+  nextUser(): void {
+    this.currentIndex++;
+    if (this.currentIndex < this.users.length) {
+      this.currentUser = this.users[this.currentIndex];
+      console.log('Próximo usuário:', this.currentUser);
+    } else {
+      console.log('Todos os usuários foram exibidos.');
+      this.currentUser = null;
+    }
+
+    this.cdr.detectChanges();
+  }
+
+  resetGallery(): void {
+    this.currentIndex = 0;
+    this.currentUser = this.users[this.currentIndex] || null;
+  }
+
   addNotification(likedUserId: string): void {
     const notificationsKey = `notifications_${likedUserId}`;
-    const notifications = JSON.parse(localStorage.getItem(notificationsKey) || '[]');
-  
-    // Verifica se a notificação já existe
-    const notificationExists = notifications.some(
-      (n: any) => n.userId === this.currentUser._id
+    const notifications = JSON.parse(
+      localStorage.getItem(notificationsKey) || '[]'
     );
-  
+
+    const notificationExists = notifications.some(
+      (n: any) => n.userId === this.currentUser!._id
+    );
+
     if (!notificationExists) {
-      // Cria a notificação
       const newNotification = {
-        userId: this.currentUser._id,
-        message: `${this.currentUser.name} Está de olho em você!.`,
+        userId: this.currentUser?._id ?? 'Usuário desconhecido',
+        message: `${this.currentUser?.name ?? 'Alguém'} está de olho em você!`,
         timestamp: new Date().toISOString(),
       };
-  
-      // Adiciona a notificação à lista existente
       notifications.push(newNotification);
-  
-      // Salva no localStorage
+    
       localStorage.setItem(notificationsKey, JSON.stringify(notifications));
-  
+    
       console.log('Notificação adicionada:', newNotification);
     } else {
       console.log('Notificação já existente, nenhuma ação realizada.');
     }
-  }
-  
-  // Método para obter notificações do usuário logado
+  }    
+
   getNotifications(): any[] {
     if (!this.currentUser || !this.currentUser._id) {
       console.error('Usuário atual não encontrado.');
       return [];
     }
-  
+
     const notificationsKey = `notifications_${this.currentUser._id}`;
     return JSON.parse(localStorage.getItem(notificationsKey) || '[]');
   }
-  
-  // Método para limpar notificações do usuário logado
+
   clearNotifications(): void {
     if (!this.currentUser || !this.currentUser._id) {
       console.error('Usuário atual não encontrado.');
       return;
     }
-  
+
     const notificationsKey = `notifications_${this.currentUser._id}`;
     localStorage.removeItem(notificationsKey);
     console.log('Notificações limpas para o usuário logado.');
   }
-  
 
   goToChat(otherUserId: string): void {
     if (!this.currentUser || !this.currentUser._id) {
@@ -265,15 +300,17 @@ export class NakedFeedComponent implements OnInit {
       return;
     }
 
-    this.apiService.getOrCreateChat(this.currentUser._id, otherUserId).subscribe({
-      next: (response) => {
-        const chatId = response.chatId;
-        this.router.navigate(['/chat', chatId]);
-      },
-      error: (error) => {
-        console.error('Erro ao iniciar ou obter conversa:', error);
-      },
-    });  
+    this.apiService
+      .getOrCreateChat(this.currentUser._id, otherUserId)
+      .subscribe({
+        next: (response) => {
+          const chatId = response.chatId;
+          this.router.navigate(['/chat', chatId]);
+        },
+        error: (error) => {
+          console.error('Erro ao iniciar ou obter conversa:', error);
+        },
+      });
   }
 
   getLoggedUserId(): string {
@@ -287,7 +324,7 @@ export class NakedFeedComponent implements OnInit {
   fetchUserPosts(): void {
     const userId = this.route.snapshot.paramMap.get('id') || this.getUserId();
     this.loading = true;
-  
+
     this.apiService.getPostsByUserId(userId).subscribe({
       next: (response: Post[]) => {
         this.posts = response
@@ -306,13 +343,12 @@ export class NakedFeedComponent implements OnInit {
       },
     });
   }
-  
 
   getPosts() {
     this.apiService.getPostsFromSecondFeed().subscribe({
       next: (posts: Post[]) => {
         if (posts) {
-          console.log(posts)
+          console.log(posts);
           this.posts = posts
             .map((post) => {
               return {
@@ -341,21 +377,21 @@ export class NakedFeedComponent implements OnInit {
       postOwnerId !== null &&
       '_id' in postOwnerId
     ) {
-      console.log(postOwnerId)
+      console.log(postOwnerId);
       postOwnerId = postOwnerId._id;
-      console.log(postOwnerId)
+      console.log(postOwnerId);
     }
     if (typeof postOwnerId !== 'string') {
       console.error('postOwnerId deve ser uma string', postOwnerId);
-      console.log("chegou a segunda condição")
-      console.log(postOwnerId)
+      console.log('chegou a segunda condição');
+      console.log(postOwnerId);
       return false;
     }
 
     const currentUserId = this.getUserIdFromAuthService();
-    console.log("O id do usuário atual é :")
-    console.log(currentUserId)
-    
+    console.log('O id do usuário atual é :');
+    console.log(currentUserId);
+
     return currentUserId === String(postOwnerId);
   }
 
@@ -378,6 +414,4 @@ export class NakedFeedComponent implements OnInit {
       url.endsWith('.tiff')
     );
   }
- 
-  
 }
