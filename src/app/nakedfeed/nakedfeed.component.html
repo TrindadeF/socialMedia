@@ -31,9 +31,10 @@
         [class.swipe-left]="swipeDirection === 'left'"
         (animationend)="handleAnimationEnd()"
       >
+        <!-- Exibe a primeira mídia do usuário -->
         <div class="profile-pic">
           <img
-            [src]="currentUser.profilePic || 'assets/images/default-avatar.png'"
+            [src]="currentUser.secondPosts?.[0]?.media[0] || 'assets/images/default-avatar.png'"
             alt="{{
               currentUser.nickName || ('PROFILE.DEFAULT_NAME' | translate)
             }}"
@@ -44,7 +45,6 @@
           <h3>{{ currentUser.name }}</h3>
           <p>{{ currentUser.age }} {{ "PROFILE.YEARS_OLD" | translate }}</p>
           <p>{{ currentUser.description }}</p>
-          <p></p>
         </div>
 
         <div class="action-buttons">

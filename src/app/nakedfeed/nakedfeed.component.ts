@@ -3,13 +3,8 @@ import { ApiService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post, User } from 'database';
 import { MatSnackBar } from '@angular/material/snack-bar';
-<<<<<<< HEAD
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-=======
-import { ChangeDetectorRef } from '@angular/core';
->>>>>>> 218009165dc92ab3cad7856645a8fd072fac9916
+
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -84,13 +79,6 @@ export class NakedFeedComponent implements OnInit {
       next: (data: User[]) => {
         if (this.gender === 'all') {
           this.users = data.filter((user) => user._id !== currentUserId);
-<<<<<<< HEAD
-        } else if (this.gender === 'M' || this.gender === 'F' || this.gender === 'NB' || this.gender === 'BI' || this.gender === 'TR' || this.gender === 'HOM'
-
-        ) {
-          this.users = data.filter((user) =>
-            user._id !== currentUserId && user.gender === this.gender
-=======
         } else if (
           this.gender === 'M' ||
           this.gender === 'F' ||
@@ -101,7 +89,6 @@ export class NakedFeedComponent implements OnInit {
         ) {
           this.users = data.filter(
             (user) => user._id !== currentUserId && user.gender === this.gender
->>>>>>> 218009165dc92ab3cad7856645a8fd072fac9916
           );
         } else {
           this.users = data.filter((user) => user._id !== currentUserId);
@@ -121,18 +108,6 @@ export class NakedFeedComponent implements OnInit {
     this.swipeDirection = direction;
 
     if (direction === 'right' && this.currentUser) {
-<<<<<<< HEAD
-      this.likeUser(this.currentUser._id); // Apenas registra o like
-    } else if (direction === 'left') {
-      this.ignoreUser(); // Apenas registra o ignorar
-    }
-
-    // Aguarda a animação antes de passar para o próximo usuário
-    setTimeout(() => {
-      this.nextUser();
-      this.swipeDirection = null;
-    }, 500); // Tempo alinhado com a duração da animação CSS
-=======
       this.likeUser(this.currentUser._id);
     } else if (direction === 'left') {
       this.ignoreUser();
@@ -142,7 +117,6 @@ export class NakedFeedComponent implements OnInit {
       this.nextUser();
       this.swipeDirection = null;
     }, 500);
->>>>>>> 218009165dc92ab3cad7856645a8fd072fac9916
   }
 
   handleAnimationEnd(): void {
@@ -291,16 +265,6 @@ export class NakedFeedComponent implements OnInit {
 
     if (!notificationExists) {
       const newNotification = {
-<<<<<<< HEAD
-        userId: this.currentUser?._id ?? 'Usuário desconhecido',
-        message: `${this.currentUser?.name ?? 'Alguém'} está de olho em você!`,
-        timestamp: new Date().toISOString(),
-      };
-      notifications.push(newNotification);
-    
-      localStorage.setItem(notificationsKey, JSON.stringify(notifications));
-    
-=======
         userId: this.currentUser!._id,
         message: `${this.currentUser!.name} Está de olho em você!.`,
         timestamp: new Date().toISOString(),
@@ -309,16 +273,11 @@ export class NakedFeedComponent implements OnInit {
 
       localStorage.setItem(notificationsKey, JSON.stringify(notifications));
 
->>>>>>> 218009165dc92ab3cad7856645a8fd072fac9916
       console.log('Notificação adicionada:', newNotification);
     } else {
       console.log('Notificação já existente, nenhuma ação realizada.');
     }
-<<<<<<< HEAD
-  }    
-=======
   }
->>>>>>> 218009165dc92ab3cad7856645a8fd072fac9916
 
   getNotifications(): any[] {
     if (!this.currentUser || !this.currentUser._id) {

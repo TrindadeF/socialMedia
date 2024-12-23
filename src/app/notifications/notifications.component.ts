@@ -27,6 +27,8 @@ export class NotificationsComponent implements OnInit {
   currentUser!: User;
   followers: any[] = [];
   mutualLikes: { [key: string]: boolean } = {};
+  unreadNotificationsCount: number = 0;
+
 
   constructor(
     private apiService: ApiService,
@@ -44,10 +46,16 @@ export class NotificationsComponent implements OnInit {
       if (userId) {
         this.loadNotifications(userId);
         this.getNewFollowers(userId);
+        
       }
     }
 
     this.getCurrentUser();
+    const userId = this.getUserIdFromAuthService();
+    if (userId) {
+        this.getUnreadNotificationsCount(userId);
+    }
+
   }
 
   loadLikesForPost(postId: string): void {
@@ -60,6 +68,23 @@ export class NotificationsComponent implements OnInit {
         });
       });
   }
+  markNotificationsAsRead(userId: string): void {
+    const notificationsKey = `notifications_${userId}`;
+    const notifications = JSON.parse(localStorage.getItem(notificationsKey) || '[]');
+
+    notifications.forEach((n: any) => (n.read = true));
+    localStorage.setItem(notificationsKey, JSON.stringify(notifications));
+
+    this.unreadNotificationsCount = 0;
+    console.log('Todas as notificações foram marcadas como lidas.');
+}
+
+  getUnreadNotificationsCount(userId: string): void {
+    const notificationsKey = `notifications_${userId}`;
+    const notifications = JSON.parse(localStorage.getItem(notificationsKey) || '[]');
+    this.unreadNotificationsCount = notifications.filter((n: any) => !n.read).length;
+}
+
 
   likePost(postId: string) {
     this.apiService.likePostInFirstFeed(postId).subscribe(
@@ -117,20 +142,24 @@ export class NotificationsComponent implements OnInit {
       },
     });
   }
-  loadNotifications(userId: string) {
-    const notificationsEnabled = this.getNotificationsStatus();
+  loadNotifications(userId: string): void {
     const notificationsKey = `notifications_${userId}`;
-    const notifications = JSON.parse(
-      localStorage.getItem(notificationsKey) || '[]'
-    );
-
+    const notifications = JSON.parse(localStorage.getItem(notificationsKey) || '[]');
+  
+    this.notifications = notifications;
+    this.unreadNotificationsCount = notifications.filter(
+      (notification: any) => !notification.read
+    ).length;
+  
     if (notifications.length > 0) {
-      this.notifications = notifications;
-      notifications.forEach((notification: string) => {
-        this.snackBar.open(notification, 'Fechar', { duration: 3000 });
+      notifications.forEach((notification: any) => {
+        if (!notification.read) {
+          this.snackBar.open(notification.message, 'Fechar', { duration: 3000 });
+        }
       });
     }
   }
+  
   getUserIdFromAuthService(): string {
     return localStorage.getItem('userId') || '';
   }
@@ -152,35 +181,32 @@ export class NotificationsComponent implements OnInit {
   addNotification(likedUserId: string): void {
     const notificationsEnabled = this.getNotificationsStatus();
     if (!notificationsEnabled) {
-      console.log(
-        'Notificações desativadas. Nenhuma notificação será adicionada.'
-      );
-      return;
+        console.log('Notificações desativadas. Nenhuma notificação será adicionada.');
+        return;
     }
 
     const notificationsKey = `notifications_${likedUserId}`;
-    const notifications = JSON.parse(
-      localStorage.getItem(notificationsKey) || '[]'
-    );
+    const notifications = JSON.parse(localStorage.getItem(notificationsKey) || '[]');
 
     const notificationExists = notifications.some(
-      (n: any) => n.userId === this.currentUser._id
+        (n: any) => n.userId === this.currentUser._id
     );
 
     if (!notificationExists) {
-      const newNotification = {
-        userId: this.currentUser._id,
-        message: `${this.currentUser.name} curtiu seu perfil.`,
-        timestamp: new Date().toISOString(),
-      };
-      notifications.push(newNotification);
-      localStorage.setItem(notificationsKey, JSON.stringify(notifications));
+        const newNotification = {
+            userId: this.currentUser._id,
+            message: `${this.currentUser.name} curtiu seu perfil.`,
+            timestamp: new Date().toISOString(),
+            read: false // Marca a notificação como não lida
+        };
+        notifications.push(newNotification);
+        localStorage.setItem(notificationsKey, JSON.stringify(notifications));
 
-      console.log('Notificação adicionada:', newNotification);
+        console.log('Notificação adicionada:', newNotification);
     } else {
-      console.log('Notificação já existente, nenhuma ação realizada.');
+        console.log('Notificação já existente, nenhuma ação realizada.');
     }
-  }
+}
 
   clearNotifications(): void {
     if (!this.currentUser || !this.currentUser._id) {

@@ -1,0 +1,261 @@
+{
+  "MENU": {
+    "HOME": "首页",
+    "FEED": "动态",
+    "EDIT_PROFILE": "编辑资料",
+    "PROFILE": "个人资料",
+    "CHAT": "聊天",
+    "NOTIFICATIONS": "通知",
+    "PAYMENTS": "支付",
+    "SETTINGS": "设置",
+    "LOGOUT": "退出",
+    "LANGUAGE": "语言"
+  },
+  "ACTIONS": {
+    "LIKE": "喜欢",
+    "IGNORE": "忽略",
+    "SEND": "发送",
+    "CANCEL": "取消",
+    "SAVE": "保存",
+    "DELETE": "删除"
+  },
+  "MESSAGES": {
+    "LOADING": "加载中...",
+    "ERROR": "发生错误。",
+    "NO_DATA": "未找到数据。"
+  },
+  "EDIT_PROFILE": {
+    "TITLE": "编辑资料",
+    "PICTURE_ALT": "个人头像预览",
+    "PICTURE_LABEL": "个人头像",
+    "ANONYMOUS_WARNING": "该资料设置为匿名。某些信息隐藏或无法更改。",
+    "NAME_LABEL": "姓名",
+    "USERNAME_LABEL": "用户名",
+    "DESCRIPTION_LABEL": "描述",
+    "EMAIL_LABEL": "电子邮件",
+    "AGE_LABEL": "年龄",
+    "GENDER_LABEL": "性别",
+    "GENDER_SELECT": "选择",
+    "GENDER_MALE": "男性",
+    "GENDER_FEMALE": "女性",
+    "GENDER_NON_BINARY": "非二元",
+    "GENDER_BISEXUAL": "双性恋",
+    "GENDER_TRANSGENDER": "跨性别",
+    "GENDER_HOMOSEXUAL": "同性恋",
+    "ANONYMOUS_LABEL": "匿名资料",
+    "ANONYMOUS_ENABLE": "启用",
+    "ANONYMOUS_DISABLE": "禁用",
+    "SAVE_BUTTON": "保存",
+    "DELETE_BUTTON": "删除资料"
+  },
+  "CHAT": {
+    "TITLE": "聊天",
+    "CHATS": "聊天列表",
+    "WITH": "与...聊天",
+    "MESSAGES_WITH": "与...的消息",
+    "DELETE_CHAT": "删除聊天",
+    "PLACEHOLDER": "输入消息..."
+  },
+  "TERMS": {
+    "CHECKBOX_LABEL": "我接受条款和条件",
+    "ACCEPTED_TEXT": "您已接受条款和条件。点击下面的链接下载：",
+    "DOWNLOAD_LINK": "下载条款和条件"
+  },
+  "COMMENTS": {
+    "ADD_PLACEHOLDER": "添加评论...",
+    "ADD_ARIA_LABEL": "添加评论的字段",
+    "POST_BUTTON_TEXT": "评论",
+    "POST_BUTTON_ARIA_LABEL": "发送评论的按钮"
+  },
+  "HELP_CENTER": {
+    "TITLE": "帮助中心",
+    "DESCRIPTION": "网站的所有信息都在这里。"
+  },
+  "TERMS_OF_USE": {
+    "TITLE": "使用条款",
+    "DESCRIPTION": "在此查看网站的使用条款。"
+  },
+  "PRIVACY_POLICY": {
+    "TITLE": "隐私政策",
+    "DESCRIPTION": "在此查看网站的隐私政策。"
+  },
+  "USER_PREFERENCES": {
+    "TITLE": "用户偏好",
+    "DESCRIPTION": "管理您的用户偏好，例如通知和解锁。"
+  },
+  "NOTIFICATIONS": {
+    "TITLE": "通知",
+    "DESCRIPTION": "在此管理您的通知。"
+  },
+  "BLOCKED_USERS": {
+    "TITLE": "已屏蔽用户",
+    "UNBLOCK_BUTTON": "解除屏蔽"
+  },
+  "FEED": {
+    "HEADER": "ⓃakedLove",
+    "PLACEHOLDER": "你今天要向我们展示什么？",
+    "ALERT": {
+      "SUCCESS": "发布成功！",
+      "ERROR": "发生错误，请稍后重试。"
+    },
+    "POST": {
+      "AVATAR_ALT": "用户头像",
+      "IMAGE_ALT": "帖子图片",
+      "VIDEO_ALT": "帖子视频",
+      "ACTIONS": {
+        "LIKE": "点赞",
+        "COMMENT": "评论",
+        "BLOCK_USER": "屏蔽",
+        "DELETE": "删除"
+      }
+    },
+    "MODAL": {
+      "WELCOME_TITLE": "欢迎！",
+      "PUBLISH": "发布"
+    }
+  },
+  "FORGOT_PASSWORD": {
+    "TITLE": "忘记密码",
+    "HEADER": "忘记密码",
+    "EMAIL_PLACEHOLDER": "输入您的电子邮件",
+    "EMAIL_ERROR": "电子邮件字段是必填项，必须是有效的电子邮件。",
+    "SUBMIT_BUTTON": "发送",
+    "BACK_TO_LOGIN": "返回登录"
+  },
+  "HOME_PAGE": {
+    "TITLE": "首页",
+    "WELCOME_MESSAGE": "欢迎来到 NakedLove",
+    "DESCRIPTION": "在安全且隐秘的环境中探索各种令人兴奋的联系和欲望。加入一个充满活力的社区，与寻找热情和深刻关系的人们相遇。",
+    "REGISTER_BUTTON": "立即注册",
+    "LOGIN_BUTTON": "登录",
+    "AGE_VERIFICATION_MESSAGE": "本网站仅面向 18 岁及以上人士。继续即表示您确认已达到法定年龄，可以浏览面向成人的内容。",
+    "AGE_VERIFICATION_ACCEPT": "我已年满 18 岁 - 进入",
+    "AGE_VERIFICATION_DECLINE": "我未满 18 岁 - 离开",
+    "FEEDBACK_ALT1": "反馈 1",
+    "FEEDBACK_ALT2": "反馈 2",
+    "FEEDBACK_ALT3": "反馈 3",
+    "HOME_IMAGE_ALT": "主页图片",
+    "FOOTER_MESSAGE": "© 2024 成人交友网站。版权所有。"
+  },
+  "MODAL": {
+    "TITLE": "发布新内容",
+    "PLACEHOLDER": "今天你要展示什么？",
+    "UPLOAD_IMAGE": "添加图片",
+    "UPLOAD_MEDIA": "添加媒体",
+    "PREVIEW_IMAGE_ALT": "图片预览",
+    "PUBLISH": "发布",
+    "PUBLISHING": "发布中...",
+    "CLOSE": "关闭",
+    "CLOSE_ARIA_LABEL": "关闭模态框"
+  },
+  "POST": {
+    "IMAGE_ALT": "帖子图片",
+    "CREATED_AT": "创建日期",
+    "DELETE": "删除",
+    "LIKE": "点赞",
+    "ADD_COMMENT_PLACEHOLDER": "添加评论",
+    "SEND_COMMENT": "发送",
+    "COMMENT_AVATAR_ALT": "评论头像",
+    "DELETE_COMMENT": "删除评论"
+  },
+  "FILTER_BY_GENDER": {
+    "LABEL": "按性别筛选：",
+    "ALL": "所有",
+    "MALE": "男性",
+    "FEMALE": "女性"
+  },
+  "SUBSCRIPTION": {
+    "WARNING": "您的订阅已过期或无效。",
+    "RENEW": "续订"
+  },
+  "PROFILE": {
+    "DEFAULT_NAME": "用户",
+    "YEARS_OLD": "岁"
+  },
+  "NO_MORE_CARDS": {
+    "MESSAGE": "您已浏览所有用户！",
+    "RESET": "再看一次",
+    "VIEW_GALLERY": "查看画廊"
+  },
+  "NOTIFICATIONS1": {
+    "TITLE": "通知",
+    "ENABLE": "启用通知",
+    "DISABLE": "禁用通知",
+    "LEFT_TITLE": "收到的通知",
+    "RIGHT_TITLE": "最近的活动",
+    "NO_FOLLOWERS": "您还没有新的关注者。",
+    "TOGGLE_DESCRIPTION": "启用或禁用新关注者的通知。"
+  },
+  "PAYMENTS": {
+    "PAYMENT_IMAGE_ALT": "付款",
+    "TITLE": "+18 内容",
+    "CANCEL_SUBSCRIPTION": "取消订阅",
+    "MONTHLY_PLAN": "每月 €17.99 / 月",
+    "SEMESTRAL_PLAN": "半年 €14.99 / 月",
+    "SEMESTRAL_DISCOUNT": "最多可节省 17%，总计 €89.94。",
+    "ANNUAL_PLAN": "每年 €11.99 / 月",
+    "ANNUAL_DISCOUNT": "最多可节省 33%（最受欢迎），总计 €143.88。",
+    "MAKE_PAYMENT": "进行付款",
+    "CENTER_IMAGE_ALT": "性感图片"
+  },
+  "POST_DETAIL": {
+    "BACK_LINK": "返回",
+    "OWNER_AVATAR_ALT": "帖子拥有者的头像",
+    "POST_IMAGE_ALT": "帖子图片",
+    "COMMENTS_TITLE": "评论：",
+    "COMMENT_AVATAR_ALT": "评论头像",
+    "DELETE_COMMENT_BUTTON": "删除评论",
+    "ADD_COMMENT_PLACEHOLDER": "添加评论",
+    "ADD_COMMENT_BUTTON": "评论"
+  },
+  "CAROUSEL": {
+    "IMAGE_1_ALT": "图片 1",
+    "IMAGE_1_TEXT": "寻找我们的灵魂伴侣总是很复杂。",
+    "IMAGE_2_ALT": "图片 2",
+    "IMAGE_2_TEXT": "有许多应用程序、社交网络、约会网站，但我们仍在寻找真正的爱情。",
+    "IMAGE_3_ALT": "图片 3",
+    "IMAGE_3_TEXT": "当谈到爱情和对的人时，为什么要浪费时间？在 Naked Love，我们摆脱了所有的过滤器和衣服，看看是否有一种更本能的方式找到它。",
+    "IMAGE_4_ALT": "图片 4",
+    "IMAGE_4_TEXT": "我们如何找到合适的人？如果能避免错误、不愉快的惊喜，尤其是浪费时间，那就太好了。在 Naked Love，我们有完美的方法来找到您的灵魂伴侣。",
+    "IMAGE_5_ALT": "图片 5",
+    "IMAGE_5_TEXT": "我们需要什么才能坠入爱河？是什么点燃了火花，又是什么影响了我们选择伴侣？在 Naked Love，我们有机会发现一个伴侣，并以结束时的方式开始，裸露。",
+    "IMAGE_6_ALT": "图片 6",
+    "IMAGE_6_TEXT": "坠入爱河需要多长时间？对于科学家来说，是几秒钟；对于诗人来说，一生都不够。",
+    "GO_TO_HOME": "回到主页"
+  },
+  "PROFILE1": {
+    "ALT_IMAGE": "{{ name }}的头像",
+    "DEFAULT_IMAGE_ALT": "默认头像",
+    "FOLLOWERS": "粉丝: {{ count }}",
+    "FOLLOW": "关注",
+    "UNFOLLOW": "取消关注",
+    "ANONYMOUS_TITLE": "匿名资料",
+    "ANONYMOUS_MESSAGE": "此用户处于匿名模式。",
+    "ADD_POST": "添加帖子",
+    "FEED_TITLE": "动态",
+    "POST_IMAGE": "帖子图片",
+    "DELETE_POST": "删除帖子"
+  },
+  "RULES": {
+    "WELCOME": {
+      "TITLE": "欢迎来到 NakedLove",
+      "DESCRIPTION": "请遵守以下规则："
+    },
+    "BE_YOURSELF": {
+      "TITLE": "做你自己",
+      "DESCRIPTION": "确保你的照片、年龄和简介真实反映自己。"
+    },
+    "BE_CAUTIOUS": {
+      "TITLE": "保持谨慎",
+      "DESCRIPTION": "不要急于透露你的个人信息。"
+    },
+    "SECURE_CONVERSATIONS": {
+      "TITLE": "保持安全的虚拟对话",
+      "DESCRIPTION": "善良待人。尊重他人，像希望被对待那样对待他人。"
+    },
+    "BE_PROACTIVE": {
+      "TITLE": "积极主动",
+      "DESCRIPTION": "始终举报不当行为。"
+    }
+  }
+}
