@@ -31,10 +31,11 @@ export class GalleryComponent implements OnInit {
   profilePicUrl: string = '';
   secondPosts?: Post[] = [];
   gender: string = 'all';
-  filteredUsers: any[] = [];
+  filteredUsers: User[] = [];
   currentIndex: number = 0;
   swipeDirection: string | null = null;
   restrictedInfo!: TemplateRef<NgIfContext<boolean>> | null;
+  searchQuery: string = '';
 
   constructor(
     private apiService: ApiService,
@@ -78,37 +79,28 @@ export class GalleryComponent implements OnInit {
 
     this.apiService.getAllUsers().subscribe({
       next: (data: User[]) => {
-        if (this.gender === 'all') {
-          this.users = data.filter((user) => user._id !== currentUserId);
-        } else if (
-          this.gender === 'M' ||
-          this.gender === 'F' ||
-          this.gender === 'NB' ||
-          this.gender === 'BI' ||
-          this.gender === 'TR' ||
-          this.gender === 'HOM'
-        ) {
-          this.users = data.filter(
-            (user) => user._id !== currentUserId && user.gender === this.gender
-          );
-        } else {
-          this.users = data.filter((user) => user._id !== currentUserId);
-        }
-
-        this.users = data.filter((user) => user._id !== currentUserId);
-        this.currentIndex = 0;
-        this.currentUser = this.users[this.currentIndex] || null;
+        this.users = data.filter(user => user._id !== currentUserId);
+        this.filteredUsers = [...this.users]; // Inicializa com todos os usuários
       },
       error: (error) => {
         console.error('Erro ao carregar usuários:', error);
       },
     });
   }
-
   onGenderChange(gender: string): void {
     this.gender = gender;
     this.loadUsers();
   }
+  filterUsers(): void {
+    if (this.searchQuery) {
+      this.filteredUsers = this.users.filter(user =>
+        user.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    } else {
+      this.filteredUsers = [...this.users]; // Se não houver busca, mostra todos os usuários
+    }
+  }
+
 
   getCurrentUser(): void {
     const currentUserId = this.getLoggedUserId();

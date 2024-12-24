@@ -4,7 +4,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #060606;
-  color: #fff;
+  color: #000000;
   font-family: Arial, sans-serif;
   min-height: 100vh;
   display: flex;
@@ -41,6 +41,15 @@ body {
   display: flex;
   flex-direction: column;
 }
+.search-input {
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 
 /* Efeito hover no cartão */
 .profile-card:hover {
