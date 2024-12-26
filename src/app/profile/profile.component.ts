@@ -76,9 +76,9 @@ export class ProfileComponent implements OnInit {
   }
 
   fetchUserProfile() {
-    const userId = this.route.snapshot.paramMap.get('id');
-    const loggedUserId = this.getUserId();
-
+    const userId = this.route.snapshot.paramMap.get('id'); // Obtém o ID do usuário da URL
+    const loggedUserId = this.getUserId(); // Recupera o ID do usuário logado
+  
     if (userId) {
       this.loading = true;
       this.apiService.getUserById(userId).subscribe({
@@ -90,6 +90,8 @@ export class ProfileComponent implements OnInit {
             description: this.user.description,
           });
           this.user.followerCount = this.user.followers.length;
+  
+          // Verifica se o usuário logado segue o perfil visitado
           this.apiService.isFollowing(loggedUserId, userId).subscribe({
             next: (isFollowing) => {
               this.isFollowing = isFollowing;
@@ -102,6 +104,8 @@ export class ProfileComponent implements OnInit {
         error: (err) => {
           console.error('Erro ao buscar perfil do usuário:', err);
           this.errorMessage = 'Erro ao carregar o perfil do usuário';
+          // Redireciona para a página de login em caso de erro no backend
+          this.router.navigate(['/login']);
         },
         complete: () => {
           this.loading = false;
@@ -110,8 +114,12 @@ export class ProfileComponent implements OnInit {
     } else {
       console.error('ID do usuário não encontrado na URL');
       this.errorMessage = 'ID do usuário não encontrado';
+  
+      // Redireciona para a página de login caso o ID esteja ausente na URL
+      this.router.navigate(['/login']);
     }
   }
+  
 
   toggleFollow() {
     const userId = this.route.snapshot.paramMap.get('id');

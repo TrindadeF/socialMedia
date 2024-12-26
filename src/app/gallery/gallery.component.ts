@@ -76,17 +76,19 @@ export class GalleryComponent implements OnInit {
   loadUsers(): void {
     const currentUserId = this.getLoggedUserId();
     console.log('ID do usuário logado:', currentUserId);
-
+  
     this.apiService.getAllUsers().subscribe({
       next: (data: User[]) => {
-        this.users = data.filter(user => user._id !== currentUserId);
-        this.filteredUsers = [...this.users]; // Inicializa com todos os usuários
+        // Filtra usuários que possuem postagens e exclui o usuário logado
+        this.users = data.filter(user => user._id !== currentUserId && user.secondPosts && user.secondPosts.length > 0);
+        this.filteredUsers = [...this.users]; // Inicializa com todos os usuários filtrados
       },
       error: (error) => {
         console.error('Erro ao carregar usuários:', error);
       },
     });
   }
+  
   onGenderChange(gender: string): void {
     this.gender = gender;
     this.loadUsers();

@@ -72,31 +72,22 @@ export class NakedFeedComponent implements OnInit {
   }
 
   loadUsers(): void {
-    const currentUserId = this.getLoggedUserId();
-    console.log('ID do usuário logado:', currentUserId);
+    const currentUserId = this.getLoggedUserId(); // Método para obter o id do usuário logado
 
     this.apiService.getAllUsers().subscribe({
       next: (data: User[]) => {
         if (this.gender === 'all') {
-          this.users = data.filter((user) => user._id !== currentUserId);
-        } else if (
-          this.gender === 'M' ||
-          this.gender === 'F' ||
-          this.gender === 'NB' ||
-          this.gender === 'BI' ||
-          this.gender === 'TR' ||
-          this.gender === 'HOM'
-        ) {
+          // Se "all" for selecionado, mostra todos os usuários
+          this.users = data.filter(user => user._id !== currentUserId && user.secondPosts && user.secondPosts.length > 0);
+        } else {
+          // Se um gênero for selecionado, filtra os usuários por gênero
           this.users = data.filter(
             (user) => user._id !== currentUserId && user.gender === this.gender
           );
-        } else {
-          this.users = data.filter((user) => user._id !== currentUserId);
         }
 
-        this.users = data.filter((user) => user._id !== currentUserId);
-        this.currentIndex = 0;
-        this.currentUser = this.users[this.currentIndex] || null;
+        // Atualiza o usuário atual (se houver)
+        this.currentUser = this.users.length > 0 ? this.users[0] : null;
       },
       error: (error) => {
         console.error('Erro ao carregar usuários:', error);

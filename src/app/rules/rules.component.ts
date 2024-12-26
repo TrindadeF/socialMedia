@@ -36,9 +36,11 @@ export class RulesComponent {
   ];
 
   constructor(private router: Router, private translate: TranslateService) {
-    if (!sessionStorage.getItem('rulesReloaded')) {
-      sessionStorage.setItem('rulesReloaded', 'true');
-      window.location.reload();
+    // Verifica se as regras já foram visualizadas
+    const hasViewedRules = localStorage.getItem('hasViewedRules');
+    if (hasViewedRules) {
+      // Se já foram visualizadas, redireciona diretamente para o perfil
+      this.router.navigate(['/edit-profile']);
     }
   }
 
@@ -52,7 +54,8 @@ export class RulesComponent {
     if (this.currentIndex < this.items.length - 1) {
       this.currentIndex++;
     } else {
-      // Ao terminar as regras, redireciona para o perfil
+      // Marca as regras como visualizadas e redireciona para o perfil
+      localStorage.setItem('hasViewedRules', 'true');
       this.router.navigate(['/edit-profile']);
     }
   }

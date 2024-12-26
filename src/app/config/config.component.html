@@ -1,4 +1,31 @@
 <div class="container">
+  <!-- Divisão 2 - Preferências do Usuário -->
+  <div class="section" (click)="togglePreferences()">
+    <h3>{{ "USER_PREFERENCES.TITLE" | translate }}</h3>
+    <p>{{ "USER_PREFERENCES.DESCRIPTION" | translate }}</p>
+  </div>
+
+  <!-- Seção de Preferências do Usuário Expandida -->
+  <div *ngIf="preferencesVisible" class="preferences">
+    <div class="section" (click)="goToNotifications()">
+      <h3>{{ "NOTIFICATIONS.TITLE" | translate }}</h3>
+      <p>{{ "NOTIFICATIONS.DESCRIPTION" | translate }}</p>
+    </div>
+  </div>
+
+  <!-- Usuários Bloqueados -->
+  <div *ngIf="blockedUsersData.length > 0" class="blocked-users-section">
+    <h3>{{ "BLOCKED_USERS.TITLE" | translate }}</h3>
+    <ul>
+      <li *ngFor="let blockeduser of blockedUsersData">
+        {{ blockeduser.name }}
+        <button class="unblock-btn" (click)="unblockUser(blockeduser._id)">
+          {{ "BLOCKED_USERS.UNBLOCK_BUTTON" | translate }}
+        </button>
+      </li>
+    </ul>
+  </div>
+
   <!-- Divisão 1 -->
   <div class="section" (click)="openHelpDocument()">
     <h3>{{ "HELP_CENTER.TITLE" | translate }}</h3>
@@ -24,33 +51,5 @@
     <p>Para questões relacionadas à publicidade, envie um email para: 
       <a href="mailto:marketing@nakedlove.eu">Publicidade</a>
     </p>
-  </div>
-
-  <!-- Divisão 2 -->
-  <div class="section" (click)="togglePreferences()">
-    <h3>{{ "USER_PREFERENCES.TITLE" | translate }}</h3>
-    <p>{{ "USER_PREFERENCES.DESCRIPTION" | translate }}</p>
-  </div>
-
-  <!-- Seção de Preferências do Usuário Expandida -->
-  <div *ngIf="preferencesVisible" class="preferences">
-    <div class="section" (click)="goToNotifications()">
-      <h3>{{ "NOTIFICATIONS.TITLE" | translate }}</h3>
-      <p>{{ "NOTIFICATIONS.DESCRIPTION" | translate }}</p>
-    </div>
-  </div>
-
-  <!-- Usuários Bloqueados -->
-  <div *ngIf="blockedUsersData.length > 0" class="blocked-users-section">
-    <h3>{{ "BLOCKED_USERS.TITLE" | translate }}</h3>
-    <ul>
-      <li *ngFor="let blockeduser of blockedUsersData">
-        {{ blockeduser.name }}
-        <button class="unblock-btn" (click)="unblockUser(blockeduser._id)">
-          {{ "BLOCKED_USERS.UNBLOCK_BUTTON" | translate }}
-        </button>
-      </li>
-    </ul>
-    
   </div>
 </div>
