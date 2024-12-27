@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit {
   private checkUserLogin() {
     const userId = this.getUserId();
     if (!userId) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/home']);
     }
   }
 
@@ -76,7 +76,7 @@ export class ProfileComponent implements OnInit {
   }
 
   fetchUserProfile() {
-    const userId = this.route.snapshot.paramMap.get('id'); // Obtém o ID do usuário da URL
+    const userId = this.route.snapshot.paramMap.get('id') || this.getUserId(); // Obtém o ID do usuário da URL
     const loggedUserId = this.getUserId(); // Recupera o ID do usuário logado
   
     if (userId) {
@@ -105,7 +105,7 @@ export class ProfileComponent implements OnInit {
           console.error('Erro ao buscar perfil do usuário:', err);
           this.errorMessage = 'Erro ao carregar o perfil do usuário';
           // Redireciona para a página de login em caso de erro no backend
-          this.router.navigate(['/login']);
+        
         },
         complete: () => {
           this.loading = false;
@@ -116,7 +116,7 @@ export class ProfileComponent implements OnInit {
       this.errorMessage = 'ID do usuário não encontrado';
   
       // Redireciona para a página de login caso o ID esteja ausente na URL
-      this.router.navigate(['/login']);
+    
     }
   }
   

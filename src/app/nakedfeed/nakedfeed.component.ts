@@ -213,7 +213,6 @@ export class NakedFeedComponent implements OnInit {
     this.apiService.likeUser(userId, likedUserId).subscribe(
       (response) => {
         console.log('Like registrado com sucesso!', response);
-        this.addNotification(likedUserId);
         this.checkMutualLikes();
       },
       (error) => {
@@ -244,53 +243,7 @@ export class NakedFeedComponent implements OnInit {
     this.currentUser = this.users[this.currentIndex] || null;
   }
 
-  addNotification(likedUserId: string): void {
-    const notificationsKey = `notifications_${likedUserId}`;
-    const notifications = JSON.parse(
-      localStorage.getItem(notificationsKey) || '[]'
-    );
-
-    const notificationExists = notifications.some(
-      (n: any) => n.userId === this.currentUser!._id
-    );
-
-    if (!notificationExists) {
-      const newNotification = {
-        userId: this.currentUser!._id,
-        message: `${this.currentUser!.name} Está de olho em você!.`,
-        timestamp: new Date().toISOString(),
-      };
-      notifications.push(newNotification);
-
-      localStorage.setItem(notificationsKey, JSON.stringify(notifications));
-
-      console.log('Notificação adicionada:', newNotification);
-    } else {
-      console.log('Notificação já existente, nenhuma ação realizada.');
-    }
-  }
-
-  getNotifications(): any[] {
-    if (!this.currentUser || !this.currentUser._id) {
-      console.error('Usuário atual não encontrado.');
-      return [];
-    }
-
-    const notificationsKey = `notifications_${this.currentUser._id}`;
-    return JSON.parse(localStorage.getItem(notificationsKey) || '[]');
-  }
-
-  clearNotifications(): void {
-    if (!this.currentUser || !this.currentUser._id) {
-      console.error('Usuário atual não encontrado.');
-      return;
-    }
-
-    const notificationsKey = `notifications_${this.currentUser._id}`;
-    localStorage.removeItem(notificationsKey);
-    console.log('Notificações limpas para o usuário logado.');
-  }
-
+ 
   goToChat(otherUserId: string): void {
     if (!this.currentUser || !this.currentUser._id) {
       console.error('Usuário atual não encontrado.');
