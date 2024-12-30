@@ -124,40 +124,45 @@ export class GalleryComponent implements OnInit {
   }
 
   checkUserSubscriptionStatus(): void {
-    console.log('Iniciando verificação de status de assinatura...');
+    console.log('Verificando o status da assinatura do usuário...');
     const currentUserId = this.getLoggedUserId();
+
     if (!currentUserId) {
-      console.error('ID do usuário atual não encontrado.');
+      console.error('ID do usuário logado não encontrado.');
+      this.showOverlay = true;
+      this.errorMessage =
+        'Erro ao verificar a assinatura. Faça login novamente.';
       return;
     }
 
-    this.apiService.checkSubscriptionStatus(currentUserId).subscribe(
-      (response) => {
-        console.log('Resposta de status de assunatura:', response);
+    this.apiService.checkSubscriptionStatus(currentUserId).subscribe({
+      next: (response) => {
+        console.log('Resposta do status da assinatura:', response);
         this.hasActiveSubscription = response.hasActiveSubscription;
+
         if (!this.hasActiveSubscription) {
           this.showOverlay = true;
           this.snackBar
-            .open(
-              'É preciso assinar um plano para usar esta página.',
-              'Assinar Agora',
-              {
-                duration: 5000,
-                verticalPosition: 'top',
-              }
-            )
+            .open('Sua assinatura expirou ou é inválida.', 'Assinar Agora', {
+              duration: 5000,
+              verticalPosition: 'top',
+            })
             .onAction()
             .subscribe(() => {
               this.showOverlay = false;
-              this.router.navigate(['/payments']);
+              this.router.navigate(['/subscribe']);
             });
+        } else {
+          this.showOverlay = false;
         }
       },
-      (error) => {
-        console.error('Erro ao verificar status da assinatura:', error);
+      error: (error) => {
+        console.error('Erro ao verificar o status da assinatura:', error);
         const errorMessage =
-          error.error?.message || 'Erro ao verificar status da assinatura.';
+          error.error?.message || 'Erro ao verificar a assinatura.';
+        this.errorMessage = errorMessage;
         this.showOverlay = true;
+
         this.snackBar
           .open(errorMessage, 'Assinar Agora', {
             duration: 5000,
@@ -166,10 +171,10 @@ export class GalleryComponent implements OnInit {
           .onAction()
           .subscribe(() => {
             this.showOverlay = false;
-            this.router.navigate(['/payments']);
+            this.router.navigate(['/subscribe']);
           });
-      }
-    );
+      },
+    });
   }
 
   checkMutualLikes(): void {

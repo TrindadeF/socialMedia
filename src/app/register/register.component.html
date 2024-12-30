@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastro - Site de Relacionamento Adulto</title>
+    <title>Registration - Adult Dating Site</title>
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
@@ -21,16 +21,16 @@
     </header>
 
     <main class="container mt-5" id="form-container">
-      <h1 class="text-center mb-4">Cadastre-se</h1>
+      <h1 class="text-center mb-4">Sign up</h1>
 
       <form>
         <div class="form-group">
-          <label for="username">Nome de Usuário</label>
+          <label for="username">Username</label>
           <input
             type="text"
             id="username"
             class="form-control"
-            placeholder="Digite seu nome de usuário"
+            placeholder="Enter your username"
             [(ngModel)]="name"
             required
             name="name"
@@ -42,38 +42,38 @@
             type="email"
             id="email"
             class="form-control"
-            placeholder="Digite seu email"
+            placeholder="Enter your email"
             [(ngModel)]="email"
             required
             name="email"
           />
         </div>
         <div class="form-group">
-          <label for="password">Senha</label>
+          <label for="password">Password</label>
           <input
             type="password"
             id="password"
             class="form-control"
-            placeholder="Digite sua senha"
+            placeholder="Enter your password"
             [(ngModel)]="password"
             required
             name="password"
           />
         </div>
         <div class="form-group">
-          <label for="confirmPassword">Confirme sua Senha</label>
+          <label for="confirmPassword">Confirm your password</label>
           <input
             type="password"
             id="confirmPassword"
             class="form-control"
-            placeholder="Confirme sua senha"
+            placeholder="Confirm your password"
             [(ngModel)]="confirmPassword"
             required
             name="confirmPassword"
           />
         </div>
         <div class="form-group">
-          <label for="gender-select">Gênero</label>
+          <label for="gender-select">Gender</label>
           <select
             id="gender-select"
             class="form-control"
@@ -81,22 +81,22 @@
             required
             name="gender"
           >
-            <option value="" disabled selected>Selecione seu Gênero</option>
-            <option value="M">Masculino</option>
-            <option value="F">Feminino</option>
+            <option value="" disabled selected>Select your gender</option>
+            <option value="M">Masculine</option>
+            <option value="F">Feminine</option>
             <option value="HOM">Homosexual</option>
-            <option value="TR">Transgênero</option>
-            <option value="BI">Bigênero</option>
-            <option value="NB">Não Binário</option>
+            <option value="TR">Transgender</option>
+            <option value="BI">Bigender</option>
+            <option value="NB">No Binary</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="age">Idade</label>
+          <label for="age">Age</label>
           <input
             type="number"
             id="age"
             class="form-control"
-            placeholder="Digite sua idade"
+            placeholder="Enter your age"
             [(ngModel)]="age"
             required
             name="age"
@@ -112,11 +112,11 @@
             name="termsAccepted"
           />
           <label class="form-check-label" for="termsCheck">
-            Aceito os
+            I accept the
             <a
               href="assets/docs/TERMOS DE USO – NAKED LOVE ( LEIA COM ATENÇÃO!!! ).pdf"
               download
-              >termos e condições</a
+              >terms and conditions</a
             >
           </label>
         </div>
@@ -127,7 +127,7 @@
           (click)="registerUser()"
           [disabled]="!termsAccepted"
         >
-          Cadastrar
+          Sign up
         </button>
 
         <div *ngIf="errorMessage" class="text-danger text-center mt-3">
@@ -136,7 +136,7 @@
       </form>
 
       <a [routerLink]="['/login']" class="d-block text-center mt-3">
-        Já tem uma conta? Faça login
+        Already have an account? Log in
       </a>
     </main>
 
