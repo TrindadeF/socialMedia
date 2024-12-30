@@ -5,6 +5,7 @@ import { Post, User } from 'database';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ChangeDetectorRef } from '@angular/core';
 
+
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -274,7 +275,6 @@ loadNotifications(): void {
     this.currentUser = this.users[this.currentIndex] || null;
   }
 
- 
   goToChat(otherUserId: string): void {
     if (!this.currentUser || !this.currentUser._id) {
       console.error('Usuário atual não encontrado.');
