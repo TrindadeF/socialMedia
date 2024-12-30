@@ -24,7 +24,12 @@
       </a>
       <a routerLink="/notifications" class="menu-item">
         <mat-icon>notifications</mat-icon>
+        <span class="badge" *ngIf="unreadNotificationsCount > 0">
+          {{ unreadNotificationsCount }}
+        </span>
       </a>
+      
+      
       <a routerLink="/payments" class="menu-item">
         <mat-icon>payment</mat-icon>
       </a>

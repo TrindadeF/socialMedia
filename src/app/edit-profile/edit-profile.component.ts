@@ -43,8 +43,17 @@ export class EditProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Força o recarregamento da página
+    if (!sessionStorage.getItem('reloaded')) {
+      sessionStorage.setItem('reloaded', 'true');
+      window.location.reload();
+    } else {
+      sessionStorage.removeItem('reloaded');
+    }
+  
     this.fetchUserProfile();
   }
+  
 
   fetchUserProfile() {
     const userId = this.getLoggedInUserId();

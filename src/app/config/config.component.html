@@ -1,19 +1,5 @@
 <div class="container">
-  <!-- Divisão 1 -->
-  <div class="section" (click)="openHelpDocument()">
-    <h3>{{ "HELP_CENTER.TITLE" | translate }}</h3>
-    <p>{{ "HELP_CENTER.DESCRIPTION" | translate }}</p>
-  </div>
-  <div class="section" (click)="openTermsUse()">
-    <h3>{{ "TERMS_OF_USE.TITLE" | translate }}</h3>
-    <p>{{ "TERMS_OF_USE.DESCRIPTION" | translate }}</p>
-  </div>
-  <div class="section" (click)="openPoliticUse()">
-    <h3>{{ "PRIVACY_POLICY.TITLE" | translate }}</h3>
-    <p>{{ "PRIVACY_POLICY.DESCRIPTION" | translate }}</p>
-  </div>
-
-  <!-- Divisão 2 -->
+  <!-- Divisão 2 - Preferências do Usuário -->
   <div class="section" (click)="togglePreferences()">
     <h3>{{ "USER_PREFERENCES.TITLE" | translate }}</h3>
     <p>{{ "USER_PREFERENCES.DESCRIPTION" | translate }}</p>
@@ -38,5 +24,32 @@
         </button>
       </li>
     </ul>
+  </div>
+
+  <!-- Divisão 1 -->
+  <div class="section" (click)="openHelpDocument()">
+    <h3>{{ "HELP_CENTER.TITLE" | translate }}</h3>
+    <p>{{ "HELP_CENTER.DESCRIPTION" | translate }}</p>
+  </div>
+  <div class="section" (click)="openTermsUse()">
+    <h3>{{ "TERMS_OF_USE.TITLE" | translate }}</h3>
+    <p>{{ "TERMS_OF_USE.DESCRIPTION" | translate }}</p>
+  </div>
+  <div class="section" (click)="openPoliticUse()">
+    <h3>{{ "PRIVACY_POLICY.TITLE" | translate }}</h3>
+    <p>{{ "PRIVACY_POLICY.DESCRIPTION" | translate }}</p>
+  </div>
+  <div class="support-section">
+    <h3>Contato com o Suporte</h3>
+    <p>Para relatar problemas ou abusos, entre em contato pelo email: 
+      <a href="mailto:support@nakedlove.eu">Suporte</a>
+    </p>
+  </div>
+  <!-- Contato de Publicidade -->
+  <div class="marketing-section">
+    <h3>Contato de Publicidade</h3>
+    <p>Para questões relacionadas à publicidade, envie um email para: 
+      <a href="mailto:marketing@nakedlove.eu">Publicidade</a>
+    </p>
   </div>
 </div>

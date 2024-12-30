@@ -4,6 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Post, User } from 'database';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ChangeDetectorRef } from '@angular/core';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 92eff21fdd6b7a52b49544880676f87336875c15
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -71,12 +75,12 @@ export class NakedFeedComponent implements OnInit {
   }
 
   loadUsers(): void {
-    const currentUserId = this.getLoggedUserId();
-    console.log('ID do usuário logado:', currentUserId);
+    const currentUserId = this.getLoggedUserId(); // Método para obter o id do usuário logado
 
     this.apiService.getAllUsers().subscribe({
       next: (data: User[]) => {
         if (this.gender === 'all') {
+<<<<<<< HEAD
           this.users = data.filter((user) => user._id !== currentUserId);
         } else if (
           this.gender === 'M' ||
@@ -86,16 +90,19 @@ export class NakedFeedComponent implements OnInit {
           this.gender === 'TR' ||
           this.gender === 'HOM'
         ) {
+=======
+          // Se "all" for selecionado, mostra todos os usuários
+          this.users = data.filter(user => user._id !== currentUserId && user.secondPosts && user.secondPosts.length > 0);
+        } else {
+          // Se um gênero for selecionado, filtra os usuários por gênero
+>>>>>>> 92eff21fdd6b7a52b49544880676f87336875c15
           this.users = data.filter(
             (user) => user._id !== currentUserId && user.gender === this.gender
           );
-        } else {
-          this.users = data.filter((user) => user._id !== currentUserId);
         }
 
-        this.users = data.filter((user) => user._id !== currentUserId);
-        this.currentIndex = 0;
-        this.currentUser = this.users[this.currentIndex] || null;
+        // Atualiza o usuário atual (se houver)
+        this.currentUser = this.users.length > 0 ? this.users[0] : null;
       },
       error: (error) => {
         console.error('Erro ao carregar usuários:', error);
@@ -221,7 +228,6 @@ export class NakedFeedComponent implements OnInit {
     this.apiService.likeUser(userId, likedUserId).subscribe(
       (response) => {
         console.log('Like registrado com sucesso!', response);
-        this.addNotification(likedUserId);
         this.checkMutualLikes();
       },
       (error) => {
@@ -252,6 +258,7 @@ export class NakedFeedComponent implements OnInit {
     this.currentUser = this.users[this.currentIndex] || null;
   }
 
+<<<<<<< HEAD
   addNotification(likedUserId: string): void {
     const notificationsKey = `notifications_${likedUserId}`;
     const notifications = JSON.parse(
@@ -299,6 +306,9 @@ export class NakedFeedComponent implements OnInit {
     console.log('Notificações limpas para o usuário logado.');
   }
 
+=======
+ 
+>>>>>>> 92eff21fdd6b7a52b49544880676f87336875c15
   goToChat(otherUserId: string): void {
     if (!this.currentUser || !this.currentUser._id) {
       console.error('Usuário atual não encontrado.');

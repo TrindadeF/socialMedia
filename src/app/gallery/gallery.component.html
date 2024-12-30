@@ -1,7 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payments</title>
+  <link rel="stylesheet" href="gallery.component.css">
+</head>
+<input 
+  type="text" 
+  placeholder="Procure seu Match..." 
+  [(ngModel)]="searchQuery" 
+  (input)="filterUsers()"  
+  class="search-input" />
+
+<!-- Overlay -->
 <div *ngIf="showOverlay" class="overlay"></div>
 
+<!-- Conteúdo da página -->
 <div class="page-content" [class.disabled]="showOverlay">
   <div class="profile-container">
+
+    <!-- Mensagem de assinatura expirada -->
     <div *ngIf="hasActiveSubscription === false">
       <p>
         Sua assinatura expirou ou é inválida.
@@ -9,7 +28,8 @@
       </p>
     </div>
 
-    <div class="profile-card" *ngFor="let user of users">
+    <!-- Cartões de perfil, agora filtrados -->
+    <div class="profile-card" *ngFor="let user of filteredUsers">
       <div class="profile-pic">
         <img alt="{{ user.nickName || 'Usuário' }}" />
       </div>
@@ -42,10 +62,7 @@
         <div *ngIf="user.secondPosts" class="user-posts">
           <mat-tab-group>
             <mat-tab
-              *ngFor="
-                let post of user.secondPosts | slice : 0 : 2;
-                let i = index
-              "
+              *ngFor="let post of user.secondPosts | slice : 0 : 2; let i = index"
             >
               <ng-template mat-tab-label>
                 <mat-icon>visibility</mat-icon>
