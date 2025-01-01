@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Post, User } from 'database';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ChangeDetectorRef } from '@angular/core';
+
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -50,6 +51,7 @@ export class NakedFeedComponent implements OnInit {
     this.getCurrentUser();
     this.fetchUserPosts();
     this.checkMutualLikes();
+    this.loadNotifications();
   }
 
   openImageViewer(postId: string) {
@@ -223,12 +225,49 @@ export class NakedFeedComponent implements OnInit {
     this.apiService.likeUser(userId, likedUserId).subscribe(
       (response) => {
         console.log('Like registrado com sucesso!', response);
-        this.checkMutualLikes();
+
+        // Adicionando a notificação para o usuário receptor no localStorage
+        const notifications = JSON.parse(
+          localStorage.getItem(`notifications_${likedUserId}`) || '[]'
+        );
+        notifications.push({
+          message: 'Parece que alguém está de olho em você!',
+          timestamp: new Date(),
+        });
+        localStorage.setItem(
+          `notifications_${likedUserId}`,
+          JSON.stringify(notifications)
+        );
+
+        this.checkMutualLikes(); // Atualiza a verificação de likes mútuos
       },
       (error) => {
         console.error('Erro ao registrar o like:', error);
       }
     );
+  }
+  loadNotifications(): void {
+    if (!this.currentUser || !this.currentUser._id) {
+      console.error('Usuário atual não encontrado.');
+      return;
+    }
+
+    const userId = this.currentUser._id;
+    const notifications = JSON.parse(
+      localStorage.getItem(`notifications_${userId}`) || '[]'
+    );
+
+    if (notifications.length > 0) {
+      notifications.forEach((notification: any) => {
+        this.snackBar.open(notification.message, 'Fechar', {
+          duration: 3000,
+          panelClass: ['success-snackbar'],
+        });
+      });
+
+      // Limpa as notificações após exibi-las
+      localStorage.removeItem(`notifications_${userId}`);
+    }
   }
 
   ignoreUser(): void {
