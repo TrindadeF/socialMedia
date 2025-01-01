@@ -36,10 +36,8 @@ export class RulesComponent {
   ];
 
   constructor(private router: Router, private translate: TranslateService) {
-    // Verifica se as regras já foram visualizadas
     const hasViewedRules = localStorage.getItem('hasViewedRules');
     if (hasViewedRules) {
-      // Se já foram visualizadas, redireciona diretamente para o perfil
       this.router.navigate(['/edit-profile']);
     }
   }
@@ -54,11 +52,7 @@ export class RulesComponent {
     if (this.currentIndex < this.items.length - 1) {
       this.currentIndex++;
     } else {
-<<<<<<< HEAD
-=======
-      // Marca as regras como visualizadas e redireciona para o perfil
       localStorage.setItem('hasViewedRules', 'true');
->>>>>>> 92eff21fdd6b7a52b49544880676f87336875c15
       this.router.navigate(['/edit-profile']);
     }
   }

@@ -14,7 +14,6 @@
         <option value="all">{{ "FILTER_BY_GENDER.ALL" | translate }}</option>
         <option value="M">{{ "FILTER_BY_GENDER.MALE" | translate }}</option>
         <option value="F">{{ "FILTER_BY_GENDER.FEMALE" | translate }}</option>
-        
       </select>
     </div>
 
@@ -32,7 +31,6 @@
         [class.swipe-left]="swipeDirection === 'left'"
         (animationend)="handleAnimationEnd()"
       >
-        <!-- Exibe a primeira mídia do usuário -->
         <div class="profile-pic">
           <img
             [src]="currentUser.secondPosts?.[0]?.media[0] || 'assets/images/default-avatar.png'"
@@ -43,7 +41,6 @@
         </div>
 
         <div class="profile-info">
-          
           <p>{{ currentUser.description }}</p>
         </div>
 
