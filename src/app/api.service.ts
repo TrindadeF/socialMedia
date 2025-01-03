@@ -304,7 +304,7 @@ export class ApiService {
   }
   cancelSubscription(subscriptionId: string): Observable<any> {
     return this.http.post<any>(
-      `${this.api}/stripe/web-hook/cancel-subscription`,
+      `${this.api}/stripe-webhook/cancel-subscription`,
       { subscriptionId }
     );
   }

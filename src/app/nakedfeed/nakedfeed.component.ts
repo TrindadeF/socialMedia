@@ -5,7 +5,6 @@ import { Post, User } from 'database';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ChangeDetectorRef } from '@angular/core';
 
-
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -79,16 +78,27 @@ export class NakedFeedComponent implements OnInit {
     this.apiService.getAllUsers().subscribe({
       next: (data: User[]) => {
         if (this.gender === 'all') {
-          // Se "all" for selecionado, mostra todos os usuários
-          this.users = data.filter(user => user._id !== currentUserId && user.secondPosts && user.secondPosts.length > 0);
+          this.users = data.filter((user) => user._id !== currentUserId);
+        } else if (
+          this.gender === 'M' ||
+          this.gender === 'F' ||
+          this.gender === 'NB' ||
+          this.gender === 'BI' ||
+          this.gender === 'TR' ||
+          this.gender === 'HOM'
+        ) {
+          this.users = data.filter(
+            (user) =>
+              user._id !== currentUserId &&
+              user.secondPosts &&
+              user.secondPosts.length > 0
+          );
         } else {
-          // Se um gênero for selecionado, filtra os usuários por gênero
           this.users = data.filter(
             (user) => user._id !== currentUserId && user.gender === this.gender
           );
         }
 
-        // Atualiza o usuário atual (se houver)
         this.currentUser = this.users.length > 0 ? this.users[0] : null;
       },
       error: (error) => {
@@ -215,11 +225,19 @@ export class NakedFeedComponent implements OnInit {
     this.apiService.likeUser(userId, likedUserId).subscribe(
       (response) => {
         console.log('Like registrado com sucesso!', response);
-        
+
         // Adicionando a notificação para o usuário receptor no localStorage
-        const notifications = JSON.parse(localStorage.getItem(`notifications_${likedUserId}`) || '[]');
-        notifications.push({ message: 'Parece que alguém está de olho em você!', timestamp: new Date() });
-        localStorage.setItem(`notifications_${likedUserId}`, JSON.stringify(notifications));
+        const notifications = JSON.parse(
+          localStorage.getItem(`notifications_${likedUserId}`) || '[]'
+        );
+        notifications.push({
+          message: 'Parece que alguém está de olho em você!',
+          timestamp: new Date(),
+        });
+        localStorage.setItem(
+          `notifications_${likedUserId}`,
+          JSON.stringify(notifications)
+        );
 
         this.checkMutualLikes(); // Atualiza a verificação de likes mútuos
       },
@@ -227,31 +245,30 @@ export class NakedFeedComponent implements OnInit {
         console.error('Erro ao registrar o like:', error);
       }
     );
-}
-loadNotifications(): void {
-  if (!this.currentUser || !this.currentUser._id) {
+  }
+  loadNotifications(): void {
+    if (!this.currentUser || !this.currentUser._id) {
       console.error('Usuário atual não encontrado.');
       return;
-  }
+    }
 
-  const userId = this.currentUser._id;
-  const notifications = JSON.parse(localStorage.getItem(`notifications_${userId}`) || '[]');
+    const userId = this.currentUser._id;
+    const notifications = JSON.parse(
+      localStorage.getItem(`notifications_${userId}`) || '[]'
+    );
 
-  if (notifications.length > 0) {
+    if (notifications.length > 0) {
       notifications.forEach((notification: any) => {
-          this.snackBar.open(notification.message, 'Fechar', {
-              duration: 3000,
-              panelClass: ['success-snackbar']
-          });
+        this.snackBar.open(notification.message, 'Fechar', {
+          duration: 3000,
+          panelClass: ['success-snackbar'],
+        });
       });
 
       // Limpa as notificações após exibi-las
       localStorage.removeItem(`notifications_${userId}`);
+    }
   }
-}
-
-
-
 
   ignoreUser(): void {
     console.log('Usuário ignorado:', this.currentUser!._id);
@@ -273,6 +290,53 @@ loadNotifications(): void {
   resetGallery(): void {
     this.currentIndex = 0;
     this.currentUser = this.users[this.currentIndex] || null;
+  }
+
+  addNotification(likedUserId: string): void {
+    const notificationsKey = `notifications_${likedUserId}`;
+    const notifications = JSON.parse(
+      localStorage.getItem(notificationsKey) || '[]'
+    );
+
+    const notificationExists = notifications.some(
+      (n: any) => n.userId === this.currentUser!._id
+    );
+
+    if (!notificationExists) {
+      const newNotification = {
+        userId: this.currentUser!._id,
+        message: `${this.currentUser!.name} Está de olho em você!.`,
+        timestamp: new Date().toISOString(),
+      };
+      notifications.push(newNotification);
+
+      localStorage.setItem(notificationsKey, JSON.stringify(notifications));
+
+      console.log('Notificação adicionada:', newNotification);
+    } else {
+      console.log('Notificação já existente, nenhuma ação realizada.');
+    }
+  }
+
+  getNotifications(): any[] {
+    if (!this.currentUser || !this.currentUser._id) {
+      console.error('Usuário atual não encontrado.');
+      return [];
+    }
+
+    const notificationsKey = `notifications_${this.currentUser._id}`;
+    return JSON.parse(localStorage.getItem(notificationsKey) || '[]');
+  }
+
+  clearNotifications(): void {
+    if (!this.currentUser || !this.currentUser._id) {
+      console.error('Usuário atual não encontrado.');
+      return;
+    }
+
+    const notificationsKey = `notifications_${this.currentUser._id}`;
+    localStorage.removeItem(notificationsKey);
+    console.log('Notificações limpas para o usuário logado.');
   }
 
   goToChat(otherUserId: string): void {
@@ -395,15 +459,4 @@ loadNotifications(): void {
       url.endsWith('.tiff')
     );
   }
-
-
-
-
-
-
-
-
-
-
-
 }
