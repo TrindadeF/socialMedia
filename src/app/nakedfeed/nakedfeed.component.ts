@@ -226,7 +226,7 @@ export class NakedFeedComponent implements OnInit {
       (response) => {
         console.log('Like registrado com sucesso!', response);
 
-        // Adicionando a notificação para o usuário receptor no localStorage
+       
         const notifications = JSON.parse(
           localStorage.getItem(`notifications_${likedUserId}`) || '[]'
         );
@@ -239,7 +239,7 @@ export class NakedFeedComponent implements OnInit {
           JSON.stringify(notifications)
         );
 
-        this.checkMutualLikes(); // Atualiza a verificação de likes mútuos
+        this.checkMutualLikes(); 
       },
       (error) => {
         console.error('Erro ao registrar o like:', error);
@@ -294,30 +294,31 @@ export class NakedFeedComponent implements OnInit {
 
   addNotification(likedUserId: string): void {
     const notificationsKey = `notifications_${likedUserId}`;
-    const notifications = JSON.parse(
-      localStorage.getItem(notificationsKey) || '[]'
-    );
-
+    const notifications = JSON.parse(localStorage.getItem(notificationsKey) || '[]');
+  
     const notificationExists = notifications.some(
       (n: any) => n.userId === this.currentUser!._id
     );
-
+  
     if (!notificationExists) {
       const newNotification = {
         userId: this.currentUser!._id,
-        message: `${this.currentUser!.name} Está de olho em você!.`,
+        message: `${this.currentUser!.name} Está de olho em você!`,
         timestamp: new Date().toISOString(),
       };
       notifications.push(newNotification);
-
+  
       localStorage.setItem(notificationsKey, JSON.stringify(notifications));
-
+  
+      // Atualiza as notificações exibidas no componente
+      this.getNotifications = notifications.map((n: any) => n.message);
+  
       console.log('Notificação adicionada:', newNotification);
     } else {
       console.log('Notificação já existente, nenhuma ação realizada.');
     }
   }
-
+  
   getNotifications(): any[] {
     if (!this.currentUser || !this.currentUser._id) {
       console.error('Usuário atual não encontrado.');

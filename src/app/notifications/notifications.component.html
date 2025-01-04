@@ -1,4 +1,5 @@
 <div class="page-wrapper">
+  <!-- Notification Toggle -->
   <div class="notification-toggle">
     <p class="toggle-description">
       {{ "NOTIFICATIONS1.TOGGLE_DESCRIPTION" | translate }}
@@ -7,17 +8,15 @@
       [checked]="getNotificationsStatus()"
       (change)="toggleNotifications($event.checked)"
     >
-      {{
-        getNotificationsStatus()
-          ? ("NOTIFICATIONS1.DISABLE" | translate)
-          : ("NOTIFICATIONS1.ENABLE" | translate)
-      }}
+      {{ "NOTIFICATIONS1.DISABLE" | translate }}
     </mat-slide-toggle>
   </div>
 
+  <!-- Page Title -->
   <h1 class="typing-animation">{{ "NOTIFICATIONS1.TITLE" | translate }}</h1>
 
-  <div class="notifications-container" *ngIf="followers.length > 0">
+  <!-- Followers Section -->
+  <div class="followers-container" *ngIf="followers.length > 0">
     <h3>{{ "NOTIFICATIONS1.LEFT_TITLE" | translate }}</h3>
     <ul>
       <li *ngFor="let follower of followers" class="notification">
@@ -26,13 +25,27 @@
           alt="Avatar do seguidor"
           class="avatar"
         />
-        <span>{{ follower.name }} começou a seguir você!</span>
-        <mat-icon>favorite</mat-icon>
+        <div class="notification-content">
+          <span>{{ follower.name }} começou a seguir você!</span>
+          <mat-icon>favorite</mat-icon>
+        </div>
       </li>
     </ul>
   </div>
-
-  <div *ngIf="followers.length === 0" class="no-notifications">
+  <div *ngIf="followers.length === 0" class="no-followers">
     <p>{{ "NOTIFICATIONS1.NO_FOLLOWERS" | translate }}</p>
+  </div>
+
+  <!-- Notifications Section -->
+  <div *ngIf="notifications.length > 0" class="notifications-container">
+    
+    <ul class="notifications-list">
+      <li *ngFor="let notification of notifications" class="notification-item">
+        <p>{{ notification }}</p>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="notifications.length === 0" class="no-notifications">
+    <p>{{ "NOTIFICATIONS1.NO_NOTIFICATIONS" | translate }}</p>
   </div>
 </div>

@@ -88,7 +88,7 @@ export class ModalProfileComponent {
           const currentUserId = this.getUserIdFromAuthService(); // Usuário que curtiu
   
           if (postOwnerId !== currentUserId) {
-            this.notifyUser(postOwnerId, currentUserId); // Envia notificação se o dono não for o atual usuário
+            this.notifiUser(postOwnerId, currentUserId); // Envia notificação se o dono não for o atual usuário
           }
         },
         error: (error: any) => {
@@ -101,7 +101,7 @@ export class ModalProfileComponent {
     return localStorage.getItem('userId') || '';
   }
   
-  notifyUser(postOwnerId: string, likerId: string) {
+  notifiUser(postOwnerId: string, likerId: string) {
     // Obtem informações do usuário que curtiu
     this.apiService.getUserById(likerId).subscribe({
       next: (liker: User) => {

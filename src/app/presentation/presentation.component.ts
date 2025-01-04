@@ -12,37 +12,37 @@ export class PresentationComponent implements OnInit, OnDestroy {
     {
       src: 'assets/imagems/mamaco 1.jpg',
       alt: 'Imagem 1',
-      description: 'Encontrar a nossa alma gémea é sempre complicado.',
+      description: 'Finding our soulmate is always complicated.',
     },
     {
       src: 'assets/imagems/mamaco 2.jpg',
       alt: 'Imagem 2',
       description:
-        'Existem várias aplicações, redes sociais, sites de encontro e mesmo assim, continuámos à procura do verdadeiro amor.',
+        'There are many apps, social networks, and dating sites, yet we still keep searching for true love.',
     },
     {
       src: 'assets/imagems/mamaco 3.jpg',
       alt: 'Imagem 3',
       description:
-        'Quando se fala de amor e da pessoa certa, perder tempo para quê? No Naked Love, livrámo-nos de todos os filtros e roupas para ver se existe uma forma mais instintiva de o encontrar.',
+      'When it comes to love and the right person, why waste time? At Naked Love, we strip away all filters and clothes to see if there’s a more instinctive way to find it.',
     },
     {
       src: 'assets/imagems/mamaco 4.jpg',
       alt: 'Imagem 4',
       description:
-        'Como encontramos a pessoa certa? Seria bom poder evitar erros, surpresas desagradáveis e sobretudo perda de tempo. No Naked Love, temos a forma ideal para encontrar a sua alma gémea.',
+        'How do we find the right person? It would be great to avoid mistakes, unpleasant surprises, and especially wasting time. At Naked Love, we have the perfect way to help you find your soulmate.',
     },
     {
       src: 'assets/imagems/mamaco 5.jpg',
       alt: 'Imagem 5',
       description:
-        'O que é preciso para nos apaixonarmos, o que desencadeia a faísca e o que nos influencia na escolha de um parceiro? No Naked Love, temos a oportunidade de descobrir um parceiro e começar como terminamos, nus.',
+        'What does it take for us to fall in love? What sparks the connection, and what influences our choice of a partner? At Naked Love, we have the opportunity to discover a partner and start as we end—naked.',
     },
     {
       src: 'assets/imagems/ERO 6.jpg',
       alt: 'Imagem 6',
       description:
-        'Quanto tempo demoramos para nos apaixonarmos? Para a ciência, segundos; para os poetas, uma vida inteira não é suficiente.',
+        'How long does it take for us to fall in love? For science, just seconds; for poets, an entire lifetime is not enough.',
     },
   ];
   currentIndex: number = 0;

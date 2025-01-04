@@ -11,6 +11,46 @@
   align-items: center;
   padding-top: 10px;
 }
+/* Estilos adicionais para o botão language */
+.menu-item[mat-icon-button] {
+  all: unset; /* Remove os estilos padrão do botão */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #888;
+  padding: 20px 0;
+  position: relative;
+  transition: color 0.3s;
+}
+
+/* Efeito hover para o botão language */
+.menu-item[mat-icon-button]:hover {
+  color: white;
+}
+
+.menu-item[mat-icon-button]::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: -3px 3px 6px rgba(255, 255, 255, 0.3),
+    3px -3px 6px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.menu-item[mat-icon-button]:hover::after {
+  width: 90%;
+  height: 3px;
+  box-shadow: -5px 5px 10px rgba(255, 255, 255, 0.5),
+    5px -5px 10px rgba(0, 0, 0, 0.7);
+}
+
 
 .menu-icons {
   display: flex;

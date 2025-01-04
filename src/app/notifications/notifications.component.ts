@@ -116,6 +116,27 @@ export class NotificationsComponent implements OnInit {
       }
     );
   }
+  notifiUser(postOwnerId: string, likerId: string) {
+    
+    this.apiService.getUserById(likerId).subscribe({
+      next: (liker: User) => {
+        const notificationMessage = `${liker.name} Não resistiu e curtiu sua foto mais provocante!`;
+  
+        // Recupera notificações existentes
+        const notificationsKey = `notifications_${postOwnerId}`;
+        const notifications = JSON.parse(localStorage.getItem(notificationsKey) || '[]');
+  
+        // Adiciona nova notificação
+        notifications.push(notificationMessage);
+        localStorage.setItem(notificationsKey, JSON.stringify(notifications));
+  
+        console.log(`Notificação enviada para o usuário ${postOwnerId}: ${notificationMessage}`);
+      },
+      error: (error) => {
+        console.error('Erro ao obter informações do usuário que curtiu:', error);
+      },
+    });
+  }
 
   notifyUser(postOwnerId: string, likerId: string) {
     this.apiService.getUserById(likerId).subscribe({
@@ -163,6 +184,42 @@ export class NotificationsComponent implements OnInit {
   getUserIdFromAuthService(): string {
     return localStorage.getItem('userId') || '';
   }
+  
+  likeUser(likedUserId: string): void {
+    if (!this.currentUser || !this.currentUser._id) {
+      console.error('Usuário atual não encontrado.');
+      return;
+    }
+  
+    const userId = this.currentUser._id;
+  
+    this.apiService.likeUser(userId, likedUserId).subscribe(
+      (response) => {
+        console.log('Like registrado com sucesso!', response);
+  
+        
+        const notificationMessage = 'Parece que alguém está de olho em você!';
+        this.notifications.push(notificationMessage);
+  
+       
+        const notificationsKey = `notifications_${likedUserId}`;
+        const existingNotifications: string[] = JSON.parse(
+          localStorage.getItem(notificationsKey) || '[]'
+        );
+        existingNotifications.push(notificationMessage);
+        localStorage.setItem(
+          notificationsKey,
+          JSON.stringify(existingNotifications)
+        );
+  
+        this.checkMutualLikes(); 
+      },
+      (error) => {
+        console.error('Erro ao registrar o like:', error);
+      }
+    );
+  }
+  
 
   checkMutualLikes(): void {
     if (!this.currentUser) return;
@@ -178,35 +235,7 @@ export class NotificationsComponent implements OnInit {
       );
     });
   }
-  addNotification(likedUserId: string): void {
-    const notificationsEnabled = this.getNotificationsStatus();
-    if (!notificationsEnabled) {
-        console.log('Notificações desativadas. Nenhuma notificação será adicionada.');
-        return;
-    }
 
-    const notificationsKey = `notifications_${likedUserId}`;
-    const notifications = JSON.parse(localStorage.getItem(notificationsKey) || '[]');
-
-    const notificationExists = notifications.some(
-        (n: any) => n.userId === this.currentUser._id
-    );
-
-    if (!notificationExists) {
-        const newNotification = {
-            userId: this.currentUser._id,
-            message: `${this.currentUser.name} curtiu seu perfil.`,
-            timestamp: new Date().toISOString(),
-            read: false // Marca a notificação como não lida
-        };
-        notifications.push(newNotification);
-        localStorage.setItem(notificationsKey, JSON.stringify(notifications));
-
-        console.log('Notificação adicionada:', newNotification);
-    } else {
-        console.log('Notificação já existente, nenhuma ação realizada.');
-    }
-}
 
   clearNotifications(): void {
     if (!this.currentUser || !this.currentUser._id) {

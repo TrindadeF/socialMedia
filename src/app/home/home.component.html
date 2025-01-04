@@ -1,30 +1,25 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ "HOME_PAGE.TITLE" | translate }}</title>
-    <link rel="stylesheet" href="home.component.css" />
-  </head>
-  <body>
-    <header>
-      <img src="assets/images/nova logo.jpg" alt="Logo" class="logo" />
-      <div class="header-content">
-        <h1 class="typewriter">
-          {{ "HOME_PAGE.WELCOME_MESSAGE" | translate
-          }}<span class="cursor"></span>
-        </h1>
-        <p>
-          {{ "HOME_PAGE.DESCRIPTION" | translate }}
-        </p>
-        <button [routerLink]="['/register']" class="btn btn-primary cta">
-          {{ "HOME_PAGE.REGISTER_BUTTON" | translate }}
-        </button>
-        <button [routerLink]="['/login']" class="btn btn-secondary login-btn">
-          {{ "HOME_PAGE.LOGIN_BUTTON" | translate }}
-        </button>
-      </div>
-    </header>
+<html lang="en">
+<body>
+<header>
+  <img src="assets/images/nova logo.jpg" alt="Logo" class="logo" />
+  <div class="header-content">
+    <h1 class="typewriter">Welcome to Naked Love!<span class="cursor"></span></h1>
+    <p>
+      Discover countless emotional connections and explore your desires in a safe and discreet environment. <br />
+      Join a vibrant community of people seeking passionate and intense relationships.
+
+    </p>
+    
+    <button [routerLink]="['/register']" class="btn btn-primary cta">
+      Register Now
+    </button>
+    <button [routerLink]="['/login']" class="btn btn-secondary login-btn">
+      Login
+    </button>
+  </div>
+  
+</header>
 
     <div *ngIf="showAgeVerification" class="age-verification-container">
       <div class="age-verification-content">
@@ -42,31 +37,26 @@
 
     <div class="feedback-images">
       <img
-        src="/assets/images/feedback 1.png"
+        src="/assets/images/feed 1.png"
         alt="{{ 'HOME_PAGE.FEEDBACK_ALT1' | translate }}"
         class="feedback-img"
       />
       <img
-        src="/assets/images/feedback 2.png"
+        src="/assets/images/feed 2.png"
         alt="{{ 'HOME_PAGE.FEEDBACK_ALT2' | translate }}"
         class="feedback-img"
       />
       <img
-        src="/assets/images/feedback 3.png"
+        src="/assets/images/feed 3.png"
         alt="{{ 'HOME_PAGE.FEEDBACK_ALT3' | translate }}"
         class="feedback-img"
       />
     </div>
 
-    <div class="image-container">
-      <img
-        src="/assets/images/home.jpg"
-        alt="{{ 'HOME_PAGE.HOME_IMAGE_ALT' | translate }}"
-      />
-    </div>
+   
 
     <footer>
-      {{ "HOME_PAGE.FOOTER_MESSAGE" | translate }}
+      © 2024 Adult Dating Site. All rights reserved.
     </footer>
 
     <script>

@@ -52,14 +52,11 @@ export class RulesComponent {
     if (this.currentIndex < this.items.length - 1) {
       this.currentIndex++;
     } else {
-<<<<<<< HEAD
 
-      // Marca as regras como visualizadas e redireciona para o perfil
+
+
       localStorage.setItem('hasViewedRules', 'true');
 
-=======
-      localStorage.setItem('hasViewedRules', 'true');
->>>>>>> ad7e10c2cd92fc5954aafac6dacadea640e40c31
       this.router.navigate(['/edit-profile']);
     }
   }

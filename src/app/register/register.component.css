@@ -18,7 +18,42 @@ body {
   align-items: center;
   flex-grow: 1; /* Faz o body ocupar todo o espaço disponível */
 }
+#carousel-container {
+  width: 125px; /* Garante um círculo perfeito */
+  height: 300px;
+  border-radius: 50%; /* Torna o contêiner perfeitamente circular */
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  margin: 0 auto; /* Remove margens laterais */
+}
 
+#image-carousel {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  animation: fadeInCarousel 9s infinite;
+}
+
+#image-carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+@keyframes fadeInCarousel {
+  0%, 33% {
+    transform: translateX(0);
+  }
+  34%, 66% {
+    transform: translateX(-100%);
+  }
+  67%, 100% {
+    transform: translateX(-200%);
+  }
+}
 #form-container {
   max-width: 480px;
   width: 100%;

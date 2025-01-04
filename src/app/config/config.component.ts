@@ -12,6 +12,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./config.component.css'],
 })
 export class ConfigComponent implements OnInit {
+  
+  userEmail: string = '';
   users: User[] = [];
   user: any = {};
   posts: Post[] = [];
@@ -200,5 +202,51 @@ export class ConfigComponent implements OnInit {
   }
   goToNotifications(): void {
     this.router.navigate(['/notifications']); // Substitua '/notifications' pela rota correta do seu componente
+  }
+  subscribeToPlan(planId: string) {
+    const requestBody = {
+      userId: this.userId,
+      email: this.userEmail,
+    };
+
+    this.http
+      .post<{ url: string }>(
+        `https://nakedlove.eu/api/stripe/checkout/${planId}`,
+        requestBody
+      )
+      .subscribe(
+        (response) => {
+          window.location.href = response.url;
+        },
+        (error) => {
+          console.error('Erro ao criar a sessão de checkout:', error);
+        }
+      );
+  }
+
+  plan1() {
+    this.subscribeToPlan('plan1');
+  }
+
+  plan2() {
+    this.subscribeToPlan('plan2');
+  }
+
+  plan3() {
+    this.subscribeToPlan('plan3');
+  }
+
+  cancelSubscription(): void {
+    const confirmation = confirm(
+      'Tem certeza que deseja cancelar sua assinatura?'
+    );
+    if (!confirmation) {
+      return;
+    }
+    console.log('Assinatura cancelada com sucesso:');
+    this.snackBar.open('Assinatura cancelada com sucesso.', 'Fechar', {
+      duration: 5000,
+      verticalPosition: 'top',
+    });
   }
 }

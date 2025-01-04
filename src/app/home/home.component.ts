@@ -50,7 +50,7 @@ export class HomeComponent implements AfterViewInit {
     this.renderer.listen('document', 'DOMContentLoaded', () => {
       console.log('DOM totalmente carregado e analisado.');
 
-      alert('Bem-vindo ao NakedLove!');
+      alert('Welcome to Naked Love!');
 
       const contentWrapper = document.getElementById('content-wrapper');
       if (contentWrapper) {
